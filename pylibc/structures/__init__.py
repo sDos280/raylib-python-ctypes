@@ -153,13 +153,14 @@ class Quaternion(Vector4):
         super(Vector4, self).__init__(x, y, z, w)
 
 
+# Matrix, 4x4 components, column major, OpenGL style, right-handed
+
 class Matrix(_Struct):
     _fields_ = [
         ('m0', _Float), ('m4', _Float), ('m8', _Float), ('m12', _Float),  # Matrix first row (4 components)
         ('m1', _Float), ('m5', _Float), ('m9', _Float), ('m13', _Float),  # Matrix second row (4 components)
         ('m2', _Float), ('m6', _Float), ('m10', _Float), ('m14', _Float),  # Matrix third row (4 components)
         ('m3', _Float), ('m7', _Float), ('m11', _Float), ('m15', _Float),  # Matrix fourth row (4 components)
-
     ]
 
     def __init__(self, m0: float = 0, m1: float = 0, m2: float = 0, m3: float = 0,
@@ -295,3 +296,48 @@ class Matrix(_Struct):
     @m15.setter
     def m15(self, i: float) -> None:
         self.m15 = i
+
+
+# Color, 4 components, R8G8B8A8 (32bit)
+class Color(_Struct):
+    _fields_ = [
+        ('r', _Float),  # Color red value
+        ('g', _Float),  # Color green value
+        ('b', _Float),  # Color blue value
+        ('a', _Float),  # Color alpha value
+    ]
+
+    def __init__(self, r: float = 0, g: float = 0, b: float = 0, a: float = 0) -> None:
+        super(Color, self).__init__(r, g, b, a)
+
+    @property
+    def r(self) -> float:
+        return self.r.value
+
+    @r.setter
+    def r(self, i: float) -> None:
+        self.r = i
+
+    @property
+    def g(self) -> float:
+        return self.g.value
+
+    @g.setter
+    def g(self, i: float) -> None:
+        self.g = i
+
+    @property
+    def b(self) -> float:
+        return self.b.value
+
+    @b.setter
+    def b(self, i: float) -> None:
+        self.b = i
+
+    @property
+    def a(self) -> float:
+        return self.a.value
+
+    @a.setter
+    def a(self, i: float) -> None:
+        self.a = i
