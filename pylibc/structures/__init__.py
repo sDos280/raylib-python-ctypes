@@ -154,7 +154,6 @@ class Quaternion(Vector4):
 
 
 # Matrix, 4x4 components, column major, OpenGL style, right-handed
-
 class Matrix(_Struct):
     _fields_ = [
         ('m0', _Float), ('m4', _Float), ('m8', _Float), ('m12', _Float),  # Matrix first row (4 components)
@@ -301,43 +300,88 @@ class Matrix(_Struct):
 # Color, 4 components, R8G8B8A8 (32bit)
 class Color(_Struct):
     _fields_ = [
-        ('r', _Float),  # Color red value
-        ('g', _Float),  # Color green value
-        ('b', _Float),  # Color blue value
-        ('a', _Float),  # Color alpha value
+        ('r', _UChar),  # Color red value
+        ('g', _UChar),  # Color green value
+        ('b', _UChar),  # Color blue value
+        ('a', _UChar),  # Color alpha value
     ]
 
-    def __init__(self, r: float = 0, g: float = 0, b: float = 0, a: float = 0) -> None:
+    def __init__(self, r: int = 0, g: int = 0, b: int = 0, a: int = 0) -> None:
         super(Color, self).__init__(r, g, b, a)
 
     @property
-    def r(self) -> float:
+    def r(self) -> int:
         return self.r.value
 
     @r.setter
-    def r(self, i: float) -> None:
+    def r(self, i: int) -> None:
         self.r = i
 
     @property
-    def g(self) -> float:
+    def g(self) -> int:
         return self.g.value
 
     @g.setter
-    def g(self, i: float) -> None:
+    def g(self, i: int) -> None:
         self.g = i
 
     @property
-    def b(self) -> float:
+    def b(self) -> int:
         return self.b.value
 
     @b.setter
-    def b(self, i: float) -> None:
+    def b(self, i: int) -> None:
         self.b = i
 
     @property
-    def a(self) -> float:
+    def a(self) -> int:
         return self.a.value
 
     @a.setter
-    def a(self, i: float) -> None:
+    def a(self, i: int) -> None:
         self.a = i
+
+
+# Rectangle, 4 components
+class Rectangle(_Struct):
+    _fields_ = [
+        ('x', _Float),  # Color red value
+        ('y', _Float),  # Color green value
+        ('width', _Float),  # Color blue value
+        ('height', _Float),  # Color alpha value
+    ]
+
+    def __init__(self, x: float = 0, y: float = 0, width: float = 0, height: float = 0) -> None:
+        super(Rectangle, self).__init__(x, y, width, height)
+
+    @property
+    def x(self) -> float:
+        return self.x.value
+
+    @x.setter
+    def x(self, i: float) -> None:
+        self.x = i
+
+    @property
+    def y(self) -> float:
+        return self.y.value
+
+    @y.setter
+    def y(self, i: float) -> None:
+        self.y = i
+
+    @property
+    def width(self) -> float:
+        return self.width.value
+
+    @width.setter
+    def width(self, i: float) -> None:
+        self.width = i
+
+    @property
+    def height(self) -> float:
+        return self.height.value
+
+    @height.setter
+    def height(self, i: float) -> None:
+        self.height = i
