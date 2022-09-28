@@ -34,15 +34,6 @@ _UInt = c_uint
 _Double = c_double
 _Struct = Structure
 
-
-def _to_int(value: float):
-    return int(value) if isinstance(value, float) else value
-
-
-def _to_float(value: int):
-    return float(value) if isinstance(value, int) else value
-
-
 # ----------------------------------------------------------------------------------
 # Structures Definition
 # ----------------------------------------------------------------------------------
@@ -67,8 +58,87 @@ class Vector2(_Struct):
 
     @property
     def y(self) -> float:
-        return float(self.y.value)
+        return self.y.value
 
     @y.setter
     def y(self, i: float) -> None:
         self.y = i
+
+# Vector3, 3 components
+class Vector3(_Struct):
+    _fields_ = [
+        ('x', _Float),  # Vector x component
+        ('y', _Float),  # Vector y component
+        ('z', _Float),  # Vector z component
+    ]
+
+    def __init__(self, x: float = 0, y: float = 0, z: float = 0) -> None:
+        super(Vector3, self).__init__(x, y, z)
+
+    @property
+    def x(self) -> float:
+        return self.x.value
+
+    @x.setter
+    def x(self, i: float) -> None:
+        self.x = i
+
+    @property
+    def y(self) -> float:
+        return self.y.value
+
+    @y.setter
+    def y(self, i: float) -> None:
+        self.y = i
+
+    @property
+    def z(self) -> float:
+        return self.z.value
+
+    @z.setter
+    def z(self, i: float) -> None:
+        self.z = i
+
+# Vector4, 4 components
+class Vector4(_Struct):
+    _fields_ = [
+        ('x', _Float),  # Vector x component
+        ('y', _Float),  # Vector y component
+        ('z', _Float),  # Vector z component
+        ('w', _Float),  # Vector w component
+    ]
+
+    def __init__(self, x: float = 0, y: float = 0, z: float = 0, w: float = 0) -> None:
+        super(Vector4, self).__init__(x, y, z, w)
+
+    @property
+    def x(self) -> float:
+        return self.x.value
+
+    @x.setter
+    def x(self, i: float) -> None:
+        self.x = i
+
+    @property
+    def y(self) -> float:
+        return self.y.value
+
+    @y.setter
+    def y(self, i: float) -> None:
+        self.y = i
+
+    @property
+    def z(self) -> float:
+        return self.z.value
+
+    @z.setter
+    def z(self, i: float) -> None:
+        self.z = i
+
+    @property
+    def w(self) -> float:
+        return self.w.value
+
+    @w.setter
+    def w(self, i: float) -> None:
+        self.w = i
