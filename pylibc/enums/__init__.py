@@ -1,3 +1,5 @@
+from enum import IntEnum
+
 # ----------------------------------------------------------------------------------
 # Enumerators Definition
 # ----------------------------------------------------------------------------------
@@ -5,7 +7,7 @@
 # System/Window config flags
 # NOTE: Every bit registers one state (use it with bit masks)
 # By default all flags are set to 0
-class ConfigFlags:
+class ConfigFlags(IntEnum):
     FLAG_VSYNC_HINT = int(0x00000040)  # Set to try enabling V-Sync on GPU
     FLAG_FULLSCREEN_MODE = int(0x00000002)  # Set to run program in fullscreen
     FLAG_WINDOW_RESIZABLE = int(0x00000004)  # Set to allow resizable window
@@ -24,7 +26,7 @@ class ConfigFlags:
     FLAG_INTERLACED_HINT = int(0x00010000)  # Set to try enabling interlaced video format (for V3D)
 
 
-class TraceLogLevel:
+class TraceLogLevel(IntEnum):
     LOG_ALL = 0  # Display all logs
     LOG_TRACE = 1  # Trace logging, intended for internal use only
     LOG_DEBUG = 2  # Debug logging, used for internal debugging, it should be disabled on release builds
@@ -38,7 +40,7 @@ class TraceLogLevel:
 # Keyboard keys (US keyboard layout)
 # NOTE: Use GetKeyPressed() to allow redefining
 # required keys for alternative layouts
-class KeyboardKey:
+class KeyboardKey(IntEnum):
     KEY_NULL = 0  # Key: NULL, used for no key pressed
     # Alphanumeric keys
     KEY_APOSTROPHE = 39  # Key: '
@@ -156,7 +158,7 @@ class KeyboardKey:
 
 
 # Mouse buttons
-class MouseButton:
+class MouseButton(IntEnum):
     MOUSE_BUTTON_LEFT = 0  # Mouse button left
     MOUSE_BUTTON_RIGHT = 1  # Mouse button right
     MOUSE_BUTTON_MIDDLE = 2  # Mouse button middle (pressed wheel)
@@ -167,7 +169,7 @@ class MouseButton:
 
 
 # Mouse cursor
-class MouseCursor:
+class MouseCursor(IntEnum):
     MOUSE_CURSOR_DEFAULT = 0  # Default pointer shape
     MOUSE_CURSOR_ARROW = 1  # Arrow shape
     MOUSE_CURSOR_IBEAM = 2  # Text writing cursor shape
@@ -182,7 +184,7 @@ class MouseCursor:
 
 
 # Gamepad buttons
-class GamepadButton:
+class GamepadButton(IntEnum):
     GAMEPAD_BUTTON_UNKNOWN = 0  # Unknown button, just for error checking
     GAMEPAD_BUTTON_LEFT_FACE_UP = 1  # Gamepad left DPAD up button
     GAMEPAD_BUTTON_LEFT_FACE_RIGHT = 2  # Gamepad left DPAD right button
@@ -204,7 +206,7 @@ class GamepadButton:
 
 
 # Gamepad axis
-class GamepadAxis:
+class GamepadAxis(IntEnum):
     GAMEPAD_AXIS_LEFT_X = 0  # Gamepad left stick X axis
     GAMEPAD_AXIS_LEFT_Y = 1  # Gamepad left stick Y axis
     GAMEPAD_AXIS_RIGHT_X = 2  # Gamepad right stick X axis
@@ -214,7 +216,7 @@ class GamepadAxis:
 
 
 # Shader location index
-class ShaderLocationIndex:
+class ShaderLocationIndex(IntEnum):
     SHADER_LOC_VERTEX_POSITION = 0  # Shader location: vertex attribute: position
     SHADER_LOC_VERTEX_TEXCOORD01 = 1  # Shader location: vertex attribute: texcoord01
     SHADER_LOC_VERTEX_TEXCOORD02 = 2  # Shader location: vertex attribute: texcoord02
@@ -244,7 +246,7 @@ class ShaderLocationIndex:
 
 
 # Shader attribute data types
-class ShaderAttributeDataType:
+class ShaderAttributeDataType(IntEnum):
     SHADER_ATTRIB_FLOAT = 0  # Shader attribute type: float
     SHADER_ATTRIB_VEC2 = 1  # Shader attribute type: vec2 (2 float)
     SHADER_ATTRIB_VEC3 = 2  # Shader attribute type: vec3 (3 float)
@@ -253,7 +255,7 @@ class ShaderAttributeDataType:
 
 # Pixel formats
 # NOTE: Support depends on OpenGL version and platform
-class PixelFormat:
+class PixelFormat(IntEnum):
     PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1  # 8 bit per pixel (no alpha)
     PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2  # 8*2 bpp (2 channels)
     PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3  # 16 bpp
@@ -280,7 +282,7 @@ class PixelFormat:
 # Texture parameters: filter mode
 # NOTE 1: Filtering considers mipmaps if available in the texture
 # NOTE 2: Filter is accordingly set for minification and magnification
-class TextureFilter:
+class TextureFilter(IntEnum):
     TEXTURE_FILTER_POINT = 0  # No filter, just pixel approximation
     TEXTURE_FILTER_BILINEAR = 1  # Linear filtering
     TEXTURE_FILTER_TRILINEAR = 2  # Trilinear filtering (linear with mipmaps)
@@ -290,7 +292,7 @@ class TextureFilter:
 
 
 # Texture parameters: wrap mode
-class TextureWrap:
+class TextureWrap(IntEnum):
     TEXTURE_WRAP_REPEAT = 0  # Repeats texture in tiled mode
     TEXTURE_WRAP_CLAMP = 1  # Clamps texture to edge pixel in tiled mode
     TEXTURE_WRAP_MIRROR_REPEAT = 2  # Mirrors and repeats the texture in tiled mode
@@ -298,7 +300,7 @@ class TextureWrap:
 
 
 # Cubemap layouts
-class CubemapLayout:
+class CubemapLayout(IntEnum):
     CUBEMAP_LAYOUT_AUTO_DETECT = 0,  # Automatically detect layout type
     CUBEMAP_LAYOUT_LINE_VERTICAL = 1  # Layout is defined by a vertical line with faces
     CUBEMAP_LAYOUT_LINE_HORIZONTAL = 2  # Layout is defined by an horizontal line with faces
@@ -308,14 +310,14 @@ class CubemapLayout:
 
 
 # Font type, defines generation method
-class FontType:
+class FontType(IntEnum):
     FONT_DEFAULT = 0  # Default font generation, anti-aliased
     FONT_BITMAP = 1  # Bitmap font generation, no anti-aliasing
     FONT_SDF = 2  # SDF font generation, requires external shader
 
 
 # Color blending modes (pre-defined)
-class BlendMode:
+class BlendMode(IntEnum):
     GESTURE_NONE = 0  # No gesture
     GESTURE_TAP = 1  # Tap gesture
     GESTURE_DOUBLETAP = 2  # Double tap gesture
@@ -330,7 +332,7 @@ class BlendMode:
 
 
 # Camera system modes
-class CameraMode:
+class CameraMode(IntEnum):
     CAMERA_CUSTOM = 0  # Custom camera
     CAMERA_FREE = 1  # Free camera
     CAMERA_ORBITAL = 2  # Orbital camera
@@ -339,13 +341,13 @@ class CameraMode:
 
 
 # Camera projection
-class CameraProjection:
+class CameraProjection(IntEnum):
     CAMERA_PERSPECTIVE = 0  # Perspective projection
     CAMERA_ORTHOGRAPHIC = 1  # Orthographic projection
 
 
 # N-patch layout
-class NPatchLayout:
+class NPatchLayout(IntEnum):
     NPATCH_NINE_PATCH = 0  # Npatch layout: 3x3 tiles
     NPATCH_THREE_PATCH_VERTICAL = 1  # Npatch layout: 1x3 tiles
     NPATCH_THREE_PATCH_HORIZONTAL = 2  # Npatch layout: 3x1 tiles
