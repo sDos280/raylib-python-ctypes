@@ -385,3 +385,57 @@ class Rectangle(_Struct):
     @height.setter
     def height(self, i: float) -> None:
         self.height = i
+
+
+# Image, pixel data stored in CPU memory (RAM)
+class Image(_Struct):
+    _fields_ = [
+        ('data', _VoidPtr),  # Image raw data
+        ('width', _Int),  # Image base width
+        ('height', _Int),  # Image base height
+        ('mipmaps', _Int),  # Mipmap levels, 1 by default
+        ('format', _Int)  # Data format (PixelFormat type)
+    ]
+
+    def __init__(self, data: _VoidPtr = 0, width: int = 0, height: int = 0, mipmaps: int = 0, format: int = 0) -> None:
+        super(Image, self).__init__(data, width, height, mipmaps, format)
+
+    @property
+    def data(self) -> _VoidPtr:
+        return self.data.value
+
+    @data.setter
+    def data(self, i: _VoidPtr) -> None:
+        self.data = i
+
+    @property
+    def width(self) -> int:
+        return self.width.value
+
+    @width.setter
+    def width(self, i: int) -> None:
+        self.width = i
+
+    @property
+    def height(self) -> int:
+        return self.height.value
+
+    @height.setter
+    def height(self, i: int) -> None:
+        self.height = i
+
+    @property
+    def mipmaps(self) -> int:
+        return self.mipmaps.value
+
+    @mipmaps.setter
+    def mipmaps(self, i: int) -> None:
+        self.mipmaps = i
+
+    @property
+    def format(self) -> int:
+        return self.format.value
+
+    @format.setter
+    def format(self, i: int) -> None:
+        self.format = i
