@@ -645,5 +645,92 @@ class RenderTexture(_Struct):
     def __init__(self, id: int, texture: Texture, depth: Texture) -> None:
         self.__set(id, texture, depth)
 
+    @property
+    def id(self) -> _UInt:
+        return self.id.value
+
+    @id.setter
+    def id(self, i: _UInt) -> None:
+        self.id = i
+
+    @property
+    def texture(self) -> Texture:
+        return self.texture
+
+    @texture.setter
+    def texture(self, i: Texture) -> None:
+        self.texture = i
+
+    @property
+    def depth(self) -> Texture:
+        return self.depth
+
+    @depth.setter
+    def depth(self, i: Texture) -> None:
+        self.depth = i
+
     def __set(self, id: int, texture: Texture, depth: Texture):
         super(RenderTexture, self).__init__(id, texture, depth)
+
+
+# RenderTexture2D, same as RenderTexture
+RenderTexture2D = RenderTexture
+
+# NPatchInfo, n-patch layout infostructers
+class NPatchInfo(_Struct):
+    _fields_ = [
+        ('source', _UInt),  # Texture source rectangle
+        ('left', _Int),  # Left border offset
+        ('top', _Int),  # Top border offset
+        ('right', _Int),  # Right border offset
+        ('bottom', _Int),  # Bottom border offset
+        ('layout', _Int),  # Layout of the n-patch: 3x3, 1x3 or 3x1
+    ]
+
+    @property
+    def source(self) -> _UInt:
+        return self.source.value
+
+    @source.setter
+    def source(self, i: _UInt) -> None:
+        self.source = i
+
+    @property
+    def left(self) -> _Int:
+        return self.left.value
+
+    @left.setter
+    def left(self, i: _Int) -> None:
+        self.left = i
+
+    @property
+    def top(self) -> _Int:
+        return self.top.value
+
+    @top.setter
+    def top(self, i: _Int) -> None:
+        self.top = i
+
+    @property
+    def right(self) -> _Int:
+        return self.right.value
+
+    @right.setter
+    def right(self, i: _Int) -> None:
+        self.right = i
+
+    @property
+    def bottom(self) -> _Int:
+        return self.bottom.value
+
+    @bottom.setter
+    def bottom(self, i: _Int) -> None:
+        self.bottom = i
+
+    @property
+    def layout(self) -> _Int:
+        return self.layout.value
+
+    @layout.setter
+    def layout(self, i: _Int) -> None:
+        self.layout = i
