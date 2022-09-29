@@ -1,4 +1,20 @@
+from multipledispatch import dispatch
+
+try:
+    from collections.abc import Iterable
+except ImportError:
+    from collections import Iterable
+
+from typing import (
+    Any,
+    List,
+    Optional,
+    Sequence,
+    Type,
+)
+
 from ctypes import (
+    pointer,
     POINTER,
     Structure,
     c_bool,
@@ -35,6 +51,43 @@ _Double = c_double
 _Struct = Structure
 
 
+def _to_int(value: float):
+    return int(value) if isinstance(value, float) else value
+
+
+def _to_float(value: int):
+    return float(value) if isinstance(value, int) else value
+
+
+def _to_byte_str(value: str):
+    if not isinstance(value, (str, bytes)):
+        value = str(value)
+    return value.encode('utf-8', 'ignore')
+
+
+def _to_str(value: bytes):
+    return value.decode('utf-8', 'ignore') if isinstance(value, bytes) else value
+
+
+def copyDataTo(src, dest):
+    pointer(dest)[0] = pointer(src)[0]
+
+
+def _flatten(
+        filter_types: Sequence[Type],
+        *args: Any,
+        map_to: Optional[Type] = None
+) -> List[Any]:
+    flatten_list = []
+    for value in args:
+        if isinstance(value, filter_types):
+            flatten_list.append(map_to(value) if map_to else value)
+        else:
+            flatten_list.extend(_flatten(filter_types, *value, map_to=map_to))
+
+    return flatten_list
+
+
 # ----------------------------------------------------------------------------------
 # Structures Definition
 # ----------------------------------------------------------------------------------
@@ -46,8 +99,13 @@ class Vector2(_Struct):
         ('y', _Float),  # Vector y component
     ]
 
+    @dispatch()
+    def __init__(self) -> None:
+        self.__set()
+
+    @dispatch((float, int), (float, int))
     def __init__(self, x: float = 0, y: float = 0) -> None:
-        super(Vector2, self).__init__(x, y)
+        self.__set(x, y)
 
     @property
     def x(self) -> float:
@@ -55,7 +113,7 @@ class Vector2(_Struct):
 
     @x.setter
     def x(self, i: float) -> None:
-        self.x = i
+        self.x = _to_float(i)
 
     @property
     def y(self) -> float:
@@ -63,7 +121,10 @@ class Vector2(_Struct):
 
     @y.setter
     def y(self, i: float) -> None:
-        self.y = i
+        self.y = _to_float(i)
+
+    def __set(self, x: float = 0, y: float = 0) -> None:
+        super(Vector2, self).__init__(_to_float(x), _to_float(y))
 
 
 # Vector3, 3 components
@@ -74,8 +135,13 @@ class Vector3(_Struct):
         ('z', _Float),  # Vector z component
     ]
 
+    @dispatch()
+    def __init__(self) -> None:
+        self.__set()
+
+    @dispatch((float, int), (float, int), (float, int))
     def __init__(self, x: float = 0, y: float = 0, z: float = 0) -> None:
-        super(Vector3, self).__init__(x, y, z)
+        self.__set(x, y, z)
 
     @property
     def x(self) -> float:
@@ -83,7 +149,7 @@ class Vector3(_Struct):
 
     @x.setter
     def x(self, i: float) -> None:
-        self.x = i
+        self.x = _to_float(i)
 
     @property
     def y(self) -> float:
@@ -91,7 +157,7 @@ class Vector3(_Struct):
 
     @y.setter
     def y(self, i: float) -> None:
-        self.y = i
+        self.y = _to_float(i)
 
     @property
     def z(self) -> float:
@@ -99,7 +165,10 @@ class Vector3(_Struct):
 
     @z.setter
     def z(self, i: float) -> None:
-        self.z = i
+        self.z = _to_float(i)
+
+    def __set(self, x: float = 0, y: float = 0, z: float = 0):
+        super(Vector3, self).__init__(_to_float(x), _to_float(y), _to_float(z))
 
 
 # Vector4, 4 components
@@ -111,8 +180,13 @@ class Vector4(_Struct):
         ('w', _Float),  # Vector w component
     ]
 
+    @dispatch()
+    def __init__(self) -> None:
+        self.__set()
+
+    @dispatch((float, int), (float, int), (float, int), (float, int))
     def __init__(self, x: float = 0, y: float = 0, z: float = 0, w: float = 0) -> None:
-        super(Vector4, self).__init__(x, y, z, w)
+        self.__set(x, y, z, w)
 
     @property
     def x(self) -> float:
@@ -120,7 +194,7 @@ class Vector4(_Struct):
 
     @x.setter
     def x(self, i: float) -> None:
-        self.x = i
+        self.x = _to_float(i)
 
     @property
     def y(self) -> float:
@@ -128,7 +202,7 @@ class Vector4(_Struct):
 
     @y.setter
     def y(self, i: float) -> None:
-        self.y = i
+        self.y = _to_float(i)
 
     @property
     def z(self) -> float:
@@ -136,7 +210,7 @@ class Vector4(_Struct):
 
     @z.setter
     def z(self, i: float) -> None:
-        self.z = i
+        self.z = _to_float(i)
 
     @property
     def w(self) -> float:
@@ -144,13 +218,14 @@ class Vector4(_Struct):
 
     @w.setter
     def w(self, i: float) -> None:
-        self.w = i
+        self.w = _to_float(i)
+
+    def __set(self, x: float = 0, y: float = 0, z: float = 0, w: float = 0):
+        super(Vector4, self).__init__(_to_float(x), _to_float(y), _to_float(z), _to_float(w))
 
 
 # Quaternion, 4 components (Vector4 alias)
-class Quaternion(Vector4):
-    def __init__(self, x: float = 0, y: float = 0, z: float = 0, w: float = 0) -> None:
-        super(Vector4, self).__init__(x, y, z, w)
+Quaternion = Vector4
 
 
 # Matrix, 4x4 components, column major, OpenGL style, right-handed
@@ -162,11 +237,19 @@ class Matrix(_Struct):
         ('m3', _Float), ('m7', _Float), ('m11', _Float), ('m15', _Float),  # Matrix fourth row (4 components)
     ]
 
+    @dispatch()
+    def __init__(self) -> None:
+        self.__set()
+
+    @dispatch((float, int), (float, int), (float, int), (float, int),
+              (float, int), (float, int), (float, int), (float, int),
+              (float, int), (float, int), (float, int), (float, int),
+              (float, int), (float, int), (float, int), (float, int))
     def __init__(self, m0: float = 0, m1: float = 0, m2: float = 0, m3: float = 0,
                  m4: float = 0, m5: float = 0, m6: float = 0, m7: float = 0,
                  m8: float = 0, m9: float = 0, m10: float = 0, m11: float = 0,
                  m12: float = 0, m13: float = 0, m14: float = 0, m15: float = 0, ) -> None:
-        super(Matrix, self).__init__(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15)
+        self.__set(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15)
 
     @property
     def m0(self) -> float:
@@ -174,7 +257,7 @@ class Matrix(_Struct):
 
     @m0.setter
     def m0(self, i: float) -> None:
-        self.m0 = i
+        self.m0 = _to_float(i)
 
     @property
     def m1(self) -> float:
@@ -182,7 +265,7 @@ class Matrix(_Struct):
 
     @m1.setter
     def m1(self, i: float) -> None:
-        self.m1 = i
+        self.m1 = _to_float(i)
 
     @property
     def m2(self) -> float:
@@ -190,7 +273,7 @@ class Matrix(_Struct):
 
     @m2.setter
     def m2(self, i: float) -> None:
-        self.m2 = i
+        self.m2 = _to_float(i)
 
     @property
     def m3(self) -> float:
@@ -198,7 +281,7 @@ class Matrix(_Struct):
 
     @m3.setter
     def m3(self, i: float) -> None:
-        self.m3 = i
+        self.m3 = _to_float(i)
 
     @property
     def m4(self) -> float:
@@ -206,7 +289,7 @@ class Matrix(_Struct):
 
     @m4.setter
     def m4(self, i: float) -> None:
-        self.m4 = i
+        self.m4 = _to_float(i)
 
     @property
     def m5(self) -> float:
@@ -214,7 +297,7 @@ class Matrix(_Struct):
 
     @m5.setter
     def m5(self, i: float) -> None:
-        self.m5 = i
+        self.m5 = _to_float(i)
 
     @property
     def m6(self) -> float:
@@ -222,7 +305,7 @@ class Matrix(_Struct):
 
     @m6.setter
     def m6(self, i: float) -> None:
-        self.m6 = i
+        self.m6 = _to_float(i)
 
     @property
     def m7(self) -> float:
@@ -230,7 +313,7 @@ class Matrix(_Struct):
 
     @m7.setter
     def m7(self, i: float) -> None:
-        self.m7 = i
+        self.m7 = _to_float(i)
 
     @property
     def m8(self) -> float:
@@ -238,7 +321,7 @@ class Matrix(_Struct):
 
     @m8.setter
     def m8(self, i: float) -> None:
-        self.m8 = i
+        self.m8 = _to_float(i)
 
     @property
     def m9(self) -> float:
@@ -246,7 +329,7 @@ class Matrix(_Struct):
 
     @m9.setter
     def m9(self, i: float) -> None:
-        self.m9 = i
+        self.m9 = _to_float(i)
 
     @property
     def m10(self) -> float:
@@ -254,7 +337,7 @@ class Matrix(_Struct):
 
     @m10.setter
     def m10(self, i: float) -> None:
-        self.m10 = i
+        self.m10 = _to_float(i)
 
     @property
     def m11(self) -> float:
@@ -262,7 +345,7 @@ class Matrix(_Struct):
 
     @m11.setter
     def m11(self, i: float) -> None:
-        self.m11 = i
+        self.m11 = _to_float(i)
 
     @property
     def m12(self) -> float:
@@ -270,7 +353,7 @@ class Matrix(_Struct):
 
     @m12.setter
     def m12(self, i: float) -> None:
-        self.m12 = i
+        self.m12 = _to_float(i)
 
     @property
     def m13(self) -> float:
@@ -278,7 +361,7 @@ class Matrix(_Struct):
 
     @m13.setter
     def m13(self, i: float) -> None:
-        self.m13 = i
+        self.m13 = _to_float(i)
 
     @property
     def m14(self) -> float:
@@ -286,7 +369,7 @@ class Matrix(_Struct):
 
     @m14.setter
     def m14(self, i: float) -> None:
-        self.m14 = i
+        self.m14 = _to_float(i)
 
     @property
     def m15(self) -> float:
@@ -294,7 +377,16 @@ class Matrix(_Struct):
 
     @m15.setter
     def m15(self, i: float) -> None:
-        self.m15 = i
+        self.m15 = _to_float(i)
+
+    def __set(self, m0: float = 0, m1: float = 0, m2: float = 0, m3: float = 0,
+              m4: float = 0, m5: float = 0, m6: float = 0, m7: float = 0,
+              m8: float = 0, m9: float = 0, m10: float = 0, m11: float = 0,
+              m12: float = 0, m13: float = 0, m14: float = 0, m15: float = 0, ) -> None:
+        super(Matrix, self).__init__(_to_float(m0), _to_float(m1), _to_float(m2), _to_float(m3),
+                                     _to_float(m4), _to_float(m5), _to_float(m6), _to_float(m7),
+                                     _to_float(m8), _to_float(m9), _to_float(m10), _to_float(m11),
+                                     _to_float(m12), _to_float(m13), _to_float(m14), _to_float(m15))
 
 
 # Color, 4 components, R8G8B8A8 (32bit)
@@ -306,8 +398,23 @@ class Color(_Struct):
         ('a', _UChar),  # Color alpha value
     ]
 
+    @dispatch()
+    def __init__(self) -> None:
+        self.__set()
+
+    @dispatch(int, int, int, int)
     def __init__(self, r: int = 0, g: int = 0, b: int = 0, a: int = 0) -> None:
-        super(Color, self).__init__(r, g, b, a)
+        self.__set(r, g, b, a)
+
+    @dispatch(Iterable)
+    def __init__(self, _color: 'Color') -> None:
+        color = _flatten(int, _color)
+        self.__set(
+            color[0],
+            color[1],
+            color[2],
+            color[3]
+        )
 
     @property
     def r(self) -> int:
@@ -315,7 +422,7 @@ class Color(_Struct):
 
     @r.setter
     def r(self, i: int) -> None:
-        self.r = i
+        self.r = _UChar(i)
 
     @property
     def g(self) -> int:
@@ -341,6 +448,9 @@ class Color(_Struct):
     def a(self, i: int) -> None:
         self.a = i
 
+    def __set(self, r: int = 0, g: int = 0, b: int = 0, a: int = 255) -> None:
+        super(Color, self).__init__(_UChar(r), _UChar(g), _UChar(b), _UChar(a))
+
 
 # Rectangle, 4 components
 class Rectangle(_Struct):
@@ -351,8 +461,9 @@ class Rectangle(_Struct):
         ('height', _Float),  # Color alpha value
     ]
 
+    @dispatch((int, float), (int, float), (int, float), (int, float))
     def __init__(self, x: float = 0, y: float = 0, width: float = 0, height: float = 0) -> None:
-        super(Rectangle, self).__init__(x, y, width, height)
+        self.__set(x, y, width, height)
 
     @property
     def x(self) -> float:
@@ -386,6 +497,9 @@ class Rectangle(_Struct):
     def height(self, i: float) -> None:
         self.height = i
 
+    def __set(self, x: float = 0, y: float = 0, width: float = 0, height: float = 0):
+        super(Rectangle, self).__init__(_to_float(x), _to_float(y), _to_float(width), _to_float(height))
+
 
 # Image, pixel data stored in CPU memory (RAM)
 class Image(_Struct):
@@ -397,8 +511,11 @@ class Image(_Struct):
         ('format', _Int)  # Data format (PixelFormat type)
     ]
 
-    def __init__(self, data: _VoidPtr = 0, width: int = 0, height: int = 0, mipmaps: int = 0, format: int = 0) -> None:
-        super(Image, self).__init__(data, width, height, mipmaps, format)
+    def __init__(self, image: 'Image') -> None:
+        if isinstance(image, Image):
+            self.__set(image)
+        else:
+            raise ValueError('Invalid argument')
 
     @property
     def data(self) -> _VoidPtr:
@@ -439,3 +556,94 @@ class Image(_Struct):
     @format.setter
     def format(self, i: int) -> None:
         self.format = i
+
+    def __set(self, img) -> None:
+        super(Image, self).__init__(
+            img.data,
+            img.width,
+            img.height,
+            img.mipmaps,
+            img.format
+        )
+
+
+# Texture, tex data stored in GPU memory (VRAM)
+class Texture(_Struct):
+    _fields_ = [
+        ('id', _UInt),  # Image raw data
+        ('width', _Int),  # Image base width
+        ('height', _Int),  # Image base height
+        ('mipmaps', _Int),  # Mipmap levels, 1 by default
+        ('format', _Int)  # Data format (PixelFormat type)
+    ]
+
+    def __init__(self, texture: 'Texture') -> None:
+        if isinstance(texture, Texture):
+            self.__set(texture)
+        else:
+            raise ValueError('Invalid argument')
+
+    @property
+    def id(self) -> _UInt:
+        return self.id.value
+
+    @id.setter
+    def id(self, i: _UInt) -> None:
+        self.id = i
+
+    @property
+    def width(self) -> int:
+        return self.width.value
+
+    @width.setter
+    def width(self, i: int) -> None:
+        self.width = i
+
+    @property
+    def height(self) -> int:
+        return self.height.value
+
+    @height.setter
+    def height(self, i: int) -> None:
+        self.height = i
+
+    @property
+    def mipmaps(self) -> int:
+        return self.mipmaps.value
+
+    @mipmaps.setter
+    def mipmaps(self, i: int) -> None:
+        self.mipmaps = i
+
+    @property
+    def format(self) -> int:
+        return self.format.value
+
+    @format.setter
+    def format(self, i: int) -> None:
+        self.format = i
+
+    def __set(self, texture: 'Texture'):
+        super(Texture, self).__init__(texture.id, texture.width, texture.height, texture.mipmaps, texture.format)
+
+
+# Texture2D, same as Texture
+Texture2D = Texture
+
+# TextureCubemap, same as Texture
+TextureCubemap = Texture
+
+
+# RenderTexture, fbo for texture rendering
+class RenderTexture(_Struct):
+    _fields_ = [
+        ('id', _UInt),  # OpenGL framebuffer object id
+        ('texture', Texture),  # Image base width
+        ('depth', Texture),  # Image base width
+    ]
+
+    def __init__(self, id: int, texture: Texture, depth: Texture) -> None:
+        self.__set(id, texture, depth)
+
+    def __set(self, id: int, texture: Texture, depth: Texture):
+        super(RenderTexture, self).__init__(id, texture, depth)

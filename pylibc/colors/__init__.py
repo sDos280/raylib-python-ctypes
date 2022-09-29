@@ -28,4 +28,4 @@ WHITE = Color(255, 255, 255, 255)  # White
 BLACK = Color(0, 0, 0, 255)  # Black
 BLANK = Color(0, 0, 0, 0)  # Blank (Transparent)
 MAGENTA = Color(255, 0, 255, 255)  # Magenta
-RAYWHITHE = Color(245, 245, 245, 255)  # My own White (raylib logo)
+RAYWHITE = Color(245, 245, 245, 255)  # My own White (raylib logo)
