@@ -11,6 +11,7 @@ from typing import (
     Optional,
     Sequence,
     Type,
+    Union
 )
 
 from ctypes import (
@@ -73,11 +74,7 @@ def copyDataTo(src, dest):
     pointer(dest)[0] = pointer(src)[0]
 
 
-def _flatten(
-        filter_types: Sequence[Type],
-        *args: Any,
-        map_to: Optional[Type] = None
-) -> List[Any]:
+def _flatten(filter_types: Sequence[Type], *args: Any, map_to: Optional[Type] = None) -> List[Any]:
     flatten_list = []
     for value in args:
         if isinstance(value, filter_types):
@@ -406,16 +403,6 @@ class Color(_Struct):
     def __init__(self, r: int = 0, g: int = 0, b: int = 0, a: int = 0) -> None:
         self.__set(r, g, b, a)
 
-    @dispatch(Iterable)
-    def __init__(self, _color: 'Color') -> None:
-        color = _flatten(int, _color)
-        self.__set(
-            color[0],
-            color[1],
-            color[2],
-            color[3]
-        )
-
     @property
     def r(self) -> int:
         return self.r.value
@@ -557,14 +544,8 @@ class Image(_Struct):
     def format(self, i: int) -> None:
         self.format = i
 
-    def __set(self, img) -> None:
-        super(Image, self).__init__(
-            img.data,
-            img.width,
-            img.height,
-            img.mipmaps,
-            img.format
-        )
+    def __set(self, image) -> None:
+        super(Image, self).__init__(image.data, image.width, image.height, image.mipmaps, image.format)
 
 
 # Texture, tex data stored in GPU memory (VRAM)
@@ -642,8 +623,11 @@ class RenderTexture(_Struct):
         ('depth', Texture),  # Image base width
     ]
 
-    def __init__(self, id: int, texture: Texture, depth: Texture) -> None:
-        self.__set(id, texture, depth)
+    def __init__(self, renderTexture: 'RenderTexture') -> None:
+        if isinstance(renderTexture, RenderTexture):
+            self.__set(renderTexture)
+        else:
+            raise ValueError('Invalid argument')
 
     @property
     def id(self) -> _UInt:
@@ -669,17 +653,18 @@ class RenderTexture(_Struct):
     def depth(self, i: Texture) -> None:
         self.depth = i
 
-    def __set(self, id: int, texture: Texture, depth: Texture):
-        super(RenderTexture, self).__init__(id, texture, depth)
+    def __set(self, renderTexture: 'RenderTexture'):
+        super(RenderTexture, self).__init__(renderTexture.id, renderTexture.texture, renderTexture.depth)
 
 
 # RenderTexture2D, same as RenderTexture
 RenderTexture2D = RenderTexture
 
+
 # NPatchInfo, n-patch layout infostructers
 class NPatchInfo(_Struct):
     _fields_ = [
-        ('source', _UInt),  # Texture source rectangle
+        ('source', Rectangle),  # Texture source rectangle
         ('left', _Int),  # Left border offset
         ('top', _Int),  # Top border offset
         ('right', _Int),  # Right border offset
@@ -688,11 +673,11 @@ class NPatchInfo(_Struct):
     ]
 
     @property
-    def source(self) -> _UInt:
+    def source(self) -> Rectangle:
         return self.source.value
 
     @source.setter
-    def source(self, i: _UInt) -> None:
+    def source(self, i: Rectangle) -> None:
         self.source = i
 
     @property
