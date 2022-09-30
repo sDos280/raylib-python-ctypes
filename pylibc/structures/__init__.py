@@ -298,7 +298,7 @@ class Matrix(_Struct):
 
     @property
     def m6(self) -> float:
-        return self.x.value
+        return self.m6.value
 
     @m6.setter
     def m6(self, i: float) -> None:
@@ -417,7 +417,7 @@ class Color(_Struct):
 
     @g.setter
     def g(self, i: int) -> None:
-        self.g = i
+        self.g = _UChar(i)
 
     @property
     def b(self) -> int:
@@ -425,7 +425,7 @@ class Color(_Struct):
 
     @b.setter
     def b(self, i: int) -> None:
-        self.b = i
+        self.b = _UChar(i)
 
     @property
     def a(self) -> int:
@@ -433,7 +433,7 @@ class Color(_Struct):
 
     @a.setter
     def a(self, i: int) -> None:
-        self.a = i
+        self.a = _UChar(i)
 
     def __set(self, r: int = 0, g: int = 0, b: int = 0, a: int = 255) -> None:
         super(Color, self).__init__(_UChar(r), _UChar(g), _UChar(b), _UChar(a))
@@ -458,7 +458,7 @@ class Rectangle(_Struct):
 
     @x.setter
     def x(self, i: float) -> None:
-        self.x = i
+        self.x = _to_float(i)
 
     @property
     def y(self) -> float:
@@ -466,7 +466,7 @@ class Rectangle(_Struct):
 
     @y.setter
     def y(self, i: float) -> None:
-        self.y = i
+        self.y = _to_float(i)
 
     @property
     def width(self) -> float:
@@ -474,7 +474,7 @@ class Rectangle(_Struct):
 
     @width.setter
     def width(self, i: float) -> None:
-        self.width = i
+        self.width = _to_float(i)
 
     @property
     def height(self) -> float:
@@ -482,7 +482,7 @@ class Rectangle(_Struct):
 
     @height.setter
     def height(self, i: float) -> None:
-        self.height = i
+        self.height = _to_float(i)
 
     def __set(self, x: float = 0, y: float = 0, width: float = 0, height: float = 0):
         super(Rectangle, self).__init__(_to_float(x), _to_float(y), _to_float(width), _to_float(height))
@@ -518,7 +518,7 @@ class Image(_Struct):
 
     @width.setter
     def width(self, i: int) -> None:
-        self.width = i
+        self.width = _to_int(i)
 
     @property
     def height(self) -> int:
@@ -526,7 +526,7 @@ class Image(_Struct):
 
     @height.setter
     def height(self, i: int) -> None:
-        self.height = i
+        self.height = _to_int(i)
 
     @property
     def mipmaps(self) -> int:
@@ -534,7 +534,7 @@ class Image(_Struct):
 
     @mipmaps.setter
     def mipmaps(self, i: int) -> None:
-        self.mipmaps = i
+        self.mipmaps = _to_int(i)
 
     @property
     def format(self) -> int:
@@ -542,7 +542,7 @@ class Image(_Struct):
 
     @format.setter
     def format(self, i: int) -> None:
-        self.format = i
+        self.format = _to_int(i)
 
     def __set(self, image) -> None:
         super(Image, self).__init__(image.data, image.width, image.height, image.mipmaps, image.format)
@@ -578,7 +578,7 @@ class Texture(_Struct):
 
     @width.setter
     def width(self, i: int) -> None:
-        self.width = i
+        self.width = _to_int(i)
 
     @property
     def height(self) -> int:
@@ -586,7 +586,7 @@ class Texture(_Struct):
 
     @height.setter
     def height(self, i: int) -> None:
-        self.height = i
+        self.height = _to_int(i)
 
     @property
     def mipmaps(self) -> int:
@@ -594,7 +594,7 @@ class Texture(_Struct):
 
     @mipmaps.setter
     def mipmaps(self, i: int) -> None:
-        self.mipmaps = i
+        self.mipmaps = _to_int(i)
 
     @property
     def format(self) -> int:
@@ -602,7 +602,7 @@ class Texture(_Struct):
 
     @format.setter
     def format(self, i: int) -> None:
-        self.format = i
+        self.format = _to_int(i)
 
     def __set(self, texture: 'Texture'):
         super(Texture, self).__init__(texture.id, texture.width, texture.height, texture.mipmaps, texture.format)
@@ -672,50 +672,59 @@ class NPatchInfo(_Struct):
         ('layout', _Int),  # Layout of the n-patch: 3x3, 1x3 or 3x1
     ]
 
+    def __init__(self, nPatchInfo: 'NPatchInfo') -> None:
+        if isinstance(nPatchInfo, NPatchInfo):
+            self.__set(nPatchInfo)
+        else:
+            raise ValueError('Invalid argument')
+
     @property
     def source(self) -> Rectangle:
         return self.source.value
 
     @source.setter
     def source(self, i: Rectangle) -> None:
-        self.source = i
+        self.source = _to_int(i)
 
     @property
-    def left(self) -> _Int:
+    def left(self) -> int:
         return self.left.value
 
     @left.setter
-    def left(self, i: _Int) -> None:
-        self.left = i
+    def left(self, i: int) -> None:
+        self.left = _to_int(i)
 
     @property
-    def top(self) -> _Int:
+    def top(self) -> int:
         return self.top.value
 
     @top.setter
-    def top(self, i: _Int) -> None:
-        self.top = i
+    def top(self, i: int) -> None:
+        self.top = _to_int(i)
 
     @property
-    def right(self) -> _Int:
+    def right(self) -> int:
         return self.right.value
 
     @right.setter
-    def right(self, i: _Int) -> None:
-        self.right = i
+    def right(self, i: int) -> None:
+        self.right = _to_int(i)
 
     @property
-    def bottom(self) -> _Int:
+    def bottom(self) -> int:
         return self.bottom.value
 
     @bottom.setter
-    def bottom(self, i: _Int) -> None:
-        self.bottom = i
+    def bottom(self, i: int) -> None:
+        self.bottom = _to_int(i)
 
     @property
-    def layout(self) -> _Int:
+    def layout(self) -> int:
         return self.layout.value
 
     @layout.setter
-    def layout(self, i: _Int) -> None:
-        self.layout = i
+    def layout(self, i: int) -> None:
+        self.layout = _to_int(i)
+
+    def __set(self, nPatchInfo: 'NPatchInfo'):
+        super.__init__(self, Rectangle(nPatchInfo.source), _to_int(nPatchInfo.left), _to_int(nPatchInfo.top), _to_int(nPatchInfo.right), _to_int(nPatchInfo.bottom), _to_int(nPatchInfo.layout))
