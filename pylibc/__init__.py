@@ -66,7 +66,7 @@ _rl = cdll.LoadLibrary(str(Path(__file__).parent / 'lib/raylib.dll'))
 
 functions_data = {}
 # Opening JSON file
-with open('C:/Raylib Python Bindings/raylib-python-ctypes/pylibc/functions.json') as json_file:
+with open('./functions.json') as json_file:
     functions_data = json.load(json_file)
 
 rcore_functions_data = functions_data['rcore_functions']
