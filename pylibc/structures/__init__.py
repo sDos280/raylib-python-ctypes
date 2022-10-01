@@ -614,7 +614,7 @@ class RenderTexture(Struct):
     _fields_ = [
         ('id', UInt),  # OpenGL framebuffer object id
         ('texture', Texture),  # Image base width
-        ('depth', Texture),  # Image base width
+        ('depth', Texture)  # Image base width
     ]
 
     def __init__(self, renderTexture: 'RenderTexture') -> None:
@@ -663,7 +663,7 @@ class NPatchInfo(Struct):
         ('top', Int),  # Top border offset
         ('right', Int),  # Right border offset
         ('bottom', Int),  # Bottom border offset
-        ('layout', Int),  # Layout of the n-patch: 3x3, 1x3 or 3x1
+        ('layout', Int)  # Layout of the n-patch: 3x3, 1x3 or 3x1
     ]
 
     def __init__(self, nPatchInfo: 'NPatchInfo') -> None:
@@ -723,3 +723,130 @@ class NPatchInfo(Struct):
     def __set(self, nPatchInfo: 'NPatchInfo'):
         super.__init__(self, nPatchInfo.source, nPatchInfo.left, nPatchInfo.top, nPatchInfo.right, nPatchInfo.bottom,
                        nPatchInfo.layout)
+
+# GlyphInfo, font characters glyphs info
+class GlyphInfo(Struct):
+    _fields_ = [
+        ('value', Int),  # Character value (Unicode)
+        ('offsetX', Int),  # Character offset X when drawing
+        ('offsetY', Int),  # Character offset Y when drawing
+        ('advanceX', Int),  # Character advance position X
+        ('image', Image)  # Character image data
+    ]
+
+    def __init__(self, glyphInfo: 'GlyphInfo') -> None:
+        if isinstance(glyphInfo, NPatchInfo):
+            self.__set(glyphInfo)
+        else:
+            raise ValueError('Invalid argument')
+
+    @property
+    def value(self) -> int:
+        return self.value.value
+
+    @value.setter
+    def value(self, i: int) -> None:
+        self.value = i
+
+    @property
+    def offsetX(self) -> int:
+        return self.offsetX.value
+
+    @offsetX.setter
+    def offsetX(self, i: int) -> None:
+        self.offsetX = i
+
+    @property
+    def offsetY(self) -> int:
+        return self.offsetY.value
+
+    @offsetY.setter
+    def offsetY(self, i: int) -> None:
+        self.offsetY = i
+
+    @property
+    def advanceX(self) -> int:
+        return self.advanceX.value
+
+    @advanceX.setter
+    def advanceX(self, i: int) -> None:
+        self.advanceX = i
+
+    @property
+    def image(self) -> Image:
+        return self.image.value
+
+    @image.setter
+    def image(self, i: Image) -> None:
+        self.image = i
+
+    def __set(self, glyphInfo: 'GlyphInfo'):
+        super.__init__(self, glyphInfo.value, glyphInfo.offsetX, glyphInfo.offsetY, glyphInfo.advanceX, glyphInfo.image)
+
+# Font, font texture and GlyphInfo array data
+class Font(Struct):
+    _fields_ = [
+        ('baseSize', Int),  # Character value (Unicode)
+        ('glyphCount', Int),  # Character offset X when drawing
+        ('glyphPadding', Int),  # Character offset Y when drawing
+        ('texture', Texture2D),  # Character advance position X
+        ('recs', POINTER(Rectangle)),  # Character image data
+        ('glyphs', POINTER(GlyphInfo))  # Character image data
+    ]
+
+    def __init__(self, font: 'Font') -> None:
+        if isinstance(font, NPatchInfo):
+            self.__set(font)
+        else:
+            raise ValueError('Invalid argument')
+
+    @property
+    def baseSize(self) -> int:
+        return self.baseSize.value
+
+    @baseSize.setter
+    def baseSize(self, i: int) -> None:
+        self.baseSize = i
+
+    @property
+    def glyphCount(self) -> int:
+        return self.glyphCount.value
+
+    @glyphCount.setter
+    def glyphCount(self, i: int) -> None:
+        self.glyphCount = i
+
+    @property
+    def glyphPadding(self) -> int:
+        return self.glyphPadding.value
+
+    @glyphPadding.setter
+    def glyphPadding(self, i: int) -> None:
+        self.glyphPadding = i
+
+    @property
+    def texture(self) -> Texture2D:
+        return self.texture.value
+
+    @texture.setter
+    def texture(self, i: Texture2D) -> None:
+        self.texture = i
+
+    @property
+    def recs(self) -> POINTER(Rectangle):
+        return self.recs
+
+    @recs.setter
+    def recs(self, i: POINTER(Rectangle)) -> None:
+        self.recs = i
+
+    @property
+    def glyphs(self) -> POINTER(GlyphInfo):
+        return self.glyphs
+
+    @glyphs.setter
+    def glyphs(self, i: POINTER(GlyphInfo)) -> None:
+        self.glyphs = i
+
+    def __set(self, font: 'Font'):
+        super.__init__(self, font.baseSize, font.glyphCount, font.glyphPadding, font.texture, font.recs, font.glyphs)
