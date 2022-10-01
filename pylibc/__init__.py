@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 import json
 import inflection
@@ -65,8 +66,9 @@ current_module = __import__(__name__)
 _rl = cdll.LoadLibrary(str(Path(__file__).parent / 'lib/raylib.dll'))
 
 functions_data = {}
+
 # Opening JSON file
-with open('./functions.json') as json_file:
+with open(Path(__file__).parent / 'functions.json') as json_file:
     functions_data = json.load(json_file)
 
 rcore_functions_data = functions_data['rcore_functions']
