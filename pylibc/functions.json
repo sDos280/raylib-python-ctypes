@@ -2,158 +2,302 @@
   "rcore_functions": [
     {
       "name": "InitWindow",
-      "parameters": [
+      "parametersName": [
         "width", "height", "title"
       ],
       "parametersTypes": [
-        "Int", "Int", "CharPtr"
+        "int", "int", "wchar_t *"
       ],
       "returnType": [
-        "None"
+        "void"
       ]
     },
     {
       "name": "WindowShouldClose",
-      "parameters": [
-        "None"
+      "parametersName": [
+        "void"
       ],
       "parametersTypes": [
-        "None"
+        "void"
       ],
       "returnType": [
-        "Bool"
+        "bool"
       ]
     },
     {
       "name": "CloseWindow",
-      "parameters": [
-        "None"
+      "parametersName": [
+        "void"
       ],
       "parametersTypes": [
-        "None"
+        "void"
       ],
       "returnType": [
-        "None"
+        "void"
       ]
     },
     {
       "name": "IsWindowReady",
-      "parameters": [
-        "None"
+      "parametersName": [
+        "void"
       ],
       "parametersTypes": [
-        "None"
+        "void"
       ],
       "returnType": [
-        "Bool"
+        "bool"
       ]
     },
     {
       "name": "IsWindowFullscreen",
-      "parameters": [
-        "None"
+      "parametersName": [
+        "void"
       ],
       "parametersTypes": [
-        "None"
+        "void"
       ],
       "returnType": [
-        "Bool"
+        "bool"
       ]
     },
     {
       "name": "IsWindowHidden",
-      "parameters": [
-        "None"
+      "parametersName": [
+        "void"
       ],
       "parametersTypes": [
-        "None"
+        "void"
       ],
       "returnType": [
-        "Bool"
+        "bool"
       ]
     },
     {
       "name": "IsWindowMinimized",
-      "parameters": [
-        "None"
+      "parametersName": [
+        "void"
       ],
       "parametersTypes": [
-        "None"
+        "void"
       ],
       "returnType": [
-        "Bool"
+        "bool"
       ]
     },
     {
       "name": "IsWindowMaximized",
-      "parameters": [
-        "None"
+      "parametersName": [
+        "void"
       ],
       "parametersTypes": [
-        "None"
+        "void"
       ],
       "returnType": [
-        "Bool"
+        "bool"
       ]
     },
     {
       "name": "IsWindowFocused",
-      "parameters": [
-        "None"
+      "parametersName": [
+        "void"
       ],
       "parametersTypes": [
-        "None"
+        "void"
       ],
       "returnType": [
-        "Bool"
+        "bool"
       ]
     },
     {
       "name": "IsWindowResized",
-      "parameters": [
-        "None"
+      "parametersName": [
+        "void"
       ],
       "parametersTypes": [
-        "None"
+        "void"
       ],
       "returnType": [
-        "Bool"
+        "bool"
       ]
     },
     {
       "name": "IsWindowState",
-      "parameters": [
+      "parametersName": [
         "flag"
       ],
       "parametersTypes": [
-        "UInt"
+        "unsigned int"
       ],
       "returnType": [
-        "Bool"
+        "bool"
       ]
     },
     {
       "name": "SetWindowState",
-      "parameters": [
+      "parametersName": [
         "flags"
       ],
       "parametersTypes": [
-        "UInt"
+        "int"
       ],
       "returnType": [
-        "None"
+        "void"
       ]
     },
     {
       "name": "ClearWindowState",
-      "parameters": [
+      "parametersName": [
         "flags"
       ],
       "parametersTypes": [
-        "UInt"
+        "unsigned int"
       ],
       "returnType": [
-        "None"
+        "void"
+      ]
+    },
+    {
+      "name": "ToggleFullscreen",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "MaximizeWindow",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "MinimizeWindow",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "RestoreWindow",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "SetWindowIcon",
+      "parametersName": [
+        "image"
+      ],
+      "parametersTypes": [
+        "Image"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "SetWindowTitle",
+      "parametersName": [
+        "title"
+      ],
+      "parametersTypes": [
+        "wchar_t *"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "SetWindowPosition",
+      "parametersName": [
+        "x", "y"
+      ],
+      "parametersTypes": [
+        "int", "int"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "SetWindowMonitor",
+      "parametersName": [
+        "monitor"
+      ],
+      "parametersTypes": [
+        "int"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "SetWindowMinSize",
+      "parametersName": [
+        "width", "height"
+      ],
+      "parametersTypes": [
+        "int", "int"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "SetWindowSize",
+      "parametersName": [
+        "width", "height"
+      ],
+      "parametersTypes": [
+        "int", "int"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "SetWindowOpacity",
+      "parametersName": [
+        "opacity"
+      ],
+      "parametersTypes": [
+        "float"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "GetWindowHandle",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "void *"
       ]
     }
   ]
