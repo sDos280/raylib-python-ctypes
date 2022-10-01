@@ -299,6 +299,30 @@
       "returnType": [
         "void *"
       ]
+    },
+    {
+      "name": "GetScreenWidth",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "int"
+      ]
+    },
+    {
+      "name": "GetScreenWidth",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "int"
+      ]
     }
   ]
 }
