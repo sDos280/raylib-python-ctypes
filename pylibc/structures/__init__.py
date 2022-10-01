@@ -10,8 +10,7 @@ from typing import (
     List,
     Optional,
     Sequence,
-    Type,
-    Union
+    Type
 )
 
 from ctypes import (
@@ -32,24 +31,24 @@ from ctypes import (
     c_uint,
 )
 
-_Bool = c_bool
-_VoidPtr = c_void_p
-_CharPtr = c_char_p
-_CharPtrPtr = POINTER(c_char_p)
-_UCharPtr = POINTER(c_ubyte)
-_IntPtr = POINTER(c_int)
-_UIntPtr = POINTER(c_uint)
-_FloatPtr = POINTER(c_float)
-_UShortPtr = POINTER(c_ushort)
-_Char = c_char
-_UChar = c_ubyte
-_Byte = c_byte
-_Short = c_short
-_Int = c_int
-_Float = c_float
-_UInt = c_uint
-_Double = c_double
-_Struct = Structure
+Bool = c_bool
+VoidPtr = c_void_p
+CharPtr = c_char_p
+CharPtrPtr = POINTER(c_char_p)
+UCharPtr = POINTER(c_ubyte)
+IntPtr = POINTER(c_int)
+UIntPtr = POINTER(c_uint)
+FloatPtr = POINTER(c_float)
+UShortPtr = POINTER(c_ushort)
+Char = c_char
+UChar = c_ubyte
+Byte = c_byte
+Short = c_short
+Int = c_int
+Float = c_float
+UInt = c_uint
+Double = c_double
+Struct = Structure
 
 
 def _to_int(value: float):
@@ -90,10 +89,10 @@ def _flatten(filter_types: Sequence[Type], *args: Any, map_to: Optional[Type] = 
 # ----------------------------------------------------------------------------------
 
 # Vector2, 2 components
-class Vector2(_Struct):
+class Vector2(Struct):
     _fields_ = [
-        ('x', _Float),  # Vector x component
-        ('y', _Float),  # Vector y component
+        ('x', Float),  # Vector x component
+        ('y', Float),  # Vector y component
     ]
 
     @dispatch()
@@ -125,11 +124,11 @@ class Vector2(_Struct):
 
 
 # Vector3, 3 components
-class Vector3(_Struct):
+class Vector3(Struct):
     _fields_ = [
-        ('x', _Float),  # Vector x component
-        ('y', _Float),  # Vector y component
-        ('z', _Float),  # Vector z component
+        ('x', Float),  # Vector x component
+        ('y', Float),  # Vector y component
+        ('z', Float),  # Vector z component
     ]
 
     @dispatch()
@@ -169,12 +168,12 @@ class Vector3(_Struct):
 
 
 # Vector4, 4 components
-class Vector4(_Struct):
+class Vector4(Struct):
     _fields_ = [
-        ('x', _Float),  # Vector x component
-        ('y', _Float),  # Vector y component
-        ('z', _Float),  # Vector z component
-        ('w', _Float),  # Vector w component
+        ('x', Float),  # Vector x component
+        ('y', Float),  # Vector y component
+        ('z', Float),  # Vector z component
+        ('w', Float),  # Vector w component
     ]
 
     @dispatch()
@@ -226,12 +225,12 @@ Quaternion = Vector4
 
 
 # Matrix, 4x4 components, column major, OpenGL style, right-handed
-class Matrix(_Struct):
+class Matrix(Struct):
     _fields_ = [
-        ('m0', _Float), ('m4', _Float), ('m8', _Float), ('m12', _Float),  # Matrix first row (4 components)
-        ('m1', _Float), ('m5', _Float), ('m9', _Float), ('m13', _Float),  # Matrix second row (4 components)
-        ('m2', _Float), ('m6', _Float), ('m10', _Float), ('m14', _Float),  # Matrix third row (4 components)
-        ('m3', _Float), ('m7', _Float), ('m11', _Float), ('m15', _Float),  # Matrix fourth row (4 components)
+        ('m0', Float), ('m4', Float), ('m8', Float), ('m12', Float),  # Matrix first row (4 components)
+        ('m1', Float), ('m5', Float), ('m9', Float), ('m13', Float),  # Matrix second row (4 components)
+        ('m2', Float), ('m6', Float), ('m10', Float), ('m14', Float),  # Matrix third row (4 components)
+        ('m3', Float), ('m7', Float), ('m11', Float), ('m15', Float),  # Matrix fourth row (4 components)
     ]
 
     @dispatch()
@@ -387,12 +386,12 @@ class Matrix(_Struct):
 
 
 # Color, 4 components, R8G8B8A8 (32bit)
-class Color(_Struct):
+class Color(Struct):
     _fields_ = [
-        ('r', _UChar),  # Color red value
-        ('g', _UChar),  # Color green value
-        ('b', _UChar),  # Color blue value
-        ('a', _UChar),  # Color alpha value
+        ('r', UChar),  # Color red value
+        ('g', UChar),  # Color green value
+        ('b', UChar),  # Color blue value
+        ('a', UChar),  # Color alpha value
     ]
 
     @dispatch()
@@ -409,7 +408,7 @@ class Color(_Struct):
 
     @r.setter
     def r(self, i: int) -> None:
-        self.r = _UChar(i)
+        self.r = UChar(i)
 
     @property
     def g(self) -> int:
@@ -417,7 +416,7 @@ class Color(_Struct):
 
     @g.setter
     def g(self, i: int) -> None:
-        self.g = _UChar(i)
+        self.g = UChar(i)
 
     @property
     def b(self) -> int:
@@ -425,7 +424,7 @@ class Color(_Struct):
 
     @b.setter
     def b(self, i: int) -> None:
-        self.b = _UChar(i)
+        self.b = UChar(i)
 
     @property
     def a(self) -> int:
@@ -433,19 +432,19 @@ class Color(_Struct):
 
     @a.setter
     def a(self, i: int) -> None:
-        self.a = _UChar(i)
+        self.a = UChar(i)
 
     def __set(self, r: int = 0, g: int = 0, b: int = 0, a: int = 255) -> None:
-        super(Color, self).__init__(_UChar(r), _UChar(g), _UChar(b), _UChar(a))
+        super(Color, self).__init__(UChar(r), UChar(g), UChar(b), UChar(a))
 
 
 # Rectangle, 4 components
-class Rectangle(_Struct):
+class Rectangle(Struct):
     _fields_ = [
-        ('x', _Float),  # Color red value
-        ('y', _Float),  # Color green value
-        ('width', _Float),  # Color blue value
-        ('height', _Float),  # Color alpha value
+        ('x', Float),  # Color red value
+        ('y', Float),  # Color green value
+        ('width', Float),  # Color blue value
+        ('height', Float),  # Color alpha value
     ]
 
     @dispatch((int, float), (int, float), (int, float), (int, float))
@@ -489,13 +488,13 @@ class Rectangle(_Struct):
 
 
 # Image, pixel data stored in CPU memory (RAM)
-class Image(_Struct):
+class Image(Struct):
     _fields_ = [
-        ('data', _VoidPtr),  # Image raw data
-        ('width', _Int),  # Image base width
-        ('height', _Int),  # Image base height
-        ('mipmaps', _Int),  # Mipmap levels, 1 by default
-        ('format', _Int)  # Data format (PixelFormat type)
+        ('data', VoidPtr),  # Image raw data
+        ('width', Int),  # Image base width
+        ('height', Int),  # Image base height
+        ('mipmaps', Int),  # Mipmap levels, 1 by default
+        ('format', Int)  # Data format (PixelFormat type)
     ]
 
     def __init__(self, image: 'Image') -> None:
@@ -505,11 +504,11 @@ class Image(_Struct):
             raise ValueError('Invalid argument')
 
     @property
-    def data(self) -> _VoidPtr:
+    def data(self) -> VoidPtr:
         return self.data.value
 
     @data.setter
-    def data(self, i: _VoidPtr) -> None:
+    def data(self, i: VoidPtr) -> None:
         self.data = i
 
     @property
@@ -549,13 +548,13 @@ class Image(_Struct):
 
 
 # Texture, tex data stored in GPU memory (VRAM)
-class Texture(_Struct):
+class Texture(Struct):
     _fields_ = [
-        ('id', _UInt),  # Image raw data
-        ('width', _Int),  # Image base width
-        ('height', _Int),  # Image base height
-        ('mipmaps', _Int),  # Mipmap levels, 1 by default
-        ('format', _Int)  # Data format (PixelFormat type)
+        ('id', UInt),  # Image raw data
+        ('width', Int),  # Image base width
+        ('height', Int),  # Image base height
+        ('mipmaps', Int),  # Mipmap levels, 1 by default
+        ('format', Int)  # Data format (PixelFormat type)
     ]
 
     def __init__(self, texture: 'Texture') -> None:
@@ -565,11 +564,11 @@ class Texture(_Struct):
             raise ValueError('Invalid argument')
 
     @property
-    def id(self) -> _UInt:
+    def id(self) -> UInt:
         return self.id.value
 
     @id.setter
-    def id(self, i: _UInt) -> None:
+    def id(self, i: UInt) -> None:
         self.id = i
 
     @property
@@ -616,9 +615,9 @@ TextureCubemap = Texture
 
 
 # RenderTexture, fbo for texture rendering
-class RenderTexture(_Struct):
+class RenderTexture(Struct):
     _fields_ = [
-        ('id', _UInt),  # OpenGL framebuffer object id
+        ('id', UInt),  # OpenGL framebuffer object id
         ('texture', Texture),  # Image base width
         ('depth', Texture),  # Image base width
     ]
@@ -630,11 +629,11 @@ class RenderTexture(_Struct):
             raise ValueError('Invalid argument')
 
     @property
-    def id(self) -> _UInt:
+    def id(self) -> UInt:
         return self.id.value
 
     @id.setter
-    def id(self, i: _UInt) -> None:
+    def id(self, i: UInt) -> None:
         self.id = i
 
     @property
@@ -662,14 +661,14 @@ RenderTexture2D = RenderTexture
 
 
 # NPatchInfo, n-patch layout infostructers
-class NPatchInfo(_Struct):
+class NPatchInfo(Struct):
     _fields_ = [
         ('source', Rectangle),  # Texture source rectangle
-        ('left', _Int),  # Left border offset
-        ('top', _Int),  # Top border offset
-        ('right', _Int),  # Right border offset
-        ('bottom', _Int),  # Bottom border offset
-        ('layout', _Int),  # Layout of the n-patch: 3x3, 1x3 or 3x1
+        ('left', Int),  # Left border offset
+        ('top', Int),  # Top border offset
+        ('right', Int),  # Right border offset
+        ('bottom', Int),  # Bottom border offset
+        ('layout', Int),  # Layout of the n-patch: 3x3, 1x3 or 3x1
     ]
 
     def __init__(self, nPatchInfo: 'NPatchInfo') -> None:

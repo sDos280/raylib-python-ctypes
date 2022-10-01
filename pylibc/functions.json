@@ -1,0 +1,40 @@
+{
+  "rcore_functions": [
+    {
+      "name": "InitWindow",
+      "parameters": [
+        "width", "height", "title"
+      ],
+      "parametersTypes": [
+        "Int", "Int", "CharPtr"
+      ],
+      "returnType": [
+        "None"
+      ]
+    },
+    {
+      "name": "WindowShouldClose",
+      "parameters": [
+        "None"
+      ],
+      "parametersTypes": [
+        "None"
+      ],
+      "returnType": [
+        "Bool"
+      ]
+    },
+    {
+      "name": "CloseWindow",
+      "parameters": [
+        "None"
+      ],
+      "parametersTypes": [
+        "None"
+      ],
+      "returnType": [
+        "None"
+      ]
+    }
+  ]
+}
