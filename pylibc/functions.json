@@ -35,6 +35,126 @@
       "returnType": [
         "None"
       ]
+    },
+    {
+      "name": "IsWindowReady",
+      "parameters": [
+        "None"
+      ],
+      "parametersTypes": [
+        "None"
+      ],
+      "returnType": [
+        "Bool"
+      ]
+    },
+    {
+      "name": "IsWindowFullscreen",
+      "parameters": [
+        "None"
+      ],
+      "parametersTypes": [
+        "None"
+      ],
+      "returnType": [
+        "Bool"
+      ]
+    },
+    {
+      "name": "IsWindowHidden",
+      "parameters": [
+        "None"
+      ],
+      "parametersTypes": [
+        "None"
+      ],
+      "returnType": [
+        "Bool"
+      ]
+    },
+    {
+      "name": "IsWindowMinimized",
+      "parameters": [
+        "None"
+      ],
+      "parametersTypes": [
+        "None"
+      ],
+      "returnType": [
+        "Bool"
+      ]
+    },
+    {
+      "name": "IsWindowMaximized",
+      "parameters": [
+        "None"
+      ],
+      "parametersTypes": [
+        "None"
+      ],
+      "returnType": [
+        "Bool"
+      ]
+    },
+    {
+      "name": "IsWindowFocused",
+      "parameters": [
+        "None"
+      ],
+      "parametersTypes": [
+        "None"
+      ],
+      "returnType": [
+        "Bool"
+      ]
+    },
+    {
+      "name": "IsWindowResized",
+      "parameters": [
+        "None"
+      ],
+      "parametersTypes": [
+        "None"
+      ],
+      "returnType": [
+        "Bool"
+      ]
+    },
+    {
+      "name": "IsWindowState",
+      "parameters": [
+        "flag"
+      ],
+      "parametersTypes": [
+        "UInt"
+      ],
+      "returnType": [
+        "Bool"
+      ]
+    },
+    {
+      "name": "SetWindowState",
+      "parameters": [
+        "flags"
+      ],
+      "parametersTypes": [
+        "UInt"
+      ],
+      "returnType": [
+        "None"
+      ]
+    },
+    {
+      "name": "ClearWindowState",
+      "parameters": [
+        "flags"
+      ],
+      "parametersTypes": [
+        "UInt"
+      ],
+      "returnType": [
+        "None"
+      ]
     }
   ]
 }
