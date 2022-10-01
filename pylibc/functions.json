@@ -313,7 +313,7 @@
       ]
     },
     {
-      "name": "GetScreenWidth",
+      "name": "GetScreenHeight",
       "parametersName": [
         "void"
       ],
@@ -322,6 +322,66 @@
       ],
       "returnType": [
         "int"
+      ]
+    },
+    {
+      "name": "GetRenderWidth",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "int"
+      ]
+    },
+    {
+      "name": "GetRenderHeight",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "int"
+      ]
+    },
+    {
+      "name": "GetMonitorCount",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "int"
+      ]
+    },
+    {
+      "name": "GetCurrentMonitor",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "int"
+      ]
+    },
+    {
+      "name": "GetMonitorPosition",
+      "parametersName": [
+        "monitor"
+      ],
+      "parametersTypes": [
+        "int"
+      ],
+      "returnType": [
+        "Vector2"
       ]
     }
   ]

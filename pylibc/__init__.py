@@ -1,10 +1,9 @@
-import os
 from pathlib import Path
 import json
 import inflection
 
 from pylibc.structures import (
-    Image
+    Image, Vector2
 )
 
 from ctypes import (
@@ -58,7 +57,8 @@ typesDictionary = {
     'void': c_void_p,  # C type: void  Python type: None
 
     # Structures
-    'Image': Image
+    'Image': Image,  # C type: struct Image
+    'Vector2': Vector2  # C type: struct Vector2
 }
 
 current_module = __import__(__name__)
