@@ -647,7 +647,7 @@
       "returnType": [
         "void"
       ]
-    },.....
+    },
     {
       "name": "BeginDrawing",
       "parametersName": [
@@ -683,7 +683,7 @@
       "returnType": [
         "void"
       ]
-    },......
+    },
     {
       "name": "EndMode2D",
       "parametersName": [
@@ -707,7 +707,7 @@
       "returnType": [
         "void"
       ]
-    },.....
+    },
     {
       "name": "EndMode3D",
       "parametersName": [
@@ -731,7 +731,7 @@
       "returnType": [
         "void"
       ]
-    },......
+    },
     {
       "name": "EndTextureMode",
       "parametersName": [
@@ -755,6 +755,222 @@
       "returnType": [
         "void"
       ]
-    }.....
+    },
+    {
+      "name": "EndShaderMode",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "BeginBlendMode",
+      "parametersName": [
+        "mode"
+      ],
+      "parametersTypes": [
+        "int"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "EndBlendMode",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "BeginScissorMode",
+      "parametersName": [
+        "x" , "y" , "width" , "height"
+      ],
+      "parametersTypes": [
+        "int" , "int" , "int" , "int"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "EndScissorMode",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "BeginVrStereoMode",
+      "parametersName": [
+        "config"
+      ],
+      "parametersTypes": [
+        "VrStereoConfig"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "EndVrStereoMode",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "UnloadVrStereoConfig",
+      "parametersName": [
+        "config"
+      ],
+      "parametersTypes": [
+        "VrStereoConfig"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "LoadVrStereoConfig",
+      "parametersName": [
+        "device"
+      ],
+      "parametersTypes": [
+        "VrDeviceInfo"
+      ],
+      "returnType": [
+        "VrStereoConfig"
+      ]
+    },
+    {
+      "name": "LoadShader",
+      "parametersName": [
+        "vsFileName" , "fsFileName"
+      ],
+      "parametersTypes": [
+        "wchar_t" , "wchar_t"
+      ],
+      "returnType": [
+        "Shader"
+      ]
+    },
+    {
+      "name": "LoadShaderFromMemory",
+      "parametersName": [
+        "vsCode" , "fsCode"
+      ],
+      "parametersTypes": [
+        "wchar_t" , "wchar_t"
+      ],
+      "returnType": [
+        "Shader"
+      ]
+    },
+    {
+      "name": "GetShaderLocation",
+      "parametersName": [
+        "shader" , "uniformName"
+      ],
+      "parametersTypes": [
+        "Shader" , "wchar_t"
+      ],
+      "returnType": [
+        "int"
+      ]
+    },
+    {
+      "name": "GetShaderLocationAttrib",
+      "parametersName": [
+        "shader" , "attribName"
+      ],
+      "parametersTypes": [
+        "Shader" , "wchar_t"
+      ],
+      "returnType": [
+        "int"
+      ]
+    },
+    {
+      "name": "SetShaderValue",
+      "parametersName": [
+        "shader" , "locIndex" , "value" , "uniformType"
+      ],
+      "parametersTypes": [
+        "Shader" , "int" , "wchar_t" , "int"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "SetShaderValueV",
+      "parametersName": [
+        "shader" , "locIndex" , "value" , "uniformType" , "count"
+      ],
+      "parametersTypes": [
+        "Shader" , "int" , "wchar_t" , "int" , "int"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "SetShaderValueMatrix",
+      "parametersName": [
+        "shader" , "locIndex" , "mat"
+      ],
+      "parametersTypes": [
+        "Shader" , "int" , "matrix"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "SetShaderValueTexture",
+      "parametersName": [
+        "shader" , "locIndex" , "texture"
+      ],
+      "parametersTypes": [
+        "Shader" , "int" , "Texture2D"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "UnloadShader",
+      "parametersName": [
+        "shader"
+      ],
+      "parametersTypes": [
+        "Shader"
+      ],
+      "returnType": [
+        "void"
+      ]
+    }
   ]
 }
