@@ -3,12 +3,10 @@ import json
 import inflection
 
 from pylibc.structures import (
-    Image, Vector2
+    Image, Vector2, Color, Camera2D, Camera3D, RenderTexture2D, Shader, Matrix, Texture2D
 )
 
-from pylibc.customExceptions import (
-    OverloadFunction
-)
+from pylibc.customExceptions import *
 
 from ctypes import (
     POINTER,
@@ -62,7 +60,14 @@ typesDictionary = {
 
     # Structures
     'Image': Image,  # C type: struct Image
-    'Vector2': Vector2  # C type: struct Vector2
+    'Vector2': Vector2,  # C type: struct Vector2
+    'Color': Color,  # C type: struct Color
+    'Camera2D': Camera2D,  # C type: struct Camera2D
+    'Shader': Shader,  # C type: struct Shader
+    'Matrix': Matrix,  # C type: struct Matrix
+    'Texture2D': Texture2D,  # C type: struct Texture2D
+    'Camera3D': Camera3D,  # C type: struct Texture2D
+    'RenderTexture2D': RenderTexture2D  # C type: struct Texture2D
 }
 
 current_module = __import__(__name__)
@@ -89,17 +94,27 @@ def wrap_function(funcname, argtypes=None, restype=None):
 for core_function in rcore_functions_data:
     for index, parametersType in enumerate(core_function['parametersTypes']):
         try:
-            core_function['parametersTypes'][index] = typesDictionary[parametersType]
-        except:
-            print(core_function)
+            if parametersType in typesDictionary:
+                core_function['parametersTypes'][index] = typesDictionary[parametersType]
+            else:
+                raise UnknownType
+        except UnknownType:
+            print(UnknownType.__doc__, parametersType)
     core_function['parametersTypes'] = core_function['parametersTypes'] if len(core_function['parametersTypes']) != 1 and core_function['parametersTypes'] != 'void' else None
     core_function['parametersName'] = core_function['parametersName'] if len(core_function['parametersName']) != 1 and core_function['parametersName'] != 'void' else None
-    core_function['returnType'] = typesDictionary[core_function['returnType'][0]]
+    try:
+        core_function['returnType'] = typesDictionary[core_function['returnType'][0]]
+    except:
+        print(core_function['returnType'][0])
+
 
 core_wrapped_function = []
 # wrapper for core functions
 for core_function in rcore_functions_data:
     try:
+        if type(core_function['returnType']) == list:
+            raise UnknownType
+
         name_of_function = inflection.underscore(core_function['name']).replace('3_d', '_3d').replace('2_d', '_2d')
         if name_of_function in core_wrapped_function:
             raise OverloadFunction
@@ -107,4 +122,6 @@ for core_function in rcore_functions_data:
         f = wrap_function(core_function['name'], core_function['parametersTypes'], core_function['returnType'])
         setattr(current_module, name_of_function, f)
     except OverloadFunction:
-        print(f"the function {core_function['name']} loaded twice")
+        print(OverloadFunction.__doc__, core_function['name'])
+    except UnknownType:
+        print(UnknownType.__doc__, core_function['returnType'])

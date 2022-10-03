@@ -6,7 +6,7 @@
         "width", "height", "title"
       ],
       "parametersTypes": [
-        "int", "int", "wchar_t *"
+        "int", "int", "char *"
       ],
       "returnType": [
         "void"
@@ -222,7 +222,7 @@
         "title"
       ],
       "parametersTypes": [
-        "wchar_t *"
+        "char *"
       ],
       "returnType": [
         "void"
@@ -477,7 +477,7 @@
         "int"
       ],
       "returnType": [
-        "wchar_t *"
+        "char *"
       ]
     },
     {
@@ -486,7 +486,7 @@
         "text"
       ],
       "parametersTypes": [
-        "wchar_t"
+        "char *"
       ],
       "returnType": [
         "void"
@@ -501,7 +501,7 @@
         "void"
       ],
       "returnType": [
-        "wchar_t"
+        "char *"
       ]
     },
     {
@@ -870,7 +870,7 @@
         "vsFileName" , "fsFileName"
       ],
       "parametersTypes": [
-        "wchar_t" , "wchar_t"
+        "char *" , "char *"
       ],
       "returnType": [
         "Shader"
@@ -882,7 +882,7 @@
         "vsCode" , "fsCode"
       ],
       "parametersTypes": [
-        "wchar_t" , "wchar_t"
+        "char *" , "char *"
       ],
       "returnType": [
         "Shader"
@@ -894,7 +894,7 @@
         "shader" , "uniformName"
       ],
       "parametersTypes": [
-        "Shader" , "wchar_t"
+        "Shader" , "char *"
       ],
       "returnType": [
         "int"
@@ -906,7 +906,7 @@
         "shader" , "attribName"
       ],
       "parametersTypes": [
-        "Shader" , "wchar_t"
+        "Shader" , "char *"
       ],
       "returnType": [
         "int"
@@ -918,7 +918,7 @@
         "shader" , "locIndex" , "value" , "uniformType"
       ],
       "parametersTypes": [
-        "Shader" , "int" , "wchar_t" , "int"
+        "Shader" , "int" , "void *" , "int"
       ],
       "returnType": [
         "void"
@@ -930,7 +930,7 @@
         "shader" , "locIndex" , "value" , "uniformType" , "count"
       ],
       "parametersTypes": [
-        "Shader" , "int" , "wchar_t" , "int" , "int"
+        "Shader" , "int" , "void *" , "int" , "int"
       ],
       "returnType": [
         "void"
@@ -942,7 +942,7 @@
         "shader" , "locIndex" , "mat"
       ],
       "parametersTypes": [
-        "Shader" , "int" , "matrix"
+        "Shader" , "int" , "Matrix"
       ],
       "returnType": [
         "void"
