@@ -40,28 +40,6 @@ VoidPtr = c_void_p  # C type: wchar_t* (NUL terminated)  Python type: int or Non
 Void = c_void_p  # C type: void  Python type: None
 
 
-def _to_int(value: float):
-    return int(value) if isinstance(value, float) else value
-
-
-def _to_float(value: int):
-    return float(value) if isinstance(value, int) else value
-
-
-def _to_byte_str(value: str):
-    if not isinstance(value, (str, bytes)):
-        value = str(value)
-    return value.encode('utf-8', 'ignore')
-
-
-def _to_str(value: bytes):
-    return value.decode('utf-8', 'ignore') if isinstance(value, bytes) else value
-
-
-def copyDataTo(src, dest):
-    pointer(dest)[0] = pointer(src)[0]
-
-
 # ----------------------------------------------------------------------------------
 # Structures Definition
 # ----------------------------------------------------------------------------------
@@ -75,19 +53,19 @@ class Vector2(Structure):
 
     @property
     def x(self) -> float:
-        return self.x.value
+        pass
 
     @x.setter
     def x(self, i: float) -> None:
-        self.x = i
+        pass
 
     @property
     def y(self) -> float:
-        return self.y.value
+        pass
 
     @y.setter
     def y(self, i: float) -> None:
-        self.y = i
+        pass
 
 
 # Vector3, 3 components
@@ -100,27 +78,27 @@ class Vector3(Structure):
 
     @property
     def x(self) -> float:
-        return self.x.value
+        pass
 
     @x.setter
     def x(self, i: float) -> None:
-        self.x = i
+        pass
 
     @property
     def y(self) -> float:
-        return self.y.value
+        pass
 
     @y.setter
     def y(self, i: float) -> None:
-        self.y = i
+        pass
 
     @property
     def z(self) -> float:
-        return self.z.value
+        pass
 
     @z.setter
     def z(self, i: float) -> None:
-        self.z = i
+        pass
 
 
 # Vector4, 4 components
@@ -134,35 +112,35 @@ class Vector4(Structure):
 
     @property
     def x(self) -> float:
-        return self.x.value
+        pass
 
     @x.setter
     def x(self, i: float) -> None:
-        self.x = i
+        pass
 
     @property
     def y(self) -> float:
-        return self.y.value
+        pass
 
     @y.setter
     def y(self, i: float) -> None:
-        self.y = i
+        pass
 
     @property
     def z(self) -> float:
-        return self.z.value
+        pass
 
     @z.setter
     def z(self, i: float) -> None:
-        self.z = i
+        pass
 
     @property
     def w(self) -> float:
-        return self.w.value
+        pass
 
     @w.setter
     def w(self, i: float) -> None:
-        self.w = i
+        pass
 
 
 # Quaternion, 4 components (Vector4 alias)
@@ -180,131 +158,131 @@ class Matrix(Structure):
 
     @property
     def m0(self) -> float:
-        return self.m0.value
+        pass
 
     @m0.setter
     def m0(self, i: float) -> None:
-        self.m0 = i
+        pass
 
     @property
     def m1(self) -> float:
-        return self.m1.value
+        pass
 
     @m1.setter
     def m1(self, i: float) -> None:
-        self.m1 = i
+        pass
 
     @property
     def m2(self) -> float:
-        return self.m2.value
+        pass
 
     @m2.setter
     def m2(self, i: float) -> None:
-        self.m2 = i
+        pass
 
     @property
     def m3(self) -> float:
-        return self.m3.value
+        pass
 
     @m3.setter
     def m3(self, i: float) -> None:
-        self.m3 = i
+        pass
 
     @property
     def m4(self) -> float:
-        return self.m4.value
+        pass
 
     @m4.setter
     def m4(self, i: float) -> None:
-        self.m4 = i
+        pass
 
     @property
     def m5(self) -> float:
-        return self.m5.value
+        pass
 
     @m5.setter
     def m5(self, i: float) -> None:
-        self.m5 = i
+        pass
 
     @property
     def m6(self) -> float:
-        return self.m6.value
+        pass
 
     @m6.setter
     def m6(self, i: float) -> None:
-        self.m6 = i
+        pass
 
     @property
     def m7(self) -> float:
-        return self.m7.value
+        pass
 
     @m7.setter
     def m7(self, i: float) -> None:
-        self.m7 = i
+        pass
 
     @property
     def m8(self) -> float:
-        return self.m8.value
+        pass
 
     @m8.setter
     def m8(self, i: float) -> None:
-        self.m8 = i
+        pass
 
     @property
     def m9(self) -> float:
-        return self.m9.value
+        pass
 
     @m9.setter
     def m9(self, i: float) -> None:
-        self.m9 = i
+        pass
 
     @property
     def m10(self) -> float:
-        return self.m10.value
+        pass
 
     @m10.setter
     def m10(self, i: float) -> None:
-        self.m10 = i
+        pass
 
     @property
     def m11(self) -> float:
-        return self.m11.value
+        pass
 
     @m11.setter
     def m11(self, i: float) -> None:
-        self.m11 = i
+        pass
 
     @property
     def m12(self) -> float:
-        return self.m12.value
+        pass
 
     @m12.setter
     def m12(self, i: float) -> None:
-        self.m12 = i
+        pass
 
     @property
     def m13(self) -> float:
-        return self.m13.value
+        pass
 
     @m13.setter
     def m13(self, i: float) -> None:
-        self.m13 = i
+        pass
 
     @property
     def m14(self) -> float:
-        return self.m14.value
+        pass
 
     @m14.setter
     def m14(self, i: float) -> None:
-        self.m14 = i
+        pass
 
     @property
     def m15(self) -> float:
-        return self.m15.value
+        pass
 
     @m15.setter
     def m15(self, i: float) -> None:
-        self.m15 = i
+        pass
 
 
 # Color, 4 components, R8G8B8A8 (32bit)
@@ -318,35 +296,35 @@ class Color(Structure):
 
     @property
     def r(self) -> int:
-        return self.r.value
+        pass
 
     @r.setter
     def r(self, i: int) -> None:
-        self.r = i
+        pass
 
     @property
     def g(self) -> int:
-        return self.g.value
+        pass
 
     @g.setter
     def g(self, i: int) -> None:
-        self.g = i
+        pass
 
     @property
     def b(self) -> int:
-        return self.b.value
+        pass
 
     @b.setter
     def b(self, i: int) -> None:
-        self.b = i
+        pass
 
     @property
     def a(self) -> int:
-        return self.a.value
+        pass
 
     @a.setter
     def a(self, i: int) -> None:
-        self.a = i
+        pass
 
 
 # Rectangle, 4 components
@@ -360,35 +338,35 @@ class Rectangle(Structure):
 
     @property
     def x(self) -> float:
-        return self.x.value
+        pass
 
     @x.setter
     def x(self, i: float) -> None:
-        self.x = i
+        pass
 
     @property
     def y(self) -> float:
-        return self.y.value
+        pass
 
     @y.setter
     def y(self, i: float) -> None:
-        self.y = i
+        pass
 
     @property
     def width(self) -> float:
-        return self.width.value
+        pass
 
     @width.setter
     def width(self, i: float) -> None:
-        self.width = i
+        pass
 
     @property
     def height(self) -> float:
-        return self.height.value
+        pass
 
     @height.setter
     def height(self, i: float) -> None:
-        self.height = i
+        pass
 
 
 # Image, pixel data stored in CPU memory (RAM)
@@ -403,43 +381,43 @@ class Image(Structure):
 
     @property
     def data(self) -> VoidPtr:
-        return self.data.value
+        pass
 
     @data.setter
     def data(self, i: VoidPtr) -> None:
-        self.data = i
+        pass
 
     @property
     def width(self) -> int:
-        return self.width.value
+        pass
 
     @width.setter
     def width(self, i: int) -> None:
-        self.width = i
+        pass
 
     @property
     def height(self) -> int:
-        return self.height.value
+        pass
 
     @height.setter
     def height(self, i: int) -> None:
-        self.height = i
+        pass
 
     @property
     def mipmaps(self) -> int:
-        return self.mipmaps.value
+        pass
 
     @mipmaps.setter
     def mipmaps(self, i: int) -> None:
-        self.mipmaps = i
+        pass
 
     @property
     def format(self) -> int:
-        return self.format.value
+        pass
 
     @format.setter
     def format(self, i: int) -> None:
-        self.format = i
+        pass
 
 
 # Texture, tex data stored in GPU memory (VRAM)
@@ -454,43 +432,43 @@ class Texture(Structure):
 
     @property
     def id(self) -> UInt:
-        return self.id.value
+        pass
 
     @id.setter
     def id(self, i: UInt) -> None:
-        self.id = i
+        pass
 
     @property
     def width(self) -> int:
-        return self.width.value
+        pass
 
     @width.setter
     def width(self, i: int) -> None:
-        self.width = i
+        pass
 
     @property
     def height(self) -> int:
-        return self.height.value
+        pass
 
     @height.setter
     def height(self, i: int) -> None:
-        self.height = i
+        pass
 
     @property
     def mipmaps(self) -> int:
-        return self.mipmaps.value
+        pass
 
     @mipmaps.setter
     def mipmaps(self, i: int) -> None:
-        self.mipmaps = i
+        pass
 
     @property
     def format(self) -> int:
-        return self.format.value
+        pass
 
     @format.setter
     def format(self, i: int) -> None:
-        self.format = i
+        pass
 
 
 # Texture2D, same as Texture
@@ -510,27 +488,27 @@ class RenderTexture(Structure):
 
     @property
     def id(self) -> int:
-        return self.id.value
+        pass
 
     @id.setter
     def id(self, i: int) -> None:
-        self.id = i
+        pass
 
     @property
     def texture(self) -> Texture:
-        return self.texture
+        pass
 
     @texture.setter
     def texture(self, i: Texture) -> None:
-        self.texture = i
+        pass
 
     @property
     def depth(self) -> Texture:
-        return self.depth
+        pass
 
     @depth.setter
     def depth(self, i: Texture) -> None:
-        self.depth = i
+        pass
 
 
 # RenderTexture2D, same as RenderTexture
@@ -550,51 +528,51 @@ class NPatchInfo(Structure):
 
     @property
     def source(self) -> Rectangle:
-        return self.source.value
+        pass
 
     @source.setter
     def source(self, i: Rectangle) -> None:
-        self.source = i
+        pass
 
     @property
     def left(self) -> int:
-        return self.left.value
+        pass
 
     @left.setter
     def left(self, i: int) -> None:
-        self.left = i
+        pass
 
     @property
     def top(self) -> int:
-        return self.top.value
+        pass
 
     @top.setter
     def top(self, i: int) -> None:
-        self.top = i
+        pass
 
     @property
     def right(self) -> int:
-        return self.right.value
+        pass
 
     @right.setter
     def right(self, i: int) -> None:
-        self.right = i
+        pass
 
     @property
     def bottom(self) -> int:
-        return self.bottom.value
+        pass
 
     @bottom.setter
     def bottom(self, i: int) -> None:
-        self.bottom = i
+        pass
 
     @property
     def layout(self) -> int:
-        return self.layout.value
+        pass
 
     @layout.setter
     def layout(self, i: int) -> None:
-        self.layout = i
+        pass
 
 
 # GlyphInfo, font characters glyphs info
@@ -609,43 +587,43 @@ class GlyphInfo(Structure):
 
     @property
     def value(self) -> int:
-        return self.value.value
+        pass
 
     @value.setter
     def value(self, i: int) -> None:
-        self.value = i
+        pass
 
     @property
     def offsetX(self) -> int:
-        return self.offsetX.value
+        pass
 
     @offsetX.setter
     def offsetX(self, i: int) -> None:
-        self.offsetX = i
+        pass
 
     @property
     def offsetY(self) -> int:
-        return self.offsetY.value
+        pass
 
     @offsetY.setter
     def offsetY(self, i: int) -> None:
-        self.offsetY = i
+        pass
 
     @property
     def advanceX(self) -> int:
-        return self.advanceX.value
+        pass
 
     @advanceX.setter
     def advanceX(self, i: int) -> None:
-        self.advanceX = i
+        pass
 
     @property
     def image(self) -> Image:
-        return self.image.value
+        pass
 
     @image.setter
     def image(self, i: Image) -> None:
-        self.image = i
+        pass
 
 
 # Font, font texture and GlyphInfo array data
@@ -661,48 +639,48 @@ class Font(Structure):
 
     @property
     def baseSize(self) -> int:
-        return self.baseSize.value
+        pass
 
     @baseSize.setter
     def baseSize(self, i: int) -> None:
-        self.baseSize = i
+        pass
 
     @property
     def glyphCount(self) -> int:
-        return self.glyphCount.value
+        pass
 
     @glyphCount.setter
     def glyphCount(self, i: int) -> None:
-        self.glyphCount = i
+        pass
 
     @property
     def glyphPadding(self) -> int:
-        return self.glyphPadding.value
+        pass
 
     @glyphPadding.setter
     def glyphPadding(self, i: int) -> None:
-        self.glyphPadding = i
+        pass
 
     @property
     def texture(self) -> Texture2D:
-        return self.texture.value
+        pass
 
     @texture.setter
     def texture(self, i: Texture2D) -> None:
-        self.texture = i
+        pass
 
     @property
     def recs(self) -> POINTER(Rectangle):
-        return self.recs
+        pass
 
     @recs.setter
     def recs(self, i: POINTER(Rectangle)) -> None:
-        self.recs = i
+        pass
 
     @property
     def glyphs(self) -> POINTER(GlyphInfo):
-        return self.glyphs
+        pass
 
     @glyphs.setter
     def glyphs(self, i: POINTER(GlyphInfo)) -> None:
-        self.glyphs = i
+        pass
