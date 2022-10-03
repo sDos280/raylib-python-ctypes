@@ -971,6 +971,78 @@
       "returnType": [
         "void"
       ]
+    },
+    {
+      "name": "GetMouseRay",
+      "parametersName": [
+        "mousePosition", "camera"
+      ],
+      "parametersTypes": [
+        "Vector2", "Camera"
+      ],
+      "returnType": [
+        "Ray"
+      ]
+    },
+    {
+      "name": "GetCameraMatrix",
+      "parametersName": [
+        "camera"
+      ],
+      "parametersTypes": [
+        "Camera"
+      ],
+      "returnType": [
+        "Matrix"
+      ]
+    },
+    {
+      "name": "GetCameraMatrix2D",
+      "parametersName": [
+        "camera"
+      ],
+      "parametersTypes": [
+        "Camera2D"
+      ],
+      "returnType": [
+        "Matrix"
+      ]
+    },
+    {
+      "name": "GetWorldToScreen",
+      "parametersName": [
+        "position", "camera"
+      ],
+      "parametersTypes": [
+        "Vector3", "Camera"
+      ],
+      "returnType": [
+        "Vector2"
+      ]
+    },
+    {
+      "name": "GetScreenToWorld2D",
+      "parametersName": [
+        "position", "camera"
+      ],
+      "parametersTypes": [
+        "Vector3", "Camera2D"
+      ],
+      "returnType": [
+        "Vector2"
+      ]
+    },
+    {
+      "name": "GetScreenToWorld2D",
+      "parametersName": [
+        "position", "camera", "width", "height"
+      ],
+      "parametersTypes": [
+        "Vector3", "Camera2D", "int", "int"
+      ],
+      "returnType": [
+        "Vector2"
+      ]
     }
   ]
 }

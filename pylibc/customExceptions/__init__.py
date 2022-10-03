@@ -11,3 +11,8 @@ class OverloadFunction(Exception):
 class UnknownType(Exception):
     """this type is unknown"""
     pass
+
+class NotOneReturnType(Exception):
+    """not one return type"""
+    pass
+
