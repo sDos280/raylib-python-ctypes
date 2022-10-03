@@ -57,7 +57,7 @@ typesDictionary = {
     'long double': c_longdouble,  # C type: long double  Python type: float
     'char *': c_char_p,  # C type: char* (NUL terminated)  Python type: bytes object or None
     'wchar_t *': c_wchar_p,  # C type: wchar_t* (NUL terminated)  Python type: string object or None
-    'void *': c_void_p,  # C type: wchar_t* (NUL terminated)  Python type: string object or None
+    'void *': c_void_p,  # C type: wchar_t* (NUL terminated)  Python type: int or None
     'void': c_void_p,  # C type: void  Python type: None
 
     # Structures
