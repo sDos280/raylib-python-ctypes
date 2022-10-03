@@ -24,29 +24,25 @@ from ctypes import (
 Bool = c_bool  # C type: _Bool  Python type: bool (1)
 Char = c_char  # C type: char  Python type: 1-character bytes object
 UChar = c_ubyte  # C type: unsigned char  Python type: int
+UCharPtr = POINTER(c_ubyte)  # C type: unsigned char *  Python type: int
 Short = c_short  # C type: short  Python type: int
 UShort = c_ushort  # C type: unsigned short  Python type: int
+UShortPtr = POINTER(c_ushort)  # C type: unsigned short *  Python type: int
 Int = c_int  # C type: int  Python type: int
+IntPtr = POINTER(c_int)  # C type: int *  Python type: int
 UInt = c_uint  # C type: unsigned int  Python type: int
+UIntPtr = POINTER(c_uint)  # C type: unsigned int * Python type: int
 Long = c_long  # C type: long  Python type: int
 ULong = c_ulong  # C type: unsigned long  Python type: int
 ULLong = c_longlong  # C type: __int64 or long-long  Python type: int
 ULLong = c_ulonglong  # C type: unsigned __int64 or unsigned long-long  Python type: int
 Float = c_float  # C type: float  Python type: float
+FloatPtr = POINTER(c_float)  # C type: float*  Python type: iny
 Double = c_double  # C type: double  Python type: float
 LDouble = c_longdouble  # C type: long double  Python type: float
-CharPnt = c_char_p  # C type: char* (NUL terminated)  Python type: bytes object or None
+CharPtr = c_char_p  # C type: char* (NUL terminated)  Python type: bytes object or None
 VoidPtr = c_void_p  # C type: wchar_t* (NUL terminated)  Python type: int or None
 Void = c_void_p  # C type: void  Python type: None
-
-
-def _to_int(value: float):
-    return int(value) if isinstance(value, float) else value
-
-
-def _to_float(value: int):
-    return float(value) if isinstance(value, int) else value
-
 
 def _to_byte_str(value: str):
     if not isinstance(value, (str, bytes)):
@@ -75,7 +71,7 @@ class Vector2(Structure):
 
     @property
     def x(self) -> float:
-        return self.x.value
+        return self.x
 
     @x.setter
     def x(self, i: float) -> None:
@@ -83,7 +79,7 @@ class Vector2(Structure):
 
     @property
     def y(self) -> float:
-        return self.y.value
+        return self.y
 
     @y.setter
     def y(self, i: float) -> None:
@@ -100,7 +96,7 @@ class Vector3(Structure):
 
     @property
     def x(self) -> float:
-        return self.x.value
+        return self.x
 
     @x.setter
     def x(self, i: float) -> None:
@@ -108,7 +104,7 @@ class Vector3(Structure):
 
     @property
     def y(self) -> float:
-        return self.y.value
+        return self.y
 
     @y.setter
     def y(self, i: float) -> None:
@@ -116,7 +112,7 @@ class Vector3(Structure):
 
     @property
     def z(self) -> float:
-        return self.z.value
+        return self.z
 
     @z.setter
     def z(self, i: float) -> None:
@@ -134,7 +130,7 @@ class Vector4(Structure):
 
     @property
     def x(self) -> float:
-        return self.x.value
+        return self.x
 
     @x.setter
     def x(self, i: float) -> None:
@@ -142,7 +138,7 @@ class Vector4(Structure):
 
     @property
     def y(self) -> float:
-        return self.y.value
+        return self.y
 
     @y.setter
     def y(self, i: float) -> None:
@@ -150,7 +146,7 @@ class Vector4(Structure):
 
     @property
     def z(self) -> float:
-        return self.z.value
+        return self.z
 
     @z.setter
     def z(self, i: float) -> None:
@@ -158,7 +154,7 @@ class Vector4(Structure):
 
     @property
     def w(self) -> float:
-        return self.w.value
+        return self.w
 
     @w.setter
     def w(self, i: float) -> None:
@@ -180,7 +176,7 @@ class Matrix(Structure):
 
     @property
     def m0(self) -> float:
-        return self.m0.value
+        return self.m0
 
     @m0.setter
     def m0(self, i: float) -> None:
@@ -188,7 +184,7 @@ class Matrix(Structure):
 
     @property
     def m1(self) -> float:
-        return self.m1.value
+        return self.m1
 
     @m1.setter
     def m1(self, i: float) -> None:
@@ -196,7 +192,7 @@ class Matrix(Structure):
 
     @property
     def m2(self) -> float:
-        return self.m2.value
+        return self.m2
 
     @m2.setter
     def m2(self, i: float) -> None:
@@ -204,7 +200,7 @@ class Matrix(Structure):
 
     @property
     def m3(self) -> float:
-        return self.m3.value
+        return self.m3
 
     @m3.setter
     def m3(self, i: float) -> None:
@@ -212,7 +208,7 @@ class Matrix(Structure):
 
     @property
     def m4(self) -> float:
-        return self.m4.value
+        return self.m4
 
     @m4.setter
     def m4(self, i: float) -> None:
@@ -220,7 +216,7 @@ class Matrix(Structure):
 
     @property
     def m5(self) -> float:
-        return self.m5.value
+        return self.m5
 
     @m5.setter
     def m5(self, i: float) -> None:
@@ -228,7 +224,7 @@ class Matrix(Structure):
 
     @property
     def m6(self) -> float:
-        return self.m6.value
+        return self.m6
 
     @m6.setter
     def m6(self, i: float) -> None:
@@ -236,7 +232,7 @@ class Matrix(Structure):
 
     @property
     def m7(self) -> float:
-        return self.m7.value
+        return self.m7
 
     @m7.setter
     def m7(self, i: float) -> None:
@@ -244,7 +240,7 @@ class Matrix(Structure):
 
     @property
     def m8(self) -> float:
-        return self.m8.value
+        return self.m8
 
     @m8.setter
     def m8(self, i: float) -> None:
@@ -252,7 +248,7 @@ class Matrix(Structure):
 
     @property
     def m9(self) -> float:
-        return self.m9.value
+        return self.m9
 
     @m9.setter
     def m9(self, i: float) -> None:
@@ -260,7 +256,7 @@ class Matrix(Structure):
 
     @property
     def m10(self) -> float:
-        return self.m10.value
+        return self.m10
 
     @m10.setter
     def m10(self, i: float) -> None:
@@ -268,7 +264,7 @@ class Matrix(Structure):
 
     @property
     def m11(self) -> float:
-        return self.m11.value
+        return self.m11
 
     @m11.setter
     def m11(self, i: float) -> None:
@@ -276,7 +272,7 @@ class Matrix(Structure):
 
     @property
     def m12(self) -> float:
-        return self.m12.value
+        return self.m12
 
     @m12.setter
     def m12(self, i: float) -> None:
@@ -284,7 +280,7 @@ class Matrix(Structure):
 
     @property
     def m13(self) -> float:
-        return self.m13.value
+        return self.m13
 
     @m13.setter
     def m13(self, i: float) -> None:
@@ -292,7 +288,7 @@ class Matrix(Structure):
 
     @property
     def m14(self) -> float:
-        return self.m14.value
+        return self.m14
 
     @m14.setter
     def m14(self, i: float) -> None:
@@ -300,7 +296,7 @@ class Matrix(Structure):
 
     @property
     def m15(self) -> float:
-        return self.m15.value
+        return self.m15
 
     @m15.setter
     def m15(self, i: float) -> None:
@@ -318,7 +314,7 @@ class Color(Structure):
 
     @property
     def r(self) -> int:
-        return self.r.value
+        return self.r
 
     @r.setter
     def r(self, i: int) -> None:
@@ -326,7 +322,7 @@ class Color(Structure):
 
     @property
     def g(self) -> int:
-        return self.g.value
+        return self.g
 
     @g.setter
     def g(self, i: int) -> None:
@@ -334,7 +330,7 @@ class Color(Structure):
 
     @property
     def b(self) -> int:
-        return self.b.value
+        return self.b
 
     @b.setter
     def b(self, i: int) -> None:
@@ -342,7 +338,7 @@ class Color(Structure):
 
     @property
     def a(self) -> int:
-        return self.a.value
+        return self.a
 
     @a.setter
     def a(self, i: int) -> None:
@@ -360,7 +356,7 @@ class Rectangle(Structure):
 
     @property
     def x(self) -> float:
-        return self.x.value
+        return self.x
 
     @x.setter
     def x(self, i: float) -> None:
@@ -368,7 +364,7 @@ class Rectangle(Structure):
 
     @property
     def y(self) -> float:
-        return self.y.value
+        return self.y
 
     @y.setter
     def y(self, i: float) -> None:
@@ -376,7 +372,7 @@ class Rectangle(Structure):
 
     @property
     def width(self) -> float:
-        return self.width.value
+        return self.width
 
     @width.setter
     def width(self, i: float) -> None:
@@ -384,7 +380,7 @@ class Rectangle(Structure):
 
     @property
     def height(self) -> float:
-        return self.height.value
+        return self.height
 
     @height.setter
     def height(self, i: float) -> None:
@@ -403,7 +399,7 @@ class Image(Structure):
 
     @property
     def data(self) -> VoidPtr:
-        return self.data.value
+        return self.data
 
     @data.setter
     def data(self, i: VoidPtr) -> None:
@@ -411,7 +407,7 @@ class Image(Structure):
 
     @property
     def width(self) -> int:
-        return self.width.value
+        return self.width
 
     @width.setter
     def width(self, i: int) -> None:
@@ -419,7 +415,7 @@ class Image(Structure):
 
     @property
     def height(self) -> int:
-        return self.height.value
+        return self.height
 
     @height.setter
     def height(self, i: int) -> None:
@@ -427,7 +423,7 @@ class Image(Structure):
 
     @property
     def mipmaps(self) -> int:
-        return self.mipmaps.value
+        return self.mipmaps
 
     @mipmaps.setter
     def mipmaps(self, i: int) -> None:
@@ -435,7 +431,7 @@ class Image(Structure):
 
     @property
     def format(self) -> int:
-        return self.format.value
+        return self.format
 
     @format.setter
     def format(self, i: int) -> None:
@@ -453,16 +449,16 @@ class Texture(Structure):
     ]
 
     @property
-    def id(self) -> UInt:
-        return self.id.value
+    def id(self) -> int:
+        return self.id
 
     @id.setter
-    def id(self, i: UInt) -> None:
+    def id(self, i: int) -> None:
         self.id = i
 
     @property
     def width(self) -> int:
-        return self.width.value
+        return self.width
 
     @width.setter
     def width(self, i: int) -> None:
@@ -470,7 +466,7 @@ class Texture(Structure):
 
     @property
     def height(self) -> int:
-        return self.height.value
+        return self.height
 
     @height.setter
     def height(self, i: int) -> None:
@@ -478,7 +474,7 @@ class Texture(Structure):
 
     @property
     def mipmaps(self) -> int:
-        return self.mipmaps.value
+        return self.mipmaps
 
     @mipmaps.setter
     def mipmaps(self, i: int) -> None:
@@ -486,7 +482,7 @@ class Texture(Structure):
 
     @property
     def format(self) -> int:
-        return self.format.value
+        return self.format
 
     @format.setter
     def format(self, i: int) -> None:
@@ -510,7 +506,7 @@ class RenderTexture(Structure):
 
     @property
     def id(self) -> int:
-        return self.id.value
+        return self.id
 
     @id.setter
     def id(self, i: int) -> None:
@@ -550,7 +546,7 @@ class NPatchInfo(Structure):
 
     @property
     def source(self) -> Rectangle:
-        return self.source.value
+        return self.source
 
     @source.setter
     def source(self, i: Rectangle) -> None:
@@ -558,7 +554,7 @@ class NPatchInfo(Structure):
 
     @property
     def left(self) -> int:
-        return self.left.value
+        return self.left
 
     @left.setter
     def left(self, i: int) -> None:
@@ -566,7 +562,7 @@ class NPatchInfo(Structure):
 
     @property
     def top(self) -> int:
-        return self.top.value
+        return self.top
 
     @top.setter
     def top(self, i: int) -> None:
@@ -574,7 +570,7 @@ class NPatchInfo(Structure):
 
     @property
     def right(self) -> int:
-        return self.right.value
+        return self.right
 
     @right.setter
     def right(self, i: int) -> None:
@@ -582,7 +578,7 @@ class NPatchInfo(Structure):
 
     @property
     def bottom(self) -> int:
-        return self.bottom.value
+        return self.bottom
 
     @bottom.setter
     def bottom(self, i: int) -> None:
@@ -590,7 +586,7 @@ class NPatchInfo(Structure):
 
     @property
     def layout(self) -> int:
-        return self.layout.value
+        return self.layout
 
     @layout.setter
     def layout(self, i: int) -> None:
@@ -609,7 +605,7 @@ class GlyphInfo(Structure):
 
     @property
     def value(self) -> int:
-        return self.value.value
+        return self.value
 
     @value.setter
     def value(self, i: int) -> None:
@@ -617,7 +613,7 @@ class GlyphInfo(Structure):
 
     @property
     def offsetX(self) -> int:
-        return self.offsetX.value
+        return self.offsetX
 
     @offsetX.setter
     def offsetX(self, i: int) -> None:
@@ -625,7 +621,7 @@ class GlyphInfo(Structure):
 
     @property
     def offsetY(self) -> int:
-        return self.offsetY.value
+        return self.offsetY
 
     @offsetY.setter
     def offsetY(self, i: int) -> None:
@@ -633,7 +629,7 @@ class GlyphInfo(Structure):
 
     @property
     def advanceX(self) -> int:
-        return self.advanceX.value
+        return self.advanceX
 
     @advanceX.setter
     def advanceX(self, i: int) -> None:
@@ -641,7 +637,7 @@ class GlyphInfo(Structure):
 
     @property
     def image(self) -> Image:
-        return self.image.value
+        return self.image
 
     @image.setter
     def image(self, i: Image) -> None:
@@ -661,7 +657,7 @@ class Font(Structure):
 
     @property
     def baseSize(self) -> int:
-        return self.baseSize.value
+        return self.baseSize
 
     @baseSize.setter
     def baseSize(self, i: int) -> None:
@@ -669,7 +665,7 @@ class Font(Structure):
 
     @property
     def glyphCount(self) -> int:
-        return self.glyphCount.value
+        return self.glyphCount
 
     @glyphCount.setter
     def glyphCount(self, i: int) -> None:
@@ -677,7 +673,7 @@ class Font(Structure):
 
     @property
     def glyphPadding(self) -> int:
-        return self.glyphPadding.value
+        return self.glyphPadding
 
     @glyphPadding.setter
     def glyphPadding(self, i: int) -> None:
@@ -685,7 +681,7 @@ class Font(Structure):
 
     @property
     def texture(self) -> Texture2D:
-        return self.texture.value
+        return self.texture
 
     @texture.setter
     def texture(self, i: Texture2D) -> None:
@@ -706,3 +702,653 @@ class Font(Structure):
     @glyphs.setter
     def glyphs(self, i: POINTER(GlyphInfo)) -> None:
         self.glyphs = i
+
+
+# Camera, defines position/orientation in 3d space
+class Camera3D(Structure):
+    _fields_ = [
+        ('position', Vector3),  # Camera position
+        ('target', Vector3),  # Camera target it looks-at
+        ('up', Vector3),  # Camera up vector (rotation over its axis)
+        ('fovy', Float),
+        # Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic
+        ('projection', Int)  # CCamera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
+    ]
+
+    @property
+    def position(self) -> Vector3:
+        return self.position
+
+    @position.setter
+    def position(self, i: Vector3) -> None:
+        self.position = i
+
+    @property
+    def target(self) -> Vector3:
+        return self.target
+
+    @target.setter
+    def target(self, i: Vector3) -> None:
+        self.target = i
+
+    @property
+    def up(self) -> Vector3:
+        return self.up
+
+    @up.setter
+    def up(self, i: Vector3) -> None:
+        self.up = i
+
+    @property
+    def fovy(self) -> float:
+        return self.fovy
+
+    @fovy.setter
+    def fovy(self, i: float) -> None:
+        self.fovy = i
+
+    @property
+    def projection(self) -> int:
+        return self.projection
+
+    @projection.setter
+    def projection(self, i: int) -> None:
+        self.projection = i
+
+
+# Camera type fallback, defaults to Camera3D
+Camera = Camera3D
+
+
+# Camera2D, defines position/orientation in 2d space
+class Camera2D(Structure):
+    _fields_ = [
+        ('offset', Vector2),  # Camera offset (displacement from target)
+        ('target', Vector2),  # Camera target (rotation and zoom origin)
+        ('rotation', Float),  # Camera rotation in degrees
+        ('zoom', Float)  # Camera zoom (scaling), should be 1.0f by default
+    ]
+
+    @property
+    def offset(self) -> Vector2:
+        return self.offset
+
+    @offset.setter
+    def offset(self, i: Vector2) -> None:
+        self.offset = i
+
+    @property
+    def target(self) -> Vector2:
+        return self.target
+
+    @target.setter
+    def target(self, i: Vector2) -> None:
+        self.target = i
+
+    @property
+    def rotation(self) -> float:
+        return self.rotation
+
+    @rotation.setter
+    def rotation(self, i: float) -> None:
+        self.rotation = i
+
+    @property
+    def zoom(self) -> float:
+        return self.zoom
+
+    @zoom.setter
+    def zoom(self, i: float) -> None:
+        self.zoom = i
+
+
+# Mesh, vertex data and vao/vbo
+class Mesh(Structure):
+    _fields_ = [
+        ('vertexCount', Int),  # Number of vertices stored in arrays
+        ('triangleCount', Int),  # Number of triangles stored (indexed or not)
+
+        # Vertex attributes data
+        ('vertices', FloatPtr),  # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
+        ('texcoords', FloatPtr),  # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
+        ('texcoords2', FloatPtr),
+        # Vertex texture second coordinates (UV - 2 components per vertex) (shader-location = 5)
+        ('normals', FloatPtr),  # Vertex normals (XYZ - 3 components per vertex) (shader-location = 2)
+        ('tangents', FloatPtr),  # Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4)
+        ('colors', UCharPtr),  # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
+        ('indices', UShortPtr),  # Vertex indices (in case vertex data comes indexed)
+
+        # Animation vertex data
+        ('animVertices', FloatPtr),  # Camera zoom (scaling), should be 1.0f by default
+        ('animNormals', FloatPtr),  # Camera zoom (scaling), should be 1.0f by default
+        ('boneIds', Float),  # Camera zoom (scaling), should be 1.0f by default
+        ('boneWeights', FloatPtr),  # Camera zoom (scaling), should be 1.0f by default
+
+        # OpenGL identifiers
+        ('vaoId', UInt),  # OpenGL Vertex Array Object id
+        ('vboId', UIntPtr)  # OpenGL Vertex Buffer Objects id (default vertex data)
+    ]
+
+    @property
+    def vertexCount(self) -> int:
+        return self.vertexCount
+
+    @vertexCount.setter
+    def vertexCount(self, i: int) -> None:
+        self.vertexCount = i
+
+    @property
+    def triangleCount(self) -> int:
+        return self.triangleCount
+
+    @triangleCount.setter
+    def triangleCount(self, i: int) -> None:
+        self.triangleCount = i
+
+    @property
+    def vertices(self) -> FloatPtr:
+        return self.vertices
+
+    @vertices.setter
+    def vertices(self, i: FloatPtr) -> None:
+        self.vertices = i
+
+    @property
+    def texcoords(self) -> FloatPtr:
+        return self.texcoords
+
+    @texcoords.setter
+    def texcoords(self, i: FloatPtr) -> None:
+        self.texcoords = i
+
+    @property
+    def texcoords2(self) -> FloatPtr:
+        return self.texcoords2
+
+    @texcoords2.setter
+    def texcoords2(self, i: FloatPtr) -> None:
+        self.texcoords2 = i
+
+    @property
+    def normals(self) -> FloatPtr:
+        return self.normals
+
+    @normals.setter
+    def normals(self, i: FloatPtr) -> None:
+        self.normals = i
+
+    @property
+    def tangents(self) -> FloatPtr:
+        return self.tangents
+
+    @tangents.setter
+    def tangents(self, i: FloatPtr) -> None:
+        self.tangents = i
+
+    @property
+    def colors(self) -> UCharPtr:
+        return self.colors
+
+    @colors.setter
+    def colors(self, i: UCharPtr) -> None:
+        self.colors = i
+
+    @property
+    def indices(self) -> UShortPtr:
+        return self.indices
+
+    @indices.setter
+    def indices(self, i: UShortPtr) -> None:
+        self.indices = i
+
+    @property
+    def animVertices(self) -> FloatPtr:
+        return self.animVertices
+
+    @animVertices.setter
+    def animVertices(self, i: FloatPtr) -> None:
+        self.animVertices = i
+
+    @property
+    def animNormals(self) -> FloatPtr:
+        return self.animNormals
+
+    @animNormals.setter
+    def animNormals(self, i: FloatPtr) -> None:
+        self.animNormals = i
+
+    @property
+    def boneIds(self) -> UCharPtr:
+        return self.boneIds
+
+    @boneIds.setter
+    def boneIds(self, i: UCharPtr) -> None:
+        self.boneIds = i
+
+    @property
+    def boneWeights(self) -> FloatPtr:
+        return self.boneWeights
+
+    @boneWeights.setter
+    def boneWeights(self, i: FloatPtr) -> None:
+        self.boneWeights = i
+
+    @property
+    def vaoId(self) -> int:
+        return self.vaoId
+
+    @vaoId.setter
+    def vaoId(self, i: int) -> None:
+        self.vaoId = i
+
+    @property
+    def vboId(self) -> UIntPtr:
+        return self.vboId
+
+    @vboId.setter
+    def vboId(self, i: UIntPtr) -> None:
+        self.vboId = i
+
+
+# Shader
+class Shader(Structure):
+    _fields_ = [
+        ('id', UInt),  # Shader program id
+        ('locs', IntPtr)  # Shader locations array (RL_MAX_SHADER_LOCATIONS)
+    ]
+
+    @property
+    def id(self) -> int:
+        return self.id
+
+    @id.setter
+    def id(self, i: int) -> None:
+        self.id = i
+
+    @property
+    def locs(self) -> IntPtr:
+        return self.locs
+
+    @locs.setter
+    def locs(self, i: IntPtr) -> None:
+        self.locs = i
+
+
+# MaterialMap
+class MaterialMap(Structure):
+    _fields_ = [
+        ('texture', Texture2D),  # Material map texture
+        ('color', Color),  # Material map color
+        ('value', Float)  # Material map value
+    ]
+
+    @property
+    def texture(self) -> Texture2D:
+        return self.texture
+
+    @texture.setter
+    def texture(self, i: Texture2D) -> None:
+        self.texture = i
+
+    @property
+    def color(self) -> Color:
+        return self.color
+
+    @color.setter
+    def color(self, i: Color) -> None:
+        self.color = i
+
+    @property
+    def value(self) -> float:
+        return self.value
+
+    @value.setter
+    def value(self, i: float) -> None:
+        self.value = i
+
+
+# Material, includes shader and maps
+class Material(Structure):
+    _fields_ = [
+        ('shader', Shader),  # Material map texture
+        ('maps', POINTER(MaterialMap)),  # Material map color
+        ('params', Float * 4)  # Material map value
+    ]
+
+    @property
+    def shader(self) -> Shader:
+        return self.shader
+
+    @shader.setter
+    def shader(self, i: Shader) -> None:
+        self.shader = i
+
+    @property
+    def maps(self) -> POINTER(MaterialMap):
+        return self.maps
+
+    @maps.setter
+    def maps(self, i: POINTER(MaterialMap)) -> None:
+        self.maps = i
+
+    @property
+    def params(self) -> Float * 4:
+        return self.params
+
+    @params.setter
+    def params(self, i: Float * 4) -> None:
+        self.params = i
+
+
+# Transform, vertex transformation data
+class Transform(Structure):
+    _fields_ = [
+        ('translation', Vector3),  # Translation
+        ('rotation', Quaternion),  # Rotation
+        ('scale', Vector3)  # Scale
+    ]
+
+    @property
+    def translation(self) -> Vector3:
+        return self.translation
+
+    @translation.setter
+    def translation(self, i: Vector3) -> None:
+        self.translation = i
+
+    @property
+    def rotation(self) -> Quaternion:
+        return self.rotation
+
+    @rotation.setter
+    def rotation(self, i: Quaternion) -> None:
+        self.rotation = i
+
+    @property
+    def scale(self) -> Vector3:
+        return self.scale
+
+    @scale.setter
+    def scale(self, i: Vector3) -> None:
+        self.scale = i
+
+
+# Bone, skeletal animation bone
+class BoneInfo(Structure):
+    _fields_ = [
+        ('name', Char * 32),  # Bone name
+        ('parent', Int)  # Bone parent
+    ]
+
+    @property
+    def name(self) -> Char * 32:
+        return self.name
+
+    @name.setter
+    def name(self, i: Char * 32) -> None:
+        self.name = i
+
+    @property
+    def parent(self) -> int:
+        return self.parent
+
+    @parent.setter
+    def parent(self, i: int) -> None:
+        self.parent = i
+
+
+# Model, meshes, materials and animation data
+class Model(Structure):
+    _fields_ = [
+        ('transform', Matrix),  # Local transform matrix
+
+        ('meshCount', Int),  # Number of meshes
+        ('materialCount', Int),  # Number of materials
+        ('meshes', POINTER(Mesh)),  # Meshes array
+        ('materials', POINTER(Material)),  # Materials array
+        ('meshMaterial', IntPtr),  # Mesh material number
+
+        # Animation data
+        ('boneCount', Int),  # Number of bones
+        ('bones', POINTER(BoneInfo)),  # Bones information (skeleton)
+        ('bindPose', POINTER(Transform))  # Bones base transformation (pose)
+    ]
+
+    @property
+    def transform(self) -> Matrix:
+        return self.transform
+
+    @transform.setter
+    def transform(self, i: Matrix) -> None:
+        self.transform = i
+
+    @property
+    def meshCount(self) -> int:
+        return self.meshCount
+
+    @meshCount.setter
+    def meshCount(self, i: int) -> None:
+        self.meshCount = i
+
+    @property
+    def materialCount(self) -> int:
+        return self.materialCount
+
+    @materialCount.setter
+    def materialCount(self, i: int) -> None:
+        self.materialCount = i
+
+    @property
+    def meshes(self) -> POINTER(Mesh):
+        return self.meshes
+
+    @meshes.setter
+    def meshes(self, i: POINTER(Mesh)) -> None:
+        self.meshes = i
+
+    @property
+    def materials(self) -> POINTER(Material):
+        return self.materials
+
+    @materials.setter
+    def materials(self, i: POINTER(Material)) -> None:
+        self.materials = i
+
+    @property
+    def meshMaterial(self) -> IntPtr:
+        return self.meshMaterial
+
+    @meshMaterial.setter
+    def meshMaterial(self, i: IntPtr) -> None:
+        self.meshMaterial = i
+
+    @property
+    def boneCount(self) -> int:
+        return self.boneCount
+
+    @boneCount.setter
+    def boneCount(self, i: int) -> None:
+        self.boneCount = i
+
+    @property
+    def bones(self) -> POINTER(BoneInfo):
+        return self.bones
+
+    @bones.setter
+    def bones(self, i: POINTER(BoneInfo)) -> None:
+        self.bones = i
+
+    @property
+    def bindPose(self) -> POINTER(Transform):
+        return self.bindPose
+
+    @bindPose.setter
+    def bindPose(self, i: POINTER(Transform)) -> None:
+        self.bindPose = i
+
+
+# ModelAnimation
+class Model(Structure):
+    _fields_ = [
+        ('boneCount', Int),  # Number of bones
+        ('frameCount', Int),  # Number of animation frames
+        ('bones', POINTER(BoneInfo)),  # Bones information (skeleton)
+        ('framePoses', POINTER(POINTER(Transform)))  # Poses array by frame
+    ]
+
+    @property
+    def boneCount(self) -> int:
+        return self.boneCount
+
+    @boneCount.setter
+    def boneCount(self, i: int) -> None:
+        self.boneCount = i
+
+    @property
+    def frameCount(self) -> int:
+        return self.frameCount
+
+    @frameCount.setter
+    def frameCount(self, i: int) -> None:
+        self.frameCount = i
+
+    @property
+    def bones(self) -> POINTER(BoneInfo):
+        return self.bones
+
+    @bones.setter
+    def bones(self, i: POINTER(BoneInfo)) -> None:
+        self.bones = i
+
+    @property
+    def framePoses(self) -> POINTER(POINTER(Transform)):
+        return self.framePoses
+
+    @framePoses.setter
+    def framePoses(self, i: POINTER(POINTER(Transform))) -> None:
+        self.framePoses = i
+
+
+# Ray, ray for raycasting
+class Ray(Structure):
+    _fields_ = [
+        ('position', Vector3),  # Ray position (origin)
+        ('direction', Vector3)  # Ray direction
+    ]
+
+    @property
+    def position(self) -> Vector3:
+        return self.position
+
+    @position.setter
+    def position(self, i: Vector3) -> None:
+        self.position = i
+
+    @property
+    def direction(self) -> Vector3:
+        return self.direction
+
+    @direction.setter
+    def direction(self, i: Vector3) -> None:
+        self.direction = i
+
+
+# RayCollision, ray hit information
+class RayCollision(Structure):
+    _fields_ = [
+        ('hit', Bool),  # Did the ray hit something?
+        ('distance', Float),  # Distance to the nearest hit
+        ('point', Vector3),  # Point of the nearest hit
+        ('normal', Vector3)  # Surface normal of hit
+    ]
+
+    @property
+    def hit(self) -> bool:
+        return self.hit
+
+    @hit.setter
+    def hit(self, i: bool) -> None:
+        self.hit = i
+
+    @property
+    def distance(self) -> float:
+        return self.distance
+
+    @distance.setter
+    def distance(self, i: float) -> None:
+        self.distance = i
+
+    @property
+    def point(self) -> Vector3:
+        return self.point
+
+    @point.setter
+    def point(self, i: Vector3) -> None:
+        self.point = i
+
+    @property
+    def normal(self) -> Vector3:
+        return self.normal
+
+    @normal.setter
+    def normal(self, i: Vector3) -> None:
+        self.normal = i
+
+
+# BoundingBox
+class BoundingBox(Structure):
+    _fields_ = [
+        ('min', Vector3),  # Minimum vertex box-corner
+        ('max', Vector3)  # Maximum vertex box-corner
+    ]
+
+    @property
+    def min(self) -> Vector3:
+        return self.min
+
+    @min.setter
+    def min(self, i: Vector3) -> None:
+        self.min = i
+
+    @property
+    def max(self) -> Vector3:
+        return self.max
+
+    @max.setter
+    def max(self, i: Vector3) -> None:
+        self.max = i
+
+
+# not sound/Vr implementation for now
+
+# File path list
+class FilePathList(Structure):
+    _fields_ = [
+        ('capacity', UInt),  # Filepaths max entries
+        ('count', UInt),  # Filepaths entries count
+        ('paths', POINTER(CharPtr))  # Filepaths entries
+    ]
+
+    @property
+    def capacity(self) -> int:
+        return self.capacity
+
+    @capacity.setter
+    def capacity(self, i: int) -> None:
+        self.capacity = i
+
+    @property
+    def count(self) -> int:
+        return self.count
+
+    @count.setter
+    def count(self, i: int) -> None:
+        self.count = i
+
+    @property
+    def paths(self) -> POINTER(CharPtr):
+        return self.paths
+
+    @paths.setter
+    def paths(self, i: POINTER(CharPtr)) -> None:
+        self.paths = i
