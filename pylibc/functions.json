@@ -10,6 +10,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Initialize window and OpenGL context"
       ]
     },
     {
@@ -22,6 +25,9 @@
       ],
       "returnType": [
         "bool"
+      ],
+      "comment": [
+        "Check if KEY_ESCAPE pressed or Close icon pressed"
       ]
     },
     {
@@ -34,6 +40,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Close window and unload OpenGL context"
       ]
     },
     {
@@ -46,6 +55,9 @@
       ],
       "returnType": [
         "bool"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -58,6 +70,9 @@
       ],
       "returnType": [
         "bool"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -70,6 +85,9 @@
       ],
       "returnType": [
         "bool"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -82,6 +100,9 @@
       ],
       "returnType": [
         "bool"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -94,6 +115,9 @@
       ],
       "returnType": [
         "bool"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -106,6 +130,9 @@
       ],
       "returnType": [
         "bool"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -118,6 +145,9 @@
       ],
       "returnType": [
         "bool"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -130,6 +160,9 @@
       ],
       "returnType": [
         "bool"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -142,6 +175,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -154,6 +190,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -166,6 +205,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -178,6 +220,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -190,6 +235,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -202,6 +250,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -214,6 +265,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -226,6 +280,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -238,6 +295,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -250,6 +310,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -262,6 +325,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -274,6 +340,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -286,6 +355,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -298,6 +370,9 @@
       ],
       "returnType": [
         "void *"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -310,6 +385,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -322,6 +400,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -334,6 +415,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -346,6 +430,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -358,6 +445,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -370,6 +460,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -382,6 +475,9 @@
       ],
       "returnType": [
         "Vector2"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -394,6 +490,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -406,6 +505,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -418,6 +520,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -430,6 +535,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -442,6 +550,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -454,6 +565,9 @@
       ],
       "returnType": [
         "Vector2"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -466,6 +580,9 @@
       ],
       "returnType": [
         "Vector2"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -478,6 +595,9 @@
       ],
       "returnType": [
         "char *"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -490,6 +610,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -502,6 +625,9 @@
       ],
       "returnType": [
         "char *"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -514,6 +640,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -526,6 +655,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -538,6 +670,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -550,6 +685,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -562,6 +700,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -574,6 +715,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -586,6 +730,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -598,6 +745,9 @@
       ],
       "returnType": [
         "bool"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -610,6 +760,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -622,6 +775,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -634,6 +790,9 @@
       ],
       "returnType": [
         "bool"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -646,6 +805,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -658,6 +820,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -670,6 +835,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -682,6 +850,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -694,6 +865,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -706,6 +880,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -718,6 +895,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -730,6 +910,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -742,6 +925,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -754,6 +940,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -766,6 +955,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -778,6 +970,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -790,6 +985,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -802,6 +1000,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -814,6 +1015,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -826,6 +1030,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -838,6 +1045,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -850,6 +1060,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -862,6 +1075,9 @@
       ],
       "returnType": [
         "VrStereoConfig"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -874,6 +1090,9 @@
       ],
       "returnType": [
         "Shader"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -886,6 +1105,9 @@
       ],
       "returnType": [
         "Shader"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -898,6 +1120,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -910,6 +1135,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -922,6 +1150,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -934,6 +1165,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -946,6 +1180,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -958,6 +1195,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -970,6 +1210,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -982,6 +1225,9 @@
       ],
       "returnType": [
         "Ray"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -994,6 +1240,9 @@
       ],
       "returnType": [
         "Matrix"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -1006,6 +1255,9 @@
       ],
       "returnType": [
         "Matrix"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -1018,6 +1270,9 @@
       ],
       "returnType": [
         "Vector2"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -1030,6 +1285,9 @@
       ],
       "returnType": [
         "Vector2"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -1042,6 +1300,9 @@
       ],
       "returnType": [
         "Vector2"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -1054,6 +1315,9 @@
       ],
       "returnType": [
         "Vector2"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -1066,6 +1330,9 @@
       ],
       "returnType": [
         "void"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -1078,6 +1345,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -1090,6 +1360,9 @@
       ],
       "returnType": [
         "float"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -1102,6 +1375,9 @@
       ],
       "returnType": [
         "double"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     },
     {
@@ -1114,6 +1390,9 @@
       ],
       "returnType": [
         "int"
+      ],
+      "comment": [
+        "Check if window has been initialized successfully"
       ]
     }
   ]

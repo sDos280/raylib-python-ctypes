@@ -276,13 +276,16 @@ def check_if_functions_can_wrap(functions_set):
 # wrap functions to ctypes functions => to _rl ctypes functions
 def wrap_functions_to_ctypes_functions_and_add_function_to_this_module(functions_to_wrap, current_module):
     for function_to_wrap in functions_to_wrap:
-        function_to_wrap_ctype = {'name': function_to_wrap['name'], 'parametersTypes': [], 'returnType': []}
+        function_to_wrap_ctype = {'name': function_to_wrap['name'], 'parametersTypes': [], 'returnType': [], 'comment': ""}
 
         for parameterTypes in function_to_wrap['parametersTypes']:
             function_to_wrap_ctype['parametersTypes'].append(typesDictionaryCstringToCtypes[parameterTypes])
 
         for parameterTypes in function_to_wrap['returnType']:
             function_to_wrap_ctype['returnType'].append(typesDictionaryCstringToCtypes[parameterTypes])
+
+        gg = function_to_wrap['comment']
+
 
         function_ctype = wrap_function(function_to_wrap_ctype['name'], function_to_wrap_ctype['parametersTypes'], function_to_wrap_ctype['returnType'])
         name_of_function = inflection.underscore(function_to_wrap_ctype['name']).replace('3_d', '_3d').replace('2_d', '_2d')
@@ -309,7 +312,7 @@ def generate_functions_code_in_code_pyi_file(functions_that_can_be_wrap_ctype_se
                 if typesDictionaryCstringToPythonTypesString[function_that_can_be_wrap_ctype_data[1]] != 'None':
                     function_that_can_be_wrap_python_arguments_string += f"{function_that_can_be_wrap_ctype_data[0]}: {typesDictionaryCstringToPythonTypesString[function_that_can_be_wrap_ctype_data[1]]}, "
             function_that_can_be_wrap_python_arguments_string = function_that_can_be_wrap_python_arguments_string[:-2]
-            functions_code = f"def {name_of_function}({function_that_can_be_wrap_python_arguments_string}) -> {typesDictionaryCstringToPythonTypesString[function_that_can_be_wrap_ctype['returnType'][0]]}:\n\tpass\n\n"
+            functions_code = f"def {name_of_function}({function_that_can_be_wrap_python_arguments_string}) -> {typesDictionaryCstringToPythonTypesString[function_that_can_be_wrap_ctype['returnType'][0]]}:\n\t\"\"\"{function_that_can_be_wrap_ctype['comment'][0]}\"\"\"\n\tpass\n\n"
             functions_code_file_w.write(functions_code)
 
 
