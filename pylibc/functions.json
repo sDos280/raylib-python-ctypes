@@ -1033,7 +1033,7 @@
       ]
     },
     {
-      "name": "GetScreenToWorld2D",
+      "name": "GetWorldToScreenEx",
       "parametersName": [
         "position", "camera", "width", "height"
       ],
@@ -1042,6 +1042,78 @@
       ],
       "returnType": [
         "Vector2"
+      ]
+    },
+    {
+      "name": "GetWorldToScreen2D",
+      "parametersName": [
+        "position", "camera"
+      ],
+      "parametersTypes": [
+        "Vector2", "Camera2D"
+      ],
+      "returnType": [
+        "Vector2"
+      ]
+    },
+    {
+      "name": "SetTargetFPS",
+      "parametersName": [
+        "fps"
+      ],
+      "parametersTypes": [
+        "int"
+      ],
+      "returnType": [
+        "void"
+      ]
+    },
+    {
+      "name": "GetFPS",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "int"
+      ]
+    },
+    {
+      "name": "GetFrameTime",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "float"
+      ]
+    },
+    {
+      "name": "GetTime",
+      "parametersName": [
+        "void"
+      ],
+      "parametersTypes": [
+        "void"
+      ],
+      "returnType": [
+        "double"
+      ]
+    },
+    {
+      "name": "GetRandomValue",
+      "parametersName": [
+        "min", "max"
+      ],
+      "parametersTypes": [
+        "int", "int"
+      ],
+      "returnType": [
+        "int"
       ]
     }
   ]

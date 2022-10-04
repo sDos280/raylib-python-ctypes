@@ -69,7 +69,6 @@ typesDictionary = {
     'RenderTexture2D': RenderTexture2D,  # C type: struct RenderTexture2D
     'Ray': Ray,  # C type: struct Ray
     'Vector3': Vector3,  # C type: struct Vector3
-    'Vector2': Vector2  # C type: struct Vector2
 }
 
 current_module = __import__(__name__)
@@ -123,7 +122,7 @@ core_wrapped_function = []
 for core_function in rcore_functions_data:
     try:
         if type(core_function['returnType']) == list:
-            raise UnknownType
+            raise NotOneReturnType
 
         name_of_function = inflection.underscore(core_function['name']).replace('3_d', '_3d').replace('2_d', '_2d')
         if name_of_function in core_wrapped_function:
@@ -133,5 +132,6 @@ for core_function in rcore_functions_data:
         setattr(current_module, name_of_function, f)
     except OverloadFunction:
         print(OverloadFunction.__doc__, core_function['name'], core_function['name'])
-    except UnknownType:
-        print(UnknownType.__doc__, core_function['returnType'], core_function['name'])
+    except NotOneReturnType:
+        print(NotOneReturnType.__doc__, core_function['returnType'], core_function['name'])
+
