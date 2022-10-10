@@ -1,5 +1,6 @@
 from structures import *
 
+
 # Initialize window and OpenGL context
 def init_window(width: int, height: int, title: bytes) -> None:
 	pass

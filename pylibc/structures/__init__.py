@@ -1,4 +1,6 @@
 from ctypes import *
+
+
 #  Vector2, 2 components
 class Vector2(Structure):
 	_fields_ = [

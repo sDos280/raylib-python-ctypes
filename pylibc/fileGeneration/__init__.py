@@ -164,26 +164,26 @@ def generate_structs_py_pyi_files():
         with open(Path(Path(__file__).parent.parent / 'structures/__init__.py'), "x"):  # generate __init__.py file => struct logic
             pass
         with open(Path(Path(__file__).parent.parent / 'structures/__init__.py'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from ctypes import *\n')
+            structs_code_file_write.write('from ctypes import *\n\n\n')
     else:
         print(f"there isn\'t a __init__.py in {Path(Path(__file__).parent.parent / 'structures/__init__.py')}, regenerating a new one here")
         with open(Path(Path(__file__).parent.parent / 'structures/__init__.py'), "x"):  # generate __init__.py file => struct logic
             pass
         with open(Path(Path(__file__).parent.parent / 'structures/__init__.py'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from ctypes import *\n')
+            structs_code_file_write.write('from ctypes import *\n\n\n')
 
     if Path(Path(__file__).parent.parent / 'structures/__init__.pyi').exists():
         os.remove(Path(Path(__file__).parent.parent / 'structures/__init__.pyi'))
         with open(Path(Path(__file__).parent.parent / 'structures/__init__.pyi'), "x"):  # generate __init__.pyi file => struct signature
             pass
         with open(Path(Path(__file__).parent.parent / 'structures/__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from ctypes import *\n')
+            structs_code_file_write.write('from ctypes import *\n\n\n')
     else:
         print(f"there isn\'t a __init__.pyi in {Path(Path(__file__).parent.parent / 'structures/__init__.pyi')}, regenerating a new one here")
         with open(Path(Path(__file__).parent.parent / 'structures/__init__.pyi'), "x"):  # generate __init__.pyi file => struct signature
             pass
         with open(Path(Path(__file__).parent.parent / 'structures/__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from ctypes import *\n')
+            structs_code_file_write.write('from ctypes import *\n\n\n')
 
 
 def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
@@ -540,13 +540,13 @@ def generate_functions_code_pyi_file():
         with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "x"):  # generate __init__.pyi file => function signature
             pass
         with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from structures import *\n\n')
+            structs_code_file_write.write('from structures import *\n\n\n')
     else:
         print(f"there isn\'t a __init__.pyi in {Path(Path(__file__).parent.parent / '__init__.pyi')}, regenerating a new one here")
         with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "x"):  # generate __init__.pyi file => function signature
             pass
         with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from structures import *\n\n')
+            structs_code_file_write.write('from structures import *\n\n\n')
 
 # return a set (from a functions set) of functions that can be wrap
 def check_for_functions_that_can_wrap(functions_set):
