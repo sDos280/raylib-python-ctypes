@@ -540,12 +540,16 @@ def generate_functions_code_pyi_file():
         with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "x"):  # generate __init__.pyi file => function signature
             pass
         with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+            structs_code_file_write.write('from colors import *\n')
+            structs_code_file_write.write('from enums import *\n')
             structs_code_file_write.write('from structures import *\n\n\n')
     else:
         print(f"there isn\'t a __init__.pyi in {Path(Path(__file__).parent.parent / '__init__.pyi')}, regenerating a new one here")
         with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "x"):  # generate __init__.pyi file => function signature
             pass
         with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+            structs_code_file_write.write('from colors import *\n')
+            structs_code_file_write.write('from enums import *\n')
             structs_code_file_write.write('from structures import *\n\n\n')
 
 # return a set (from a functions set) of functions that can be wrap
