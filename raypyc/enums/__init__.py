@@ -152,7 +152,7 @@ class MouseButton(IntEnum):
 	MOUSE_BUTTON_MIDDLE: int = 2  # Mouse button middle (pressed wheel)
 	MOUSE_BUTTON_SIDE: int = 3  # Mouse button side (advanced mouse device)
 	MOUSE_BUTTON_EXTRA: int = 4  # Mouse button extra (advanced mouse device)
-	MOUSE_BUTTON_FORWARD: int = 5  # Mouse button fordward (advanced mouse device)
+	MOUSE_BUTTON_FORWARD: int = 5  # Mouse button forward (advanced mouse device)
 	MOUSE_BUTTON_BACK: int = 6  # Mouse button back (advanced mouse device)
 
 
@@ -338,6 +338,7 @@ class BlendMode(IntEnum):
 	BLEND_SUBTRACT_COLORS: int = 4  # Blend textures subtracting colors (alternative)
 	BLEND_ALPHA_PREMULTIPLY: int = 5  # Blend premultiplied textures considering alpha
 	BLEND_CUSTOM: int = 6  # Blend textures using custom src/dst factors (use rlSetBlendMode())
+	BLEND_CUSTOM_SEPARATE: int = 7  # Blend textures using custom rgb/alpha separate src/dst factors (use rlSetBlendModeSeparate())
 
 
 #  Gesture

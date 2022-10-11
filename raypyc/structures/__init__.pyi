@@ -1006,7 +1006,7 @@ class Material(Structure):
 		pass
 
 
-#  Transform, vectex transformation data
+#  Transform, vertex transformation data
 class Transform(Structure):
 	@property
 	def translation(self) -> Vector3:
