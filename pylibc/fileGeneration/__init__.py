@@ -254,12 +254,9 @@ def generate_struct_fields_string_code(struct_data):
         struct_data_field_type_pointer_level = struct_data_field_type.count("*")
         struct_data_field_type_is_array = struct_data_field_type.count("]")
         if struct_data_field_type_is_array == 0:
-            if struct_data_field_type_pointer_level == 0 or (
-                    struct_data_field_type.replace(" ", "") in typesDictionaryCstringToCtypesString or struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString):  # if value isn't a pointer value
+            if struct_data_field_type_pointer_level == 0 or (struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString):  # if value isn't a pointer value
                 if struct_data_field_type.replace(" ", "") in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
                     struct_fields += f"\t('{struct_data_field_name}', {typesDictionaryCstringToCtypesString[struct_data_field_type.replace(' ', '')]}),  # {struct_data_field_description}\n"
-                elif struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString:  # there isn't really a const type in python
-                    struct_fields += f"\t('{struct_data_field_name}', {typesDictionaryCstringToCtypesString[struct_data_field_type.replace(' ', '').replace('const', '')]}),  # {struct_data_field_description}\n"
                 else:  # probably type is struct
                     struct_fields += f"\t('{struct_data_field_name}', {struct_data_field_type.replace(' ', '').replace('const', '')}),  # {struct_data_field_description}\n"  # probably type is struct
             else:
@@ -360,12 +357,8 @@ def generate_struct_setters_getters_code(struct_data):
         struct_data_field_type_is_array = struct_data_field_type.count("]")
         struct_getters_string += f"def {struct_data_field_name}(self) -> "
         if struct_data_field_type_is_array == 0:
-            if struct_data_field_type_pointer_level == 0 or (
-                    struct_data_field_type.replace(" ", "") in typesDictionaryCstringToPythonTypesString or struct_data_field_type.replace(" ", "").replace('const',
-                                                                                                                                                            '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
-                if struct_data_field_type.replace(" ", "") in typesDictionaryCstringToPythonTypesString:  # that why in the typesDictionary we don't use spaces for the key
-                    struct_getters_string += f"{typesDictionaryCstringToPythonTypesString[struct_data_field_type.replace(' ', '')]}:\n\treturn self.{struct_data_field_name}\n\n"
-                elif struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
+            if struct_data_field_type_pointer_level == 0 or (struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
+                if struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
                     struct_getters_string += f"{typesDictionaryCstringToPythonTypesString[struct_data_field_type.replace(' ', '').replace('const', '')]}:\n\treturn self.{struct_data_field_name}\n\n"
                 else:  # probably type is struct
                     struct_getters_string += f"{struct_data_field_type.replace(' ', '').replace('const', '')}:\n\treturn self.{struct_data_field_name}\n\n"
@@ -453,12 +446,8 @@ def generate_struct_setters_getters_code_stub(struct_data):
         struct_data_field_type_is_array = struct_data_field_type.count("]")
         struct_getters_string += f"def {struct_data_field_name}(self) -> "
         if struct_data_field_type_is_array == 0:
-            if struct_data_field_type_pointer_level == 0 or (
-                    struct_data_field_type.replace(" ", "") in typesDictionaryCstringToPythonTypesString or struct_data_field_type.replace(" ", "").replace('const',
-                                                                                                                                                            '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
-                if struct_data_field_type.replace(" ", "") in typesDictionaryCstringToPythonTypesString:  # that why in the typesDictionary we don't use spaces for the key
-                    struct_getters_string += f"{typesDictionaryCstringToPythonTypesString[struct_data_field_type.replace(' ', '')]}:\n\tpass\n\n"
-                elif struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
+            if struct_data_field_type_pointer_level == 0 or (struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
+                if struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
                     struct_getters_string += f"{typesDictionaryCstringToPythonTypesString[struct_data_field_type.replace(' ', '').replace('const', '')]}:\n\tpass\n\n"
                 else:  # probably type is struct
                     struct_getters_string += f"{struct_data_field_type.replace(' ', '').replace('const', '')}:\n\tpass\n\n"
@@ -565,12 +554,8 @@ def check_for_functions_that_can_wrap(functions_set):
                 function_param_pointer_level = function_param_type.count("*")
                 sfunction_param_is_array = function_param_type.count("]")
                 if sfunction_param_is_array == 0:
-                    if function_param_pointer_level == 0 or (
-                            function_param_type.replace(" ", "") in typesDictionaryCstringToPythonTypesString or function_param_type.replace(" ", "").replace('const',
-                                                                                                                                                         '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
-                        if function_param_type.replace(" ", "") in typesDictionaryCstringToPythonTypesString:  # that why in the typesDictionary we don't use spaces for the key
-                            do_wrapper_this_function = True
-                        elif function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
+                    if function_param_pointer_level == 0 or (function_param_type.replace(" ", "").replace("const", "") in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
+                        if function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
                             do_wrapper_this_function = True
                         else:  # probably type is struct
                             do_wrapper_this_function = True  # probably type is struct
@@ -590,7 +575,8 @@ def check_for_functions_that_can_wrap(functions_set):
                     else:
                         do_wrapper_this_function = True  # probably type is struct
 
-                if function_param_type.replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '') in ['AudioStream', 'Wave', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
+                if function_param_type.replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '') in ['AudioStream', 'Wave', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback',
+                                                                                                                                    'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
                     do_wrapper_this_function = False
                     break
 
@@ -599,11 +585,8 @@ def check_for_functions_that_can_wrap(functions_set):
             function_param_pointer_level = function_return_type.count("*")
             sfunction_param_is_array = function_return_type.count("]")
             if sfunction_param_is_array == 0:
-                if function_param_pointer_level == 0 or (
-                        function_return_type.replace(" ", "") in typesDictionaryCstringToCtypesString or function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString):  # if value isn't a pointer value
-                    if function_return_type.replace(" ", "") in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
-                        do_wrapper_this_function = True
-                    elif function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString:  # there isn't really a const type in python
+                if function_param_pointer_level == 0 or (function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString):  # if value isn't a pointer value
+                    if function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString:  # there isn't really a const type in python
                         do_wrapper_this_function = True
                     else:  # probably type is struct
                         do_wrapper_this_function = True  # probably type is struct
@@ -623,7 +606,8 @@ def check_for_functions_that_can_wrap(functions_set):
                 else:
                     do_wrapper_this_function = True  # probably type is struct
 
-            if function_return_type.replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '') in ['AudioStream', 'Wave', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
+            if function_return_type.replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '') in ['AudioStream', 'Wave', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback',
+                                                                                                                                 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
                 do_wrapper_this_function = False
 
         if do_wrapper_this_function:

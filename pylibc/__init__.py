@@ -172,12 +172,8 @@ def check_for_functions_that_can_wrap(functions_set):
                 function_param_pointer_level = function_param_type.count("*")
                 sfunction_param_is_array = function_param_type.count("]")
                 if sfunction_param_is_array == 0:
-                    if function_param_pointer_level == 0 or (
-                            function_param_type.replace(" ", "") in typesDictionaryCstringToPythonTypesString or function_param_type.replace(" ", "").replace('const',
-                                                                                                                                                              '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
-                        if function_param_type.replace(" ", "") in typesDictionaryCstringToPythonTypesString:  # that why in the typesDictionary we don't use spaces for the key
-                            do_wrapper_this_function = True
-                        elif function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
+                    if function_param_pointer_level == 0 or (function_param_type.replace(" ", "").replace("const", "") in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
+                        if function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
                             do_wrapper_this_function = True
                         else:  # probably type is struct
                             do_wrapper_this_function = True  # probably type is struct
@@ -207,16 +203,13 @@ def check_for_functions_that_can_wrap(functions_set):
             function_param_pointer_level = function_return_type.count("*")
             sfunction_param_is_array = function_return_type.count("]")
             if sfunction_param_is_array == 0:
-                if function_param_pointer_level == 0 or (
-                        function_return_type.replace(" ", "") in typesDictionaryCstringToCtypesString or function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString):  # if value isn't a pointer value
-                    if function_return_type.replace(" ", "") in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
-                        do_wrapper_this_function = True
-                    elif function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString:  # there isn't really a const type in python
+                if function_param_pointer_level == 0 or (function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString):  # if value isn't a pointer value
+                    if function_return_type.replace(" ", "").replace("const", "") in typesDictionaryCstringToCtypesString:  # there isn't really a const type in python
                         do_wrapper_this_function = True
                     else:  # probably type is struct
                         do_wrapper_this_function = True  # probably type is struct
                 else:
-                    if function_return_type.replace('const', '').replace(" ", "") in typesDictionaryCstringToCtypesString:
+                    if function_return_type.replace("const", "").replace(" ", "") in typesDictionaryCstringToCtypesString:
                         do_wrapper_this_function = True
                     else:
                         if function_return_type.replace('const', '').replace(" ", "").replace("*", "") in typesDictionaryCstringToCtypesString:
@@ -254,11 +247,8 @@ def wrap_functions_to_ctypes_functions_add_function_to_this_module(functions_to_
                 function_param_type = function_param['type']
                 function_param_pointer_level = function_param_type.count("*")
                 # function_param_is_array = function_param_type.count("]") raylib functions shouldn't really return arrays...
-                if function_param_pointer_level == 0 or (
-                        function_param_type.replace(" ", "") in typesDictionaryCstringToCtypes or function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes):  # if value isn't a pointer value
-                    if function_param_type.replace(" ", "") in typesDictionaryCstringToCtypes:  # that why in the typesDictionary we don't use spaces for the key
-                        function_to_wrap_ctype['parametersTypes'].append(typesDictionaryCstringToCtypes[function_param_type.replace(" ", "")])
-                    elif function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes:  # there isn't really a const type in python
+                if function_param_pointer_level == 0 or (function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes):  # if value isn't a pointer value
+                    if function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes:  # there isn't really a const type in python
                         function_to_wrap_ctype['parametersTypes'].append(typesDictionaryCstringToCtypes[function_param_type.replace(" ", "").replace('const', '')])
                 else:
                     function_param_processed = function_param_type.replace('const', '').replace(' ', '').replace('*', '')
@@ -272,11 +262,8 @@ def wrap_functions_to_ctypes_functions_add_function_to_this_module(functions_to_
         function_return_type = function_to_wrap['returnType']
         function_return_type_pointer_level = function_return_type.count("*")
         # function_param_is_array = function_param_type.count("]") raylib functions shouldn't really return arrays...
-        if function_return_type_pointer_level == 0 or (
-                function_return_type.replace(" ", "") in typesDictionaryCstringToCtypes or function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes):  # if value isn't a pointer value
-            if function_return_type.replace(" ", "") in typesDictionaryCstringToCtypes:  # that why in the typesDictionary we don't use spaces for the key
-                function_to_wrap_ctype['returnType'] = typesDictionaryCstringToCtypes[function_return_type.replace(" ", "")]
-            elif function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes:  # there isn't really a const type in python
+        if function_return_type_pointer_level == 0 or (function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes):  # if value isn't a pointer value
+            if function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes:  # there isn't really a const type in python
                 function_to_wrap_ctype['returnType'] = typesDictionaryCstringToCtypes[function_return_type.replace(" ", "").replace('const', '')]
         else:
             function_return_type_processed = function_return_type.replace('const', '').replace(' ', '').replace('*', '')
