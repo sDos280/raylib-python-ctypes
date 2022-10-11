@@ -93,7 +93,7 @@ resources/common/gui.png
 ```python
 """
 
-raylib [raylib module] example - Name Of The Example
+raylib [raylib module] example - example explanation
 
 """
 
@@ -107,6 +107,7 @@ raylib [raylib module] example - Name Of The Example
 # Define you functions/global variables here
 # ------------------------------------------------------------------------------------
 
+# ------------------------------------------------------------------------------------
 # Program main entry point
 # ------------------------------------------------------------------------------------
 def main():
@@ -207,7 +208,7 @@ typedef struct Vector2 {
     float y;
 } Vector2;
 ```
-- 1. first we need to import all the stuff from ctypes for later use
+- 1. first we need to import all the stuff from ctypes for later use (you can also just include raypyc, ctypes already included in there...)
 ```python
 "from ctypes import *"
 
