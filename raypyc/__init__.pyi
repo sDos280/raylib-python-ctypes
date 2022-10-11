@@ -911,10 +911,6 @@ def check_collision_point_circle(point: Vector2, center: Vector2, radius: float)
 def check_collision_point_triangle(point: Vector2, p1: Vector2, p2: Vector2, p3: Vector2) -> bool:
 	pass
 
-# Check if point is within a polygon described by array of vertices
-def check_collision_point_poly(point: Vector2, points: POINTER(Vector2), pointCount: int) -> bool:
-	pass
-
 # Check the collision between two lines defined by two points each, returns collision point by reference
 def check_collision_lines(startPos1: Vector2, endPos1: Vector2, startPos2: Vector2, endPos2: Vector2, collisionPoint: POINTER(Vector2)) -> bool:
 	pass
@@ -985,10 +981,6 @@ def gen_image_checked(width: int, height: int, checksX: int, checksY: int, col1:
 
 # Generate image: white noise
 def gen_image_white_noise(width: int, height: int, factor: float) -> Image:
-	pass
-
-# Generate image: perlin noise
-def gen_image_perlin_noise(width: int, height: int, offsetX: int, offsetY: int, scale: float) -> Image:
 	pass
 
 # Generate image: cellular algorithm, bigger tileSize means bigger cells
@@ -1143,20 +1135,12 @@ def image_draw_line(dst: POINTER(Image), startPosX: int, startPosY: int, endPosX
 def image_draw_line_v(dst: POINTER(Image), start: Vector2, end: Vector2, color: Color) -> None:
 	pass
 
-# Draw a filled circle within an image
+# Draw circle within an image
 def image_draw_circle(dst: POINTER(Image), centerX: int, centerY: int, radius: int, color: Color) -> None:
 	pass
 
-# Draw a filled circle within an image (Vector version)
+# Draw circle within an image (Vector version)
 def image_draw_circle_v(dst: POINTER(Image), center: Vector2, radius: int, color: Color) -> None:
-	pass
-
-# Draw circle outline within an image
-def image_draw_circle_lines(dst: POINTER(Image), centerX: int, centerY: int, radius: int, color: Color) -> None:
-	pass
-
-# Draw circle outline within an image (Vector version)
-def image_draw_circle_lines_v(dst: POINTER(Image), center: Vector2, radius: int, color: Color) -> None:
 	pass
 
 # Draw rectangle within an image
@@ -1399,14 +1383,6 @@ def get_glyph_info(font: Font, codepoint: int) -> GlyphInfo:
 def get_glyph_atlas_rec(font: Font, codepoint: int) -> Rectangle:
 	pass
 
-# Load UTF-8 text encoded from codepoints array
-def load_utf8(codepoints: POINTER(c_int), length: int) -> bytes:
-	pass
-
-# Unload UTF-8 text encoded from codepoints array
-def unload_utf8(text: bytes) -> None:
-	pass
-
 # Load all codepoints from a UTF-8 text string, codepoints count returned by parameter
 def load_codepoints(text: bytes, count: POINTER(c_int)) -> POINTER(c_int):  # Load all codepoints from a UTF-8 text string, codepoints count returned by parameter
 	pass
@@ -1420,19 +1396,15 @@ def get_codepoint_count(text: bytes) -> int:
 	pass
 
 # Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
-def get_codepoint(text: bytes, codepointSize: POINTER(c_int)) -> int:
-	pass
-
-# Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
-def get_codepoint_next(text: bytes, codepointSize: POINTER(c_int)) -> int:
-	pass
-
-# Get previous codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
-def get_codepoint_previous(text: bytes, codepointSize: POINTER(c_int)) -> int:
+def get_codepoint(text: bytes, bytesProcessed: POINTER(c_int)) -> int:
 	pass
 
 # Encode one codepoint into UTF-8 byte array (array length returned as parameter)
-def codepoint_to_utf8(codepoint: int, utf8Size: POINTER(c_int)) -> bytes:
+def codepoint_to_utf8(codepoint: int, byteSize: POINTER(c_int)) -> bytes:
+	pass
+
+# Encode text as codepoints array into UTF-8 text string (WARNING: memory must be freed!)
+def text_codepoints_to_utf8(codepoints: POINTER(c_int), length: int) -> bytes:
 	pass
 
 # Copy one string to another, returns bytes copied

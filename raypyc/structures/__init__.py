@@ -823,7 +823,7 @@ class Camera3D(Structure):
 		('position', Vector3),  # Camera position
 		('target', Vector3),  # Camera target it looks-at
 		('up', Vector3),  # Camera up vector (rotation over its axis)
-		('fovy', c_float),  # Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic
+		('fovy', c_float),  # Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic
 		('projection', c_int)  # Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
 	]
 
@@ -874,7 +874,7 @@ class Camera(Structure):
 		('position', Vector3),  # Camera position
 		('target', Vector3),  # Camera target it looks-at
 		('up', Vector3),  # Camera up vector (rotation over its axis)
-		('fovy', c_float),  # Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic
+		('fovy', c_float),  # Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic
 		('projection', c_int)  # Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
 	]
 
@@ -1192,7 +1192,7 @@ class Material(Structure):
 		self.params = i
 
 
-#  Transform, vertex transformation data
+#  Transform, vectex transformation data
 class Transform(Structure):
 	_fields_ = [
 		('translation', Vector3),  # Translation
