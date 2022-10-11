@@ -1,4 +1,4 @@
-from pylibc.structures import Color
+from raypyc.structures import Color
 
 LIGHTGRAY: Color  # Light Gray
 GRAY: Color  # Gray

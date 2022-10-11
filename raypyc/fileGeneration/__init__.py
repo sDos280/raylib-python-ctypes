@@ -56,7 +56,7 @@ typesDictionaryCstringToCtypesString = {
 
 # -----------------------------------------
 
-# **all the functions pylibc use are here**
+# **all the functions raypyc use are here**
 
 # get class object by string name
 def str_to_class(classname):

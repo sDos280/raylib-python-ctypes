@@ -1,4 +1,4 @@
-from pylibc.structures import Color
+from raypyc.structures import Color
 
 # Some Basic Colors
 # NOTE: Custom raylib color palette for amazing visuals on WHITE background

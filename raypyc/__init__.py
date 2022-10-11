@@ -1,9 +1,9 @@
 from pathlib import Path
 import json
 import inflection
-from pylibc.colors import *
-from pylibc.enums import *
-from pylibc.structures import *
+from raypyc.colors import *
+from raypyc.enums import *
+from raypyc.structures import *
 
 from ctypes import (
     POINTER,
