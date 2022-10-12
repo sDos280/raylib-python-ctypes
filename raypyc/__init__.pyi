@@ -1,6 +1,6 @@
-from colors import *
-from enums import *
-from structures import *
+from raypyc.colors import *
+from raypyc.enums import *
+from raypyc.structures import *
 
 
 # Initialize window and OpenGL context

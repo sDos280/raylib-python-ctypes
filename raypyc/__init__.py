@@ -144,6 +144,13 @@ current_module = __import__(__name__)
 
 _rl = cdll.LoadLibrary(str(Path(__file__).parent / 'lib/raylib.dll'))
 
+# get numbers from string
+def get_numbers_from_string(string):
+    ints = []
+    for s in string.split(' '):
+        if s.isdigit():
+            ints.append(int(s))
+    return ints
 
 def wrap_function(funcname, _argtypes, _restype):
     func = _rl.__getattr__(funcname)
