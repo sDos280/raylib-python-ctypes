@@ -1,7 +1,8 @@
-from pathlib import Path
-import inflection
 import json
 import os
+from pathlib import Path
+
+import inflection
 
 typesDictionaryCstringToPythonTypesString = {
     'bool': 'bool',  # C type: _Bool  Python type: bool (1)
@@ -53,6 +54,15 @@ typesDictionaryCstringToCtypesString = {
     'void': 'None',  # C type: void  Python type: None
 }
 
+# -----------------------------------------
+ENUMS_FOLDER_PATH = Path(__file__).parent / 'raypyc/enums'
+STRUCTURES_FOLDER_PATH = Path(__file__).parent / 'raypyc/structures'
+FUNCTIONS_FOLDER_PATH = Path(__file__).parent / 'raypyc'
+JSON_FOLDER_PATH = Path(__file__).parent / 'raypyc'
+
+
+# -----------------------------------------
+
 
 # -----------------------------------------
 
@@ -84,36 +94,36 @@ def indentString(string: str, indent_by: int) -> str:
 
 # remove the current enums/__init__.py and enums/__init__.pyi files and generated new ones
 def generate_enums_py_pyi_files():
-    if Path(Path(__file__).parent.parent / 'enums/__init__.py').exists():
-        os.remove(Path(Path(__file__).parent.parent / 'enums/__init__.py'))
-        with open(Path(Path(__file__).parent.parent / 'enums/__init__.py'), "x"):  # generate enums/__init__.py file => enum logic
+    if Path(ENUMS_FOLDER_PATH / '__init__.py').exists():
+        os.remove(Path(ENUMS_FOLDER_PATH / '__init__.py'))
+        with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "x"):  # generate enums/__init__.py file => enum logic
             pass
-        with open(Path(Path(__file__).parent.parent / 'enums/__init__.py'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from enum import IntEnum\n\n')
     else:
-        print(f"there isn\'t a __init__.py in {Path(Path(__file__).parent.parent / 'enums/__init__.py')}, regenerating a new one here")
-        with open(Path(Path(__file__).parent.parent / 'enums/__init__.py'), "x"):  # generate enums/__init__.py file => enum logic
+        print(f"there isn\'t a __init__.py in {Path(ENUMS_FOLDER_PATH / '__init__.py')}, regenerating a new one here")
+        with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "x"):  # generate enums/__init__.py file => enum logic
             pass
-        with open(Path(Path(__file__).parent.parent / 'enums/__init__.py'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from enum import IntEnum\n\n')
 
-    if Path(Path(__file__).parent.parent / 'enums/__init__.pyi').exists():
-        os.remove(Path(Path(__file__).parent.parent / 'enums/__init__.pyi'))
-        with open(Path(Path(__file__).parent.parent / 'enums/__init__.pyi'), "x"):  # generate __init__.pyi file => enum signature
+    if Path(ENUMS_FOLDER_PATH / '__init__.pyi').exists():
+        os.remove(Path(ENUMS_FOLDER_PATH / '__init__.pyi'))
+        with open(Path(ENUMS_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => enum signature
             pass
-        with open(Path(Path(__file__).parent.parent / 'enums/__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(ENUMS_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from enum import IntEnum\n\n')
     else:
-        print(f"there isn\'t a __init__.pyi in {Path(Path(__file__).parent.parent / 'enums/__init__.pyi')}, regenerating a new one here")
-        with open(Path(Path(__file__).parent.parent / 'enums/__init__.pyi'), "x"):  # generate __init__.pyi file => enum signature
+        print(f"there isn\'t a __init__.pyi in {Path(ENUMS_FOLDER_PATH / '__init__.pyi')}, regenerating a new one here")
+        with open(Path(ENUMS_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => enum signature
             pass
-        with open(Path(Path(__file__).parent.parent / 'enums/__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(ENUMS_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from enum import IntEnum\n\n')
 
 
 def generate_enums_py_pyi_code(_raylib_api_enums):
     # generate __init__.py code
-    with open(Path(Path(__file__).parent.parent / 'enums/__init__.py'), "a") as enums_code_file_w:
+    with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "a") as enums_code_file_w:
         for enum in _raylib_api_enums:
             enum_string_logic = ""
             enum_string_logic += generate_enum_signature_code(enum)
@@ -123,7 +133,7 @@ def generate_enums_py_pyi_code(_raylib_api_enums):
             enums_code_file_w.write(enum_string_logic.replace('\n\t\n', '\n\n'))
 
     # generate __init__.pyi code
-    with open(Path(Path(__file__).parent.parent / 'enums/__init__.pyi'), "a") as enums_code_file_w:
+    with open(Path(ENUMS_FOLDER_PATH / '__init__.pyi'), "a") as enums_code_file_w:
         for enum in _raylib_api_enums:
             enum_string_logic = ""
             enum_string_logic += generate_enum_signature_code_stub(enum)
@@ -159,36 +169,36 @@ def generate_enum_values_string_code_stub(enum_data):
 
 # remove the current structures/__init__.py and structures/__init__.pyi files and generated new ones
 def generate_structs_py_pyi_files():
-    if Path(Path(__file__).parent.parent / 'structures/__init__.py').exists():
-        os.remove(Path(Path(__file__).parent.parent / 'structures/__init__.py'))
-        with open(Path(Path(__file__).parent.parent / 'structures/__init__.py'), "x"):  # generate __init__.py file => struct logic
+    if Path(STRUCTURES_FOLDER_PATH / '__init__.py').exists():
+        os.remove(Path(STRUCTURES_FOLDER_PATH / '__init__.py'))
+        with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "x"):  # generate __init__.py file => struct logic
             pass
-        with open(Path(Path(__file__).parent.parent / 'structures/__init__.py'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from ctypes import *\n\n\n')
     else:
-        print(f"there isn\'t a __init__.py in {Path(Path(__file__).parent.parent / 'structures/__init__.py')}, regenerating a new one here")
-        with open(Path(Path(__file__).parent.parent / 'structures/__init__.py'), "x"):  # generate __init__.py file => struct logic
+        print(f"there isn\'t a __init__.py in {Path(STRUCTURES_FOLDER_PATH / '__init__.py')}, regenerating a new one here")
+        with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "x"):  # generate __init__.py file => struct logic
             pass
-        with open(Path(Path(__file__).parent.parent / 'structures/__init__.py'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from ctypes import *\n\n\n')
 
-    if Path(Path(__file__).parent.parent / 'structures/__init__.pyi').exists():
-        os.remove(Path(Path(__file__).parent.parent / 'structures/__init__.pyi'))
-        with open(Path(Path(__file__).parent.parent / 'structures/__init__.pyi'), "x"):  # generate __init__.pyi file => struct signature
+    if Path(STRUCTURES_FOLDER_PATH / '__init__.pyi').exists():
+        os.remove(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'))
+        with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => struct signature
             pass
-        with open(Path(Path(__file__).parent.parent / 'structures/__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from ctypes import *\n\n\n')
     else:
-        print(f"there isn\'t a __init__.pyi in {Path(Path(__file__).parent.parent / 'structures/__init__.pyi')}, regenerating a new one here")
-        with open(Path(Path(__file__).parent.parent / 'structures/__init__.pyi'), "x"):  # generate __init__.pyi file => struct signature
+        print(f"there isn\'t a __init__.pyi in {Path(STRUCTURES_FOLDER_PATH / '__init__.pyi')}, regenerating a new one here")
+        with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => struct signature
             pass
-        with open(Path(Path(__file__).parent.parent / 'structures/__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from ctypes import *\n\n\n')
 
 
 def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
     # generate __init__.py code
-    with open(Path(Path(__file__).parent.parent / 'structures/__init__.py'), "a") as structs_code_file_w:
+    with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "a") as structs_code_file_w:
         for struct in _raylib_api_structs:
             if not struct['name'] in ['AudioStream', 'Wave', 'Sound', 'Music']:
                 struct_string_logic = ""
@@ -212,7 +222,7 @@ def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
                         structs_code_file_w.write(aliase_string_logic.replace('\n\t\n', '\n\n'))
 
     # generate __init__.pyi code
-    with open(Path(Path(__file__).parent.parent / 'structures/__init__.pyi'), "a") as structs_code_stub_file_w:
+    with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "a") as structs_code_stub_file_w:
         for struct in _raylib_api_structs:
             if not struct['name'] in ['AudioStream', 'Wave', 'Sound', 'Music']:
                 struct_string_logic = ""
@@ -524,22 +534,23 @@ def generate_struct_setters_getters_code_stub(struct_data):
 
 # remove the current functions_code.pyi file and generated new one
 def generate_functions_code_pyi_file():
-    if Path(Path(__file__).parent.parent / '__init__.pyi').exists():
-        os.remove(Path(Path(__file__).parent.parent / '__init__.pyi'))
-        with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "x"):  # generate __init__.pyi file => function signature
+    if Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi').exists():
+        os.remove(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'))
+        with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => function signature
             pass
-        with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from raypyc.colors import *\n')
             structs_code_file_write.write('from raypyc.enums import *\n')
             structs_code_file_write.write('from raypyc.structures import *\n\n\n')
     else:
-        print(f"there isn\'t a __init__.pyi in {Path(Path(__file__).parent.parent / '__init__.pyi')}, regenerating a new one here")
-        with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "x"):  # generate __init__.pyi file => function signature
+        print(f"there isn\'t a __init__.pyi in {Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi')}, regenerating a new one here")
+        with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => function signature
             pass
-        with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from raypyc.colors import *\n')
             structs_code_file_write.write('from raypyc.enums import *\n')
             structs_code_file_write.write('from raypyc.structures import *\n\n\n')
+
 
 # return a set (from a functions set) of functions that can be wrap
 def check_for_functions_that_can_wrap(functions_set):
@@ -617,8 +628,9 @@ def check_for_functions_that_can_wrap(functions_set):
 
     return functions_that_can_be_wrap
 
+
 def generate_functions_code_in_code_pyi_file(functions_set):
-    with open(Path(Path(__file__).parent.parent / '__init__.pyi'), "a") as functions_code_file_w:
+    with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "a") as functions_code_file_w:
         for function in functions_set:
             name_of_function = inflection.underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d')
             function_copy = dict(function)
@@ -639,7 +651,7 @@ def generate_function_signature_code(function_data):
             function_param_name_sting = param['name']
             function_param_name_pointer_level = param['type'].count("*")
             if function_param_name_pointer_level == 0 or (function_param_type_sting.replace(" ", "") in typesDictionaryCstringToPythonTypesString or function_param_type_sting.replace(" ", "").replace('const',
-                                                                                                                                                                                                         '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value or in typesDictionaryCstringToCtypesString:
+                                                                                                                                                                                                        '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value or in typesDictionaryCstringToCtypesString:
                 if function_param_type_sting.replace(" ", "") in typesDictionaryCstringToPythonTypesString:
                     function_string += f"{function_param_name_sting}: {typesDictionaryCstringToPythonTypesString[function_param_type_sting.replace(' ', '')]}, "
                 elif function_param_type_sting.replace(' ', '').replace('const', '') in typesDictionaryCstringToPythonTypesString:
@@ -695,10 +707,11 @@ def generate_function_signature_code(function_data):
 
     return function_string
 
+
 # -----------------------------------------
 
 # load raylib data
-with open(Path(Path(__file__).parent.parent / 'raylib_api.json')) as reader:
+with open(Path(JSON_FOLDER_PATH / 'raylib_api.json')) as reader:
     raylib_api = json.load(reader)
 
 raylib_api_structs = raylib_api['structs']
