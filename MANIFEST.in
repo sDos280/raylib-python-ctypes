@@ -6,5 +6,5 @@ include raypyc/structures/__init__.py
 include raypyc/structures/__init__.pyi
 include raypyc/__init__.py
 include raypyc/__init__.pyi
-include raypyc/__init__.json
+include raypyc/raylib_api.json
 include raypyc/lib/*
