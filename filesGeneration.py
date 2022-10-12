@@ -724,7 +724,7 @@ with open(Path(JSON_FOLDER_PATH / 'raymath_api.json')) as reader:
     raymath_api = json.load(reader)
 
 raymath_api_structs = raymath_api['structs']
-raymath_api_aliases = raymath_api['aliases']
+# raymath_api_aliases = raymath_api['aliases']  raymath_api_aliases just redeclare some stuff, so we don't need it
 raymath_api_functions = raymath_api['functions']
 
 # first we make the structures wrapper
