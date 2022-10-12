@@ -290,6 +290,16 @@ with open(Path(Path(__file__).parent / 'raylib_api.json')) as reader:
 
 raylib_api_functions = raylib_api['functions']
 
-functions_to_wrapped = check_for_functions_that_can_wrap(raylib_api_functions)
+raylib_functions_to_wrapped = check_for_functions_that_can_wrap(raylib_api_functions)
 
-wrap_functions_to_ctypes_functions_add_function_to_this_module(functions_to_wrapped, current_module)
+wrap_functions_to_ctypes_functions_add_function_to_this_module(raylib_functions_to_wrapped, current_module)
+
+# load raymath data
+with open(Path(Path(__file__).parent / 'raymath_api.json')) as reader:
+    raymath_api = json.load(reader)
+
+raymath_api_functions = raymath_api['functions']
+
+raymath_functions_to_wrapped = check_for_functions_that_can_wrap(raymath_api_functions)
+
+wrap_functions_to_ctypes_functions_add_function_to_this_module(raymath_functions_to_wrapped, current_module)

@@ -1783,3 +1783,447 @@ def unload_wave_samples(samples: POINTER(c_float)) -> None:
 def set_audio_stream_buffer_size_default(size: int) -> None:
 	pass
 
+# 
+def clamp(value: float, min: float, max: float) -> float:
+	pass
+
+# 
+def lerp(start: float, end: float, amount: float) -> float:
+	pass
+
+# 
+def normalize(value: float, start: float, end: float) -> float:
+	pass
+
+# 
+def remap(value: float, inputStart: float, inputEnd: float, outputStart: float, outputEnd: float) -> float:
+	pass
+
+# 
+def wrap(value: float, min: float, max: float) -> float:
+	pass
+
+# 
+def float_equals(x: float, y: float) -> int:
+	pass
+
+# 
+def vector2_zero() -> Vector2:
+	pass
+
+# 
+def vector2_one() -> Vector2:
+	pass
+
+# 
+def vector2_add(v1: Vector2, v2: Vector2) -> Vector2:
+	pass
+
+# 
+def vector2_add_value(v: Vector2, add: float) -> Vector2:
+	pass
+
+# 
+def vector2_subtract(v1: Vector2, v2: Vector2) -> Vector2:
+	pass
+
+# 
+def vector2_subtract_value(v: Vector2, sub: float) -> Vector2:
+	pass
+
+# 
+def vector2_length(v: Vector2) -> float:
+	pass
+
+# 
+def vector2_length_sqr(v: Vector2) -> float:
+	pass
+
+# 
+def vector_2dot_product(v1: Vector2, v2: Vector2) -> float:
+	pass
+
+# 
+def vector_2distance(v1: Vector2, v2: Vector2) -> float:
+	pass
+
+# 
+def vector_2distance_sqr(v1: Vector2, v2: Vector2) -> float:
+	pass
+
+# 
+def vector2_angle(v1: Vector2, v2: Vector2) -> float:
+	pass
+
+# 
+def vector2_scale(v: Vector2, scale: float) -> Vector2:
+	pass
+
+# 
+def vector2_multiply(v1: Vector2, v2: Vector2) -> Vector2:
+	pass
+
+# 
+def vector2_negate(v: Vector2) -> Vector2:
+	pass
+
+# 
+def vector_2divide(v1: Vector2, v2: Vector2) -> Vector2:
+	pass
+
+# 
+def vector2_normalize(v: Vector2) -> Vector2:
+	pass
+
+# 
+def vector2_transform(v: Vector2, mat: Matrix) -> Vector2:
+	pass
+
+# 
+def vector2_lerp(v1: Vector2, v2: Vector2, amount: float) -> Vector2:
+	pass
+
+# 
+def vector2_reflect(v: Vector2, normal: Vector2) -> Vector2:
+	pass
+
+# 
+def vector2_rotate(v: Vector2, angle: float) -> Vector2:
+	pass
+
+# 
+def vector2_move_towards(v: Vector2, target: Vector2, maxDistance: float) -> Vector2:
+	pass
+
+# 
+def vector2_invert(v: Vector2) -> Vector2:
+	pass
+
+# 
+def vector2_clamp(v: Vector2, min: Vector2, max: Vector2) -> Vector2:
+	pass
+
+# 
+def vector2_clamp_value(v: Vector2, min: float, max: float) -> Vector2:
+	pass
+
+# 
+def vector2_equals(p: Vector2, q: Vector2) -> int:
+	pass
+
+# 
+def vector3_zero() -> Vector3:
+	pass
+
+# 
+def vector3_one() -> Vector3:
+	pass
+
+# 
+def vector3_add(v1: Vector3, v2: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_add_value(v: Vector3, add: float) -> Vector3:
+	pass
+
+# 
+def vector3_subtract(v1: Vector3, v2: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_subtract_value(v: Vector3, sub: float) -> Vector3:
+	pass
+
+# 
+def vector3_scale(v: Vector3, scalar: float) -> Vector3:
+	pass
+
+# 
+def vector3_multiply(v1: Vector3, v2: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_cross_product(v1: Vector3, v2: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_perpendicular(v: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_length(v: Vector3) -> float:
+	pass
+
+# 
+def vector3_length_sqr(v: Vector3) -> float:
+	pass
+
+# 
+def vector_3dot_product(v1: Vector3, v2: Vector3) -> float:
+	pass
+
+# 
+def vector_3distance(v1: Vector3, v2: Vector3) -> float:
+	pass
+
+# 
+def vector_3distance_sqr(v1: Vector3, v2: Vector3) -> float:
+	pass
+
+# 
+def vector3_angle(v1: Vector3, v2: Vector3) -> float:
+	pass
+
+# 
+def vector3_negate(v: Vector3) -> Vector3:
+	pass
+
+# 
+def vector_3divide(v1: Vector3, v2: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_normalize(v: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_ortho_normalize(v1: POINTER(Vector3), v2: POINTER(Vector3)) -> None:
+	pass
+
+# 
+def vector3_transform(v: Vector3, mat: Matrix) -> Vector3:
+	pass
+
+# 
+def vector3_rotate_by_quaternion(v: Vector3, q: Quaternion) -> Vector3:
+	pass
+
+# 
+def vector3_rotate_by_axis_angle(v: Vector3, axis: Vector3, angle: float) -> Vector3:
+	pass
+
+# 
+def vector3_lerp(v1: Vector3, v2: Vector3, amount: float) -> Vector3:
+	pass
+
+# 
+def vector3_reflect(v: Vector3, normal: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_min(v1: Vector3, v2: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_max(v1: Vector3, v2: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_barycenter(p: Vector3, a: Vector3, b: Vector3, c: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_unproject(source: Vector3, projection: Matrix, view: Matrix) -> Vector3:
+	pass
+
+# 
+def vector3_to_float_v(v: Vector3) -> float3:
+	pass
+
+# 
+def vector3_invert(v: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_clamp(v: Vector3, min: Vector3, max: Vector3) -> Vector3:
+	pass
+
+# 
+def vector3_clamp_value(v: Vector3, min: float, max: float) -> Vector3:
+	pass
+
+# 
+def vector3_equals(p: Vector3, q: Vector3) -> int:
+	pass
+
+# 
+def vector3_refract(v: Vector3, n: Vector3, r: float) -> Vector3:
+	pass
+
+# 
+def matrix_determinant(mat: Matrix) -> float:
+	pass
+
+# 
+def matrix_trace(mat: Matrix) -> float:
+	pass
+
+# 
+def matrix_transpose(mat: Matrix) -> Matrix:
+	pass
+
+# 
+def matrix_invert(mat: Matrix) -> Matrix:
+	pass
+
+# 
+def matrix_identity() -> Matrix:
+	pass
+
+# 
+def matrix_add(left: Matrix, right: Matrix) -> Matrix:
+	pass
+
+# 
+def matrix_subtract(left: Matrix, right: Matrix) -> Matrix:
+	pass
+
+# 
+def matrix_multiply(left: Matrix, right: Matrix) -> Matrix:
+	pass
+
+# 
+def matrix_translate(x: float, y: float, z: float) -> Matrix:
+	pass
+
+# 
+def matrix_rotate(axis: Vector3, angle: float) -> Matrix:
+	pass
+
+# 
+def matrix_rotate_x(angle: float) -> Matrix:
+	pass
+
+# 
+def matrix_rotate_y(angle: float) -> Matrix:
+	pass
+
+# 
+def matrix_rotate_z(angle: float) -> Matrix:
+	pass
+
+# 
+def matrix_rotate_xyz(angle: Vector3) -> Matrix:
+	pass
+
+# 
+def matrix_rotate_zyx(angle: Vector3) -> Matrix:
+	pass
+
+# 
+def matrix_scale(x: float, y: float, z: float) -> Matrix:
+	pass
+
+# 
+def matrix_frustum(left: float, right: float, bottom: float, top: float, near: float, far: float) -> Matrix:
+	pass
+
+# 
+def matrix_perspective(fovy: float, aspect: float, near: float, far: float) -> Matrix:
+	pass
+
+# 
+def matrix_ortho(left: float, right: float, bottom: float, top: float, near: float, far: float) -> Matrix:
+	pass
+
+# 
+def matrix_look_at(eye: Vector3, target: Vector3, up: Vector3) -> Matrix:
+	pass
+
+# 
+def matrix_to_float_v(mat: Matrix) -> float16:
+	pass
+
+# 
+def quaternion_add(q1: Quaternion, q2: Quaternion) -> Quaternion:
+	pass
+
+# 
+def quaternion_add_value(q: Quaternion, add: float) -> Quaternion:
+	pass
+
+# 
+def quaternion_subtract(q1: Quaternion, q2: Quaternion) -> Quaternion:
+	pass
+
+# 
+def quaternion_subtract_value(q: Quaternion, sub: float) -> Quaternion:
+	pass
+
+# 
+def quaternion_identity() -> Quaternion:
+	pass
+
+# 
+def quaternion_length(q: Quaternion) -> float:
+	pass
+
+# 
+def quaternion_normalize(q: Quaternion) -> Quaternion:
+	pass
+
+# 
+def quaternion_invert(q: Quaternion) -> Quaternion:
+	pass
+
+# 
+def quaternion_multiply(q1: Quaternion, q2: Quaternion) -> Quaternion:
+	pass
+
+# 
+def quaternion_scale(q: Quaternion, mul: float) -> Quaternion:
+	pass
+
+# 
+def quaternion_divide(q1: Quaternion, q2: Quaternion) -> Quaternion:
+	pass
+
+# 
+def quaternion_lerp(q1: Quaternion, q2: Quaternion, amount: float) -> Quaternion:
+	pass
+
+# 
+def quaternion_nlerp(q1: Quaternion, q2: Quaternion, amount: float) -> Quaternion:
+	pass
+
+# 
+def quaternion_slerp(q1: Quaternion, q2: Quaternion, amount: float) -> Quaternion:
+	pass
+
+# 
+def quaternion_from_vector3_to_vector3(_from: Vector3, to: Vector3) -> Quaternion:
+	pass
+
+# 
+def quaternion_from_matrix(mat: Matrix) -> Quaternion:
+	pass
+
+# 
+def quaternion_to_matrix(q: Quaternion) -> Matrix:
+	pass
+
+# 
+def quaternion_from_axis_angle(axis: Vector3, angle: float) -> Quaternion:
+	pass
+
+# 
+def quaternion_to_axis_angle(q: Quaternion, outAxis: POINTER(Vector3), outAngle: POINTER(c_float)) -> None:
+	pass
+
+# 
+def quaternion_from_euler(pitch: float, yaw: float, roll: float) -> Quaternion:
+	pass
+
+# 
+def quaternion_to_euler(q: Quaternion) -> Vector3:
+	pass
+
+# 
+def quaternion_transform(q: Quaternion, mat: Matrix) -> Quaternion:
+	pass
+
+# 
+def quaternion_equals(p: Quaternion, q: Quaternion) -> int:
+	pass
+

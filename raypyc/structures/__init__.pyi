@@ -1412,3 +1412,237 @@ class FilePathList(Structure):
 		pass
 
 
+#  Vector2 type
+class Vector2(Structure):
+	@property
+	def x(self) -> float:
+		pass
+
+	@x.setter
+	def x(self, i: float) -> None:
+		pass
+
+	@property
+	def y(self) -> float:
+		pass
+
+	@y.setter
+	def y(self, i: float) -> None:
+		pass
+
+
+#  Vector3 type
+class Vector3(Structure):
+	@property
+	def x(self) -> float:
+		pass
+
+	@x.setter
+	def x(self, i: float) -> None:
+		pass
+
+	@property
+	def y(self) -> float:
+		pass
+
+	@y.setter
+	def y(self, i: float) -> None:
+		pass
+
+	@property
+	def z(self) -> float:
+		pass
+
+	@z.setter
+	def z(self, i: float) -> None:
+		pass
+
+
+#  Vector4 type
+class Vector4(Structure):
+	@property
+	def x(self) -> float:
+		pass
+
+	@x.setter
+	def x(self, i: float) -> None:
+		pass
+
+	@property
+	def y(self) -> float:
+		pass
+
+	@y.setter
+	def y(self, i: float) -> None:
+		pass
+
+	@property
+	def z(self) -> float:
+		pass
+
+	@z.setter
+	def z(self, i: float) -> None:
+		pass
+
+	@property
+	def w(self) -> float:
+		pass
+
+	@w.setter
+	def w(self, i: float) -> None:
+		pass
+
+
+#  Matrix type (OpenGL style 4x4 - right handed, column major)
+class Matrix(Structure):
+	@property
+	def m0(self) -> float:
+		pass
+
+	@m0.setter
+	def m0(self, i: float) -> None:
+		pass
+
+	@property
+	def m4(self) -> float:
+		pass
+
+	@m4.setter
+	def m4(self, i: float) -> None:
+		pass
+
+	@property
+	def m8(self) -> float:
+		pass
+
+	@m8.setter
+	def m8(self, i: float) -> None:
+		pass
+
+	@property
+	def m12(self) -> float:
+		pass
+
+	@m12.setter
+	def m12(self, i: float) -> None:
+		pass
+
+	@property
+	def m1(self) -> float:
+		pass
+
+	@m1.setter
+	def m1(self, i: float) -> None:
+		pass
+
+	@property
+	def m5(self) -> float:
+		pass
+
+	@m5.setter
+	def m5(self, i: float) -> None:
+		pass
+
+	@property
+	def m9(self) -> float:
+		pass
+
+	@m9.setter
+	def m9(self, i: float) -> None:
+		pass
+
+	@property
+	def m13(self) -> float:
+		pass
+
+	@m13.setter
+	def m13(self, i: float) -> None:
+		pass
+
+	@property
+	def m2(self) -> float:
+		pass
+
+	@m2.setter
+	def m2(self, i: float) -> None:
+		pass
+
+	@property
+	def m6(self) -> float:
+		pass
+
+	@m6.setter
+	def m6(self, i: float) -> None:
+		pass
+
+	@property
+	def m10(self) -> float:
+		pass
+
+	@m10.setter
+	def m10(self, i: float) -> None:
+		pass
+
+	@property
+	def m14(self) -> float:
+		pass
+
+	@m14.setter
+	def m14(self, i: float) -> None:
+		pass
+
+	@property
+	def m3(self) -> float:
+		pass
+
+	@m3.setter
+	def m3(self, i: float) -> None:
+		pass
+
+	@property
+	def m7(self) -> float:
+		pass
+
+	@m7.setter
+	def m7(self, i: float) -> None:
+		pass
+
+	@property
+	def m11(self) -> float:
+		pass
+
+	@m11.setter
+	def m11(self, i: float) -> None:
+		pass
+
+	@property
+	def m15(self) -> float:
+		pass
+
+	@m15.setter
+	def m15(self, i: float) -> None:
+		pass
+
+
+#  NOTE: Helper types to be used instead of array return types for *ToFloat functions
+class float3(Structure):
+	@property
+	def v(self) -> c_float * 3:
+		pass
+
+	@v.setter
+	def v(self, i: c_float * 3) -> None:
+		pass
+
+
+#  
+class float16(Structure):
+	@property
+	def v(self) -> c_float * 16:
+		pass
+
+	@v.setter
+	def v(self, i: c_float * 16) -> None:
+		pass
+
+
