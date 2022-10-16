@@ -3,7 +3,7 @@ from raypyc.structures import Color
 LIGHTGRAY: Color  # Light Gray
 GRAY: Color  # Gray
 DARKGRAY: Color  # Dark Gray
-YELLO: Color  # Yellow
+YELLOW: Color  # Yellow
 Gold: Color  # Gold
 Orange: Color  # Orange
 PINK: Color  # Pink

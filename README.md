@@ -19,7 +19,7 @@ python -m pip install raypyc
 ```
 
 ## Using raypyc 
-using raypyc is really simple, make a look at an example[^1]:
+using raypyc is really simple, take a look at an example:
 
 ```python
 """
@@ -79,7 +79,6 @@ def main():
 if __name__ == '__main__':
     main()
 ```
-[^1]the example use a main function to run, you don't have to use that if you don't want to...
 
 ## _raylib_ vs _raypyc_
 
