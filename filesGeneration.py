@@ -95,9 +95,6 @@ def indentString(string: str, indent_by: int) -> str:
 # remove the current enums/__init__.py and enums/__init__.pyi files and generated new ones
 def generate_enums_py_pyi_files():
     if Path(ENUMS_FOLDER_PATH / '__init__.py').exists():
-        os.remove(Path(ENUMS_FOLDER_PATH / '__init__.py'))
-        with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "x"):  # generate enums/__init__.py file => enum logic
-            pass
         with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from enum import IntEnum\n\n')
     else:
@@ -108,9 +105,6 @@ def generate_enums_py_pyi_files():
             structs_code_file_write.write('from enum import IntEnum\n\n')
 
     if Path(ENUMS_FOLDER_PATH / '__init__.pyi').exists():
-        os.remove(Path(ENUMS_FOLDER_PATH / '__init__.pyi'))
-        with open(Path(ENUMS_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => enum signature
-            pass
         with open(Path(ENUMS_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from enum import IntEnum\n\n')
     else:
@@ -144,11 +138,11 @@ def generate_enums_py_pyi_code(_raylib_api_enums):
 
 
 def generate_enum_signature_code(enum_data):
-    return f"#  {enum_data['description']}\nclass {enum_data['name']}(IntEnum):\n"
+    return f"class {enum_data['name']}(IntEnum):\n\t\"\"\"{enum_data['description']}\"\"\"\n"
 
 
 def generate_enum_signature_code_stub(enum_data):
-    return f"#  {enum_data['description']}\nclass {enum_data['name']}(IntEnum):\n"
+    return f"class {enum_data['name']}(IntEnum):\n\t\"\"\"{enum_data['description']}\"\"\"\n"
 
 
 def generate_enum_values_string_code(enum_data):
@@ -170,9 +164,6 @@ def generate_enum_values_string_code_stub(enum_data):
 # remove the current structures/__init__.py and structures/__init__.pyi files and generated new ones
 def generate_structs_py_pyi_files():
     if Path(STRUCTURES_FOLDER_PATH / '__init__.py').exists():
-        os.remove(Path(STRUCTURES_FOLDER_PATH / '__init__.py'))
-        with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "x"):  # generate __init__.py file => struct logic
-            pass
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from ctypes import *\n\n\n')
     else:
@@ -183,9 +174,6 @@ def generate_structs_py_pyi_files():
             structs_code_file_write.write('from ctypes import *\n\n\n')
 
     if Path(STRUCTURES_FOLDER_PATH / '__init__.pyi').exists():
-        os.remove(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'))
-        with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => struct signature
-            pass
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from ctypes import *\n\n\n')
     else:
@@ -247,11 +235,11 @@ def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
 
 
 def generate_struct_signature_code(struct_data):
-    return f"#  {struct_data['description']}\nclass {struct_data['name']}(Structure):\n"
+    return f"class {struct_data['name']}(Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
 
 
 def generate_struct_signature_code_stub(struct_data):
-    return f"#  {struct_data['description']}\nclass {struct_data['name']}(Structure):\n"
+    return f"class {struct_data['name']}(Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
 
 
 def generate_struct_fields_string_code(struct_data):
@@ -535,9 +523,6 @@ def generate_struct_setters_getters_code_stub(struct_data):
 # remove the current functions_code.pyi file and generated new one
 def generate_functions_code_pyi_file():
     if Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi').exists():
-        os.remove(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'))
-        with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => function signature
-            pass
         with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from raypyc.colors import *\n')
             structs_code_file_write.write('from raypyc.enums import *\n')
@@ -644,7 +629,7 @@ def generate_function_signature_code(function_data):
     function_return_type_pointer_level = function_data['returnType'].count("*")
     # function_return_type_is_array = function_data['returnType'].count("]") c functions shouldn't return an array
 
-    function_string = f"# {function_data['description']}\ndef {function_data['name']}("
+    function_string = f"def {function_data['name']}("
     if 'params' in function_data.keys():  # only return stuff
         for param in function_data['params']:
             function_param_type_sting = param['type']
@@ -682,16 +667,16 @@ def generate_function_signature_code(function_data):
     if function_return_type_pointer_level == 0 or (function_return_type_sting.replace(" ", "") in typesDictionaryCstringToPythonTypesString or function_return_type_sting.replace(" ", "").replace('const',
                                                                                                                                                                                                    '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value or in typesDictionaryCstringToCtypesString:
         if function_return_type_sting.replace(" ", "") in typesDictionaryCstringToPythonTypesString:
-            function_string += f"{typesDictionaryCstringToPythonTypesString[function_return_type_sting.replace(' ', '')]}:\n\tpass\n\n"
+            function_string += f"{typesDictionaryCstringToPythonTypesString[function_return_type_sting.replace(' ', '')]}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
         elif function_return_type_sting.replace(' ', '').replace('const', '') in typesDictionaryCstringToPythonTypesString:
-            function_string += f"{typesDictionaryCstringToPythonTypesString[function_return_type_sting.replace(' ', '').replace('const', '')]}:\n\tpass\n\n"
+            function_string += f"{typesDictionaryCstringToPythonTypesString[function_return_type_sting.replace(' ', '').replace('const', '')]}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
         else:  # probably type is struct
-            function_string += f"{function_return_type_sting.replace(' ', '').replace('const', '')}:\n\tpass\n\n"
+            function_string += f"{function_return_type_sting.replace(' ', '').replace('const', '')}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
     else:  # ctyps function wrapper
         function_return_type_processed_with_pointer_end = ""
         function_return_type_processed_with_pointer = function_return_type_sting.replace('const', '').replace(" ", "")
         if function_return_type_processed_with_pointer in typesDictionaryCstringToCtypesString:
-            function_string += f"{typesDictionaryCstringToCtypesString[function_return_type_processed_with_pointer]}:\n\tpass\n\n"
+            function_string += f"{typesDictionaryCstringToCtypesString[function_return_type_processed_with_pointer]}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
         else:
             function_return_type_processed = function_return_type_sting.replace('const', '').replace(" ", "").replace("*", "")
             function_return_type_processed_ctype = ""
@@ -703,7 +688,7 @@ def generate_function_signature_code(function_data):
                 function_return_type_processed_ctype = f"POINTER({function_return_type_processed_ctype})"
 
             function_return_type_processed_with_pointer_end = function_return_type_processed_ctype
-        function_string += f"{function_return_type_processed_with_pointer_end}:  # {function_data['description']}\n\tpass\n\n"
+        function_string += f"{function_return_type_processed_with_pointer_end}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
 
     return function_string
 

@@ -1,8 +1,8 @@
 from ctypes import *
 
 
-#  Vector2, 2 components
 class Vector2(Structure):
+	"""Vector2, 2 components"""
 	@property
 	def x(self) -> float:
 		pass
@@ -20,8 +20,8 @@ class Vector2(Structure):
 		pass
 
 
-#  Vector3, 3 components
 class Vector3(Structure):
+	"""Vector3, 3 components"""
 	@property
 	def x(self) -> float:
 		pass
@@ -47,8 +47,8 @@ class Vector3(Structure):
 		pass
 
 
-#  Vector4, 4 components
 class Vector4(Structure):
+	"""Vector4, 4 components"""
 	@property
 	def x(self) -> float:
 		pass
@@ -82,8 +82,8 @@ class Vector4(Structure):
 		pass
 
 
-#  Quaternion, 4 components (Vector4 alias)
 class Quaternion(Structure):
+	"""Quaternion, 4 components (Vector4 alias)"""
 	@property
 	def x(self) -> float:
 		pass
@@ -117,8 +117,8 @@ class Quaternion(Structure):
 		pass
 
 
-#  Matrix, 4x4 components, column major, OpenGL style, right handed
 class Matrix(Structure):
+	"""Matrix, 4x4 components, column major, OpenGL style, right handed"""
 	@property
 	def m0(self) -> float:
 		pass
@@ -248,8 +248,8 @@ class Matrix(Structure):
 		pass
 
 
-#  Color, 4 components, R8G8B8A8 (32bit)
 class Color(Structure):
+	"""Color, 4 components, R8G8B8A8 (32bit)"""
 	@property
 	def r(self) -> int:
 		pass
@@ -283,8 +283,8 @@ class Color(Structure):
 		pass
 
 
-#  Rectangle, 4 components
 class Rectangle(Structure):
+	"""Rectangle, 4 components"""
 	@property
 	def x(self) -> float:
 		pass
@@ -318,8 +318,8 @@ class Rectangle(Structure):
 		pass
 
 
-#  Image, pixel data stored in CPU memory (RAM)
 class Image(Structure):
+	"""Image, pixel data stored in CPU memory (RAM)"""
 	@property
 	def data(self) -> int:
 		pass
@@ -361,8 +361,8 @@ class Image(Structure):
 		pass
 
 
-#  Texture, tex data stored in GPU memory (VRAM)
 class Texture(Structure):
+	"""Texture, tex data stored in GPU memory (VRAM)"""
 	@property
 	def id(self) -> int:
 		pass
@@ -404,8 +404,8 @@ class Texture(Structure):
 		pass
 
 
-#  Texture2D, same as Texture
 class Texture2D(Structure):
+	"""Texture2D, same as Texture"""
 	@property
 	def id(self) -> int:
 		pass
@@ -447,8 +447,8 @@ class Texture2D(Structure):
 		pass
 
 
-#  TextureCubemap, same as Texture
 class TextureCubemap(Structure):
+	"""TextureCubemap, same as Texture"""
 	@property
 	def id(self) -> int:
 		pass
@@ -490,8 +490,8 @@ class TextureCubemap(Structure):
 		pass
 
 
-#  RenderTexture, fbo for texture rendering
 class RenderTexture(Structure):
+	"""RenderTexture, fbo for texture rendering"""
 	@property
 	def id(self) -> int:
 		pass
@@ -517,8 +517,8 @@ class RenderTexture(Structure):
 		pass
 
 
-#  RenderTexture2D, same as RenderTexture
 class RenderTexture2D(Structure):
+	"""RenderTexture2D, same as RenderTexture"""
 	@property
 	def id(self) -> int:
 		pass
@@ -544,8 +544,8 @@ class RenderTexture2D(Structure):
 		pass
 
 
-#  NPatchInfo, n-patch layout info
 class NPatchInfo(Structure):
+	"""NPatchInfo, n-patch layout info"""
 	@property
 	def source(self) -> Rectangle:
 		pass
@@ -595,8 +595,8 @@ class NPatchInfo(Structure):
 		pass
 
 
-#  GlyphInfo, font characters glyphs info
 class GlyphInfo(Structure):
+	"""GlyphInfo, font characters glyphs info"""
 	@property
 	def value(self) -> int:
 		pass
@@ -638,8 +638,8 @@ class GlyphInfo(Structure):
 		pass
 
 
-#  Font, font texture and GlyphInfo array data
 class Font(Structure):
+	"""Font, font texture and GlyphInfo array data"""
 	@property
 	def baseSize(self) -> int:
 		pass
@@ -689,8 +689,8 @@ class Font(Structure):
 		pass
 
 
-#  Camera, defines position/orientation in 3d space
 class Camera3D(Structure):
+	"""Camera, defines position/orientation in 3d space"""
 	@property
 	def position(self) -> Vector3:
 		pass
@@ -732,8 +732,8 @@ class Camera3D(Structure):
 		pass
 
 
-#  Camera type fallback, defaults to Camera3D
 class Camera(Structure):
+	"""Camera type fallback, defaults to Camera3D"""
 	@property
 	def position(self) -> Vector3:
 		pass
@@ -775,8 +775,8 @@ class Camera(Structure):
 		pass
 
 
-#  Camera2D, defines position/orientation in 2d space
 class Camera2D(Structure):
+	"""Camera2D, defines position/orientation in 2d space"""
 	@property
 	def offset(self) -> Vector2:
 		pass
@@ -810,8 +810,8 @@ class Camera2D(Structure):
 		pass
 
 
-#  Mesh, vertex data and vao/vbo
 class Mesh(Structure):
+	"""Mesh, vertex data and vao/vbo"""
 	@property
 	def vertexCount(self) -> int:
 		pass
@@ -933,8 +933,8 @@ class Mesh(Structure):
 		pass
 
 
-#  Shader
 class Shader(Structure):
+	"""Shader"""
 	@property
 	def id(self) -> int:
 		pass
@@ -952,8 +952,8 @@ class Shader(Structure):
 		pass
 
 
-#  MaterialMap
 class MaterialMap(Structure):
+	"""MaterialMap"""
 	@property
 	def texture(self) -> Texture2D:
 		pass
@@ -979,8 +979,8 @@ class MaterialMap(Structure):
 		pass
 
 
-#  Material, includes shader and maps
 class Material(Structure):
+	"""Material, includes shader and maps"""
 	@property
 	def shader(self) -> Shader:
 		pass
@@ -1006,8 +1006,8 @@ class Material(Structure):
 		pass
 
 
-#  Transform, vectex transformation data
 class Transform(Structure):
+	"""Transform, vectex transformation data"""
 	@property
 	def translation(self) -> Vector3:
 		pass
@@ -1033,8 +1033,8 @@ class Transform(Structure):
 		pass
 
 
-#  Bone, skeletal animation bone
 class BoneInfo(Structure):
+	"""Bone, skeletal animation bone"""
 	@property
 	def name(self) -> c_char * 32:
 		pass
@@ -1052,8 +1052,8 @@ class BoneInfo(Structure):
 		pass
 
 
-#  Model, meshes, materials and animation data
 class Model(Structure):
+	"""Model, meshes, materials and animation data"""
 	@property
 	def transform(self) -> Matrix:
 		pass
@@ -1127,8 +1127,8 @@ class Model(Structure):
 		pass
 
 
-#  ModelAnimation
 class ModelAnimation(Structure):
+	"""ModelAnimation"""
 	@property
 	def boneCount(self) -> int:
 		pass
@@ -1162,8 +1162,8 @@ class ModelAnimation(Structure):
 		pass
 
 
-#  Ray, ray for raycasting
 class Ray(Structure):
+	"""Ray, ray for raycasting"""
 	@property
 	def position(self) -> Vector3:
 		pass
@@ -1181,8 +1181,8 @@ class Ray(Structure):
 		pass
 
 
-#  RayCollision, ray hit information
 class RayCollision(Structure):
+	"""RayCollision, ray hit information"""
 	@property
 	def hit(self) -> bool:
 		pass
@@ -1216,8 +1216,8 @@ class RayCollision(Structure):
 		pass
 
 
-#  BoundingBox
 class BoundingBox(Structure):
+	"""BoundingBox"""
 	@property
 	def min(self) -> Vector3:
 		pass
@@ -1235,8 +1235,8 @@ class BoundingBox(Structure):
 		pass
 
 
-#  VrDeviceInfo, Head-Mounted-Display device parameters
 class VrDeviceInfo(Structure):
+	"""VrDeviceInfo, Head-Mounted-Display device parameters"""
 	@property
 	def hResolution(self) -> int:
 		pass
@@ -1318,8 +1318,8 @@ class VrDeviceInfo(Structure):
 		pass
 
 
-#  VrStereoConfig, VR stereo rendering configuration for simulator
 class VrStereoConfig(Structure):
+	"""VrStereoConfig, VR stereo rendering configuration for simulator"""
 	@property
 	def projection(self) -> Matrix * 2:
 		pass
@@ -1385,8 +1385,8 @@ class VrStereoConfig(Structure):
 		pass
 
 
-#  File path list
 class FilePathList(Structure):
+	"""File path list"""
 	@property
 	def capacity(self) -> int:
 		pass
@@ -1412,8 +1412,8 @@ class FilePathList(Structure):
 		pass
 
 
-#  Vector2 type
 class Vector2(Structure):
+	"""Vector2 type"""
 	@property
 	def x(self) -> float:
 		pass
@@ -1431,8 +1431,8 @@ class Vector2(Structure):
 		pass
 
 
-#  Vector3 type
 class Vector3(Structure):
+	"""Vector3 type"""
 	@property
 	def x(self) -> float:
 		pass
@@ -1458,8 +1458,8 @@ class Vector3(Structure):
 		pass
 
 
-#  Vector4 type
 class Vector4(Structure):
+	"""Vector4 type"""
 	@property
 	def x(self) -> float:
 		pass
@@ -1493,8 +1493,8 @@ class Vector4(Structure):
 		pass
 
 
-#  Matrix type (OpenGL style 4x4 - right handed, column major)
 class Matrix(Structure):
+	"""Matrix type (OpenGL style 4x4 - right handed, column major)"""
 	@property
 	def m0(self) -> float:
 		pass
@@ -1624,8 +1624,8 @@ class Matrix(Structure):
 		pass
 
 
-#  NOTE: Helper types to be used instead of array return types for *ToFloat functions
 class float3(Structure):
+	"""NOTE: Helper types to be used instead of array return types for *ToFloat functions"""
 	@property
 	def v(self) -> c_float * 3:
 		pass
@@ -1635,8 +1635,8 @@ class float3(Structure):
 		pass
 
 
-#  
 class float16(Structure):
+	""""""
 	@property
 	def v(self) -> c_float * 16:
 		pass

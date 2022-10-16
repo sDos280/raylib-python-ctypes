@@ -1,8 +1,8 @@
 from ctypes import *
 
 
-#  Vector2, 2 components
 class Vector2(Structure):
+	"""Vector2, 2 components"""
 	_fields_ = [
 		('x', c_float),  # Vector x component
 		('y', c_float)  # Vector y component
@@ -25,8 +25,8 @@ class Vector2(Structure):
 		self.y = i
 
 
-#  Vector3, 3 components
 class Vector3(Structure):
+	"""Vector3, 3 components"""
 	_fields_ = [
 		('x', c_float),  # Vector x component
 		('y', c_float),  # Vector y component
@@ -58,8 +58,8 @@ class Vector3(Structure):
 		self.z = i
 
 
-#  Vector4, 4 components
 class Vector4(Structure):
+	"""Vector4, 4 components"""
 	_fields_ = [
 		('x', c_float),  # Vector x component
 		('y', c_float),  # Vector y component
@@ -100,8 +100,8 @@ class Vector4(Structure):
 		self.w = i
 
 
-#  Quaternion, 4 components (Vector4 alias)
 class Quaternion(Structure):
+	"""Quaternion, 4 components (Vector4 alias)"""
 	_fields_ = [
 		('x', c_float),  # Vector x component
 		('y', c_float),  # Vector y component
@@ -142,8 +142,8 @@ class Quaternion(Structure):
 		self.w = i
 
 
-#  Matrix, 4x4 components, column major, OpenGL style, right handed
 class Matrix(Structure):
+	"""Matrix, 4x4 components, column major, OpenGL style, right handed"""
 	_fields_ = [
 		('m0', c_float),  # Matrix first row (4 components)
 		('m4', c_float),  # Matrix first row (4 components)
@@ -292,8 +292,8 @@ class Matrix(Structure):
 		self.m15 = i
 
 
-#  Color, 4 components, R8G8B8A8 (32bit)
 class Color(Structure):
+	"""Color, 4 components, R8G8B8A8 (32bit)"""
 	_fields_ = [
 		('r', c_ubyte),  # Color red value
 		('g', c_ubyte),  # Color green value
@@ -334,8 +334,8 @@ class Color(Structure):
 		self.a = i
 
 
-#  Rectangle, 4 components
 class Rectangle(Structure):
+	"""Rectangle, 4 components"""
 	_fields_ = [
 		('x', c_float),  # Rectangle top-left corner position x
 		('y', c_float),  # Rectangle top-left corner position y
@@ -376,8 +376,8 @@ class Rectangle(Structure):
 		self.height = i
 
 
-#  Image, pixel data stored in CPU memory (RAM)
 class Image(Structure):
+	"""Image, pixel data stored in CPU memory (RAM)"""
 	_fields_ = [
 		('data', c_void_p),  # Image raw data
 		('width', c_int),  # Image base width
@@ -427,8 +427,8 @@ class Image(Structure):
 		self.format = i
 
 
-#  Texture, tex data stored in GPU memory (VRAM)
 class Texture(Structure):
+	"""Texture, tex data stored in GPU memory (VRAM)"""
 	_fields_ = [
 		('id', c_uint),  # OpenGL texture id
 		('width', c_int),  # Texture base width
@@ -478,8 +478,8 @@ class Texture(Structure):
 		self.format = i
 
 
-#  Texture2D, same as Texture
 class Texture2D(Structure):
+	"""Texture2D, same as Texture"""
 	_fields_ = [
 		('id', c_uint),  # OpenGL texture id
 		('width', c_int),  # Texture base width
@@ -529,8 +529,8 @@ class Texture2D(Structure):
 		self.format = i
 
 
-#  TextureCubemap, same as Texture
 class TextureCubemap(Structure):
+	"""TextureCubemap, same as Texture"""
 	_fields_ = [
 		('id', c_uint),  # OpenGL texture id
 		('width', c_int),  # Texture base width
@@ -580,8 +580,8 @@ class TextureCubemap(Structure):
 		self.format = i
 
 
-#  RenderTexture, fbo for texture rendering
 class RenderTexture(Structure):
+	"""RenderTexture, fbo for texture rendering"""
 	_fields_ = [
 		('id', c_uint),  # OpenGL framebuffer object id
 		('texture', Texture),  # Color buffer attachment texture
@@ -613,8 +613,8 @@ class RenderTexture(Structure):
 		self.depth = i
 
 
-#  RenderTexture2D, same as RenderTexture
 class RenderTexture2D(Structure):
+	"""RenderTexture2D, same as RenderTexture"""
 	_fields_ = [
 		('id', c_uint),  # OpenGL framebuffer object id
 		('texture', Texture),  # Color buffer attachment texture
@@ -646,8 +646,8 @@ class RenderTexture2D(Structure):
 		self.depth = i
 
 
-#  NPatchInfo, n-patch layout info
 class NPatchInfo(Structure):
+	"""NPatchInfo, n-patch layout info"""
 	_fields_ = [
 		('source', Rectangle),  # Texture source rectangle
 		('left', c_int),  # Left border offset
@@ -706,8 +706,8 @@ class NPatchInfo(Structure):
 		self.layout = i
 
 
-#  GlyphInfo, font characters glyphs info
 class GlyphInfo(Structure):
+	"""GlyphInfo, font characters glyphs info"""
 	_fields_ = [
 		('value', c_int),  # Character value (Unicode)
 		('offsetX', c_int),  # Character offset X when drawing
@@ -757,8 +757,8 @@ class GlyphInfo(Structure):
 		self.image = i
 
 
-#  Font, font texture and GlyphInfo array data
 class Font(Structure):
+	"""Font, font texture and GlyphInfo array data"""
 	_fields_ = [
 		('baseSize', c_int),  # Base size (default chars height)
 		('glyphCount', c_int),  # Number of glyph characters
@@ -817,8 +817,8 @@ class Font(Structure):
 		self.glyphs = i
 
 
-#  Camera, defines position/orientation in 3d space
 class Camera3D(Structure):
+	"""Camera, defines position/orientation in 3d space"""
 	_fields_ = [
 		('position', Vector3),  # Camera position
 		('target', Vector3),  # Camera target it looks-at
@@ -868,8 +868,8 @@ class Camera3D(Structure):
 		self.projection = i
 
 
-#  Camera type fallback, defaults to Camera3D
 class Camera(Structure):
+	"""Camera type fallback, defaults to Camera3D"""
 	_fields_ = [
 		('position', Vector3),  # Camera position
 		('target', Vector3),  # Camera target it looks-at
@@ -919,8 +919,8 @@ class Camera(Structure):
 		self.projection = i
 
 
-#  Camera2D, defines position/orientation in 2d space
 class Camera2D(Structure):
+	"""Camera2D, defines position/orientation in 2d space"""
 	_fields_ = [
 		('offset', Vector2),  # Camera offset (displacement from target)
 		('target', Vector2),  # Camera target (rotation and zoom origin)
@@ -961,8 +961,8 @@ class Camera2D(Structure):
 		self.zoom = i
 
 
-#  Mesh, vertex data and vao/vbo
 class Mesh(Structure):
+	"""Mesh, vertex data and vao/vbo"""
 	_fields_ = [
 		('vertexCount', c_int),  # Number of vertices stored in arrays
 		('triangleCount', c_int),  # Number of triangles stored (indexed or not)
@@ -1102,8 +1102,8 @@ class Mesh(Structure):
 		self.vboId = i
 
 
-#  Shader
 class Shader(Structure):
+	"""Shader"""
 	_fields_ = [
 		('id', c_uint),  # Shader program id
 		('locs', POINTER(c_int))  # Shader locations array (RL_MAX_SHADER_LOCATIONS)
@@ -1126,8 +1126,8 @@ class Shader(Structure):
 		self.locs = i
 
 
-#  MaterialMap
 class MaterialMap(Structure):
+	"""MaterialMap"""
 	_fields_ = [
 		('texture', Texture2D),  # Material map texture
 		('color', Color),  # Material map color
@@ -1159,8 +1159,8 @@ class MaterialMap(Structure):
 		self.value = i
 
 
-#  Material, includes shader and maps
 class Material(Structure):
+	"""Material, includes shader and maps"""
 	_fields_ = [
 		('shader', Shader),  # Material shader
 		('maps', POINTER(MaterialMap)),  # Material maps array (MAX_MATERIAL_MAPS)
@@ -1192,8 +1192,8 @@ class Material(Structure):
 		self.params = i
 
 
-#  Transform, vectex transformation data
 class Transform(Structure):
+	"""Transform, vectex transformation data"""
 	_fields_ = [
 		('translation', Vector3),  # Translation
 		('rotation', Quaternion),  # Rotation
@@ -1225,8 +1225,8 @@ class Transform(Structure):
 		self.scale = i
 
 
-#  Bone, skeletal animation bone
 class BoneInfo(Structure):
+	"""Bone, skeletal animation bone"""
 	_fields_ = [
 		('name', c_char*32),  # Bone name
 		('parent', c_int)  # Bone parent
@@ -1249,8 +1249,8 @@ class BoneInfo(Structure):
 		self.parent = i
 
 
-#  Model, meshes, materials and animation data
 class Model(Structure):
+	"""Model, meshes, materials and animation data"""
 	_fields_ = [
 		('transform', Matrix),  # Local transform matrix
 		('meshCount', c_int),  # Number of meshes
@@ -1336,8 +1336,8 @@ class Model(Structure):
 		self.bindPose = i
 
 
-#  ModelAnimation
 class ModelAnimation(Structure):
+	"""ModelAnimation"""
 	_fields_ = [
 		('boneCount', c_int),  # Number of bones
 		('frameCount', c_int),  # Number of animation frames
@@ -1378,8 +1378,8 @@ class ModelAnimation(Structure):
 		self.framePoses = i
 
 
-#  Ray, ray for raycasting
 class Ray(Structure):
+	"""Ray, ray for raycasting"""
 	_fields_ = [
 		('position', Vector3),  # Ray position (origin)
 		('direction', Vector3)  # Ray direction
@@ -1402,8 +1402,8 @@ class Ray(Structure):
 		self.direction = i
 
 
-#  RayCollision, ray hit information
 class RayCollision(Structure):
+	"""RayCollision, ray hit information"""
 	_fields_ = [
 		('hit', c_bool),  # Did the ray hit something?
 		('distance', c_float),  # Distance to nearest hit
@@ -1444,8 +1444,8 @@ class RayCollision(Structure):
 		self.normal = i
 
 
-#  BoundingBox
 class BoundingBox(Structure):
+	"""BoundingBox"""
 	_fields_ = [
 		('min', Vector3),  # Minimum vertex box-corner
 		('max', Vector3)  # Maximum vertex box-corner
@@ -1468,8 +1468,8 @@ class BoundingBox(Structure):
 		self.max = i
 
 
-#  VrDeviceInfo, Head-Mounted-Display device parameters
 class VrDeviceInfo(Structure):
+	"""VrDeviceInfo, Head-Mounted-Display device parameters"""
 	_fields_ = [
 		('hResolution', c_int),  # Horizontal resolution in pixels
 		('vResolution', c_int),  # Vertical resolution in pixels
@@ -1564,8 +1564,8 @@ class VrDeviceInfo(Structure):
 		self.chromaAbCorrection = i
 
 
-#  VrStereoConfig, VR stereo rendering configuration for simulator
 class VrStereoConfig(Structure):
+	"""VrStereoConfig, VR stereo rendering configuration for simulator"""
 	_fields_ = [
 		('projection', Matrix*2),  # VR projection matrices (per eye)
 		('viewOffset', Matrix*2),  # VR view offset matrices (per eye)
@@ -1642,8 +1642,8 @@ class VrStereoConfig(Structure):
 		self.scaleIn = i
 
 
-#  File path list
 class FilePathList(Structure):
+	"""File path list"""
 	_fields_ = [
 		('capacity', c_uint),  # Filepaths max entries
 		('count', c_uint),  # Filepaths entries count
@@ -1675,8 +1675,8 @@ class FilePathList(Structure):
 		self.paths = i
 
 
-#  Vector2 type
 class Vector2(Structure):
+	"""Vector2 type"""
 	_fields_ = [
 		('x', c_float),  # 
 		('y', c_float)  # 
@@ -1699,8 +1699,8 @@ class Vector2(Structure):
 		self.y = i
 
 
-#  Vector3 type
 class Vector3(Structure):
+	"""Vector3 type"""
 	_fields_ = [
 		('x', c_float),  # 
 		('y', c_float),  # 
@@ -1732,8 +1732,8 @@ class Vector3(Structure):
 		self.z = i
 
 
-#  Vector4 type
 class Vector4(Structure):
+	"""Vector4 type"""
 	_fields_ = [
 		('x', c_float),  # 
 		('y', c_float),  # 
@@ -1774,8 +1774,8 @@ class Vector4(Structure):
 		self.w = i
 
 
-#  Matrix type (OpenGL style 4x4 - right handed, column major)
 class Matrix(Structure):
+	"""Matrix type (OpenGL style 4x4 - right handed, column major)"""
 	_fields_ = [
 		('m0', c_float),  # Matrix first row (4 components)
 		('m4', c_float),  # Matrix first row (4 components)
@@ -1924,8 +1924,8 @@ class Matrix(Structure):
 		self.m15 = i
 
 
-#  NOTE: Helper types to be used instead of array return types for *ToFloat functions
 class float3(Structure):
+	"""NOTE: Helper types to be used instead of array return types for *ToFloat functions"""
 	_fields_ = [
 		('v', c_float*3)  # 
 	]
@@ -1939,8 +1939,8 @@ class float3(Structure):
 		self.v = i
 
 
-#  
 class float16(Structure):
+	""""""
 	_fields_ = [
 		('v', c_float*16)  # 
 	]

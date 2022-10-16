@@ -1,7 +1,7 @@
 from enum import IntEnum
 
-#  System/Window config flags
 class ConfigFlags(IntEnum):
+	"""System/Window config flags"""
 	FLAG_VSYNC_HINT: int  # Set to try enabling V-Sync on GPU
 	FLAG_FULLSCREEN_MODE: int  # Set to run program in fullscreen
 	FLAG_WINDOW_RESIZABLE: int  # Set to allow resizable window
@@ -19,8 +19,8 @@ class ConfigFlags(IntEnum):
 	FLAG_INTERLACED_HINT: int  # Set to try enabling interlaced video format (for V3D)
 
 
-#  Trace log level
 class TraceLogLevel(IntEnum):
+	"""Trace log level"""
 	LOG_ALL: int  # Display all logs
 	LOG_TRACE: int  # Trace logging, intended for internal use only
 	LOG_DEBUG: int  # Debug logging, used for internal debugging, it should be disabled on release builds
@@ -31,8 +31,8 @@ class TraceLogLevel(IntEnum):
 	LOG_NONE: int  # Disable logging
 
 
-#  Keyboard keys (US keyboard layout)
 class KeyboardKey(IntEnum):
+	"""Keyboard keys (US keyboard layout)"""
 	KEY_NULL: int  # Key: NULL, used for no key pressed
 	KEY_APOSTROPHE: int  # Key: '
 	KEY_COMMA: int  # Key: ,
@@ -145,8 +145,8 @@ class KeyboardKey(IntEnum):
 	KEY_VOLUME_DOWN: int  # Key: Android volume down button
 
 
-#  Mouse buttons
 class MouseButton(IntEnum):
+	"""Mouse buttons"""
 	MOUSE_BUTTON_LEFT: int  # Mouse button left
 	MOUSE_BUTTON_RIGHT: int  # Mouse button right
 	MOUSE_BUTTON_MIDDLE: int  # Mouse button middle (pressed wheel)
@@ -156,8 +156,8 @@ class MouseButton(IntEnum):
 	MOUSE_BUTTON_BACK: int  # Mouse button back (advanced mouse device)
 
 
-#  Mouse cursor
 class MouseCursor(IntEnum):
+	"""Mouse cursor"""
 	MOUSE_CURSOR_DEFAULT: int  # Default pointer shape
 	MOUSE_CURSOR_ARROW: int  # Arrow shape
 	MOUSE_CURSOR_IBEAM: int  # Text writing cursor shape
@@ -171,8 +171,8 @@ class MouseCursor(IntEnum):
 	MOUSE_CURSOR_NOT_ALLOWED: int  # The operation-not-allowed shape
 
 
-#  Gamepad buttons
 class GamepadButton(IntEnum):
+	"""Gamepad buttons"""
 	GAMEPAD_BUTTON_UNKNOWN: int  # Unknown button, just for error checking
 	GAMEPAD_BUTTON_LEFT_FACE_UP: int  # Gamepad left DPAD up button
 	GAMEPAD_BUTTON_LEFT_FACE_RIGHT: int  # Gamepad left DPAD right button
@@ -193,8 +193,8 @@ class GamepadButton(IntEnum):
 	GAMEPAD_BUTTON_RIGHT_THUMB: int  # Gamepad joystick pressed button right
 
 
-#  Gamepad axis
 class GamepadAxis(IntEnum):
+	"""Gamepad axis"""
 	GAMEPAD_AXIS_LEFT_X: int  # Gamepad left stick X axis
 	GAMEPAD_AXIS_LEFT_Y: int  # Gamepad left stick Y axis
 	GAMEPAD_AXIS_RIGHT_X: int  # Gamepad right stick X axis
@@ -203,8 +203,8 @@ class GamepadAxis(IntEnum):
 	GAMEPAD_AXIS_RIGHT_TRIGGER: int  # Gamepad back trigger right, pressure level: [1..-1]
 
 
-#  Material map index
 class MaterialMapIndex(IntEnum):
+	"""Material map index"""
 	MATERIAL_MAP_ALBEDO: int  # Albedo material (same as: MATERIAL_MAP_DIFFUSE)
 	MATERIAL_MAP_METALNESS: int  # Metalness material (same as: MATERIAL_MAP_SPECULAR)
 	MATERIAL_MAP_NORMAL: int  # Normal material
@@ -218,8 +218,8 @@ class MaterialMapIndex(IntEnum):
 	MATERIAL_MAP_BRDF: int  # Brdf material
 
 
-#  Shader location index
 class ShaderLocationIndex(IntEnum):
+	"""Shader location index"""
 	SHADER_LOC_VERTEX_POSITION: int  # Shader location: vertex attribute: position
 	SHADER_LOC_VERTEX_TEXCOORD01: int  # Shader location: vertex attribute: texcoord01
 	SHADER_LOC_VERTEX_TEXCOORD02: int  # Shader location: vertex attribute: texcoord02
@@ -248,8 +248,8 @@ class ShaderLocationIndex(IntEnum):
 	SHADER_LOC_MAP_BRDF: int  # Shader location: sampler2d texture: brdf
 
 
-#  Shader uniform data type
 class ShaderUniformDataType(IntEnum):
+	"""Shader uniform data type"""
 	SHADER_UNIFORM_FLOAT: int  # Shader uniform type: float
 	SHADER_UNIFORM_VEC2: int  # Shader uniform type: vec2 (2 float)
 	SHADER_UNIFORM_VEC3: int  # Shader uniform type: vec3 (3 float)
@@ -261,16 +261,16 @@ class ShaderUniformDataType(IntEnum):
 	SHADER_UNIFORM_SAMPLER2D: int  # Shader uniform type: sampler2d
 
 
-#  Shader attribute data types
 class ShaderAttributeDataType(IntEnum):
+	"""Shader attribute data types"""
 	SHADER_ATTRIB_FLOAT: int  # Shader attribute type: float
 	SHADER_ATTRIB_VEC2: int  # Shader attribute type: vec2 (2 float)
 	SHADER_ATTRIB_VEC3: int  # Shader attribute type: vec3 (3 float)
 	SHADER_ATTRIB_VEC4: int  # Shader attribute type: vec4 (4 float)
 
 
-#  Pixel formats
 class PixelFormat(IntEnum):
+	"""Pixel formats"""
 	PIXELFORMAT_UNCOMPRESSED_GRAYSCALE: int  # 8 bit per pixel (no alpha)
 	PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA: int  # 8*2 bpp (2 channels)
 	PIXELFORMAT_UNCOMPRESSED_R5G6B5: int  # 16 bpp
@@ -294,8 +294,8 @@ class PixelFormat(IntEnum):
 	PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA: int  # 2 bpp
 
 
-#  Texture parameters: filter mode
 class TextureFilter(IntEnum):
+	"""Texture parameters: filter mode"""
 	TEXTURE_FILTER_POINT: int  # No filter, just pixel approximation
 	TEXTURE_FILTER_BILINEAR: int  # Linear filtering
 	TEXTURE_FILTER_TRILINEAR: int  # Trilinear filtering (linear with mipmaps)
@@ -304,16 +304,16 @@ class TextureFilter(IntEnum):
 	TEXTURE_FILTER_ANISOTROPIC_16X: int  # Anisotropic filtering 16x
 
 
-#  Texture parameters: wrap mode
 class TextureWrap(IntEnum):
+	"""Texture parameters: wrap mode"""
 	TEXTURE_WRAP_REPEAT: int  # Repeats texture in tiled mode
 	TEXTURE_WRAP_CLAMP: int  # Clamps texture to edge pixel in tiled mode
 	TEXTURE_WRAP_MIRROR_REPEAT: int  # Mirrors and repeats the texture in tiled mode
 	TEXTURE_WRAP_MIRROR_CLAMP: int  # Mirrors and clamps to border the texture in tiled mode
 
 
-#  Cubemap layouts
 class CubemapLayout(IntEnum):
+	"""Cubemap layouts"""
 	CUBEMAP_LAYOUT_AUTO_DETECT: int  # Automatically detect layout type
 	CUBEMAP_LAYOUT_LINE_VERTICAL: int  # Layout is defined by a vertical line with faces
 	CUBEMAP_LAYOUT_LINE_HORIZONTAL: int  # Layout is defined by an horizontal line with faces
@@ -322,15 +322,15 @@ class CubemapLayout(IntEnum):
 	CUBEMAP_LAYOUT_PANORAMA: int  # Layout is defined by a panorama image (equirectangular map)
 
 
-#  Font type, defines generation method
 class FontType(IntEnum):
+	"""Font type, defines generation method"""
 	FONT_DEFAULT: int  # Default font generation, anti-aliased
 	FONT_BITMAP: int  # Bitmap font generation, no anti-aliasing
 	FONT_SDF: int  # SDF font generation, requires external shader
 
 
-#  Color blending modes (pre-defined)
 class BlendMode(IntEnum):
+	"""Color blending modes (pre-defined)"""
 	BLEND_ALPHA: int  # Blend textures considering alpha (default)
 	BLEND_ADDITIVE: int  # Blend textures adding colors
 	BLEND_MULTIPLIED: int  # Blend textures multiplying colors
@@ -340,8 +340,8 @@ class BlendMode(IntEnum):
 	BLEND_CUSTOM: int  # Blend textures using custom src/dst factors (use rlSetBlendMode())
 
 
-#  Gesture
 class Gesture(IntEnum):
+	"""Gesture"""
 	GESTURE_NONE: int  # No gesture
 	GESTURE_TAP: int  # Tap gesture
 	GESTURE_DOUBLETAP: int  # Double tap gesture
@@ -355,8 +355,8 @@ class Gesture(IntEnum):
 	GESTURE_PINCH_OUT: int  # Pinch out gesture
 
 
-#  Camera system modes
 class CameraMode(IntEnum):
+	"""Camera system modes"""
 	CAMERA_CUSTOM: int  # Custom camera
 	CAMERA_FREE: int  # Free camera
 	CAMERA_ORBITAL: int  # Orbital camera
@@ -364,14 +364,14 @@ class CameraMode(IntEnum):
 	CAMERA_THIRD_PERSON: int  # Third person camera
 
 
-#  Camera projection
 class CameraProjection(IntEnum):
+	"""Camera projection"""
 	CAMERA_PERSPECTIVE: int  # Perspective projection
 	CAMERA_ORTHOGRAPHIC: int  # Orthographic projection
 
 
-#  N-patch layout
 class NPatchLayout(IntEnum):
+	"""N-patch layout"""
 	NPATCH_NINE_PATCH: int  # Npatch layout: 3x3 tiles
 	NPATCH_THREE_PATCH_VERTICAL: int  # Npatch layout: 1x3 tiles
 	NPATCH_THREE_PATCH_HORIZONTAL: int  # Npatch layout: 3x1 tiles
