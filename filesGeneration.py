@@ -74,6 +74,82 @@ wrapped_functions_names_pyi = []
 
 # **all the functions raypyc use are here**
 
+
+# convert c type string to ctype type sting
+def convert_c_type_string_to_ctype_type_sting(c_type_string: str):
+    CstringToCtypesString = {
+        'bool': 'c_bool',  # C type: _Bool  Python type: bool (1)
+        'char': 'c_char',  # C type: char  Python type: 1-character bytes object
+        'wchar_t': 'c_wchar',  # C type: wchar_t  Python type: 1-character string
+        # 'char': c_byte,  # C type: char  Python type: int
+        'unsignedchar': 'c_ubyte',  # C type: unsigned char  Python type: int
+        'short': 'c_short',  # C type: short  Python type: int
+        'unsignedshort': 'c_ushort',  # C type: unsigned short  Python type: int
+        'int': 'c_int',  # C type: int  Python type: int
+        'unsignedint': 'c_uint',  # C type: unsigned int  Python type: int
+        'long': 'c_long',  # C type: long  Python type: int
+        'unsignedlong': 'c_ulong',  # C type: unsigned long  Python type: int
+        'uint64': 'c_longlong',  # C type: __int64 or long-long  Python type: int
+        'unsigneduint64': 'c_ulonglong',  # C type: unsigned __int64 or unsigned long-long  Python type: int
+        'size_t': 'c_size_t',  # C type: unsigned size_t  Python type: int
+        'ssize_t': 'c_ssize_t',  # C type: ssize_t or Py_ssize_t  Python type: int
+        'float': 'c_float',  # C type: float  Python type: float
+        'double': 'c_double',  # C type: double  Python type: float
+        'longdouble': 'c_longdouble',  # C type: long double  Python type: float
+        'char*': 'c_char_p',  # C type: char* (NUL terminated)  Python type: bytes object or None
+        'wchar_t*': 'c_wchar_p',  # C type: wchar_t* (NUL terminated)  Python type: string object or None
+        'void*': 'c_void_p',  # C type: wchar_t* (NUL terminated)  Python type: int or None
+        'void': 'None',  # C type: void  Python type: None
+    }
+
+    c_type_string = c_type_string.replace(' ', '').replace('const', '') # remove spaces, and "const" because there isn't really a const type in python...
+    is_array = ']' in c_type_string
+    pointer_level = c_type_string.count("*")
+
+    if is_array and pointer_level > 0:  # array of pointers to structures
+        type_of_array = c_type_string.split('[')[0]
+        array_size = c_type_string.split('[')[1][:-1]
+        type_of_array_without_pointers = type_of_array.replace('*', '')
+        type_of_array_end = ""
+        if type_of_array in CstringToCtypesString:  # basic type pointer (int*, char*, float*, ...)
+            return f"{CstringToCtypesString[type_of_array]} * {array_size}"
+        if type_of_array_without_pointers in CstringToCtypesString:  # basic type pointer(probably double+ pointer level) (int**, char**, float**, ...)
+            type_of_array_end = CstringToCtypesString[type_of_array_without_pointers]
+            for i in range(pointer_level):
+                type_of_array_end = f"POINTER({type_of_array_end})"
+            return f"{type_of_array_end} * {array_size}"
+        else:  # a struct array pointer level 1+ or just a pointer level 1
+            type_of_array_end = type_of_array_without_pointers
+            for i in range(pointer_level):
+                type_of_array_end = f"POINTER({type_of_array_end})"
+            return f"{type_of_array_end} * {array_size}"
+    elif is_array:
+        type_of_array = c_type_string.split('[')[0]
+        array_size = c_type_string.split('[')[1][:-1]
+        if type_of_array in CstringToCtypesString:  # basic type array (int, char, float, ...)
+            return f"{CstringToCtypesString[type_of_array]} * {array_size}"
+        else:  # a struct array
+            return f"{type_of_array} * {array_size}"
+    elif pointer_level > 0:
+        type_without_pointers = c_type_string.replace('*', '')
+        type_of_array_end = ""
+        if c_type_string in CstringToCtypesString:  # basic type pointer (int**, char*, float*, ...)
+            return f"{CstringToCtypesString[c_type_string]}"
+        if type_without_pointers in CstringToCtypesString:  # basic type pointer(probably double+ pointer level) (int**, char**, float**, ...)
+            type_of_array_end = CstringToCtypesString[type_without_pointers]
+            for i in range(pointer_level):
+                type_of_array_end = f"POINTER({type_of_array_end})"
+            return f"{type_of_array_end}"
+        else:  # a struct pointer level 1+ or just a pointer level 1
+            type_of_array_end = type_without_pointers
+            for i in range(pointer_level):
+                type_of_array_end = f"POINTER({type_of_array_end})"
+            return f"{type_of_array_end}"
+    else:  # "regular" value not a pointer or an array
+        if c_type_string in CstringToCtypesString:
+            return CstringToCtypesString[c_type_string]
+        return c_type_string  # a struct
+
 # get class object by string name
 def str_to_class(classname):
     return eval(classname)
