@@ -139,10 +139,13 @@ typesDictionaryCstringToPythonTypesString = {
     'void*': 'int',  # C type: wchar_t* (NUL terminated)  Python type: int or None
     'void': 'None',  # C type: void  Python type: None
 }
+# -----------------------------------------
+wrapped_functions_names = []
 
 current_module = __import__(__name__)
 
 _rl = cdll.LoadLibrary(str(Path(__file__).parent / 'lib/raylib.dll'))
+# -----------------------------------------
 
 # get numbers from string
 def get_numbers_from_string(string):
@@ -246,42 +249,46 @@ def check_for_functions_that_can_wrap(functions_set):
 # wrap functions to ctypes functions => to _rl ctypes functions
 def wrap_functions_to_ctypes_functions_add_function_to_this_module(functions_to_wrap, _current_module):
     for function_to_wrap in functions_to_wrap:
-        name_of_function = inflection.underscore(function_to_wrap['name']).replace('3_d', '_3d').replace('2_d', '_2d')
-        function_to_wrap_ctype = {'name': function_to_wrap['name'], 'parametersTypes': [], 'returnType': None}
+        if function_to_wrap['name'] not in wrapped_functions_names:
+            wrapped_functions_names.append(function_to_wrap['name'])
+            name_of_function = inflection.underscore(function_to_wrap['name']).replace('3_d', '_3d').replace('2_d', '_2d')
+            function_to_wrap_ctype = {'name': function_to_wrap['name'], 'parametersTypes': [], 'returnType': None}
 
-        if 'params' in function_to_wrap.keys():
-            for function_param in function_to_wrap['params']:
-                function_param_type = function_param['type']
-                function_param_pointer_level = function_param_type.count("*")
-                # function_param_is_array = function_param_type.count("]") raylib functions shouldn't really return arrays...
-                if function_param_pointer_level == 0 or (function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes):  # if value isn't a pointer value
-                    if function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes:  # there isn't really a const type in python
-                        function_to_wrap_ctype['parametersTypes'].append(typesDictionaryCstringToCtypes[function_param_type.replace(" ", "").replace('const', '')])
-                else:
-                    function_param_processed = function_param_type.replace('const', '').replace(' ', '').replace('*', '')
-                    function_param_processed_ctype = None
-                    if function_param_processed in typesDictionaryCstringToCtypes:
-                        function_param_processed_ctype = typesDictionaryCstringToCtypes[function_param_processed]
-                    for i in range(function_param_pointer_level):
-                        function_param_processed_ctype = POINTER(function_param_processed_ctype)
-                    function_to_wrap_ctype['parametersTypes'].append(function_param_processed_ctype)
+            if 'params' in function_to_wrap.keys():
+                for function_param in function_to_wrap['params']:
+                    function_param_type = function_param['type']
+                    function_param_pointer_level = function_param_type.count("*")
+                    # function_param_is_array = function_param_type.count("]") raylib functions shouldn't really return arrays...
+                    if function_param_pointer_level == 0 or (function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes):  # if value isn't a pointer value
+                        if function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes:  # there isn't really a const type in python
+                            function_to_wrap_ctype['parametersTypes'].append(typesDictionaryCstringToCtypes[function_param_type.replace(" ", "").replace('const', '')])
+                    else:
+                        function_param_processed = function_param_type.replace('const', '').replace(' ', '').replace('*', '')
+                        function_param_processed_ctype = None
+                        if function_param_processed in typesDictionaryCstringToCtypes:
+                            function_param_processed_ctype = typesDictionaryCstringToCtypes[function_param_processed]
+                        for i in range(function_param_pointer_level):
+                            function_param_processed_ctype = POINTER(function_param_processed_ctype)
+                        function_to_wrap_ctype['parametersTypes'].append(function_param_processed_ctype)\
 
-        function_return_type = function_to_wrap['returnType']
-        function_return_type_pointer_level = function_return_type.count("*")
-        # function_param_is_array = function_param_type.count("]") raylib functions shouldn't really return arrays...
-        if function_return_type_pointer_level == 0 or (function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes):  # if value isn't a pointer value
-            if function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes:  # there isn't really a const type in python
-                function_to_wrap_ctype['returnType'] = typesDictionaryCstringToCtypes[function_return_type.replace(" ", "").replace('const', '')]
+            function_return_type = function_to_wrap['returnType']
+            function_return_type_pointer_level = function_return_type.count("*")
+            # function_param_is_array = function_param_type.count("]") raylib functions shouldn't really return arrays...
+            if function_return_type_pointer_level == 0 or (function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes):  # if value isn't a pointer value
+                if function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypes:  # there isn't really a const type in python
+                    function_to_wrap_ctype['returnType'] = typesDictionaryCstringToCtypes[function_return_type.replace(" ", "").replace('const', '')]
+            else:
+                function_return_type_processed = function_return_type.replace('const', '').replace(' ', '').replace('*', '')
+                function_return_type_processed_ctype = None
+                if function_return_type.replace('const', '').replace(' ', '') in typesDictionaryCstringToCtypes:
+                    function_return_type_processed_ctype = typesDictionaryCstringToCtypes[function_return_type_processed]
+                for i in range(function_return_type_pointer_level):
+                    function_return_type_processed_ctype = POINTER(function_return_type_processed_ctype)
+                function_to_wrap_ctype['parametersTypes'].append(function_return_type_processed_ctype)
+            f = wrap_function(function_to_wrap_ctype['name'], function_to_wrap_ctype['parametersTypes'], function_to_wrap_ctype['returnType'])
+            add_function_to_module(current_module, name_of_function, f)
         else:
-            function_return_type_processed = function_return_type.replace('const', '').replace(' ', '').replace('*', '')
-            function_return_type_processed_ctype = None
-            if function_return_type.replace('const', '').replace(' ', '') in typesDictionaryCstringToCtypes:
-                function_return_type_processed_ctype = typesDictionaryCstringToCtypes[function_return_type_processed]
-            for i in range(function_return_type_pointer_level):
-                function_return_type_processed_ctype = POINTER(function_return_type_processed_ctype)
-            function_to_wrap_ctype['parametersTypes'].append(function_return_type_processed_ctype)
-        f = wrap_function(function_to_wrap_ctype['name'], function_to_wrap_ctype['parametersTypes'], function_to_wrap_ctype['returnType'])
-        add_function_to_module(current_module, name_of_function, f)
+            print(function_to_wrap['name'])
 
 
 # load raylib data
