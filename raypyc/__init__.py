@@ -287,8 +287,6 @@ def wrap_functions_to_ctypes_functions_add_function_to_this_module(functions_to_
                 function_to_wrap_ctype['parametersTypes'].append(function_return_type_processed_ctype)
             f = wrap_function(function_to_wrap_ctype['name'], function_to_wrap_ctype['parametersTypes'], function_to_wrap_ctype['returnType'])
             add_function_to_module(current_module, name_of_function, f)
-        else:
-            print(function_to_wrap['name'])
 
 
 # load raylib data
