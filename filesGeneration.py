@@ -1,5 +1,4 @@
 import json
-import os
 from pathlib import Path
 
 import inflection
@@ -67,6 +66,8 @@ wrapped_structures_names_py = []
 wrapped_structures_names_pyi = []
 
 wrapped_functions_names_pyi = []
+
+
 # -----------------------------------------
 
 
@@ -102,7 +103,7 @@ def convert_c_type_string_to_ctype_type_sting(c_type_string: str):
         'void': 'None',  # C type: void  Python type: None
     }
 
-    c_type_string = c_type_string.replace(' ', '').replace('const', '') # remove spaces, and "const" because there isn't really a const type in python...
+    c_type_string = c_type_string.replace(' ', '').replace('const', '')  # remove spaces, and "const" because there isn't really a const type in python...
     is_array = ']' in c_type_string
     pointer_level = c_type_string.count("*")
 
@@ -149,6 +150,7 @@ def convert_c_type_string_to_ctype_type_sting(c_type_string: str):
         if c_type_string in CstringToCtypesString:
             return CstringToCtypesString[c_type_string]
         return c_type_string  # a struct
+
 
 # get class object by string name
 def str_to_class(classname):
@@ -308,7 +310,7 @@ def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
                     wrapped_structures_names_pyi.append(struct['name'])
                     struct_string_logic = ""
                     struct_string_logic += generate_struct_signature_code(struct)
-                    # struct_string_logic += generate_struct_fields_string_code(struct) we don't really need that in the __init__.pyi file
+                    # struct_string_logic += generate_struct_fields_string_code_stub(struct)  # we don't really need that in the __init__.pyi file
                     struct_string_logic += generate_struct_setters_getters_code_stub(struct)
                     struct_string_logic += "\n"
 
@@ -345,40 +347,8 @@ def generate_struct_fields_string_code(struct_data):
         struct_data_field_name = struct_data_field['name']
         struct_data_field_type = struct_data_field['type']
         struct_data_field_description = struct_data_field['description']
-        struct_data_field_type_pointer_level = struct_data_field_type.count("*")
-        struct_data_field_type_is_array = struct_data_field_type.count("]")
-        if struct_data_field_type_is_array == 0:
-            if struct_data_field_type_pointer_level == 0 or (struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString):  # if value isn't a pointer value
-                if struct_data_field_type.replace(" ", "") in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
-                    struct_fields += f"\t('{struct_data_field_name}', {typesDictionaryCstringToCtypesString[struct_data_field_type.replace(' ', '')]}),  # {struct_data_field_description}\n"
-                else:  # probably type is struct
-                    struct_fields += f"\t('{struct_data_field_name}', {struct_data_field_type.replace(' ', '').replace('const', '')}),  # {struct_data_field_description}\n"  # probably type is struct
-            else:
-                struct_data_field_type_processed_with_pointer_end = ""
-                struct_data_field_type_processed_with_pointer = struct_data_field_type.replace('const', '').replace(" ", "")
-                if struct_data_field_type_processed_with_pointer in typesDictionaryCstringToCtypesString:
-                    struct_data_field_type_processed_with_pointer_end = f"\t('{struct_data_field_name}', {typesDictionaryCstringToCtypesString[struct_data_field_type_processed_with_pointer]}),  # {struct_data_field_description}\n"
-                else:
-                    struct_data_field_type_processed = struct_data_field_type.replace('const', '').replace(" ", "").replace("*", "")
-                    struct_data_field_type_processed_ctype = ""
-                    if struct_data_field_type_processed in typesDictionaryCstringToCtypesString:
-                        struct_data_field_type_processed_ctype = typesDictionaryCstringToCtypesString[f"{str(struct_data_field_type_processed)}"]
-                    else:
-                        struct_data_field_type_processed_ctype = struct_data_field_type_processed
-                    for i in range(struct_data_field_type_pointer_level):
-                        struct_data_field_type_processed_ctype = f"POINTER({str(struct_data_field_type_processed_ctype)})"
+        struct_fields += f"\t('{struct_data_field_name}', {convert_c_type_string_to_ctype_type_sting(struct_data_field_type)}),  # {struct_data_field_description}\n"
 
-                    struct_data_field_type_processed_with_pointer_end = struct_data_field_type_processed_ctype
-
-                struct_fields += f"\t('{struct_data_field_name}', {struct_data_field_type_processed_with_pointer_end}),  # {struct_data_field_description}\n"
-        else:
-            struct_data_field_type_processed = struct_data_field_type.replace('const', '').replace(" ", "").replace("*", "")
-            struct_data_field_array_len = get_numbers_from_string(struct_data_field_type_processed.replace('[', ' ').replace(']', ' '))[0]
-            struct_data_field_type_processed_ctype = struct_data_field_type_processed.replace('[', '').replace(']', '').replace(f'{str(struct_data_field_array_len)}', '')
-            if struct_data_field_type_processed_ctype in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
-                struct_fields += f"\t('{struct_data_field_name}', {typesDictionaryCstringToCtypesString[struct_data_field_type_processed_ctype]}*{str(struct_data_field_array_len)}),  # {struct_data_field_description}\n"
-            else:
-                struct_fields += f"\t('{struct_data_field_name}', {struct_data_field_type_processed_ctype}*{str(struct_data_field_array_len)}),  # {struct_data_field_description}\n"  # probably type is struct
     temp = find_char_in_str(struct_fields, ',')
     if len(temp) != 0:
         struct_fields = struct_fields[: temp[-1]] + struct_fields[temp[-1] + 1:]
@@ -396,41 +366,7 @@ def generate_struct_fields_string_code_stub(struct_data):
         struct_data_field_description = struct_data_field['description']
         struct_data_field_type_pointer_level = struct_data_field_type.count("*")
         struct_data_field_type_is_array = struct_data_field_type.count("]")
-        if struct_data_field_type_is_array == 0:
-            if struct_data_field_type_pointer_level == 0 or (
-                    struct_data_field_type.replace(" ", "") in typesDictionaryCstringToCtypesString or struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString):  # if value isn't a pointer value
-                if struct_data_field_type.replace(" ", "") in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
-                    struct_fields += f"\t('{struct_data_field_name}', {typesDictionaryCstringToCtypesString[struct_data_field_type.replace(' ', '')]}),  # {struct_data_field_description}\n"
-                elif struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString:  # there isn't really a const type in python
-                    struct_fields += f"\t('{struct_data_field_name}', {typesDictionaryCstringToCtypesString[struct_data_field_type.replace(' ', '').replace('const', '')]}),  # {struct_data_field_description}\n"
-                else:  # probably type is struct
-                    struct_fields += f"\t('{struct_data_field_name}', {struct_data_field_type.replace(' ', '').replace('const', '')}),  # {struct_data_field_description}\n"  # probably type is struct
-            else:
-                struct_data_field_type_processed_with_pointer_end = ""
-                struct_data_field_type_processed_with_pointer = struct_data_field_type.replace('const', '').replace(" ", "")
-                if struct_data_field_type_processed_with_pointer in typesDictionaryCstringToCtypesString:
-                    struct_data_field_type_processed_with_pointer_end = f"\t('{struct_data_field_name}', {typesDictionaryCstringToCtypesString[struct_data_field_type_processed_with_pointer]}),  # {struct_data_field_description}\n"
-                else:
-                    struct_data_field_type_processed = struct_data_field_type.replace('const', '').replace(" ", "").replace("*", "")
-                    struct_data_field_type_processed_ctype = ""
-                    if struct_data_field_type_processed in typesDictionaryCstringToCtypesString:
-                        struct_data_field_type_processed_ctype = typesDictionaryCstringToCtypesString[f"{str(struct_data_field_type_processed)}"]
-                    else:
-                        struct_data_field_type_processed_ctype = struct_data_field_type_processed
-                    for i in range(struct_data_field_type_pointer_level):
-                        struct_data_field_type_processed_ctype = f"POINTER({str(struct_data_field_type_processed_ctype)})"
-
-                    struct_data_field_type_processed_with_pointer_end = struct_data_field_type_processed_ctype
-
-                struct_fields += f"\t('{struct_data_field_name}', {struct_data_field_type_processed_with_pointer_end}),  # {struct_data_field_description}\n"
-        else:
-            struct_data_field_type_processed = struct_data_field_type.replace('const', '').replace(" ", "").replace("*", "")
-            struct_data_field_array_len = get_numbers_from_string(struct_data_field_type_processed.replace('[', ' ').replace(']', ' '))[0]
-            struct_data_field_type_processed_ctype = struct_data_field_type_processed.replace('[', '').replace(']', '').replace(f'{str(struct_data_field_array_len)}', '')
-            if struct_data_field_type_processed_ctype in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
-                struct_fields += f"\t('{struct_data_field_name}', {typesDictionaryCstringToCtypesString[struct_data_field_type_processed_ctype]}*{str(struct_data_field_array_len)}),  # {struct_data_field_description}\n"
-            else:
-                struct_fields += f"\t('{struct_data_field_name}', {struct_data_field_type_processed_ctype}*{str(struct_data_field_array_len)}),  # {struct_data_field_description}\n"  # probably type is struct
+        struct_fields += f"\t('{struct_data_field_name}', {convert_c_type_string_to_ctype_type_sting(struct_data_field_type)}),  # {struct_data_field_description}\n"
     temp = find_char_in_str(struct_fields, ',')
     if len(temp) != 0:
         struct_fields = struct_fields[: temp[-1]] + struct_fields[temp[-1] + 1:]
@@ -814,7 +750,6 @@ raymath_api_functions = raymath_api['functions']
 # load raygui data
 with open(Path(JSON_FOLDER_PATH / 'raygui_api.json')) as reader:
     raygui_api = json.load(reader)
-
 
 raygui_api_structs = raygui_api['structs']
 raygui_api_aliases = raygui_api['aliases']
