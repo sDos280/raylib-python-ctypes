@@ -65,6 +65,8 @@ wrapped_enums_names_pyi = []
 
 wrapped_structures_names_py = []
 wrapped_structures_names_pyi = []
+
+wrapped_functions_names_pyi = []
 # -----------------------------------------
 
 
@@ -635,11 +637,13 @@ def check_for_functions_that_can_wrap(functions_set):
 def generate_functions_code_in_code_pyi_file(functions_set):
     with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "a") as functions_code_file_w:
         for function in functions_set:
-            name_of_function = inflection.underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d')
-            function_copy = dict(function)
-            function_copy['name'] = str(name_of_function)
-            function_string = generate_function_signature_code(function_copy)
-            functions_code_file_w.write(function_string)
+            if function['name'] not in wrapped_functions_names_pyi:
+                wrapped_functions_names_pyi.append(function['name'])
+                name_of_function = inflection.underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d')
+                function_copy = dict(function)
+                function_copy['name'] = str(name_of_function)
+                function_string = generate_function_signature_code(function_copy)
+                functions_code_file_w.write(function_string)
 
 
 def generate_function_signature_code(function_data):
@@ -727,7 +731,8 @@ with open(Path(JSON_FOLDER_PATH / 'raymath_api.json')) as reader:
     raymath_api = json.load(reader)
 
 raymath_api_structs = raymath_api['structs']
-raymath_api_aliases = raymath_api['aliases']  # raymath_api_aliases just redeclare some stuff, so we don't need it
+raymath_api_aliases = raymath_api['aliases']
+raymath_api_enums = raymath_api['enums']
 raymath_api_functions = raymath_api['functions']
 
 # first we make the structures wrapper
@@ -735,23 +740,20 @@ raymath_api_functions = raymath_api['functions']
 generate_structs_py_pyi_files()
 
 generate_structs_py_pyi_code(raylib_api_structs, raylib_api_aliases)
-# generate_structs_py_pyi_code(raymath_api_structs, raymath_api_aliases) raymath_api_aliases just redeclare some stuff, so we don't need it
 generate_structs_py_pyi_code(raymath_api_structs, raymath_api_aliases)
 
 # generate the enums files
 generate_enums_py_pyi_files()
 
 generate_enums_py_pyi_code(raylib_api_enums)
+generate_enums_py_pyi_code(raymath_api_enums)
 
 # generate the raylib functions signature file
 generate_functions_code_pyi_file()
 
 raylib_functions_to_wrapped = check_for_functions_that_can_wrap(raylib_api_functions)
-
-generate_functions_code_in_code_pyi_file(raylib_functions_to_wrapped)
-
-# add the functions signature file
-
 raymath_functions_to_wrapped = check_for_functions_that_can_wrap(raymath_api_functions)
 
+# add the functions signature file
+generate_functions_code_in_code_pyi_file(raylib_functions_to_wrapped)
 generate_functions_code_in_code_pyi_file(raymath_functions_to_wrapped)
