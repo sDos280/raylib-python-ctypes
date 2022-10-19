@@ -2227,3 +2227,219 @@ def quaternion_equals(p: Quaternion, q: Quaternion) -> int:
 	""""""
 	...
 
+def gui_enable() -> None:
+	"""Enable gui controls (global state)"""
+	...
+
+def gui_disable() -> None:
+	"""Disable gui controls (global state)"""
+	...
+
+def gui_lock() -> None:
+	"""Lock gui controls (global state)"""
+	...
+
+def gui_unlock() -> None:
+	"""Unlock gui controls (global state)"""
+	...
+
+def gui_is_locked() -> bool:
+	"""Check if gui is locked (global state)"""
+	...
+
+def gui_fade(alpha: float) -> None:
+	"""Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f"""
+	...
+
+def gui_set_state(state: int) -> None:
+	"""Set gui state (global state)"""
+	...
+
+def gui_get_state() -> int:
+	"""Get gui state (global state)"""
+	...
+
+def gui_set_font(font: Font) -> None:
+	"""Set gui custom font (global state)"""
+	...
+
+def gui_get_font() -> Font:
+	"""Get gui custom font (global state)"""
+	...
+
+def gui_set_style(control: int, property: int, value: int) -> None:
+	"""Set one style property"""
+	...
+
+def gui_get_style(control: int, property: int) -> int:
+	"""Get one style property"""
+	...
+
+def gui_window_box(bounds: Rectangle, title: bytes) -> bool:
+	"""Window Box control, shows a window that can be closed"""
+	...
+
+def gui_group_box(bounds: Rectangle, text: bytes) -> None:
+	"""Group Box control with text name"""
+	...
+
+def gui_line(bounds: Rectangle, text: bytes) -> None:
+	"""Line separator control, could contain text"""
+	...
+
+def gui_panel(bounds: Rectangle, text: bytes) -> None:
+	"""Panel control, useful to group controls"""
+	...
+
+def gui_scroll_panel(bounds: Rectangle, text: bytes, content: Rectangle, scroll: POINTER(Vector2)) -> Rectangle:
+	"""Scroll Panel control"""
+	...
+
+def gui_label(bounds: Rectangle, text: bytes) -> None:
+	"""Label control, shows text"""
+	...
+
+def gui_button(bounds: Rectangle, text: bytes) -> bool:
+	"""Button control, returns true when clicked"""
+	...
+
+def gui_label_button(bounds: Rectangle, text: bytes) -> bool:
+	"""Label button control, show true when clicked"""
+	...
+
+def gui_toggle(bounds: Rectangle, text: bytes, active: bool) -> bool:
+	"""Toggle Button control, returns true when active"""
+	...
+
+def gui_toggle_group(bounds: Rectangle, text: bytes, active: int) -> int:
+	"""Toggle Group control, returns active toggle index"""
+	...
+
+def gui_check_box(bounds: Rectangle, text: bytes, checked: bool) -> bool:
+	"""Check Box control, returns true when active"""
+	...
+
+def gui_combo_box(bounds: Rectangle, text: bytes, active: int) -> int:
+	"""Combo Box control, returns selected item index"""
+	...
+
+def gui_dropdown_box(bounds: Rectangle, text: bytes, active: POINTER(c_int), editMode: bool) -> bool:
+	"""Dropdown Box control, returns selected item"""
+	...
+
+def gui_spinner(bounds: Rectangle, text: bytes, value: POINTER(c_int), minValue: int, maxValue: int, editMode: bool) -> bool:
+	"""Spinner control, returns selected value"""
+	...
+
+def gui_value_box(bounds: Rectangle, text: bytes, value: POINTER(c_int), minValue: int, maxValue: int, editMode: bool) -> bool:
+	"""Value Box control, updates input text with numbers"""
+	...
+
+def gui_text_box(bounds: Rectangle, text: bytes, textSize: int, editMode: bool) -> bool:
+	"""Text Box control, updates input text"""
+	...
+
+def gui_text_box_multi(bounds: Rectangle, text: bytes, textSize: int, editMode: bool) -> bool:
+	"""Text Box control with multiple lines"""
+	...
+
+def gui_slider(bounds: Rectangle, textLeft: bytes, textRight: bytes, value: float, minValue: float, maxValue: float) -> float:
+	"""Slider control, returns selected value"""
+	...
+
+def gui_slider_bar(bounds: Rectangle, textLeft: bytes, textRight: bytes, value: float, minValue: float, maxValue: float) -> float:
+	"""Slider Bar control, returns selected value"""
+	...
+
+def gui_progress_bar(bounds: Rectangle, textLeft: bytes, textRight: bytes, value: float, minValue: float, maxValue: float) -> float:
+	"""Progress Bar control, shows current progress value"""
+	...
+
+def gui_status_bar(bounds: Rectangle, text: bytes) -> None:
+	"""Status Bar control, shows info text"""
+	...
+
+def gui_dummy_rec(bounds: Rectangle, text: bytes) -> None:
+	"""Dummy control for placeholders"""
+	...
+
+def gui_grid(bounds: Rectangle, text: bytes, spacing: float, subdivs: int) -> Vector2:
+	"""Grid control, returns mouse cell position"""
+	...
+
+def gui_list_view(bounds: Rectangle, text: bytes, scrollIndex: POINTER(c_int), active: int) -> int:
+	"""List View control, returns selected list item index"""
+	...
+
+def gui_list_view_ex(bounds: Rectangle, text: POINTER(POINTER(c_char)), count: int, focus: POINTER(c_int), scrollIndex: POINTER(c_int), active: int) -> int:
+	"""List View with extended parameters"""
+	...
+
+def gui_message_box(bounds: Rectangle, title: bytes, message: bytes, buttons: bytes) -> int:
+	"""Message Box control, displays a message"""
+	...
+
+def gui_text_input_box(bounds: Rectangle, title: bytes, message: bytes, buttons: bytes, text: bytes, textMaxSize: int, secretViewActive: POINTER(c_int)) -> int:
+	"""Text Input Box control, ask for text, supports secret"""
+	...
+
+def gui_color_picker(bounds: Rectangle, text: bytes, color: Color) -> Color:
+	"""Color Picker control (multiple color controls)"""
+	...
+
+def gui_color_panel(bounds: Rectangle, text: bytes, color: Color) -> Color:
+	"""Color Panel control"""
+	...
+
+def gui_color_bar_alpha(bounds: Rectangle, text: bytes, alpha: float) -> float:
+	"""Color Bar Alpha control"""
+	...
+
+def gui_color_bar_hue(bounds: Rectangle, text: bytes, value: float) -> float:
+	"""Color Bar Hue control"""
+	...
+
+def gui_load_style(fileName: bytes) -> None:
+	"""Load style file over global style variable (.rgs)"""
+	...
+
+def gui_load_style_default() -> None:
+	"""Load style default over global style"""
+	...
+
+def gui_icon_text(iconId: int, text: bytes) -> bytes:
+	"""Get text with icon id prepended (if supported)"""
+	...
+
+def gui_draw_icon(iconId: int, posX: int, posY: int, pixelSize: int, color: Color) -> None:
+	""""""
+	...
+
+def gui_get_icons() -> POINTER(c_uint):
+	"""Get full icons data pointer"""
+	...
+
+def gui_get_icon_data(iconId: int) -> POINTER(c_uint):
+	"""Get icon bit data"""
+	...
+
+def gui_set_icon_data(iconId: int, data: POINTER(c_uint)) -> None:
+	"""Set icon bit data"""
+	...
+
+def gui_set_icon_scale(scale: int) -> None:
+	"""Set icon scale (1 by default)"""
+	...
+
+def gui_set_icon_pixel(iconId: int, x: int, y: int) -> None:
+	"""Set icon pixel value"""
+	...
+
+def gui_clear_icon_pixel(iconId: int, x: int, y: int) -> None:
+	"""Clear icon pixel value"""
+	...
+
+def gui_check_icon_pixel(iconId: int, x: int, y: int) -> bool:
+	"""Check icon pixel value"""
+	...
+

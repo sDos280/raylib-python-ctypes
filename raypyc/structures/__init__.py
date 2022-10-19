@@ -1705,3 +1705,36 @@ class float16(Structure):
 		self.v = i
 
 
+class GuiStyleProp(Structure):
+	"""Style property"""
+	_fields_ = [
+		('controlId', c_ushort),  # 
+		('propertyId', c_ushort),  # 
+		('propertyValue', c_uint)  # 
+	]
+
+	@property
+	def controlId(self) -> int:
+		return self.controlId
+
+	@controlId.setter
+	def controlId(self, i: int) -> None:
+		self.controlId = i
+
+	@property
+	def propertyId(self) -> int:
+		return self.propertyId
+
+	@propertyId.setter
+	def propertyId(self, i: int) -> None:
+		self.propertyId = i
+
+	@property
+	def propertyValue(self) -> int:
+		return self.propertyValue
+
+	@propertyValue.setter
+	def propertyValue(self, i: int) -> None:
+		self.propertyValue = i
+
+

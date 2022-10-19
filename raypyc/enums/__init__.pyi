@@ -377,3 +377,398 @@ class NPatchLayout(IntEnum):
 	NPATCH_THREE_PATCH_HORIZONTAL: int  # Npatch layout: 3x1 tiles
 
 
+class GuiState(IntEnum):
+	"""Gui control state"""
+	STATE_NORMAL: int  # 
+	STATE_FOCUSED: int  # 
+	STATE_PRESSED: int  # 
+	STATE_DISABLED: int  # 
+
+
+class GuiTextAlignment(IntEnum):
+	"""Gui control text alignment"""
+	TEXT_ALIGN_LEFT: int  # 
+	TEXT_ALIGN_CENTER: int  # 
+	TEXT_ALIGN_RIGHT: int  # 
+
+
+class GuiControl(IntEnum):
+	"""Gui controls"""
+	DEFAULT: int  # 
+	LABEL: int  # Used also for: LABELBUTTON
+	BUTTON: int  # 
+	TOGGLE: int  # Used also for: TOGGLEGROUP
+	SLIDER: int  # Used also for: SLIDERBAR
+	PROGRESSBAR: int  # 
+	CHECKBOX: int  # 
+	COMBOBOX: int  # 
+	DROPDOWNBOX: int  # 
+	TEXTBOX: int  # Used also for: TEXTBOXMULTI
+	VALUEBOX: int  # 
+	SPINNER: int  # Uses: BUTTON, VALUEBOX
+	LISTVIEW: int  # 
+	COLORPICKER: int  # 
+	SCROLLBAR: int  # 
+	STATUSBAR: int  # 
+
+
+class GuiControlProperty(IntEnum):
+	"""Gui base properties for every control"""
+	BORDER_COLOR_NORMAL: int  # 
+	BASE_COLOR_NORMAL: int  # 
+	TEXT_COLOR_NORMAL: int  # 
+	BORDER_COLOR_FOCUSED: int  # 
+	BASE_COLOR_FOCUSED: int  # 
+	TEXT_COLOR_FOCUSED: int  # 
+	BORDER_COLOR_PRESSED: int  # 
+	BASE_COLOR_PRESSED: int  # 
+	TEXT_COLOR_PRESSED: int  # 
+	BORDER_COLOR_DISABLED: int  # 
+	BASE_COLOR_DISABLED: int  # 
+	TEXT_COLOR_DISABLED: int  # 
+	BORDER_WIDTH: int  # 
+	TEXT_PADDING: int  # 
+	TEXT_ALIGNMENT: int  # 
+	RESERVED: int  # 
+
+
+class GuiDefaultProperty(IntEnum):
+	"""DEFAULT extended properties"""
+	TEXT_SIZE: int  # Text size (glyphs max height)
+	TEXT_SPACING: int  # Text spacing between glyphs
+	LINE_COLOR: int  # Line control color
+	BACKGROUND_COLOR: int  # Background color
+
+
+class GuiToggleProperty(IntEnum):
+	"""Toggle/ToggleGroup"""
+	GROUP_PADDING: int  # ToggleGroup separation between toggles
+
+
+class GuiSliderProperty(IntEnum):
+	"""Slider/SliderBar"""
+	SLIDER_WIDTH: int  # Slider size of internal bar
+	SLIDER_PADDING: int  # Slider/SliderBar internal bar padding
+
+
+class GuiProgressBarProperty(IntEnum):
+	"""ProgressBar"""
+	PROGRESS_PADDING: int  # ProgressBar internal padding
+
+
+class GuiScrollBarProperty(IntEnum):
+	"""ScrollBar"""
+	ARROWS_SIZE: int  # 
+	ARROWS_VISIBLE: int  # 
+	SCROLL_SLIDER_PADDING: int  # (SLIDERBAR, SLIDER_PADDING)
+	SCROLL_SLIDER_SIZE: int  # 
+	SCROLL_PADDING: int  # 
+	SCROLL_SPEED: int  # 
+
+
+class GuiCheckBoxProperty(IntEnum):
+	"""CheckBox"""
+	CHECK_PADDING: int  # CheckBox internal check padding
+
+
+class GuiComboBoxProperty(IntEnum):
+	"""ComboBox"""
+	COMBO_BUTTON_WIDTH: int  # ComboBox right button width
+	COMBO_BUTTON_SPACING: int  # ComboBox button separation
+
+
+class GuiDropdownBoxProperty(IntEnum):
+	"""DropdownBox"""
+	ARROW_PADDING: int  # DropdownBox arrow separation from border and items
+	DROPDOWN_ITEMS_SPACING: int  # DropdownBox items separation
+
+
+class GuiTextBoxProperty(IntEnum):
+	"""TextBox/TextBoxMulti/ValueBox/Spinner"""
+	TEXT_INNER_PADDING: int  # TextBox/TextBoxMulti/ValueBox/Spinner inner text padding
+	TEXT_LINES_SPACING: int  # TextBoxMulti lines separation
+
+
+class GuiSpinnerProperty(IntEnum):
+	"""Spinner"""
+	SPIN_BUTTON_WIDTH: int  # Spinner left/right buttons width
+	SPIN_BUTTON_SPACING: int  # Spinner buttons separation
+
+
+class GuiListViewProperty(IntEnum):
+	"""ListView"""
+	LIST_ITEMS_HEIGHT: int  # ListView items height
+	LIST_ITEMS_SPACING: int  # ListView items separation
+	SCROLLBAR_WIDTH: int  # ListView scrollbar size (usually width)
+	SCROLLBAR_SIDE: int  # ListView scrollbar side (0-left, 1-right)
+
+
+class GuiColorPickerProperty(IntEnum):
+	"""ColorPicker"""
+	COLOR_SELECTOR_SIZE: int  # 
+	HUEBAR_WIDTH: int  # ColorPicker right hue bar width
+	HUEBAR_PADDING: int  # ColorPicker right hue bar separation from panel
+	HUEBAR_SELECTOR_HEIGHT: int  # ColorPicker right hue bar selector height
+	HUEBAR_SELECTOR_OVERFLOW: int  # ColorPicker right hue bar selector overflow
+
+
+class GuiIconName(IntEnum):
+	""""""
+	ICON_NONE: int  # 
+	ICON_FOLDER_FILE_OPEN: int  # 
+	ICON_FILE_SAVE_CLASSIC: int  # 
+	ICON_FOLDER_OPEN: int  # 
+	ICON_FOLDER_SAVE: int  # 
+	ICON_FILE_OPEN: int  # 
+	ICON_FILE_SAVE: int  # 
+	ICON_FILE_EXPORT: int  # 
+	ICON_FILE_ADD: int  # 
+	ICON_FILE_DELETE: int  # 
+	ICON_FILETYPE_TEXT: int  # 
+	ICON_FILETYPE_AUDIO: int  # 
+	ICON_FILETYPE_IMAGE: int  # 
+	ICON_FILETYPE_PLAY: int  # 
+	ICON_FILETYPE_VIDEO: int  # 
+	ICON_FILETYPE_INFO: int  # 
+	ICON_FILE_COPY: int  # 
+	ICON_FILE_CUT: int  # 
+	ICON_FILE_PASTE: int  # 
+	ICON_CURSOR_HAND: int  # 
+	ICON_CURSOR_POINTER: int  # 
+	ICON_CURSOR_CLASSIC: int  # 
+	ICON_PENCIL: int  # 
+	ICON_PENCIL_BIG: int  # 
+	ICON_BRUSH_CLASSIC: int  # 
+	ICON_BRUSH_PAINTER: int  # 
+	ICON_WATER_DROP: int  # 
+	ICON_COLOR_PICKER: int  # 
+	ICON_RUBBER: int  # 
+	ICON_COLOR_BUCKET: int  # 
+	ICON_TEXT_T: int  # 
+	ICON_TEXT_A: int  # 
+	ICON_SCALE: int  # 
+	ICON_RESIZE: int  # 
+	ICON_FILTER_POINT: int  # 
+	ICON_FILTER_BILINEAR: int  # 
+	ICON_CROP: int  # 
+	ICON_CROP_ALPHA: int  # 
+	ICON_SQUARE_TOGGLE: int  # 
+	ICON_SYMMETRY: int  # 
+	ICON_SYMMETRY_HORIZONTAL: int  # 
+	ICON_SYMMETRY_VERTICAL: int  # 
+	ICON_LENS: int  # 
+	ICON_LENS_BIG: int  # 
+	ICON_EYE_ON: int  # 
+	ICON_EYE_OFF: int  # 
+	ICON_FILTER_TOP: int  # 
+	ICON_FILTER: int  # 
+	ICON_TARGET_POINT: int  # 
+	ICON_TARGET_SMALL: int  # 
+	ICON_TARGET_BIG: int  # 
+	ICON_TARGET_MOVE: int  # 
+	ICON_CURSOR_MOVE: int  # 
+	ICON_CURSOR_SCALE: int  # 
+	ICON_CURSOR_SCALE_RIGHT: int  # 
+	ICON_CURSOR_SCALE_LEFT: int  # 
+	ICON_UNDO: int  # 
+	ICON_REDO: int  # 
+	ICON_REREDO: int  # 
+	ICON_MUTATE: int  # 
+	ICON_ROTATE: int  # 
+	ICON_REPEAT: int  # 
+	ICON_SHUFFLE: int  # 
+	ICON_EMPTYBOX: int  # 
+	ICON_TARGET: int  # 
+	ICON_TARGET_SMALL_FILL: int  # 
+	ICON_TARGET_BIG_FILL: int  # 
+	ICON_TARGET_MOVE_FILL: int  # 
+	ICON_CURSOR_MOVE_FILL: int  # 
+	ICON_CURSOR_SCALE_FILL: int  # 
+	ICON_CURSOR_SCALE_RIGHT_FILL: int  # 
+	ICON_CURSOR_SCALE_LEFT_FILL: int  # 
+	ICON_UNDO_FILL: int  # 
+	ICON_REDO_FILL: int  # 
+	ICON_REREDO_FILL: int  # 
+	ICON_MUTATE_FILL: int  # 
+	ICON_ROTATE_FILL: int  # 
+	ICON_REPEAT_FILL: int  # 
+	ICON_SHUFFLE_FILL: int  # 
+	ICON_EMPTYBOX_SMALL: int  # 
+	ICON_BOX: int  # 
+	ICON_BOX_TOP: int  # 
+	ICON_BOX_TOP_RIGHT: int  # 
+	ICON_BOX_RIGHT: int  # 
+	ICON_BOX_BOTTOM_RIGHT: int  # 
+	ICON_BOX_BOTTOM: int  # 
+	ICON_BOX_BOTTOM_LEFT: int  # 
+	ICON_BOX_LEFT: int  # 
+	ICON_BOX_TOP_LEFT: int  # 
+	ICON_BOX_CENTER: int  # 
+	ICON_BOX_CIRCLE_MASK: int  # 
+	ICON_POT: int  # 
+	ICON_ALPHA_MULTIPLY: int  # 
+	ICON_ALPHA_CLEAR: int  # 
+	ICON_DITHERING: int  # 
+	ICON_MIPMAPS: int  # 
+	ICON_BOX_GRID: int  # 
+	ICON_GRID: int  # 
+	ICON_BOX_CORNERS_SMALL: int  # 
+	ICON_BOX_CORNERS_BIG: int  # 
+	ICON_FOUR_BOXES: int  # 
+	ICON_GRID_FILL: int  # 
+	ICON_BOX_MULTISIZE: int  # 
+	ICON_ZOOM_SMALL: int  # 
+	ICON_ZOOM_MEDIUM: int  # 
+	ICON_ZOOM_BIG: int  # 
+	ICON_ZOOM_ALL: int  # 
+	ICON_ZOOM_CENTER: int  # 
+	ICON_BOX_DOTS_SMALL: int  # 
+	ICON_BOX_DOTS_BIG: int  # 
+	ICON_BOX_CONCENTRIC: int  # 
+	ICON_BOX_GRID_BIG: int  # 
+	ICON_OK_TICK: int  # 
+	ICON_CROSS: int  # 
+	ICON_ARROW_LEFT: int  # 
+	ICON_ARROW_RIGHT: int  # 
+	ICON_ARROW_DOWN: int  # 
+	ICON_ARROW_UP: int  # 
+	ICON_ARROW_LEFT_FILL: int  # 
+	ICON_ARROW_RIGHT_FILL: int  # 
+	ICON_ARROW_DOWN_FILL: int  # 
+	ICON_ARROW_UP_FILL: int  # 
+	ICON_AUDIO: int  # 
+	ICON_FX: int  # 
+	ICON_WAVE: int  # 
+	ICON_WAVE_SINUS: int  # 
+	ICON_WAVE_SQUARE: int  # 
+	ICON_WAVE_TRIANGULAR: int  # 
+	ICON_CROSS_SMALL: int  # 
+	ICON_PLAYER_PREVIOUS: int  # 
+	ICON_PLAYER_PLAY_BACK: int  # 
+	ICON_PLAYER_PLAY: int  # 
+	ICON_PLAYER_PAUSE: int  # 
+	ICON_PLAYER_STOP: int  # 
+	ICON_PLAYER_NEXT: int  # 
+	ICON_PLAYER_RECORD: int  # 
+	ICON_MAGNET: int  # 
+	ICON_LOCK_CLOSE: int  # 
+	ICON_LOCK_OPEN: int  # 
+	ICON_CLOCK: int  # 
+	ICON_TOOLS: int  # 
+	ICON_GEAR: int  # 
+	ICON_GEAR_BIG: int  # 
+	ICON_BIN: int  # 
+	ICON_HAND_POINTER: int  # 
+	ICON_LASER: int  # 
+	ICON_COIN: int  # 
+	ICON_EXPLOSION: int  # 
+	ICON_1UP: int  # 
+	ICON_PLAYER: int  # 
+	ICON_PLAYER_JUMP: int  # 
+	ICON_KEY: int  # 
+	ICON_DEMON: int  # 
+	ICON_TEXT_POPUP: int  # 
+	ICON_GEAR_EX: int  # 
+	ICON_CRACK: int  # 
+	ICON_CRACK_POINTS: int  # 
+	ICON_STAR: int  # 
+	ICON_DOOR: int  # 
+	ICON_EXIT: int  # 
+	ICON_MODE_2D: int  # 
+	ICON_MODE_3D: int  # 
+	ICON_CUBE: int  # 
+	ICON_CUBE_FACE_TOP: int  # 
+	ICON_CUBE_FACE_LEFT: int  # 
+	ICON_CUBE_FACE_FRONT: int  # 
+	ICON_CUBE_FACE_BOTTOM: int  # 
+	ICON_CUBE_FACE_RIGHT: int  # 
+	ICON_CUBE_FACE_BACK: int  # 
+	ICON_CAMERA: int  # 
+	ICON_SPECIAL: int  # 
+	ICON_LINK_NET: int  # 
+	ICON_LINK_BOXES: int  # 
+	ICON_LINK_MULTI: int  # 
+	ICON_LINK: int  # 
+	ICON_LINK_BROKE: int  # 
+	ICON_TEXT_NOTES: int  # 
+	ICON_NOTEBOOK: int  # 
+	ICON_SUITCASE: int  # 
+	ICON_SUITCASE_ZIP: int  # 
+	ICON_MAILBOX: int  # 
+	ICON_MONITOR: int  # 
+	ICON_PRINTER: int  # 
+	ICON_PHOTO_CAMERA: int  # 
+	ICON_PHOTO_CAMERA_FLASH: int  # 
+	ICON_HOUSE: int  # 
+	ICON_HEART: int  # 
+	ICON_CORNER: int  # 
+	ICON_VERTICAL_BARS: int  # 
+	ICON_VERTICAL_BARS_FILL: int  # 
+	ICON_LIFE_BARS: int  # 
+	ICON_INFO: int  # 
+	ICON_CROSSLINE: int  # 
+	ICON_HELP: int  # 
+	ICON_FILETYPE_ALPHA: int  # 
+	ICON_FILETYPE_HOME: int  # 
+	ICON_LAYERS_VISIBLE: int  # 
+	ICON_LAYERS: int  # 
+	ICON_WINDOW: int  # 
+	ICON_HIDPI: int  # 
+	ICON_FILETYPE_BINARY: int  # 
+	ICON_HEX: int  # 
+	ICON_SHIELD: int  # 
+	ICON_FILE_NEW: int  # 
+	ICON_FOLDER_ADD: int  # 
+	ICON_ALARM: int  # 
+	ICON_206: int  # 
+	ICON_207: int  # 
+	ICON_208: int  # 
+	ICON_209: int  # 
+	ICON_210: int  # 
+	ICON_211: int  # 
+	ICON_212: int  # 
+	ICON_213: int  # 
+	ICON_214: int  # 
+	ICON_215: int  # 
+	ICON_216: int  # 
+	ICON_217: int  # 
+	ICON_218: int  # 
+	ICON_219: int  # 
+	ICON_220: int  # 
+	ICON_221: int  # 
+	ICON_222: int  # 
+	ICON_223: int  # 
+	ICON_224: int  # 
+	ICON_225: int  # 
+	ICON_226: int  # 
+	ICON_227: int  # 
+	ICON_228: int  # 
+	ICON_229: int  # 
+	ICON_230: int  # 
+	ICON_231: int  # 
+	ICON_232: int  # 
+	ICON_233: int  # 
+	ICON_234: int  # 
+	ICON_235: int  # 
+	ICON_236: int  # 
+	ICON_237: int  # 
+	ICON_238: int  # 
+	ICON_239: int  # 
+	ICON_240: int  # 
+	ICON_241: int  # 
+	ICON_242: int  # 
+	ICON_243: int  # 
+	ICON_244: int  # 
+	ICON_245: int  # 
+	ICON_246: int  # 
+	ICON_247: int  # 
+	ICON_248: int  # 
+	ICON_249: int  # 
+	ICON_250: int  # 
+	ICON_251: int  # 
+	ICON_252: int  # 
+	ICON_253: int  # 
+	ICON_254: int  # 
+	ICON_255: int  # 
+
+

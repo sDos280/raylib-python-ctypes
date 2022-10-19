@@ -377,3 +377,398 @@ class NPatchLayout(IntEnum):
 	NPATCH_THREE_PATCH_HORIZONTAL: int = 2  # Npatch layout: 3x1 tiles
 
 
+class GuiState(IntEnum):
+	"""Gui control state"""
+	STATE_NORMAL: int = 0  # 
+	STATE_FOCUSED: int = 1  # 
+	STATE_PRESSED: int = 2  # 
+	STATE_DISABLED: int = 3  # 
+
+
+class GuiTextAlignment(IntEnum):
+	"""Gui control text alignment"""
+	TEXT_ALIGN_LEFT: int = 0  # 
+	TEXT_ALIGN_CENTER: int = 1  # 
+	TEXT_ALIGN_RIGHT: int = 2  # 
+
+
+class GuiControl(IntEnum):
+	"""Gui controls"""
+	DEFAULT: int = 0  # 
+	LABEL: int = 1  # Used also for: LABELBUTTON
+	BUTTON: int = 2  # 
+	TOGGLE: int = 3  # Used also for: TOGGLEGROUP
+	SLIDER: int = 4  # Used also for: SLIDERBAR
+	PROGRESSBAR: int = 5  # 
+	CHECKBOX: int = 6  # 
+	COMBOBOX: int = 7  # 
+	DROPDOWNBOX: int = 8  # 
+	TEXTBOX: int = 9  # Used also for: TEXTBOXMULTI
+	VALUEBOX: int = 10  # 
+	SPINNER: int = 11  # Uses: BUTTON, VALUEBOX
+	LISTVIEW: int = 12  # 
+	COLORPICKER: int = 13  # 
+	SCROLLBAR: int = 14  # 
+	STATUSBAR: int = 15  # 
+
+
+class GuiControlProperty(IntEnum):
+	"""Gui base properties for every control"""
+	BORDER_COLOR_NORMAL: int = 0  # 
+	BASE_COLOR_NORMAL: int = 1  # 
+	TEXT_COLOR_NORMAL: int = 2  # 
+	BORDER_COLOR_FOCUSED: int = 3  # 
+	BASE_COLOR_FOCUSED: int = 4  # 
+	TEXT_COLOR_FOCUSED: int = 5  # 
+	BORDER_COLOR_PRESSED: int = 6  # 
+	BASE_COLOR_PRESSED: int = 7  # 
+	TEXT_COLOR_PRESSED: int = 8  # 
+	BORDER_COLOR_DISABLED: int = 9  # 
+	BASE_COLOR_DISABLED: int = 10  # 
+	TEXT_COLOR_DISABLED: int = 11  # 
+	BORDER_WIDTH: int = 12  # 
+	TEXT_PADDING: int = 13  # 
+	TEXT_ALIGNMENT: int = 14  # 
+	RESERVED: int = 15  # 
+
+
+class GuiDefaultProperty(IntEnum):
+	"""DEFAULT extended properties"""
+	TEXT_SIZE: int = 16  # Text size (glyphs max height)
+	TEXT_SPACING: int = 17  # Text spacing between glyphs
+	LINE_COLOR: int = 18  # Line control color
+	BACKGROUND_COLOR: int = 19  # Background color
+
+
+class GuiToggleProperty(IntEnum):
+	"""Toggle/ToggleGroup"""
+	GROUP_PADDING: int = 16  # ToggleGroup separation between toggles
+
+
+class GuiSliderProperty(IntEnum):
+	"""Slider/SliderBar"""
+	SLIDER_WIDTH: int = 16  # Slider size of internal bar
+	SLIDER_PADDING: int = 17  # Slider/SliderBar internal bar padding
+
+
+class GuiProgressBarProperty(IntEnum):
+	"""ProgressBar"""
+	PROGRESS_PADDING: int = 16  # ProgressBar internal padding
+
+
+class GuiScrollBarProperty(IntEnum):
+	"""ScrollBar"""
+	ARROWS_SIZE: int = 16  # 
+	ARROWS_VISIBLE: int = 17  # 
+	SCROLL_SLIDER_PADDING: int = 18  # (SLIDERBAR, SLIDER_PADDING)
+	SCROLL_SLIDER_SIZE: int = 19  # 
+	SCROLL_PADDING: int = 20  # 
+	SCROLL_SPEED: int = 21  # 
+
+
+class GuiCheckBoxProperty(IntEnum):
+	"""CheckBox"""
+	CHECK_PADDING: int = 16  # CheckBox internal check padding
+
+
+class GuiComboBoxProperty(IntEnum):
+	"""ComboBox"""
+	COMBO_BUTTON_WIDTH: int = 16  # ComboBox right button width
+	COMBO_BUTTON_SPACING: int = 17  # ComboBox button separation
+
+
+class GuiDropdownBoxProperty(IntEnum):
+	"""DropdownBox"""
+	ARROW_PADDING: int = 16  # DropdownBox arrow separation from border and items
+	DROPDOWN_ITEMS_SPACING: int = 17  # DropdownBox items separation
+
+
+class GuiTextBoxProperty(IntEnum):
+	"""TextBox/TextBoxMulti/ValueBox/Spinner"""
+	TEXT_INNER_PADDING: int = 16  # TextBox/TextBoxMulti/ValueBox/Spinner inner text padding
+	TEXT_LINES_SPACING: int = 17  # TextBoxMulti lines separation
+
+
+class GuiSpinnerProperty(IntEnum):
+	"""Spinner"""
+	SPIN_BUTTON_WIDTH: int = 16  # Spinner left/right buttons width
+	SPIN_BUTTON_SPACING: int = 17  # Spinner buttons separation
+
+
+class GuiListViewProperty(IntEnum):
+	"""ListView"""
+	LIST_ITEMS_HEIGHT: int = 16  # ListView items height
+	LIST_ITEMS_SPACING: int = 17  # ListView items separation
+	SCROLLBAR_WIDTH: int = 18  # ListView scrollbar size (usually width)
+	SCROLLBAR_SIDE: int = 19  # ListView scrollbar side (0-left, 1-right)
+
+
+class GuiColorPickerProperty(IntEnum):
+	"""ColorPicker"""
+	COLOR_SELECTOR_SIZE: int = 16  # 
+	HUEBAR_WIDTH: int = 17  # ColorPicker right hue bar width
+	HUEBAR_PADDING: int = 18  # ColorPicker right hue bar separation from panel
+	HUEBAR_SELECTOR_HEIGHT: int = 19  # ColorPicker right hue bar selector height
+	HUEBAR_SELECTOR_OVERFLOW: int = 20  # ColorPicker right hue bar selector overflow
+
+
+class GuiIconName(IntEnum):
+	""""""
+	ICON_NONE: int = 0  # 
+	ICON_FOLDER_FILE_OPEN: int = 1  # 
+	ICON_FILE_SAVE_CLASSIC: int = 2  # 
+	ICON_FOLDER_OPEN: int = 3  # 
+	ICON_FOLDER_SAVE: int = 4  # 
+	ICON_FILE_OPEN: int = 5  # 
+	ICON_FILE_SAVE: int = 6  # 
+	ICON_FILE_EXPORT: int = 7  # 
+	ICON_FILE_ADD: int = 8  # 
+	ICON_FILE_DELETE: int = 9  # 
+	ICON_FILETYPE_TEXT: int = 10  # 
+	ICON_FILETYPE_AUDIO: int = 11  # 
+	ICON_FILETYPE_IMAGE: int = 12  # 
+	ICON_FILETYPE_PLAY: int = 13  # 
+	ICON_FILETYPE_VIDEO: int = 14  # 
+	ICON_FILETYPE_INFO: int = 15  # 
+	ICON_FILE_COPY: int = 16  # 
+	ICON_FILE_CUT: int = 17  # 
+	ICON_FILE_PASTE: int = 18  # 
+	ICON_CURSOR_HAND: int = 19  # 
+	ICON_CURSOR_POINTER: int = 20  # 
+	ICON_CURSOR_CLASSIC: int = 21  # 
+	ICON_PENCIL: int = 22  # 
+	ICON_PENCIL_BIG: int = 23  # 
+	ICON_BRUSH_CLASSIC: int = 24  # 
+	ICON_BRUSH_PAINTER: int = 25  # 
+	ICON_WATER_DROP: int = 26  # 
+	ICON_COLOR_PICKER: int = 27  # 
+	ICON_RUBBER: int = 28  # 
+	ICON_COLOR_BUCKET: int = 29  # 
+	ICON_TEXT_T: int = 30  # 
+	ICON_TEXT_A: int = 31  # 
+	ICON_SCALE: int = 32  # 
+	ICON_RESIZE: int = 33  # 
+	ICON_FILTER_POINT: int = 34  # 
+	ICON_FILTER_BILINEAR: int = 35  # 
+	ICON_CROP: int = 36  # 
+	ICON_CROP_ALPHA: int = 37  # 
+	ICON_SQUARE_TOGGLE: int = 38  # 
+	ICON_SYMMETRY: int = 39  # 
+	ICON_SYMMETRY_HORIZONTAL: int = 40  # 
+	ICON_SYMMETRY_VERTICAL: int = 41  # 
+	ICON_LENS: int = 42  # 
+	ICON_LENS_BIG: int = 43  # 
+	ICON_EYE_ON: int = 44  # 
+	ICON_EYE_OFF: int = 45  # 
+	ICON_FILTER_TOP: int = 46  # 
+	ICON_FILTER: int = 47  # 
+	ICON_TARGET_POINT: int = 48  # 
+	ICON_TARGET_SMALL: int = 49  # 
+	ICON_TARGET_BIG: int = 50  # 
+	ICON_TARGET_MOVE: int = 51  # 
+	ICON_CURSOR_MOVE: int = 52  # 
+	ICON_CURSOR_SCALE: int = 53  # 
+	ICON_CURSOR_SCALE_RIGHT: int = 54  # 
+	ICON_CURSOR_SCALE_LEFT: int = 55  # 
+	ICON_UNDO: int = 56  # 
+	ICON_REDO: int = 57  # 
+	ICON_REREDO: int = 58  # 
+	ICON_MUTATE: int = 59  # 
+	ICON_ROTATE: int = 60  # 
+	ICON_REPEAT: int = 61  # 
+	ICON_SHUFFLE: int = 62  # 
+	ICON_EMPTYBOX: int = 63  # 
+	ICON_TARGET: int = 64  # 
+	ICON_TARGET_SMALL_FILL: int = 65  # 
+	ICON_TARGET_BIG_FILL: int = 66  # 
+	ICON_TARGET_MOVE_FILL: int = 67  # 
+	ICON_CURSOR_MOVE_FILL: int = 68  # 
+	ICON_CURSOR_SCALE_FILL: int = 69  # 
+	ICON_CURSOR_SCALE_RIGHT_FILL: int = 70  # 
+	ICON_CURSOR_SCALE_LEFT_FILL: int = 71  # 
+	ICON_UNDO_FILL: int = 72  # 
+	ICON_REDO_FILL: int = 73  # 
+	ICON_REREDO_FILL: int = 74  # 
+	ICON_MUTATE_FILL: int = 75  # 
+	ICON_ROTATE_FILL: int = 76  # 
+	ICON_REPEAT_FILL: int = 77  # 
+	ICON_SHUFFLE_FILL: int = 78  # 
+	ICON_EMPTYBOX_SMALL: int = 79  # 
+	ICON_BOX: int = 80  # 
+	ICON_BOX_TOP: int = 81  # 
+	ICON_BOX_TOP_RIGHT: int = 82  # 
+	ICON_BOX_RIGHT: int = 83  # 
+	ICON_BOX_BOTTOM_RIGHT: int = 84  # 
+	ICON_BOX_BOTTOM: int = 85  # 
+	ICON_BOX_BOTTOM_LEFT: int = 86  # 
+	ICON_BOX_LEFT: int = 87  # 
+	ICON_BOX_TOP_LEFT: int = 88  # 
+	ICON_BOX_CENTER: int = 89  # 
+	ICON_BOX_CIRCLE_MASK: int = 90  # 
+	ICON_POT: int = 91  # 
+	ICON_ALPHA_MULTIPLY: int = 92  # 
+	ICON_ALPHA_CLEAR: int = 93  # 
+	ICON_DITHERING: int = 94  # 
+	ICON_MIPMAPS: int = 95  # 
+	ICON_BOX_GRID: int = 96  # 
+	ICON_GRID: int = 97  # 
+	ICON_BOX_CORNERS_SMALL: int = 98  # 
+	ICON_BOX_CORNERS_BIG: int = 99  # 
+	ICON_FOUR_BOXES: int = 100  # 
+	ICON_GRID_FILL: int = 101  # 
+	ICON_BOX_MULTISIZE: int = 102  # 
+	ICON_ZOOM_SMALL: int = 103  # 
+	ICON_ZOOM_MEDIUM: int = 104  # 
+	ICON_ZOOM_BIG: int = 105  # 
+	ICON_ZOOM_ALL: int = 106  # 
+	ICON_ZOOM_CENTER: int = 107  # 
+	ICON_BOX_DOTS_SMALL: int = 108  # 
+	ICON_BOX_DOTS_BIG: int = 109  # 
+	ICON_BOX_CONCENTRIC: int = 110  # 
+	ICON_BOX_GRID_BIG: int = 111  # 
+	ICON_OK_TICK: int = 112  # 
+	ICON_CROSS: int = 113  # 
+	ICON_ARROW_LEFT: int = 114  # 
+	ICON_ARROW_RIGHT: int = 115  # 
+	ICON_ARROW_DOWN: int = 116  # 
+	ICON_ARROW_UP: int = 117  # 
+	ICON_ARROW_LEFT_FILL: int = 118  # 
+	ICON_ARROW_RIGHT_FILL: int = 119  # 
+	ICON_ARROW_DOWN_FILL: int = 120  # 
+	ICON_ARROW_UP_FILL: int = 121  # 
+	ICON_AUDIO: int = 122  # 
+	ICON_FX: int = 123  # 
+	ICON_WAVE: int = 124  # 
+	ICON_WAVE_SINUS: int = 125  # 
+	ICON_WAVE_SQUARE: int = 126  # 
+	ICON_WAVE_TRIANGULAR: int = 127  # 
+	ICON_CROSS_SMALL: int = 128  # 
+	ICON_PLAYER_PREVIOUS: int = 129  # 
+	ICON_PLAYER_PLAY_BACK: int = 130  # 
+	ICON_PLAYER_PLAY: int = 131  # 
+	ICON_PLAYER_PAUSE: int = 132  # 
+	ICON_PLAYER_STOP: int = 133  # 
+	ICON_PLAYER_NEXT: int = 134  # 
+	ICON_PLAYER_RECORD: int = 135  # 
+	ICON_MAGNET: int = 136  # 
+	ICON_LOCK_CLOSE: int = 137  # 
+	ICON_LOCK_OPEN: int = 138  # 
+	ICON_CLOCK: int = 139  # 
+	ICON_TOOLS: int = 140  # 
+	ICON_GEAR: int = 141  # 
+	ICON_GEAR_BIG: int = 142  # 
+	ICON_BIN: int = 143  # 
+	ICON_HAND_POINTER: int = 144  # 
+	ICON_LASER: int = 145  # 
+	ICON_COIN: int = 146  # 
+	ICON_EXPLOSION: int = 147  # 
+	ICON_1UP: int = 148  # 
+	ICON_PLAYER: int = 149  # 
+	ICON_PLAYER_JUMP: int = 150  # 
+	ICON_KEY: int = 151  # 
+	ICON_DEMON: int = 152  # 
+	ICON_TEXT_POPUP: int = 153  # 
+	ICON_GEAR_EX: int = 154  # 
+	ICON_CRACK: int = 155  # 
+	ICON_CRACK_POINTS: int = 156  # 
+	ICON_STAR: int = 157  # 
+	ICON_DOOR: int = 158  # 
+	ICON_EXIT: int = 159  # 
+	ICON_MODE_2D: int = 160  # 
+	ICON_MODE_3D: int = 161  # 
+	ICON_CUBE: int = 162  # 
+	ICON_CUBE_FACE_TOP: int = 163  # 
+	ICON_CUBE_FACE_LEFT: int = 164  # 
+	ICON_CUBE_FACE_FRONT: int = 165  # 
+	ICON_CUBE_FACE_BOTTOM: int = 166  # 
+	ICON_CUBE_FACE_RIGHT: int = 167  # 
+	ICON_CUBE_FACE_BACK: int = 168  # 
+	ICON_CAMERA: int = 169  # 
+	ICON_SPECIAL: int = 170  # 
+	ICON_LINK_NET: int = 171  # 
+	ICON_LINK_BOXES: int = 172  # 
+	ICON_LINK_MULTI: int = 173  # 
+	ICON_LINK: int = 174  # 
+	ICON_LINK_BROKE: int = 175  # 
+	ICON_TEXT_NOTES: int = 176  # 
+	ICON_NOTEBOOK: int = 177  # 
+	ICON_SUITCASE: int = 178  # 
+	ICON_SUITCASE_ZIP: int = 179  # 
+	ICON_MAILBOX: int = 180  # 
+	ICON_MONITOR: int = 181  # 
+	ICON_PRINTER: int = 182  # 
+	ICON_PHOTO_CAMERA: int = 183  # 
+	ICON_PHOTO_CAMERA_FLASH: int = 184  # 
+	ICON_HOUSE: int = 185  # 
+	ICON_HEART: int = 186  # 
+	ICON_CORNER: int = 187  # 
+	ICON_VERTICAL_BARS: int = 188  # 
+	ICON_VERTICAL_BARS_FILL: int = 189  # 
+	ICON_LIFE_BARS: int = 190  # 
+	ICON_INFO: int = 191  # 
+	ICON_CROSSLINE: int = 192  # 
+	ICON_HELP: int = 193  # 
+	ICON_FILETYPE_ALPHA: int = 194  # 
+	ICON_FILETYPE_HOME: int = 195  # 
+	ICON_LAYERS_VISIBLE: int = 196  # 
+	ICON_LAYERS: int = 197  # 
+	ICON_WINDOW: int = 198  # 
+	ICON_HIDPI: int = 199  # 
+	ICON_FILETYPE_BINARY: int = 200  # 
+	ICON_HEX: int = 201  # 
+	ICON_SHIELD: int = 202  # 
+	ICON_FILE_NEW: int = 203  # 
+	ICON_FOLDER_ADD: int = 204  # 
+	ICON_ALARM: int = 205  # 
+	ICON_206: int = 206  # 
+	ICON_207: int = 207  # 
+	ICON_208: int = 208  # 
+	ICON_209: int = 209  # 
+	ICON_210: int = 210  # 
+	ICON_211: int = 211  # 
+	ICON_212: int = 212  # 
+	ICON_213: int = 213  # 
+	ICON_214: int = 214  # 
+	ICON_215: int = 215  # 
+	ICON_216: int = 216  # 
+	ICON_217: int = 217  # 
+	ICON_218: int = 218  # 
+	ICON_219: int = 219  # 
+	ICON_220: int = 220  # 
+	ICON_221: int = 221  # 
+	ICON_222: int = 222  # 
+	ICON_223: int = 223  # 
+	ICON_224: int = 224  # 
+	ICON_225: int = 225  # 
+	ICON_226: int = 226  # 
+	ICON_227: int = 227  # 
+	ICON_228: int = 228  # 
+	ICON_229: int = 229  # 
+	ICON_230: int = 230  # 
+	ICON_231: int = 231  # 
+	ICON_232: int = 232  # 
+	ICON_233: int = 233  # 
+	ICON_234: int = 234  # 
+	ICON_235: int = 235  # 
+	ICON_236: int = 236  # 
+	ICON_237: int = 237  # 
+	ICON_238: int = 238  # 
+	ICON_239: int = 239  # 
+	ICON_240: int = 240  # 
+	ICON_241: int = 241  # 
+	ICON_242: int = 242  # 
+	ICON_243: int = 243  # 
+	ICON_244: int = 244  # 
+	ICON_245: int = 245  # 
+	ICON_246: int = 246  # 
+	ICON_247: int = 247  # 
+	ICON_248: int = 248  # 
+	ICON_249: int = 249  # 
+	ICON_250: int = 250  # 
+	ICON_251: int = 251  # 
+	ICON_252: int = 252  # 
+	ICON_253: int = 253  # 
+	ICON_254: int = 254  # 
+	ICON_255: int = 255  # 
+
+

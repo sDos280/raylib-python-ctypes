@@ -1434,3 +1434,30 @@ class float16(Structure):
 		pass
 
 
+class GuiStyleProp(Structure):
+	"""Style property"""
+	@property
+	def controlId(self) -> int:
+		pass
+
+	@controlId.setter
+	def controlId(self, i: int) -> None:
+		pass
+
+	@property
+	def propertyId(self) -> int:
+		pass
+
+	@propertyId.setter
+	def propertyId(self, i: int) -> None:
+		pass
+
+	@property
+	def propertyValue(self) -> int:
+		pass
+
+	@propertyValue.setter
+	def propertyValue(self, i: int) -> None:
+		pass
+
+

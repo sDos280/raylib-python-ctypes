@@ -735,25 +735,39 @@ raymath_api_aliases = raymath_api['aliases']
 raymath_api_enums = raymath_api['enums']
 raymath_api_functions = raymath_api['functions']
 
+# load raygui data
+with open(Path(JSON_FOLDER_PATH / 'raygui_api.json')) as reader:
+    raygui_api = json.load(reader)
+
+
+raygui_api_structs = raygui_api['structs']
+raygui_api_aliases = raygui_api['aliases']
+raygui_api_enums = raygui_api['enums']
+raygui_api_functions = raygui_api['functions']
+
 # first we make the structures wrapper
 # we need to generate this first so the function file will have access to this file...
 generate_structs_py_pyi_files()
 
 generate_structs_py_pyi_code(raylib_api_structs, raylib_api_aliases)
 generate_structs_py_pyi_code(raymath_api_structs, raymath_api_aliases)
+generate_structs_py_pyi_code(raygui_api_structs, raygui_api_aliases)
 
 # generate the enums files
 generate_enums_py_pyi_files()
 
 generate_enums_py_pyi_code(raylib_api_enums)
 generate_enums_py_pyi_code(raymath_api_enums)
+generate_enums_py_pyi_code(raygui_api_enums)
 
 # generate the raylib functions signature file
 generate_functions_code_pyi_file()
 
 raylib_functions_to_wrapped = check_for_functions_that_can_wrap(raylib_api_functions)
 raymath_functions_to_wrapped = check_for_functions_that_can_wrap(raymath_api_functions)
+raygui_functions_to_wrapped = check_for_functions_that_can_wrap(raygui_api_functions)
 
 # add the functions signature file
 generate_functions_code_in_code_pyi_file(raylib_functions_to_wrapped)
 generate_functions_code_in_code_pyi_file(raymath_functions_to_wrapped)
+generate_functions_code_in_code_pyi_file(raygui_functions_to_wrapped)

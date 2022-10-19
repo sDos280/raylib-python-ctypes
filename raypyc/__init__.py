@@ -308,3 +308,13 @@ raymath_api_functions = raymath_api['functions']
 raymath_functions_to_wrapped = check_for_functions_that_can_wrap(raymath_api_functions)
 
 wrap_functions_to_ctypes_functions_add_function_to_this_module(raymath_functions_to_wrapped, current_module)
+
+# load raygui data
+with open(Path(Path(__file__).parent / 'raygui_api.json')) as reader:
+    raygui_api = json.load(reader)
+
+raygui_api_functions = raygui_api['functions']
+
+raygui_functions_to_wrapped = check_for_functions_that_can_wrap(raygui_api_functions)
+
+wrap_functions_to_ctypes_functions_add_function_to_this_module(raygui_functions_to_wrapped, current_module)
