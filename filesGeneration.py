@@ -60,8 +60,11 @@ STRUCTURES_FOLDER_PATH = Path(__file__).parent / 'raypyc/structures'
 FUNCTIONS_FOLDER_PATH = Path(__file__).parent / 'raypyc'
 JSON_FOLDER_PATH = Path(__file__).parent / 'raypyc'
 
-wrapped_structures_nams_py = []
-wrapped_structures_nams_pyi = []
+wrapped_enums_names_py = []
+wrapped_enums_names_pyi = []
+
+wrapped_structures_names_py = []
+wrapped_structures_names_pyi = []
 # -----------------------------------------
 
 
@@ -120,22 +123,26 @@ def generate_enums_py_pyi_code(_raylib_api_enums):
     # generate __init__.py code
     with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "a") as enums_code_file_w:
         for enum in _raylib_api_enums:
-            enum_string_logic = ""
-            enum_string_logic += generate_enum_signature_code(enum)
-            enum_string_logic += generate_enum_values_string_code(enum)
-            enum_string_logic += "\n"
+            if enum['name'] not in wrapped_structures_names_py:
+                wrapped_structures_names_py.append(enum['name'])
+                enum_string_logic = ""
+                enum_string_logic += generate_enum_signature_code(enum)
+                enum_string_logic += generate_enum_values_string_code(enum)
+                enum_string_logic += "\n"
 
-            enums_code_file_w.write(enum_string_logic.replace('\n\t\n', '\n\n'))
+                enums_code_file_w.write(enum_string_logic.replace('\n\t\n', '\n\n'))
 
     # generate __init__.pyi code
     with open(Path(ENUMS_FOLDER_PATH / '__init__.pyi'), "a") as enums_code_file_w:
         for enum in _raylib_api_enums:
-            enum_string_logic = ""
-            enum_string_logic += generate_enum_signature_code_stub(enum)
-            enum_string_logic += generate_enum_values_string_code_stub(enum)
-            enum_string_logic += "\n"
+            if enum['name'] not in wrapped_structures_names_pyi:
+                wrapped_structures_names_pyi.append(enum['name'])
+                enum_string_logic = ""
+                enum_string_logic += generate_enum_signature_code_stub(enum)
+                enum_string_logic += generate_enum_values_string_code_stub(enum)
+                enum_string_logic += "\n"
 
-            enums_code_file_w.write(enum_string_logic.replace('\n\t\n', '\n\n'))
+                enums_code_file_w.write(enum_string_logic.replace('\n\t\n', '\n\n'))
 
 
 def generate_enum_signature_code(enum_data):
@@ -190,9 +197,8 @@ def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
     with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "a") as structs_code_file_w:
         for struct in _raylib_api_structs:
             if not struct['name'] in ['AudioStream', 'Wave', 'Sound', 'Music']:
-                print(struct['name'], struct['name'] in wrapped_structures_nams_py)
-                if struct['name'] not in wrapped_structures_nams_py:
-                    wrapped_structures_nams_py.append(struct['name'])
+                if struct['name'] not in wrapped_structures_names_py:
+                    wrapped_structures_names_py.append(struct['name'])
                     struct_string_logic = ""
                     struct_string_logic += generate_struct_signature_code(struct)
                     struct_string_logic += generate_struct_fields_string_code(struct)
@@ -203,9 +209,8 @@ def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
 
                     for aliase in _raylib_api_aliases:
                         if struct['name'] == aliase['type']:
-                            print(aliase['name'], aliase['name'] not in wrapped_structures_nams_py)
-                            if aliase['name'] not in wrapped_structures_nams_py:
-                                wrapped_structures_nams_py.append(aliase['name'])
+                            if aliase['name'] not in wrapped_structures_names_py:
+                                wrapped_structures_names_py.append(aliase['name'])
                                 aliase_data = dict(struct)
                                 aliase_data['name'] = str(aliase['name'])
                                 aliase_data['description'] = str(aliase['description'])
@@ -221,8 +226,8 @@ def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
     with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "a") as structs_code_stub_file_w:
         for struct in _raylib_api_structs:
             if not struct['name'] in ['AudioStream', 'Wave', 'Sound', 'Music']:
-                if struct['name'] not in wrapped_structures_nams_pyi:
-                    wrapped_structures_nams_pyi.append(struct['name'])
+                if struct['name'] not in wrapped_structures_names_pyi:
+                    wrapped_structures_names_pyi.append(struct['name'])
                     struct_string_logic = ""
                     struct_string_logic += generate_struct_signature_code(struct)
                     # struct_string_logic += generate_struct_fields_string_code(struct) we don't really need that in the __init__.pyi file
@@ -233,8 +238,8 @@ def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
 
                     for aliase in _raylib_api_aliases:
                         if struct['name'] == aliase['type']:
-                            if aliase['name'] not in wrapped_structures_nams_pyi:
-                                wrapped_structures_nams_pyi.append(aliase['name'])
+                            if aliase['name'] not in wrapped_structures_names_pyi:
+                                wrapped_structures_names_pyi.append(aliase['name'])
                                 aliase_data = dict(struct)
                                 aliase_data['name'] = str(aliase['name'])
                                 aliase_data['description'] = str(aliase['description'])
@@ -750,5 +755,3 @@ generate_functions_code_in_code_pyi_file(raylib_functions_to_wrapped)
 raymath_functions_to_wrapped = check_for_functions_that_can_wrap(raymath_api_functions)
 
 generate_functions_code_in_code_pyi_file(raymath_functions_to_wrapped)
-
-print(wrapped_structures_nams_py)
