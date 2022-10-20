@@ -164,12 +164,12 @@ def get_numbers_from_string(string):
     return ints
 
 
-# get the indexed of a char in a string
+# get the indexes of a char in a string
 def find_char_in_str(string, char):
     return [i for i, ltr in enumerate(string) if ltr == char]
 
 
-# indentString by indent_by in the start of the string and in every \n in the string
+# return a string that indented in the start of the string and in every \n of the string
 def indentString(string: str, indent_by: int) -> str:
     return '\t' * indent_by + string.replace('\n', '\n' + '\t' * indent_by)
 
@@ -197,10 +197,10 @@ def generate_enums_py_pyi_files():
             structs_code_file_write.write('from enum import IntEnum\n\n')
 
 
-def generate_enums_py_pyi_code(_raylib_api_enums):
+def generate_enums_py_pyi_code(enums_api):
     # generate __init__.py code
     with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "a") as enums_code_file_w:
-        for enum in _raylib_api_enums:
+        for enum in enums_api:
             if enum['name'] not in wrapped_structures_names_py:
                 wrapped_structures_names_py.append(enum['name'])
                 enum_string_logic = ""
@@ -212,7 +212,7 @@ def generate_enums_py_pyi_code(_raylib_api_enums):
 
     # generate __init__.pyi code
     with open(Path(ENUMS_FOLDER_PATH / '__init__.pyi'), "a") as enums_code_file_w:
-        for enum in _raylib_api_enums:
+        for enum in enums_api:
             if enum['name'] not in wrapped_structures_names_pyi:
                 wrapped_structures_names_pyi.append(enum['name'])
                 enum_string_logic = ""
@@ -270,10 +270,10 @@ def generate_structs_py_pyi_files():
             structs_code_file_write.write('from ctypes import *\n\n\n')
 
 
-def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
+def generate_structs_py_pyi_code(structs_api, aliases_api):
     # generate __init__.py code
     with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "a") as structs_code_file_w:
-        for struct in _raylib_api_structs:
+        for struct in structs_api:
             if not struct['name'] in ['AudioStream', 'Wave', 'Sound', 'Music']:
                 if struct['name'] not in wrapped_structures_names_py:
                     wrapped_structures_names_py.append(struct['name'])
@@ -285,7 +285,7 @@ def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
 
                     structs_code_file_w.write(struct_string_logic.replace('\n\t\n', '\n\n'))
 
-                    for aliase in _raylib_api_aliases:
+                    for aliase in aliases_api:
                         if struct['name'] == aliase['type']:
                             if aliase['name'] not in wrapped_structures_names_py:
                                 wrapped_structures_names_py.append(aliase['name'])
@@ -302,7 +302,7 @@ def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
 
     # generate __init__.pyi code
     with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "a") as structs_code_stub_file_w:
-        for struct in _raylib_api_structs:
+        for struct in structs_api:
             if not struct['name'] in ['AudioStream', 'Wave', 'Sound', 'Music']:
                 if struct['name'] not in wrapped_structures_names_pyi:
                     wrapped_structures_names_pyi.append(struct['name'])
@@ -314,7 +314,7 @@ def generate_structs_py_pyi_code(_raylib_api_structs, _raylib_api_aliases):
 
                     structs_code_stub_file_w.write(struct_string_logic.replace('\n\t\n', '\n\n'))
 
-                    for aliase in _raylib_api_aliases:
+                    for aliase in aliases_api:
                         if struct['name'] == aliase['type']:
                             if aliase['name'] not in wrapped_structures_names_pyi:
                                 wrapped_structures_names_pyi.append(aliase['name'])
