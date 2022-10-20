@@ -1164,7 +1164,7 @@ class Material(Structure):
 	_fields_ = [
 		('shader', Shader),  # Material shader
 		('maps', POINTER(MaterialMap)),  # Material maps array (MAX_MATERIAL_MAPS)
-		('params', c_float*4)  # Material generic parameters (if required)
+		('params', c_float * 4)  # Material generic parameters (if required)
 	]
 
 	@property
@@ -1228,7 +1228,7 @@ class Transform(Structure):
 class BoneInfo(Structure):
 	"""Bone, skeletal animation bone"""
 	_fields_ = [
-		('name', c_char*32),  # Bone name
+		('name', c_char * 32),  # Bone name
 		('parent', c_int)  # Bone parent
 	]
 
@@ -1479,8 +1479,8 @@ class VrDeviceInfo(Structure):
 		('eyeToScreenDistance', c_float),  # Distance between eye and display in meters
 		('lensSeparationDistance', c_float),  # Lens separation distance in meters
 		('interpupillaryDistance', c_float),  # IPD (distance between pupils) in meters
-		('lensDistortionValues', c_float*4),  # Lens distortion constant parameters
-		('chromaAbCorrection', c_float*4)  # Chromatic aberration correction parameters
+		('lensDistortionValues', c_float * 4),  # Lens distortion constant parameters
+		('chromaAbCorrection', c_float * 4)  # Chromatic aberration correction parameters
 	]
 
 	@property
@@ -1567,14 +1567,14 @@ class VrDeviceInfo(Structure):
 class VrStereoConfig(Structure):
 	"""VrStereoConfig, VR stereo rendering configuration for simulator"""
 	_fields_ = [
-		('projection', Matrix*2),  # VR projection matrices (per eye)
-		('viewOffset', Matrix*2),  # VR view offset matrices (per eye)
-		('leftLensCenter', c_float*2),  # VR left lens center
-		('rightLensCenter', c_float*2),  # VR right lens center
-		('leftScreenCenter', c_float*2),  # VR left screen center
-		('rightScreenCenter', c_float*2),  # VR right screen center
-		('scale', c_float*2),  # VR distortion scale
-		('scaleIn', c_float*2)  # VR distortion scale in
+		('projection', Matrix * 2),  # VR projection matrices (per eye)
+		('viewOffset', Matrix * 2),  # VR view offset matrices (per eye)
+		('leftLensCenter', c_float * 2),  # VR left lens center
+		('rightLensCenter', c_float * 2),  # VR right lens center
+		('leftScreenCenter', c_float * 2),  # VR left screen center
+		('rightScreenCenter', c_float * 2),  # VR right screen center
+		('scale', c_float * 2),  # VR distortion scale
+		('scaleIn', c_float * 2)  # VR distortion scale in
 	]
 
 	@property
@@ -1678,7 +1678,7 @@ class FilePathList(Structure):
 class float3(Structure):
 	"""NOTE: Helper types to be used instead of array return types for *ToFloat functions"""
 	_fields_ = [
-		('v', c_float*3)  # 
+		('v', c_float * 3)  # 
 	]
 
 	@property
@@ -1693,7 +1693,7 @@ class float3(Structure):
 class float16(Structure):
 	""""""
 	_fields_ = [
-		('v', c_float*16)  # 
+		('v', c_float * 16)  # 
 	]
 
 	@property

@@ -364,8 +364,6 @@ def generate_struct_fields_string_code_stub(struct_data):
         struct_data_field_name = struct_data_field['name']
         struct_data_field_type = struct_data_field['type']
         struct_data_field_description = struct_data_field['description']
-        struct_data_field_type_pointer_level = struct_data_field_type.count("*")
-        struct_data_field_type_is_array = struct_data_field_type.count("]")
         struct_fields += f"\t('{struct_data_field_name}', {convert_c_type_string_to_ctype_type_sting(struct_data_field_type)}),  # {struct_data_field_description}\n"
     temp = find_char_in_str(struct_fields, ',')
     if len(temp) != 0:
@@ -578,71 +576,18 @@ def check_for_functions_that_can_wrap(functions_set):
         do_wrapper_this_function = True
         if 'params' in function.keys():
             for function_param in function['params']:
-                function_param_type = function_param['type']
-                function_param_pointer_level = function_param_type.count("*")
-                sfunction_param_is_array = function_param_type.count("]")
-                if sfunction_param_is_array == 0:
-                    if function_param_pointer_level == 0 or (function_param_type.replace(" ", "").replace("const", "") in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
-                        if function_param_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
-                            do_wrapper_this_function = True
-                        else:  # probably type is struct
-                            do_wrapper_this_function = True  # probably type is struct
-                    else:
-                        if function_param_type.replace('const', '').replace(" ", "") in typesDictionaryCstringToCtypesString:
-                            do_wrapper_this_function = True
-                        else:
-                            if function_param_type.replace('const', '').replace(" ", "").replace("*", "") in typesDictionaryCstringToCtypesString:
-                                do_wrapper_this_function = True
-                            else:
-                                do_wrapper_this_function = True  # probably type is struct
-                else:
-                    if function_param_type.replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '').replace(
-                            f'{str(get_numbers_from_string(function_param_type.replace("const", "").replace(" ", "").replace("*", "").replace("[", " ").replace("]", " "))[0])}',
-                            '') in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
-                        do_wrapper_this_function = True
-                    else:
-                        do_wrapper_this_function = True  # probably type is struct
-
-                if function_param_type.replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '') in ['AudioStream', 'Wave', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback',
-                                                                                                                                    'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
+                if function_param['type'] in ['AudioStream', 'Wave', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
                     do_wrapper_this_function = False
                     break
 
         if do_wrapper_this_function:
-            function_return_type = function['returnType']
-            function_param_pointer_level = function_return_type.count("*")
-            sfunction_param_is_array = function_return_type.count("]")
-            if sfunction_param_is_array == 0:
-                if function_param_pointer_level == 0 or (function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString):  # if value isn't a pointer value
-                    if function_return_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToCtypesString:  # there isn't really a const type in python
-                        do_wrapper_this_function = True
-                    else:  # probably type is struct
-                        do_wrapper_this_function = True  # probably type is struct
-                else:
-                    if function_return_type.replace('const', '').replace(" ", "") in typesDictionaryCstringToCtypesString:
-                        do_wrapper_this_function = True
-                    else:
-                        if function_return_type.replace('const', '').replace(" ", "").replace("*", "") in typesDictionaryCstringToCtypesString:
-                            do_wrapper_this_function = True
-                        else:
-                            do_wrapper_this_function = True  # probably type is struct
-            else:
-                if function_return_type.replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '').replace(
-                        f'{str(get_numbers_from_string(function_return_type.replace("const", "").replace(" ", "").replace("*", "").replace("[", " ").replace("]", " "))[0])}',
-                        '') in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
-                    do_wrapper_this_function = True
-                else:
-                    do_wrapper_this_function = True  # probably type is struct
-
-            if function_return_type.replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '') in ['AudioStream', 'Wave', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback',
-                                                                                                                                 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
+            if function['returnType'].replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '') in ['AudioStream', 'Wave', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
                 do_wrapper_this_function = False
 
         if do_wrapper_this_function:
             functions_that_can_be_wrap.append(function)
         else:
             functions_that_cant_be_wrap.append(function)
-
     return functions_that_can_be_wrap
 
 
@@ -666,63 +611,12 @@ def generate_function_signature_code(function_data):
     function_string = f"def {function_data['name']}("
     if 'params' in function_data.keys():  # only return stuff
         for param in function_data['params']:
-            function_param_type_sting = param['type']
-            function_param_name_sting = param['name']
-            function_param_name_pointer_level = param['type'].count("*")
-            if function_param_name_pointer_level == 0 or (function_param_type_sting.replace(" ", "") in typesDictionaryCstringToPythonTypesString or function_param_type_sting.replace(" ", "").replace('const',
-                                                                                                                                                                                                        '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value or in typesDictionaryCstringToCtypesString:
-                if function_param_type_sting.replace(" ", "") in typesDictionaryCstringToPythonTypesString:
-                    function_string += f"{function_param_name_sting}: {typesDictionaryCstringToPythonTypesString[function_param_type_sting.replace(' ', '')]}, "
-                elif function_param_type_sting.replace(' ', '').replace('const', '') in typesDictionaryCstringToPythonTypesString:
-                    function_string += f"{function_param_name_sting}: {typesDictionaryCstringToPythonTypesString[function_param_type_sting.replace(' ', '').replace('const', '')]}, "
-                else:  # probably type is struct
-                    function_string += f"{function_param_name_sting}: {function_param_type_sting.replace(' ', '').replace('const', '')}, "
-            else:  # ctyps function wrapper
+            function_string += f"{param['name']}: {convert_c_type_string_to_ctype_type_sting(param['type'])}, "
 
-                function_param_processed_with_pointer_end = ""
-                function_return_type_processed_with_pointer = function_param_type_sting.replace('const', '').replace(" ", "")
-                if function_return_type_processed_with_pointer in typesDictionaryCstringToCtypesString:
-                    function_string += f"{function_param_name_sting}: {typesDictionaryCstringToCtypesString[function_return_type_processed_with_pointer]}, "
-                else:
-                    function_return_type_processed = function_param_type_sting.replace('const', '').replace(" ", "").replace("*", "")
-                    function_param_processed_ctype = ""
-                    if function_return_type_processed in typesDictionaryCstringToCtypesString:
-                        function_param_processed_ctype = typesDictionaryCstringToCtypesString[f"{function_return_type_processed}"]
-                    else:
-                        function_param_processed_ctype = function_return_type_processed
-                    for i in range(function_param_name_pointer_level):
-                        function_param_processed_ctype = f"POINTER({function_param_processed_ctype})"
-
-                    function_param_processed_with_pointer_end = function_param_processed_ctype
-                function_string += f"{function_param_name_sting}: {function_param_processed_with_pointer_end}, "
         function_string = function_string[:-2]
 
     function_string += ") -> "
-    if function_return_type_pointer_level == 0 or (function_return_type_sting.replace(" ", "") in typesDictionaryCstringToPythonTypesString or function_return_type_sting.replace(" ", "").replace('const',
-                                                                                                                                                                                                   '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value or in typesDictionaryCstringToCtypesString:
-        if function_return_type_sting.replace(" ", "") in typesDictionaryCstringToPythonTypesString:
-            function_string += f"{typesDictionaryCstringToPythonTypesString[function_return_type_sting.replace(' ', '')]}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
-        elif function_return_type_sting.replace(' ', '').replace('const', '') in typesDictionaryCstringToPythonTypesString:
-            function_string += f"{typesDictionaryCstringToPythonTypesString[function_return_type_sting.replace(' ', '').replace('const', '')]}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
-        else:  # probably type is struct
-            function_string += f"{function_return_type_sting.replace(' ', '').replace('const', '')}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
-    else:  # ctyps function wrapper
-        function_return_type_processed_with_pointer_end = ""
-        function_return_type_processed_with_pointer = function_return_type_sting.replace('const', '').replace(" ", "")
-        if function_return_type_processed_with_pointer in typesDictionaryCstringToCtypesString:
-            function_string += f"{typesDictionaryCstringToCtypesString[function_return_type_processed_with_pointer]}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
-        else:
-            function_return_type_processed = function_return_type_sting.replace('const', '').replace(" ", "").replace("*", "")
-            function_return_type_processed_ctype = ""
-            if function_return_type_processed in typesDictionaryCstringToCtypesString:
-                function_return_type_processed_ctype = typesDictionaryCstringToCtypesString[f"{function_return_type_processed}"]
-            else:
-                function_return_type_processed_ctype = function_return_type_processed
-            for i in range(function_return_type_pointer_level):
-                function_return_type_processed_ctype = f"POINTER({function_return_type_processed_ctype})"
-
-            function_return_type_processed_with_pointer_end = function_return_type_processed_ctype
-        function_string += f"{function_return_type_processed_with_pointer_end}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
+    function_string += f"{convert_c_type_string_to_ctype_type_sting(function_data['returnType'])}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
 
     return function_string
 
