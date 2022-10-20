@@ -54,10 +54,14 @@ typesDictionaryCstringToCtypesString = {
 }
 
 # -----------------------------------------
+DEFINES_FOLDER_PATH = Path(__file__).parent / 'raypyc/defines'
 ENUMS_FOLDER_PATH = Path(__file__).parent / 'raypyc/enums'
 STRUCTURES_FOLDER_PATH = Path(__file__).parent / 'raypyc/structures'
 FUNCTIONS_FOLDER_PATH = Path(__file__).parent / 'raypyc'
 JSON_FOLDER_PATH = Path(__file__).parent / 'raypyc'
+
+wrapped_defines_names_py = []
+wrapped_defines_names_pyi = []
 
 wrapped_enums_names_py = []
 wrapped_enums_names_pyi = []
@@ -173,6 +177,98 @@ def find_char_in_str(string, char):
 def indentString(string: str, indent_by: int) -> str:
     return '\t' * indent_by + string.replace('\n', '\n' + '\t' * indent_by)
 
+def generate_define_code(define_data):
+    if define_data['type'] not in ["FLOAT_MATH", "FLOAT", "STRING", "INT"]: return ""
+    elif define_data['type'] == "FLOAT_MATH": return f"{define_data['name']}: float = {define_data['value'].replace('f', '')}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+    elif define_data['type'] in ["INT", "FLOAT"]: return f"{define_data['name']}: int = {define_data['value']}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+    elif define_data['type'] == "STRING": return f"{define_data['name']}: str = {define_data['value']}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+    else: return ""
+
+def generate_define_code_stub(define_data):
+    if define_data['type'] not in ["FLOAT_MATH", "FLOAT", "STRING", "INT"]: return ""
+    elif define_data['type'] in ["FLOAT_MATH", "FLOAT"]: return f"{define_data['name']}: float{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+    elif define_data['type'] == "INT": return f"{define_data['name']}: int{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+    elif define_data['type'] == "STRING": return f"{define_data['name']}: str{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+    else: return ""
+
+def generate_enum_signature_code(enum_data):
+    return f"class {enum_data['name']}(IntEnum):\n\t\"\"\"{enum_data['description']}\"\"\"\n"
+
+
+def generate_enum_signature_code_stub(enum_data):
+    return f"class {enum_data['name']}(IntEnum):\n\t\"\"\"{enum_data['description']}\"\"\"\n"
+
+
+def generate_enum_values_string_code(enum_data):
+    enum_members_string = ""
+    for enum_value in enum_data['values']:
+        enum_members_string += f"{enum_value['name']}: int = {enum_value['value']}  # {enum_value['description']}\n"
+
+    return f"{indentString(enum_members_string, 1)[:-1]}\n"
+
+
+def generate_enum_values_string_code_stub(enum_data):
+    enum_members_string = ""
+    for enum_value in enum_data['values']:
+        enum_members_string += f"{enum_value['name']}: int  # {enum_value['description']}\n"
+
+    return f"{indentString(enum_members_string, 1)[:-1]}\n"
+
+def generate_struct_signature_code(struct_data):
+    return f"class {struct_data['name']}(Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
+
+
+def generate_struct_signature_code_stub(struct_data):
+    return f"class {struct_data['name']}(Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
+
+
+# remove the current defines/__init__.py defines enums/__init__.pyi files and generated new ones
+def generate_defines_py_pyi_files():
+    if Path(DEFINES_FOLDER_PATH / '__init__.py').exists():
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
+            pass
+    else:
+        print(f"there isn\'t a __init__.py in {Path(DEFINES_FOLDER_PATH / '__init__.py')}, regenerating a new one here")
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "x"):  # generate __init__.py file => define logic
+            pass
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
+            pass
+
+    if Path(DEFINES_FOLDER_PATH / '__init__.pyi').exists():
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+            pass
+    else:
+        print(f"there isn\'t a __init__.pyi in {Path(DEFINES_FOLDER_PATH / '__init__.pyi')}, regenerating a new one here")
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => define signature
+            pass
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+            pass
+
+
+def generate_defines_py_pyi_code(defines_api):
+
+    # generate __init__.py code
+    with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "a") as defines_code_file_w:
+        for define in defines_api:
+            if define['name'] == "KEY_RIGHT":
+                print(defines_api)
+            if define['name'] not in wrapped_defines_names_py:
+                wrapped_defines_names_py.append(define['name'])
+                define_string_logic = generate_define_code(define)
+                if define_string_logic != "": define_string_logic += "\n"
+
+                defines_code_file_w.write(define_string_logic)
+
+    # generate __init__.pyi code
+    with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "a") as defines_code_file_w:
+        for define in defines_api:
+            if define['name'] not in wrapped_defines_names_pyi:
+                wrapped_defines_names_pyi.append(define['name'])
+                define_string_logic = generate_define_code_stub(define)
+                if define_string_logic != "": define_string_logic += "\n"
+
+                defines_code_file_w.write(define_string_logic)
+
 
 # remove the current enums/__init__.py and enums/__init__.pyi files and generated new ones
 def generate_enums_py_pyi_files():
@@ -181,7 +277,7 @@ def generate_enums_py_pyi_files():
             structs_code_file_write.write('from enum import IntEnum\n\n')
     else:
         print(f"there isn\'t a __init__.py in {Path(ENUMS_FOLDER_PATH / '__init__.py')}, regenerating a new one here")
-        with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "x"):  # generate enums/__init__.py file => enum logic
+        with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "x"):  # generate __init__.py file => enum logic
             pass
         with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('from enum import IntEnum\n\n')
@@ -221,30 +317,6 @@ def generate_enums_py_pyi_code(enums_api):
                 enum_string_logic += "\n"
 
                 enums_code_file_w.write(enum_string_logic.replace('\n\t\n', '\n\n'))
-
-
-def generate_enum_signature_code(enum_data):
-    return f"class {enum_data['name']}(IntEnum):\n\t\"\"\"{enum_data['description']}\"\"\"\n"
-
-
-def generate_enum_signature_code_stub(enum_data):
-    return f"class {enum_data['name']}(IntEnum):\n\t\"\"\"{enum_data['description']}\"\"\"\n"
-
-
-def generate_enum_values_string_code(enum_data):
-    enum_members_string = ""
-    for enum_value in enum_data['values']:
-        enum_members_string += f"{enum_value['name']}: int = {enum_value['value']}  # {enum_value['description']}\n"
-
-    return f"{indentString(enum_members_string, 1)[:-1]}\n"
-
-
-def generate_enum_values_string_code_stub(enum_data):
-    enum_members_string = ""
-    for enum_value in enum_data['values']:
-        enum_members_string += f"{enum_value['name']}: int  # {enum_value['description']}\n"
-
-    return f"{indentString(enum_members_string, 1)[:-1]}\n"
 
 
 # remove the current structures/__init__.py and structures/__init__.pyi files and generated new ones
@@ -328,14 +400,6 @@ def generate_structs_py_pyi_code(structs_api, aliases_api):
                                 aliase_string_logic += "\n"
 
                                 structs_code_stub_file_w.write(aliase_string_logic.replace('\n\t\n', '\n\n'))
-
-
-def generate_struct_signature_code(struct_data):
-    return f"class {struct_data['name']}(Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
-
-
-def generate_struct_signature_code_stub(struct_data):
-    return f"class {struct_data['name']}(Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
 
 
 def generate_struct_fields_string_code(struct_data):
@@ -466,6 +530,7 @@ def generate_function_signature_code(function_data):
 with open(Path(JSON_FOLDER_PATH / 'raylib_api.json')) as reader:
     raylib_api = json.load(reader)
 
+raylib_api_defines = raylib_api['defines']
 raylib_api_structs = raylib_api['structs']
 raylib_api_aliases = raylib_api['aliases']
 raylib_api_enums = raylib_api['enums']
@@ -475,6 +540,7 @@ raylib_api_functions = raylib_api['functions']
 with open(Path(JSON_FOLDER_PATH / 'raymath_api.json')) as reader:
     raymath_api = json.load(reader)
 
+raymath_api_defines = raymath_api['defines']
 raymath_api_structs = raymath_api['structs']
 raymath_api_aliases = raymath_api['aliases']
 raymath_api_enums = raymath_api['enums']
@@ -484,13 +550,19 @@ raymath_api_functions = raymath_api['functions']
 with open(Path(JSON_FOLDER_PATH / 'raygui_api.json')) as reader:
     raygui_api = json.load(reader)
 
+raygui_api_defines = raygui_api['defines']
 raygui_api_structs = raygui_api['structs']
 raygui_api_aliases = raygui_api['aliases']
 raygui_api_enums = raygui_api['enums']
 raygui_api_functions = raygui_api['functions']
 
-# first we make the structures wrapper
-# we need to generate this first so the function file will have access to this file...
+
+generate_defines_py_pyi_files()
+
+generate_defines_py_pyi_code(raylib_api_defines)
+generate_defines_py_pyi_code(raymath_api_defines)
+generate_defines_py_pyi_code(raygui_api_defines)
+
 generate_structs_py_pyi_files()
 
 generate_structs_py_pyi_code(raylib_api_structs, raylib_api_aliases)
