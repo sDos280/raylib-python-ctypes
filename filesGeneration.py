@@ -377,86 +377,9 @@ def generate_struct_setters_getters_code(struct_data):
     struct_setters_getters_string = ""
 
     for struct_data_field in struct_data['fields']:
-        struct_getters_string = "@property\n"
-        struct_data_field_name = struct_data_field['name']
-        struct_data_field_type = struct_data_field['type']
-        struct_data_field_description = struct_data_field['description']
-        struct_data_field_type_pointer_level = struct_data_field_type.count("*")
-        struct_data_field_type_is_array = struct_data_field_type.count("]")
-        struct_getters_string += f"def {struct_data_field_name}(self) -> "
-        if struct_data_field_type_is_array == 0:
-            if struct_data_field_type_pointer_level == 0 or (struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
-                if struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
-                    struct_getters_string += f"{typesDictionaryCstringToPythonTypesString[struct_data_field_type.replace(' ', '').replace('const', '')]}:\n\treturn self.{struct_data_field_name}\n\n"
-                else:  # probably type is struct
-                    struct_getters_string += f"{struct_data_field_type.replace(' ', '').replace('const', '')}:\n\treturn self.{struct_data_field_name}\n\n"
-            else:
-                struct_data_field_type_processed_with_pointer_end = ""
-                struct_data_field_type_processed_with_pointer = struct_data_field_type.replace('const', '').replace(" ", "")
-                if struct_data_field_type_processed_with_pointer in typesDictionaryCstringToCtypesString:
-                    struct_data_field_type_processed_with_pointer_end = f"{typesDictionaryCstringToCtypesString[struct_data_field_type_processed_with_pointer]}:\n\treturn self.{struct_data_field_name}\n\n"
-                else:
-                    struct_data_field_type_processed = struct_data_field_type.replace('const', '').replace(" ", "").replace("*", "")
-                    struct_data_field_type_processed_ctype = ""
-                    if struct_data_field_type_processed in typesDictionaryCstringToCtypesString:
-                        struct_data_field_type_processed_ctype = typesDictionaryCstringToCtypesString[f"{struct_data_field_type_processed}"]
-                    else:
-                        struct_data_field_type_processed_ctype = struct_data_field_type_processed
-                    for i in range(struct_data_field_type_pointer_level):
-                        struct_data_field_type_processed_ctype = f"POINTER({struct_data_field_type_processed_ctype})"
-
-                    struct_data_field_type_processed_with_pointer_end = struct_data_field_type_processed_ctype
-
-                struct_getters_string += f"{struct_data_field_type_processed_with_pointer_end}:\n\treturn self.{struct_data_field_name}\n\n"
-        else:
-            struct_data_field_type_processed = struct_data_field_type.replace('const', '').replace(" ", "").replace("*", "")
-            struct_data_field_array_len = get_numbers_from_string(struct_data_field_type_processed.replace('[', ' ').replace(']', ' '))[0]
-            struct_data_field_type_processed_ctype = struct_data_field_type_processed.replace('[', '').replace(']', '').replace(f'{struct_data_field_array_len}', '')
-            if struct_data_field_type_processed_ctype in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
-                struct_getters_string += f"{typesDictionaryCstringToCtypesString[struct_data_field_type_processed_ctype]} * {struct_data_field_array_len}:\n\treturn self.{struct_data_field_name}\n\n"
-            else:
-                struct_getters_string += f"{struct_data_field_type_processed_ctype} * {struct_data_field_array_len}:\n\treturn self.{struct_data_field_name}\n\n"  # probably type is struct
-        use_type = ""
-        if struct_data_field_type_is_array == 0:
-            if struct_data_field_type_pointer_level == 0 or (
-                    struct_data_field_type.replace(" ", "") in typesDictionaryCstringToPythonTypesString or struct_data_field_type.replace(" ", "").replace('const',
-                                                                                                                                                            '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
-                if struct_data_field_type.replace(" ", "") in typesDictionaryCstringToPythonTypesString:  # that why in the typesDictionary we don't use spaces for the key
-                    use_type = f"{typesDictionaryCstringToPythonTypesString[struct_data_field_type.replace(' ', '')]}"
-                elif struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
-                    use_type = f"{typesDictionaryCstringToPythonTypesString[struct_data_field_type.replace(' ', '').replace('const', '')]}"
-                else:  # probably type is struct
-                    use_type = f"{struct_data_field_type.replace(' ', '').replace('const', '')}"
-            else:
-                struct_data_field_type_processed_with_pointer_end = ""
-                struct_data_field_type_processed_with_pointer = struct_data_field_type.replace('const', '').replace(" ", "")
-                if struct_data_field_type_processed_with_pointer in typesDictionaryCstringToCtypesString:
-                    struct_data_field_type_processed_with_pointer_end = f"{typesDictionaryCstringToCtypesString[struct_data_field_type_processed_with_pointer]}"
-                else:
-                    struct_data_field_type_processed = struct_data_field_type.replace('const', '').replace(" ", "").replace("*", "")
-                    struct_data_field_type_processed_ctype = ""
-                    if struct_data_field_type_processed in typesDictionaryCstringToCtypesString:
-                        struct_data_field_type_processed_ctype = typesDictionaryCstringToCtypesString[f"{struct_data_field_type_processed}"]
-                    else:
-                        struct_data_field_type_processed_ctype = struct_data_field_type_processed
-                    for i in range(struct_data_field_type_pointer_level):
-                        struct_data_field_type_processed_ctype = f"POINTER({struct_data_field_type_processed_ctype})"
-
-                    struct_data_field_type_processed_with_pointer_end = struct_data_field_type_processed_ctype
-
-                use_type = f"{struct_data_field_type_processed_with_pointer_end}"
-        else:
-            struct_data_field_type_processed = struct_data_field_type.replace('const', '').replace(" ", "").replace("*", "")
-            struct_data_field_array_len = get_numbers_from_string(struct_data_field_type_processed.replace('[', ' ').replace(']', ' '))[0]
-            struct_data_field_type_processed_ctype = struct_data_field_type_processed.replace('[', '').replace(']', '').replace(f'{struct_data_field_array_len}', '')
-            if struct_data_field_type_processed_ctype in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
-                use_type = f"{typesDictionaryCstringToCtypesString[struct_data_field_type_processed_ctype]} * {struct_data_field_array_len}"
-            else:
-                use_type = f"{struct_data_field_type_processed_ctype} * {struct_data_field_array_len}"  # probably type is struct
-        struct_setters_string = f"@{struct_data_field_name}.setter\ndef {struct_data_field_name}(self, i: {use_type}) -> None:\n\tself.{struct_data_field_name} = i\n\n"
-        struct_setters_string += f""
-
-        struct_setters_getters_string += struct_getters_string + struct_setters_string
+        use_type = convert_c_type_string_to_ctype_type_sting(struct_data_field['type'])
+        struct_setters_getters_string += f"@property\ndef {struct_data_field['name']}(self) -> {use_type}:\n\treturn self.{struct_data_field['name']}\n\n" \
+                                         f"@{struct_data_field['name']}.setter\ndef {struct_data_field['name']}(self, i: {use_type}) -> None:\n\tself.{struct_data_field['name']} = i\n\n"
 
     return indentString(struct_setters_getters_string, 1)[:-1]
 
@@ -465,87 +388,9 @@ def generate_struct_setters_getters_code_stub(struct_data):
     struct_setters_getters_string = ""
 
     for struct_data_field in struct_data['fields']:
-        struct_getters_string = "@property\n"
-        struct_data_field_name = struct_data_field['name']
-        struct_data_field_type = struct_data_field['type']
-        struct_data_field_description = struct_data_field['description']
-        struct_data_field_description = struct_data_field['description']
-        struct_data_field_type_pointer_level = struct_data_field_type.count("*")
-        struct_data_field_type_is_array = struct_data_field_type.count("]")
-        struct_getters_string += f"def {struct_data_field_name}(self) -> "
-        if struct_data_field_type_is_array == 0:
-            if struct_data_field_type_pointer_level == 0 or (struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
-                if struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
-                    struct_getters_string += f"{typesDictionaryCstringToPythonTypesString[struct_data_field_type.replace(' ', '').replace('const', '')]}:\n\tpass\n\n"
-                else:  # probably type is struct
-                    struct_getters_string += f"{struct_data_field_type.replace(' ', '').replace('const', '')}:\n\tpass\n\n"
-            else:
-                struct_data_field_type_processed_with_pointer_end = ""
-                struct_data_field_type_processed_with_pointer = struct_data_field_type.replace('const', '').replace(" ", "")
-                if struct_data_field_type_processed_with_pointer in typesDictionaryCstringToCtypesString:
-                    struct_data_field_type_processed_with_pointer_end = f"{typesDictionaryCstringToCtypesString[struct_data_field_type_processed_with_pointer]}:\n\tpass\n\n"
-                else:
-                    struct_data_field_type_processed = struct_data_field_type.replace('const', '').replace(" ", "").replace("*", "")
-                    struct_data_field_type_processed_ctype = ""
-                    if struct_data_field_type_processed in typesDictionaryCstringToCtypesString:
-                        struct_data_field_type_processed_ctype = typesDictionaryCstringToCtypesString[f"{struct_data_field_type_processed}"]
-                    else:
-                        struct_data_field_type_processed_ctype = struct_data_field_type_processed
-                    for i in range(struct_data_field_type_pointer_level):
-                        struct_data_field_type_processed_ctype = f"POINTER({struct_data_field_type_processed_ctype})"
-
-                    struct_data_field_type_processed_with_pointer_end = struct_data_field_type_processed_ctype
-
-                struct_getters_string += f"{struct_data_field_type_processed_with_pointer_end}:\n\tpass\n\n"
-        else:
-            struct_data_field_type_processed = struct_data_field_type.replace('const', '').replace(" ", "").replace("*", "")
-            struct_data_field_array_len = get_numbers_from_string(struct_data_field_type_processed.replace('[', ' ').replace(']', ' '))[0]
-            struct_data_field_type_processed_ctype = struct_data_field_type_processed.replace('[', '').replace(']', '').replace(f'{struct_data_field_array_len}', '')
-            if struct_data_field_type_processed_ctype in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
-                struct_getters_string += f"{typesDictionaryCstringToCtypesString[struct_data_field_type_processed_ctype]} * {struct_data_field_array_len}:\n\tpass\n\n"
-            else:
-                struct_getters_string += f"{struct_data_field_type_processed_ctype} * {struct_data_field_array_len}:\n\tpass\n\n"  # probably type is struct
-        use_type = ""
-        if struct_data_field_type_is_array == 0:
-            if struct_data_field_type_pointer_level == 0 or (
-                    struct_data_field_type.replace(" ", "") in typesDictionaryCstringToPythonTypesString or struct_data_field_type.replace(" ", "").replace('const',
-                                                                                                                                                            '') in typesDictionaryCstringToPythonTypesString):  # if value isn't a pointer value
-                if struct_data_field_type.replace(" ", "") in typesDictionaryCstringToPythonTypesString:  # that why in the typesDictionary we don't use spaces for the key
-                    use_type = f"{typesDictionaryCstringToPythonTypesString[struct_data_field_type.replace(' ', '')]}"
-                elif struct_data_field_type.replace(" ", "").replace('const', '') in typesDictionaryCstringToPythonTypesString:  # there isn't really a const type in python
-                    use_type = f"{typesDictionaryCstringToPythonTypesString[struct_data_field_type.replace(' ', '').replace('const', '')]}"
-                else:  # probably type is struct
-                    use_type = f"{struct_data_field_type.replace(' ', '').replace('const', '')}"
-            else:
-                struct_data_field_type_processed_with_pointer_end = ""
-                struct_data_field_type_processed_with_pointer = struct_data_field_type.replace('const', '').replace(" ", "")
-                if struct_data_field_type_processed_with_pointer in typesDictionaryCstringToCtypesString:
-                    struct_data_field_type_processed_with_pointer_end = f"{typesDictionaryCstringToCtypesString[struct_data_field_type_processed_with_pointer]}"
-                else:
-                    struct_data_field_type_processed = struct_data_field_type.replace('const', '').replace(" ", "").replace("*", "")
-                    struct_data_field_type_processed_ctype = ""
-                    if struct_data_field_type_processed in typesDictionaryCstringToCtypesString:
-                        struct_data_field_type_processed_ctype = typesDictionaryCstringToCtypesString[f"{struct_data_field_type_processed}"]
-                    else:
-                        struct_data_field_type_processed_ctype = struct_data_field_type_processed
-                    for i in range(struct_data_field_type_pointer_level):
-                        struct_data_field_type_processed_ctype = f"POINTER({struct_data_field_type_processed_ctype})"
-
-                    struct_data_field_type_processed_with_pointer_end = struct_data_field_type_processed_ctype
-
-                use_type = f"{struct_data_field_type_processed_with_pointer_end}"
-        else:
-            struct_data_field_type_processed = struct_data_field_type.replace('const', '').replace(" ", "").replace("*", "")
-            struct_data_field_array_len = get_numbers_from_string(struct_data_field_type_processed.replace('[', ' ').replace(']', ' '))[0]
-            struct_data_field_type_processed_ctype = struct_data_field_type_processed.replace('[', '').replace(']', '').replace(f'{struct_data_field_array_len}', '')
-            if struct_data_field_type_processed_ctype in typesDictionaryCstringToCtypesString:  # that why in the typesDictionary we don't use spaces for the key
-                use_type = f"{typesDictionaryCstringToCtypesString[struct_data_field_type_processed_ctype]} * {struct_data_field_array_len}"
-            else:
-                use_type = f"{struct_data_field_type_processed_ctype} * {struct_data_field_array_len}"  # probably type is struct
-        struct_setters_string = f"@{struct_data_field_name}.setter\ndef {struct_data_field_name}(self, i: {use_type}) -> None:\n\tpass\n\n"
-        struct_setters_string += f""
-
-        struct_setters_getters_string += struct_getters_string + struct_setters_string
+        use_type = convert_c_type_string_to_ctype_type_sting(struct_data_field['type'])
+        struct_setters_getters_string += f"@property\ndef {struct_data_field['name']}(self) -> {use_type}:\n\t...\n\n" \
+                                         f"@{struct_data_field['name']}.setter\ndef {struct_data_field['name']}(self, i: {use_type}) -> None:\n\t...\n\n"
 
     return indentString(struct_setters_getters_string, 1)[:-1]
 
