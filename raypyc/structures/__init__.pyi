@@ -4,1460 +4,1460 @@ from ctypes import *
 class Vector2(Structure):
 	"""Vector2, 2 components"""
 	@property
-	def x(self) -> float:
-		pass
+	def x(self) -> c_float:
+		...
 
 	@x.setter
-	def x(self, i: float) -> None:
-		pass
+	def x(self, i: c_float) -> None:
+		...
 
 	@property
-	def y(self) -> float:
-		pass
+	def y(self) -> c_float:
+		...
 
 	@y.setter
-	def y(self, i: float) -> None:
-		pass
+	def y(self, i: c_float) -> None:
+		...
 
 
 class Vector3(Structure):
 	"""Vector3, 3 components"""
 	@property
-	def x(self) -> float:
-		pass
+	def x(self) -> c_float:
+		...
 
 	@x.setter
-	def x(self, i: float) -> None:
-		pass
+	def x(self, i: c_float) -> None:
+		...
 
 	@property
-	def y(self) -> float:
-		pass
+	def y(self) -> c_float:
+		...
 
 	@y.setter
-	def y(self, i: float) -> None:
-		pass
+	def y(self, i: c_float) -> None:
+		...
 
 	@property
-	def z(self) -> float:
-		pass
+	def z(self) -> c_float:
+		...
 
 	@z.setter
-	def z(self, i: float) -> None:
-		pass
+	def z(self, i: c_float) -> None:
+		...
 
 
 class Vector4(Structure):
 	"""Vector4, 4 components"""
 	@property
-	def x(self) -> float:
-		pass
+	def x(self) -> c_float:
+		...
 
 	@x.setter
-	def x(self, i: float) -> None:
-		pass
+	def x(self, i: c_float) -> None:
+		...
 
 	@property
-	def y(self) -> float:
-		pass
+	def y(self) -> c_float:
+		...
 
 	@y.setter
-	def y(self, i: float) -> None:
-		pass
+	def y(self, i: c_float) -> None:
+		...
 
 	@property
-	def z(self) -> float:
-		pass
+	def z(self) -> c_float:
+		...
 
 	@z.setter
-	def z(self, i: float) -> None:
-		pass
+	def z(self, i: c_float) -> None:
+		...
 
 	@property
-	def w(self) -> float:
-		pass
+	def w(self) -> c_float:
+		...
 
 	@w.setter
-	def w(self, i: float) -> None:
-		pass
+	def w(self, i: c_float) -> None:
+		...
 
 
 class Quaternion(Structure):
 	"""Quaternion, 4 components (Vector4 alias)"""
 	@property
-	def x(self) -> float:
-		pass
+	def x(self) -> c_float:
+		...
 
 	@x.setter
-	def x(self, i: float) -> None:
-		pass
+	def x(self, i: c_float) -> None:
+		...
 
 	@property
-	def y(self) -> float:
-		pass
+	def y(self) -> c_float:
+		...
 
 	@y.setter
-	def y(self, i: float) -> None:
-		pass
+	def y(self, i: c_float) -> None:
+		...
 
 	@property
-	def z(self) -> float:
-		pass
+	def z(self) -> c_float:
+		...
 
 	@z.setter
-	def z(self, i: float) -> None:
-		pass
+	def z(self, i: c_float) -> None:
+		...
 
 	@property
-	def w(self) -> float:
-		pass
+	def w(self) -> c_float:
+		...
 
 	@w.setter
-	def w(self, i: float) -> None:
-		pass
+	def w(self, i: c_float) -> None:
+		...
 
 
 class Matrix(Structure):
 	"""Matrix, 4x4 components, column major, OpenGL style, right handed"""
 	@property
-	def m0(self) -> float:
-		pass
+	def m0(self) -> c_float:
+		...
 
 	@m0.setter
-	def m0(self, i: float) -> None:
-		pass
+	def m0(self, i: c_float) -> None:
+		...
 
 	@property
-	def m4(self) -> float:
-		pass
+	def m4(self) -> c_float:
+		...
 
 	@m4.setter
-	def m4(self, i: float) -> None:
-		pass
+	def m4(self, i: c_float) -> None:
+		...
 
 	@property
-	def m8(self) -> float:
-		pass
+	def m8(self) -> c_float:
+		...
 
 	@m8.setter
-	def m8(self, i: float) -> None:
-		pass
+	def m8(self, i: c_float) -> None:
+		...
 
 	@property
-	def m12(self) -> float:
-		pass
+	def m12(self) -> c_float:
+		...
 
 	@m12.setter
-	def m12(self, i: float) -> None:
-		pass
+	def m12(self, i: c_float) -> None:
+		...
 
 	@property
-	def m1(self) -> float:
-		pass
+	def m1(self) -> c_float:
+		...
 
 	@m1.setter
-	def m1(self, i: float) -> None:
-		pass
+	def m1(self, i: c_float) -> None:
+		...
 
 	@property
-	def m5(self) -> float:
-		pass
+	def m5(self) -> c_float:
+		...
 
 	@m5.setter
-	def m5(self, i: float) -> None:
-		pass
+	def m5(self, i: c_float) -> None:
+		...
 
 	@property
-	def m9(self) -> float:
-		pass
+	def m9(self) -> c_float:
+		...
 
 	@m9.setter
-	def m9(self, i: float) -> None:
-		pass
+	def m9(self, i: c_float) -> None:
+		...
 
 	@property
-	def m13(self) -> float:
-		pass
+	def m13(self) -> c_float:
+		...
 
 	@m13.setter
-	def m13(self, i: float) -> None:
-		pass
+	def m13(self, i: c_float) -> None:
+		...
 
 	@property
-	def m2(self) -> float:
-		pass
+	def m2(self) -> c_float:
+		...
 
 	@m2.setter
-	def m2(self, i: float) -> None:
-		pass
+	def m2(self, i: c_float) -> None:
+		...
 
 	@property
-	def m6(self) -> float:
-		pass
+	def m6(self) -> c_float:
+		...
 
 	@m6.setter
-	def m6(self, i: float) -> None:
-		pass
+	def m6(self, i: c_float) -> None:
+		...
 
 	@property
-	def m10(self) -> float:
-		pass
+	def m10(self) -> c_float:
+		...
 
 	@m10.setter
-	def m10(self, i: float) -> None:
-		pass
+	def m10(self, i: c_float) -> None:
+		...
 
 	@property
-	def m14(self) -> float:
-		pass
+	def m14(self) -> c_float:
+		...
 
 	@m14.setter
-	def m14(self, i: float) -> None:
-		pass
+	def m14(self, i: c_float) -> None:
+		...
 
 	@property
-	def m3(self) -> float:
-		pass
+	def m3(self) -> c_float:
+		...
 
 	@m3.setter
-	def m3(self, i: float) -> None:
-		pass
+	def m3(self, i: c_float) -> None:
+		...
 
 	@property
-	def m7(self) -> float:
-		pass
+	def m7(self) -> c_float:
+		...
 
 	@m7.setter
-	def m7(self, i: float) -> None:
-		pass
+	def m7(self, i: c_float) -> None:
+		...
 
 	@property
-	def m11(self) -> float:
-		pass
+	def m11(self) -> c_float:
+		...
 
 	@m11.setter
-	def m11(self, i: float) -> None:
-		pass
+	def m11(self, i: c_float) -> None:
+		...
 
 	@property
-	def m15(self) -> float:
-		pass
+	def m15(self) -> c_float:
+		...
 
 	@m15.setter
-	def m15(self, i: float) -> None:
-		pass
+	def m15(self, i: c_float) -> None:
+		...
 
 
 class Color(Structure):
 	"""Color, 4 components, R8G8B8A8 (32bit)"""
 	@property
-	def r(self) -> int:
-		pass
+	def r(self) -> c_ubyte:
+		...
 
 	@r.setter
-	def r(self, i: int) -> None:
-		pass
+	def r(self, i: c_ubyte) -> None:
+		...
 
 	@property
-	def g(self) -> int:
-		pass
+	def g(self) -> c_ubyte:
+		...
 
 	@g.setter
-	def g(self, i: int) -> None:
-		pass
+	def g(self, i: c_ubyte) -> None:
+		...
 
 	@property
-	def b(self) -> int:
-		pass
+	def b(self) -> c_ubyte:
+		...
 
 	@b.setter
-	def b(self, i: int) -> None:
-		pass
+	def b(self, i: c_ubyte) -> None:
+		...
 
 	@property
-	def a(self) -> int:
-		pass
+	def a(self) -> c_ubyte:
+		...
 
 	@a.setter
-	def a(self, i: int) -> None:
-		pass
+	def a(self, i: c_ubyte) -> None:
+		...
 
 
 class Rectangle(Structure):
 	"""Rectangle, 4 components"""
 	@property
-	def x(self) -> float:
-		pass
+	def x(self) -> c_float:
+		...
 
 	@x.setter
-	def x(self, i: float) -> None:
-		pass
+	def x(self, i: c_float) -> None:
+		...
 
 	@property
-	def y(self) -> float:
-		pass
+	def y(self) -> c_float:
+		...
 
 	@y.setter
-	def y(self, i: float) -> None:
-		pass
+	def y(self, i: c_float) -> None:
+		...
 
 	@property
-	def width(self) -> float:
-		pass
+	def width(self) -> c_float:
+		...
 
 	@width.setter
-	def width(self, i: float) -> None:
-		pass
+	def width(self, i: c_float) -> None:
+		...
 
 	@property
-	def height(self) -> float:
-		pass
+	def height(self) -> c_float:
+		...
 
 	@height.setter
-	def height(self, i: float) -> None:
-		pass
+	def height(self, i: c_float) -> None:
+		...
 
 
 class Image(Structure):
 	"""Image, pixel data stored in CPU memory (RAM)"""
 	@property
-	def data(self) -> int:
-		pass
+	def data(self) -> c_void_p:
+		...
 
 	@data.setter
-	def data(self, i: int) -> None:
-		pass
+	def data(self, i: c_void_p) -> None:
+		...
 
 	@property
-	def width(self) -> int:
-		pass
+	def width(self) -> c_int:
+		...
 
 	@width.setter
-	def width(self, i: int) -> None:
-		pass
+	def width(self, i: c_int) -> None:
+		...
 
 	@property
-	def height(self) -> int:
-		pass
+	def height(self) -> c_int:
+		...
 
 	@height.setter
-	def height(self, i: int) -> None:
-		pass
+	def height(self, i: c_int) -> None:
+		...
 
 	@property
-	def mipmaps(self) -> int:
-		pass
+	def mipmaps(self) -> c_int:
+		...
 
 	@mipmaps.setter
-	def mipmaps(self, i: int) -> None:
-		pass
+	def mipmaps(self, i: c_int) -> None:
+		...
 
 	@property
-	def format(self) -> int:
-		pass
+	def format(self) -> c_int:
+		...
 
 	@format.setter
-	def format(self, i: int) -> None:
-		pass
+	def format(self, i: c_int) -> None:
+		...
 
 
 class Texture(Structure):
 	"""Texture, tex data stored in GPU memory (VRAM)"""
 	@property
-	def id(self) -> int:
-		pass
+	def id(self) -> c_uint:
+		...
 
 	@id.setter
-	def id(self, i: int) -> None:
-		pass
+	def id(self, i: c_uint) -> None:
+		...
 
 	@property
-	def width(self) -> int:
-		pass
+	def width(self) -> c_int:
+		...
 
 	@width.setter
-	def width(self, i: int) -> None:
-		pass
+	def width(self, i: c_int) -> None:
+		...
 
 	@property
-	def height(self) -> int:
-		pass
+	def height(self) -> c_int:
+		...
 
 	@height.setter
-	def height(self, i: int) -> None:
-		pass
+	def height(self, i: c_int) -> None:
+		...
 
 	@property
-	def mipmaps(self) -> int:
-		pass
+	def mipmaps(self) -> c_int:
+		...
 
 	@mipmaps.setter
-	def mipmaps(self, i: int) -> None:
-		pass
+	def mipmaps(self, i: c_int) -> None:
+		...
 
 	@property
-	def format(self) -> int:
-		pass
+	def format(self) -> c_int:
+		...
 
 	@format.setter
-	def format(self, i: int) -> None:
-		pass
+	def format(self, i: c_int) -> None:
+		...
 
 
 class Texture2D(Structure):
 	"""Texture2D, same as Texture"""
 	@property
-	def id(self) -> int:
-		pass
+	def id(self) -> c_uint:
+		...
 
 	@id.setter
-	def id(self, i: int) -> None:
-		pass
+	def id(self, i: c_uint) -> None:
+		...
 
 	@property
-	def width(self) -> int:
-		pass
+	def width(self) -> c_int:
+		...
 
 	@width.setter
-	def width(self, i: int) -> None:
-		pass
+	def width(self, i: c_int) -> None:
+		...
 
 	@property
-	def height(self) -> int:
-		pass
+	def height(self) -> c_int:
+		...
 
 	@height.setter
-	def height(self, i: int) -> None:
-		pass
+	def height(self, i: c_int) -> None:
+		...
 
 	@property
-	def mipmaps(self) -> int:
-		pass
+	def mipmaps(self) -> c_int:
+		...
 
 	@mipmaps.setter
-	def mipmaps(self, i: int) -> None:
-		pass
+	def mipmaps(self, i: c_int) -> None:
+		...
 
 	@property
-	def format(self) -> int:
-		pass
+	def format(self) -> c_int:
+		...
 
 	@format.setter
-	def format(self, i: int) -> None:
-		pass
+	def format(self, i: c_int) -> None:
+		...
 
 
 class TextureCubemap(Structure):
 	"""TextureCubemap, same as Texture"""
 	@property
-	def id(self) -> int:
-		pass
+	def id(self) -> c_uint:
+		...
 
 	@id.setter
-	def id(self, i: int) -> None:
-		pass
+	def id(self, i: c_uint) -> None:
+		...
 
 	@property
-	def width(self) -> int:
-		pass
+	def width(self) -> c_int:
+		...
 
 	@width.setter
-	def width(self, i: int) -> None:
-		pass
+	def width(self, i: c_int) -> None:
+		...
 
 	@property
-	def height(self) -> int:
-		pass
+	def height(self) -> c_int:
+		...
 
 	@height.setter
-	def height(self, i: int) -> None:
-		pass
+	def height(self, i: c_int) -> None:
+		...
 
 	@property
-	def mipmaps(self) -> int:
-		pass
+	def mipmaps(self) -> c_int:
+		...
 
 	@mipmaps.setter
-	def mipmaps(self, i: int) -> None:
-		pass
+	def mipmaps(self, i: c_int) -> None:
+		...
 
 	@property
-	def format(self) -> int:
-		pass
+	def format(self) -> c_int:
+		...
 
 	@format.setter
-	def format(self, i: int) -> None:
-		pass
+	def format(self, i: c_int) -> None:
+		...
 
 
 class RenderTexture(Structure):
 	"""RenderTexture, fbo for texture rendering"""
 	@property
-	def id(self) -> int:
-		pass
+	def id(self) -> c_uint:
+		...
 
 	@id.setter
-	def id(self, i: int) -> None:
-		pass
+	def id(self, i: c_uint) -> None:
+		...
 
 	@property
 	def texture(self) -> Texture:
-		pass
+		...
 
 	@texture.setter
 	def texture(self, i: Texture) -> None:
-		pass
+		...
 
 	@property
 	def depth(self) -> Texture:
-		pass
+		...
 
 	@depth.setter
 	def depth(self, i: Texture) -> None:
-		pass
+		...
 
 
 class RenderTexture2D(Structure):
 	"""RenderTexture2D, same as RenderTexture"""
 	@property
-	def id(self) -> int:
-		pass
+	def id(self) -> c_uint:
+		...
 
 	@id.setter
-	def id(self, i: int) -> None:
-		pass
+	def id(self, i: c_uint) -> None:
+		...
 
 	@property
 	def texture(self) -> Texture:
-		pass
+		...
 
 	@texture.setter
 	def texture(self, i: Texture) -> None:
-		pass
+		...
 
 	@property
 	def depth(self) -> Texture:
-		pass
+		...
 
 	@depth.setter
 	def depth(self, i: Texture) -> None:
-		pass
+		...
 
 
 class NPatchInfo(Structure):
 	"""NPatchInfo, n-patch layout info"""
 	@property
 	def source(self) -> Rectangle:
-		pass
+		...
 
 	@source.setter
 	def source(self, i: Rectangle) -> None:
-		pass
+		...
 
 	@property
-	def left(self) -> int:
-		pass
+	def left(self) -> c_int:
+		...
 
 	@left.setter
-	def left(self, i: int) -> None:
-		pass
+	def left(self, i: c_int) -> None:
+		...
 
 	@property
-	def top(self) -> int:
-		pass
+	def top(self) -> c_int:
+		...
 
 	@top.setter
-	def top(self, i: int) -> None:
-		pass
+	def top(self, i: c_int) -> None:
+		...
 
 	@property
-	def right(self) -> int:
-		pass
+	def right(self) -> c_int:
+		...
 
 	@right.setter
-	def right(self, i: int) -> None:
-		pass
+	def right(self, i: c_int) -> None:
+		...
 
 	@property
-	def bottom(self) -> int:
-		pass
+	def bottom(self) -> c_int:
+		...
 
 	@bottom.setter
-	def bottom(self, i: int) -> None:
-		pass
+	def bottom(self, i: c_int) -> None:
+		...
 
 	@property
-	def layout(self) -> int:
-		pass
+	def layout(self) -> c_int:
+		...
 
 	@layout.setter
-	def layout(self, i: int) -> None:
-		pass
+	def layout(self, i: c_int) -> None:
+		...
 
 
 class GlyphInfo(Structure):
 	"""GlyphInfo, font characters glyphs info"""
 	@property
-	def value(self) -> int:
-		pass
+	def value(self) -> c_int:
+		...
 
 	@value.setter
-	def value(self, i: int) -> None:
-		pass
+	def value(self, i: c_int) -> None:
+		...
 
 	@property
-	def offsetX(self) -> int:
-		pass
+	def offsetX(self) -> c_int:
+		...
 
 	@offsetX.setter
-	def offsetX(self, i: int) -> None:
-		pass
+	def offsetX(self, i: c_int) -> None:
+		...
 
 	@property
-	def offsetY(self) -> int:
-		pass
+	def offsetY(self) -> c_int:
+		...
 
 	@offsetY.setter
-	def offsetY(self, i: int) -> None:
-		pass
+	def offsetY(self, i: c_int) -> None:
+		...
 
 	@property
-	def advanceX(self) -> int:
-		pass
+	def advanceX(self) -> c_int:
+		...
 
 	@advanceX.setter
-	def advanceX(self, i: int) -> None:
-		pass
+	def advanceX(self, i: c_int) -> None:
+		...
 
 	@property
 	def image(self) -> Image:
-		pass
+		...
 
 	@image.setter
 	def image(self, i: Image) -> None:
-		pass
+		...
 
 
 class Font(Structure):
 	"""Font, font texture and GlyphInfo array data"""
 	@property
-	def baseSize(self) -> int:
-		pass
+	def baseSize(self) -> c_int:
+		...
 
 	@baseSize.setter
-	def baseSize(self, i: int) -> None:
-		pass
+	def baseSize(self, i: c_int) -> None:
+		...
 
 	@property
-	def glyphCount(self) -> int:
-		pass
+	def glyphCount(self) -> c_int:
+		...
 
 	@glyphCount.setter
-	def glyphCount(self, i: int) -> None:
-		pass
+	def glyphCount(self, i: c_int) -> None:
+		...
 
 	@property
-	def glyphPadding(self) -> int:
-		pass
+	def glyphPadding(self) -> c_int:
+		...
 
 	@glyphPadding.setter
-	def glyphPadding(self, i: int) -> None:
-		pass
+	def glyphPadding(self, i: c_int) -> None:
+		...
 
 	@property
 	def texture(self) -> Texture2D:
-		pass
+		...
 
 	@texture.setter
 	def texture(self, i: Texture2D) -> None:
-		pass
+		...
 
 	@property
 	def recs(self) -> POINTER(Rectangle):
-		pass
+		...
 
 	@recs.setter
 	def recs(self, i: POINTER(Rectangle)) -> None:
-		pass
+		...
 
 	@property
 	def glyphs(self) -> POINTER(GlyphInfo):
-		pass
+		...
 
 	@glyphs.setter
 	def glyphs(self, i: POINTER(GlyphInfo)) -> None:
-		pass
+		...
 
 
 class Camera3D(Structure):
 	"""Camera, defines position/orientation in 3d space"""
 	@property
 	def position(self) -> Vector3:
-		pass
+		...
 
 	@position.setter
 	def position(self, i: Vector3) -> None:
-		pass
+		...
 
 	@property
 	def target(self) -> Vector3:
-		pass
+		...
 
 	@target.setter
 	def target(self, i: Vector3) -> None:
-		pass
+		...
 
 	@property
 	def up(self) -> Vector3:
-		pass
+		...
 
 	@up.setter
 	def up(self, i: Vector3) -> None:
-		pass
+		...
 
 	@property
-	def fovy(self) -> float:
-		pass
+	def fovy(self) -> c_float:
+		...
 
 	@fovy.setter
-	def fovy(self, i: float) -> None:
-		pass
+	def fovy(self, i: c_float) -> None:
+		...
 
 	@property
-	def projection(self) -> int:
-		pass
+	def projection(self) -> c_int:
+		...
 
 	@projection.setter
-	def projection(self, i: int) -> None:
-		pass
+	def projection(self, i: c_int) -> None:
+		...
 
 
 class Camera(Structure):
 	"""Camera type fallback, defaults to Camera3D"""
 	@property
 	def position(self) -> Vector3:
-		pass
+		...
 
 	@position.setter
 	def position(self, i: Vector3) -> None:
-		pass
+		...
 
 	@property
 	def target(self) -> Vector3:
-		pass
+		...
 
 	@target.setter
 	def target(self, i: Vector3) -> None:
-		pass
+		...
 
 	@property
 	def up(self) -> Vector3:
-		pass
+		...
 
 	@up.setter
 	def up(self, i: Vector3) -> None:
-		pass
+		...
 
 	@property
-	def fovy(self) -> float:
-		pass
+	def fovy(self) -> c_float:
+		...
 
 	@fovy.setter
-	def fovy(self, i: float) -> None:
-		pass
+	def fovy(self, i: c_float) -> None:
+		...
 
 	@property
-	def projection(self) -> int:
-		pass
+	def projection(self) -> c_int:
+		...
 
 	@projection.setter
-	def projection(self, i: int) -> None:
-		pass
+	def projection(self, i: c_int) -> None:
+		...
 
 
 class Camera2D(Structure):
 	"""Camera2D, defines position/orientation in 2d space"""
 	@property
 	def offset(self) -> Vector2:
-		pass
+		...
 
 	@offset.setter
 	def offset(self, i: Vector2) -> None:
-		pass
+		...
 
 	@property
 	def target(self) -> Vector2:
-		pass
+		...
 
 	@target.setter
 	def target(self, i: Vector2) -> None:
-		pass
+		...
 
 	@property
-	def rotation(self) -> float:
-		pass
+	def rotation(self) -> c_float:
+		...
 
 	@rotation.setter
-	def rotation(self, i: float) -> None:
-		pass
+	def rotation(self, i: c_float) -> None:
+		...
 
 	@property
-	def zoom(self) -> float:
-		pass
+	def zoom(self) -> c_float:
+		...
 
 	@zoom.setter
-	def zoom(self, i: float) -> None:
-		pass
+	def zoom(self, i: c_float) -> None:
+		...
 
 
 class Mesh(Structure):
 	"""Mesh, vertex data and vao/vbo"""
 	@property
-	def vertexCount(self) -> int:
-		pass
+	def vertexCount(self) -> c_int:
+		...
 
 	@vertexCount.setter
-	def vertexCount(self, i: int) -> None:
-		pass
+	def vertexCount(self, i: c_int) -> None:
+		...
 
 	@property
-	def triangleCount(self) -> int:
-		pass
+	def triangleCount(self) -> c_int:
+		...
 
 	@triangleCount.setter
-	def triangleCount(self, i: int) -> None:
-		pass
+	def triangleCount(self, i: c_int) -> None:
+		...
 
 	@property
 	def vertices(self) -> POINTER(c_float):
-		pass
+		...
 
 	@vertices.setter
 	def vertices(self, i: POINTER(c_float)) -> None:
-		pass
+		...
 
 	@property
 	def texcoords(self) -> POINTER(c_float):
-		pass
+		...
 
 	@texcoords.setter
 	def texcoords(self, i: POINTER(c_float)) -> None:
-		pass
+		...
 
 	@property
 	def texcoords2(self) -> POINTER(c_float):
-		pass
+		...
 
 	@texcoords2.setter
 	def texcoords2(self, i: POINTER(c_float)) -> None:
-		pass
+		...
 
 	@property
 	def normals(self) -> POINTER(c_float):
-		pass
+		...
 
 	@normals.setter
 	def normals(self, i: POINTER(c_float)) -> None:
-		pass
+		...
 
 	@property
 	def tangents(self) -> POINTER(c_float):
-		pass
+		...
 
 	@tangents.setter
 	def tangents(self, i: POINTER(c_float)) -> None:
-		pass
+		...
 
 	@property
 	def colors(self) -> POINTER(c_ubyte):
-		pass
+		...
 
 	@colors.setter
 	def colors(self, i: POINTER(c_ubyte)) -> None:
-		pass
+		...
 
 	@property
 	def indices(self) -> POINTER(c_ushort):
-		pass
+		...
 
 	@indices.setter
 	def indices(self, i: POINTER(c_ushort)) -> None:
-		pass
+		...
 
 	@property
 	def animVertices(self) -> POINTER(c_float):
-		pass
+		...
 
 	@animVertices.setter
 	def animVertices(self, i: POINTER(c_float)) -> None:
-		pass
+		...
 
 	@property
 	def animNormals(self) -> POINTER(c_float):
-		pass
+		...
 
 	@animNormals.setter
 	def animNormals(self, i: POINTER(c_float)) -> None:
-		pass
+		...
 
 	@property
 	def boneIds(self) -> POINTER(c_ubyte):
-		pass
+		...
 
 	@boneIds.setter
 	def boneIds(self, i: POINTER(c_ubyte)) -> None:
-		pass
+		...
 
 	@property
 	def boneWeights(self) -> POINTER(c_float):
-		pass
+		...
 
 	@boneWeights.setter
 	def boneWeights(self, i: POINTER(c_float)) -> None:
-		pass
+		...
 
 	@property
-	def vaoId(self) -> int:
-		pass
+	def vaoId(self) -> c_uint:
+		...
 
 	@vaoId.setter
-	def vaoId(self, i: int) -> None:
-		pass
+	def vaoId(self, i: c_uint) -> None:
+		...
 
 	@property
 	def vboId(self) -> POINTER(c_uint):
-		pass
+		...
 
 	@vboId.setter
 	def vboId(self, i: POINTER(c_uint)) -> None:
-		pass
+		...
 
 
 class Shader(Structure):
 	"""Shader"""
 	@property
-	def id(self) -> int:
-		pass
+	def id(self) -> c_uint:
+		...
 
 	@id.setter
-	def id(self, i: int) -> None:
-		pass
+	def id(self, i: c_uint) -> None:
+		...
 
 	@property
 	def locs(self) -> POINTER(c_int):
-		pass
+		...
 
 	@locs.setter
 	def locs(self, i: POINTER(c_int)) -> None:
-		pass
+		...
 
 
 class MaterialMap(Structure):
 	"""MaterialMap"""
 	@property
 	def texture(self) -> Texture2D:
-		pass
+		...
 
 	@texture.setter
 	def texture(self, i: Texture2D) -> None:
-		pass
+		...
 
 	@property
 	def color(self) -> Color:
-		pass
+		...
 
 	@color.setter
 	def color(self, i: Color) -> None:
-		pass
+		...
 
 	@property
-	def value(self) -> float:
-		pass
+	def value(self) -> c_float:
+		...
 
 	@value.setter
-	def value(self, i: float) -> None:
-		pass
+	def value(self, i: c_float) -> None:
+		...
 
 
 class Material(Structure):
 	"""Material, includes shader and maps"""
 	@property
 	def shader(self) -> Shader:
-		pass
+		...
 
 	@shader.setter
 	def shader(self, i: Shader) -> None:
-		pass
+		...
 
 	@property
 	def maps(self) -> POINTER(MaterialMap):
-		pass
+		...
 
 	@maps.setter
 	def maps(self, i: POINTER(MaterialMap)) -> None:
-		pass
+		...
 
 	@property
 	def params(self) -> c_float * 4:
-		pass
+		...
 
 	@params.setter
 	def params(self, i: c_float * 4) -> None:
-		pass
+		...
 
 
 class Transform(Structure):
 	"""Transform, vectex transformation data"""
 	@property
 	def translation(self) -> Vector3:
-		pass
+		...
 
 	@translation.setter
 	def translation(self, i: Vector3) -> None:
-		pass
+		...
 
 	@property
 	def rotation(self) -> Quaternion:
-		pass
+		...
 
 	@rotation.setter
 	def rotation(self, i: Quaternion) -> None:
-		pass
+		...
 
 	@property
 	def scale(self) -> Vector3:
-		pass
+		...
 
 	@scale.setter
 	def scale(self, i: Vector3) -> None:
-		pass
+		...
 
 
 class BoneInfo(Structure):
 	"""Bone, skeletal animation bone"""
 	@property
 	def name(self) -> c_char * 32:
-		pass
+		...
 
 	@name.setter
 	def name(self, i: c_char * 32) -> None:
-		pass
+		...
 
 	@property
-	def parent(self) -> int:
-		pass
+	def parent(self) -> c_int:
+		...
 
 	@parent.setter
-	def parent(self, i: int) -> None:
-		pass
+	def parent(self, i: c_int) -> None:
+		...
 
 
 class Model(Structure):
 	"""Model, meshes, materials and animation data"""
 	@property
 	def transform(self) -> Matrix:
-		pass
+		...
 
 	@transform.setter
 	def transform(self, i: Matrix) -> None:
-		pass
+		...
 
 	@property
-	def meshCount(self) -> int:
-		pass
+	def meshCount(self) -> c_int:
+		...
 
 	@meshCount.setter
-	def meshCount(self, i: int) -> None:
-		pass
+	def meshCount(self, i: c_int) -> None:
+		...
 
 	@property
-	def materialCount(self) -> int:
-		pass
+	def materialCount(self) -> c_int:
+		...
 
 	@materialCount.setter
-	def materialCount(self, i: int) -> None:
-		pass
+	def materialCount(self, i: c_int) -> None:
+		...
 
 	@property
 	def meshes(self) -> POINTER(Mesh):
-		pass
+		...
 
 	@meshes.setter
 	def meshes(self, i: POINTER(Mesh)) -> None:
-		pass
+		...
 
 	@property
 	def materials(self) -> POINTER(Material):
-		pass
+		...
 
 	@materials.setter
 	def materials(self, i: POINTER(Material)) -> None:
-		pass
+		...
 
 	@property
 	def meshMaterial(self) -> POINTER(c_int):
-		pass
+		...
 
 	@meshMaterial.setter
 	def meshMaterial(self, i: POINTER(c_int)) -> None:
-		pass
+		...
 
 	@property
-	def boneCount(self) -> int:
-		pass
+	def boneCount(self) -> c_int:
+		...
 
 	@boneCount.setter
-	def boneCount(self, i: int) -> None:
-		pass
+	def boneCount(self, i: c_int) -> None:
+		...
 
 	@property
 	def bones(self) -> POINTER(BoneInfo):
-		pass
+		...
 
 	@bones.setter
 	def bones(self, i: POINTER(BoneInfo)) -> None:
-		pass
+		...
 
 	@property
 	def bindPose(self) -> POINTER(Transform):
-		pass
+		...
 
 	@bindPose.setter
 	def bindPose(self, i: POINTER(Transform)) -> None:
-		pass
+		...
 
 
 class ModelAnimation(Structure):
 	"""ModelAnimation"""
 	@property
-	def boneCount(self) -> int:
-		pass
+	def boneCount(self) -> c_int:
+		...
 
 	@boneCount.setter
-	def boneCount(self, i: int) -> None:
-		pass
+	def boneCount(self, i: c_int) -> None:
+		...
 
 	@property
-	def frameCount(self) -> int:
-		pass
+	def frameCount(self) -> c_int:
+		...
 
 	@frameCount.setter
-	def frameCount(self, i: int) -> None:
-		pass
+	def frameCount(self, i: c_int) -> None:
+		...
 
 	@property
 	def bones(self) -> POINTER(BoneInfo):
-		pass
+		...
 
 	@bones.setter
 	def bones(self, i: POINTER(BoneInfo)) -> None:
-		pass
+		...
 
 	@property
 	def framePoses(self) -> POINTER(POINTER(Transform)):
-		pass
+		...
 
 	@framePoses.setter
 	def framePoses(self, i: POINTER(POINTER(Transform))) -> None:
-		pass
+		...
 
 
 class Ray(Structure):
 	"""Ray, ray for raycasting"""
 	@property
 	def position(self) -> Vector3:
-		pass
+		...
 
 	@position.setter
 	def position(self, i: Vector3) -> None:
-		pass
+		...
 
 	@property
 	def direction(self) -> Vector3:
-		pass
+		...
 
 	@direction.setter
 	def direction(self, i: Vector3) -> None:
-		pass
+		...
 
 
 class RayCollision(Structure):
 	"""RayCollision, ray hit information"""
 	@property
-	def hit(self) -> bool:
-		pass
+	def hit(self) -> c_bool:
+		...
 
 	@hit.setter
-	def hit(self, i: bool) -> None:
-		pass
+	def hit(self, i: c_bool) -> None:
+		...
 
 	@property
-	def distance(self) -> float:
-		pass
+	def distance(self) -> c_float:
+		...
 
 	@distance.setter
-	def distance(self, i: float) -> None:
-		pass
+	def distance(self, i: c_float) -> None:
+		...
 
 	@property
 	def point(self) -> Vector3:
-		pass
+		...
 
 	@point.setter
 	def point(self, i: Vector3) -> None:
-		pass
+		...
 
 	@property
 	def normal(self) -> Vector3:
-		pass
+		...
 
 	@normal.setter
 	def normal(self, i: Vector3) -> None:
-		pass
+		...
 
 
 class BoundingBox(Structure):
 	"""BoundingBox"""
 	@property
 	def min(self) -> Vector3:
-		pass
+		...
 
 	@min.setter
 	def min(self, i: Vector3) -> None:
-		pass
+		...
 
 	@property
 	def max(self) -> Vector3:
-		pass
+		...
 
 	@max.setter
 	def max(self, i: Vector3) -> None:
-		pass
+		...
 
 
 class VrDeviceInfo(Structure):
 	"""VrDeviceInfo, Head-Mounted-Display device parameters"""
 	@property
-	def hResolution(self) -> int:
-		pass
+	def hResolution(self) -> c_int:
+		...
 
 	@hResolution.setter
-	def hResolution(self, i: int) -> None:
-		pass
+	def hResolution(self, i: c_int) -> None:
+		...
 
 	@property
-	def vResolution(self) -> int:
-		pass
+	def vResolution(self) -> c_int:
+		...
 
 	@vResolution.setter
-	def vResolution(self, i: int) -> None:
-		pass
+	def vResolution(self, i: c_int) -> None:
+		...
 
 	@property
-	def hScreenSize(self) -> float:
-		pass
+	def hScreenSize(self) -> c_float:
+		...
 
 	@hScreenSize.setter
-	def hScreenSize(self, i: float) -> None:
-		pass
+	def hScreenSize(self, i: c_float) -> None:
+		...
 
 	@property
-	def vScreenSize(self) -> float:
-		pass
+	def vScreenSize(self) -> c_float:
+		...
 
 	@vScreenSize.setter
-	def vScreenSize(self, i: float) -> None:
-		pass
+	def vScreenSize(self, i: c_float) -> None:
+		...
 
 	@property
-	def vScreenCenter(self) -> float:
-		pass
+	def vScreenCenter(self) -> c_float:
+		...
 
 	@vScreenCenter.setter
-	def vScreenCenter(self, i: float) -> None:
-		pass
+	def vScreenCenter(self, i: c_float) -> None:
+		...
 
 	@property
-	def eyeToScreenDistance(self) -> float:
-		pass
+	def eyeToScreenDistance(self) -> c_float:
+		...
 
 	@eyeToScreenDistance.setter
-	def eyeToScreenDistance(self, i: float) -> None:
-		pass
+	def eyeToScreenDistance(self, i: c_float) -> None:
+		...
 
 	@property
-	def lensSeparationDistance(self) -> float:
-		pass
+	def lensSeparationDistance(self) -> c_float:
+		...
 
 	@lensSeparationDistance.setter
-	def lensSeparationDistance(self, i: float) -> None:
-		pass
+	def lensSeparationDistance(self, i: c_float) -> None:
+		...
 
 	@property
-	def interpupillaryDistance(self) -> float:
-		pass
+	def interpupillaryDistance(self) -> c_float:
+		...
 
 	@interpupillaryDistance.setter
-	def interpupillaryDistance(self, i: float) -> None:
-		pass
+	def interpupillaryDistance(self, i: c_float) -> None:
+		...
 
 	@property
 	def lensDistortionValues(self) -> c_float * 4:
-		pass
+		...
 
 	@lensDistortionValues.setter
 	def lensDistortionValues(self, i: c_float * 4) -> None:
-		pass
+		...
 
 	@property
 	def chromaAbCorrection(self) -> c_float * 4:
-		pass
+		...
 
 	@chromaAbCorrection.setter
 	def chromaAbCorrection(self, i: c_float * 4) -> None:
-		pass
+		...
 
 
 class VrStereoConfig(Structure):
 	"""VrStereoConfig, VR stereo rendering configuration for simulator"""
 	@property
 	def projection(self) -> Matrix * 2:
-		pass
+		...
 
 	@projection.setter
 	def projection(self, i: Matrix * 2) -> None:
-		pass
+		...
 
 	@property
 	def viewOffset(self) -> Matrix * 2:
-		pass
+		...
 
 	@viewOffset.setter
 	def viewOffset(self, i: Matrix * 2) -> None:
-		pass
+		...
 
 	@property
 	def leftLensCenter(self) -> c_float * 2:
-		pass
+		...
 
 	@leftLensCenter.setter
 	def leftLensCenter(self, i: c_float * 2) -> None:
-		pass
+		...
 
 	@property
 	def rightLensCenter(self) -> c_float * 2:
-		pass
+		...
 
 	@rightLensCenter.setter
 	def rightLensCenter(self, i: c_float * 2) -> None:
-		pass
+		...
 
 	@property
 	def leftScreenCenter(self) -> c_float * 2:
-		pass
+		...
 
 	@leftScreenCenter.setter
 	def leftScreenCenter(self, i: c_float * 2) -> None:
-		pass
+		...
 
 	@property
 	def rightScreenCenter(self) -> c_float * 2:
-		pass
+		...
 
 	@rightScreenCenter.setter
 	def rightScreenCenter(self, i: c_float * 2) -> None:
-		pass
+		...
 
 	@property
 	def scale(self) -> c_float * 2:
-		pass
+		...
 
 	@scale.setter
 	def scale(self, i: c_float * 2) -> None:
-		pass
+		...
 
 	@property
 	def scaleIn(self) -> c_float * 2:
-		pass
+		...
 
 	@scaleIn.setter
 	def scaleIn(self, i: c_float * 2) -> None:
-		pass
+		...
 
 
 class FilePathList(Structure):
 	"""File path list"""
 	@property
-	def capacity(self) -> int:
-		pass
+	def capacity(self) -> c_uint:
+		...
 
 	@capacity.setter
-	def capacity(self, i: int) -> None:
-		pass
+	def capacity(self, i: c_uint) -> None:
+		...
 
 	@property
-	def count(self) -> int:
-		pass
+	def count(self) -> c_uint:
+		...
 
 	@count.setter
-	def count(self, i: int) -> None:
-		pass
+	def count(self, i: c_uint) -> None:
+		...
 
 	@property
 	def paths(self) -> POINTER(POINTER(c_char)):
-		pass
+		...
 
 	@paths.setter
 	def paths(self, i: POINTER(POINTER(c_char))) -> None:
-		pass
+		...
 
 
 class float3(Structure):
 	"""NOTE: Helper types to be used instead of array return types for *ToFloat functions"""
 	@property
 	def v(self) -> c_float * 3:
-		pass
+		...
 
 	@v.setter
 	def v(self, i: c_float * 3) -> None:
-		pass
+		...
 
 
 class float16(Structure):
 	""""""
 	@property
 	def v(self) -> c_float * 16:
-		pass
+		...
 
 	@v.setter
 	def v(self, i: c_float * 16) -> None:
-		pass
+		...
 
 
 class GuiStyleProp(Structure):
 	"""Style property"""
 	@property
-	def controlId(self) -> int:
-		pass
+	def controlId(self) -> c_ushort:
+		...
 
 	@controlId.setter
-	def controlId(self, i: int) -> None:
-		pass
+	def controlId(self, i: c_ushort) -> None:
+		...
 
 	@property
-	def propertyId(self) -> int:
-		pass
+	def propertyId(self) -> c_ushort:
+		...
 
 	@propertyId.setter
-	def propertyId(self, i: int) -> None:
-		pass
+	def propertyId(self, i: c_ushort) -> None:
+		...
 
 	@property
-	def propertyValue(self) -> int:
-		pass
+	def propertyValue(self) -> c_uint:
+		...
 
 	@propertyValue.setter
-	def propertyValue(self, i: int) -> None:
-		pass
+	def propertyValue(self, i: c_uint) -> None:
+		...
 
 
