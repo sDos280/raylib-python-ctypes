@@ -51,7 +51,7 @@ def main():
     camera.rotation = 0.0
     camera.zoom = 1.0
 
-    set_target_fps(60)
+    set_target_fps(60)  # Set our game to run at 60 frames-per-second
     # ------------------------------------------------------------------------------------
 
     # Main game loop
