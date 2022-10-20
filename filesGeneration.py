@@ -111,7 +111,6 @@ def convert_c_type_string_to_ctype_type_sting(c_type_string: str):
         type_of_array = c_type_string.split('[')[0]
         array_size = c_type_string.split('[')[1][:-1]
         type_of_array_without_pointers = type_of_array.replace('*', '')
-        type_of_array_end = ""
         if type_of_array in CstringToCtypesString:  # basic type pointer (int*, char*, float*, ...)
             return f"{CstringToCtypesString[type_of_array]} * {array_size}"
         if type_of_array_without_pointers in CstringToCtypesString:  # basic type pointer(probably double+ pointer level) (int**, char**, float**, ...)
@@ -133,19 +132,18 @@ def convert_c_type_string_to_ctype_type_sting(c_type_string: str):
             return f"{type_of_array} * {array_size}"
     elif pointer_level > 0:
         type_without_pointers = c_type_string.replace('*', '')
-        type_of_array_end = ""
         if c_type_string in CstringToCtypesString:  # basic type pointer (int**, char*, float*, ...)
             return f"{CstringToCtypesString[c_type_string]}"
         if type_without_pointers in CstringToCtypesString:  # basic type pointer(probably double+ pointer level) (int**, char**, float**, ...)
-            type_of_array_end = CstringToCtypesString[type_without_pointers]
+            type_of_pointer_end = CstringToCtypesString[type_without_pointers]
             for i in range(pointer_level):
-                type_of_array_end = f"POINTER({type_of_array_end})"
-            return f"{type_of_array_end}"
+                type_of_pointer_end = f"POINTER({type_of_pointer_end})"
+            return f"{type_of_pointer_end}"
         else:  # a struct pointer level 1+ or just a pointer level 1
-            type_of_array_end = type_without_pointers
+            type_of_pointer_end = type_without_pointers
             for i in range(pointer_level):
-                type_of_array_end = f"POINTER({type_of_array_end})"
-            return f"{type_of_array_end}"
+                type_of_pointer_end = f"POINTER({type_of_pointer_end})"
+            return f"{type_of_pointer_end}"
     else:  # "regular" value not a pointer or an array
         if c_type_string in CstringToCtypesString:
             return CstringToCtypesString[c_type_string]
@@ -449,10 +447,6 @@ def generate_functions_code_in_code_pyi_file(functions_set):
 
 
 def generate_function_signature_code(function_data):
-    function_return_type_sting = function_data['returnType']
-    function_return_type_pointer_level = function_data['returnType'].count("*")
-    # function_return_type_is_array = function_data['returnType'].count("]") c functions shouldn't return an array
-
     function_string = f"def {function_data['name']}("
     if 'params' in function_data.keys():  # only return stuff
         for param in function_data['params']:
