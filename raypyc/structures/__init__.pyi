@@ -2,137 +2,6 @@ from ctypes import *
 from raypyc.defines import *
 
 
-class Matrix(Structure):
-	"""Matrix, 4x4 components, column major, OpenGL style, right handed"""
-	@property
-	def m0(self) -> c_float:
-		...
-
-	@m0.setter
-	def m0(self, i: c_float) -> None:
-		...
-
-	@property
-	def m4(self) -> c_float:
-		...
-
-	@m4.setter
-	def m4(self, i: c_float) -> None:
-		...
-
-	@property
-	def m8(self) -> c_float:
-		...
-
-	@m8.setter
-	def m8(self, i: c_float) -> None:
-		...
-
-	@property
-	def m12(self) -> c_float:
-		...
-
-	@m12.setter
-	def m12(self, i: c_float) -> None:
-		...
-
-	@property
-	def m1(self) -> c_float:
-		...
-
-	@m1.setter
-	def m1(self, i: c_float) -> None:
-		...
-
-	@property
-	def m5(self) -> c_float:
-		...
-
-	@m5.setter
-	def m5(self, i: c_float) -> None:
-		...
-
-	@property
-	def m9(self) -> c_float:
-		...
-
-	@m9.setter
-	def m9(self, i: c_float) -> None:
-		...
-
-	@property
-	def m13(self) -> c_float:
-		...
-
-	@m13.setter
-	def m13(self, i: c_float) -> None:
-		...
-
-	@property
-	def m2(self) -> c_float:
-		...
-
-	@m2.setter
-	def m2(self, i: c_float) -> None:
-		...
-
-	@property
-	def m6(self) -> c_float:
-		...
-
-	@m6.setter
-	def m6(self, i: c_float) -> None:
-		...
-
-	@property
-	def m10(self) -> c_float:
-		...
-
-	@m10.setter
-	def m10(self, i: c_float) -> None:
-		...
-
-	@property
-	def m14(self) -> c_float:
-		...
-
-	@m14.setter
-	def m14(self, i: c_float) -> None:
-		...
-
-	@property
-	def m3(self) -> c_float:
-		...
-
-	@m3.setter
-	def m3(self, i: c_float) -> None:
-		...
-
-	@property
-	def m7(self) -> c_float:
-		...
-
-	@m7.setter
-	def m7(self, i: c_float) -> None:
-		...
-
-	@property
-	def m11(self) -> c_float:
-		...
-
-	@m11.setter
-	def m11(self, i: c_float) -> None:
-		...
-
-	@property
-	def m15(self) -> c_float:
-		...
-
-	@m15.setter
-	def m15(self, i: c_float) -> None:
-		...
-
-
 class rlVertexBuffer(Structure):
 	"""Dynamic vertex buffers (position + texcoords + colors + indices arrays)"""
 	@property
@@ -275,6 +144,137 @@ class rlRenderBatch(Structure):
 
 	@currentDepth.setter
 	def currentDepth(self, i: c_float) -> None:
+		...
+
+
+class Matrix(Structure):
+	"""Matrix, 4x4 components, column major, OpenGL style, right handed"""
+	@property
+	def m0(self) -> c_float:
+		...
+
+	@m0.setter
+	def m0(self, i: c_float) -> None:
+		...
+
+	@property
+	def m4(self) -> c_float:
+		...
+
+	@m4.setter
+	def m4(self, i: c_float) -> None:
+		...
+
+	@property
+	def m8(self) -> c_float:
+		...
+
+	@m8.setter
+	def m8(self, i: c_float) -> None:
+		...
+
+	@property
+	def m12(self) -> c_float:
+		...
+
+	@m12.setter
+	def m12(self, i: c_float) -> None:
+		...
+
+	@property
+	def m1(self) -> c_float:
+		...
+
+	@m1.setter
+	def m1(self, i: c_float) -> None:
+		...
+
+	@property
+	def m5(self) -> c_float:
+		...
+
+	@m5.setter
+	def m5(self, i: c_float) -> None:
+		...
+
+	@property
+	def m9(self) -> c_float:
+		...
+
+	@m9.setter
+	def m9(self, i: c_float) -> None:
+		...
+
+	@property
+	def m13(self) -> c_float:
+		...
+
+	@m13.setter
+	def m13(self, i: c_float) -> None:
+		...
+
+	@property
+	def m2(self) -> c_float:
+		...
+
+	@m2.setter
+	def m2(self, i: c_float) -> None:
+		...
+
+	@property
+	def m6(self) -> c_float:
+		...
+
+	@m6.setter
+	def m6(self, i: c_float) -> None:
+		...
+
+	@property
+	def m10(self) -> c_float:
+		...
+
+	@m10.setter
+	def m10(self, i: c_float) -> None:
+		...
+
+	@property
+	def m14(self) -> c_float:
+		...
+
+	@m14.setter
+	def m14(self, i: c_float) -> None:
+		...
+
+	@property
+	def m3(self) -> c_float:
+		...
+
+	@m3.setter
+	def m3(self, i: c_float) -> None:
+		...
+
+	@property
+	def m7(self) -> c_float:
+		...
+
+	@m7.setter
+	def m7(self, i: c_float) -> None:
+		...
+
+	@property
+	def m11(self) -> c_float:
+		...
+
+	@m11.setter
+	def m11(self, i: c_float) -> None:
+		...
+
+	@property
+	def m15(self) -> c_float:
+		...
+
+	@m15.setter
+	def m15(self, i: c_float) -> None:
 		...
 
 
@@ -558,62 +558,6 @@ class rlglData(Structure):
 
 	@glBlendEquation.setter
 	def glBlendEquation(self, i: c_int) -> None:
-		...
-
-	@property
-	def glBlendSrcFactorRGB(self) -> c_int:
-		...
-
-	@glBlendSrcFactorRGB.setter
-	def glBlendSrcFactorRGB(self, i: c_int) -> None:
-		...
-
-	@property
-	def glBlendDestFactorRGB(self) -> c_int:
-		...
-
-	@glBlendDestFactorRGB.setter
-	def glBlendDestFactorRGB(self, i: c_int) -> None:
-		...
-
-	@property
-	def glBlendSrcFactorAlpha(self) -> c_int:
-		...
-
-	@glBlendSrcFactorAlpha.setter
-	def glBlendSrcFactorAlpha(self, i: c_int) -> None:
-		...
-
-	@property
-	def glBlendDestFactorAlpha(self) -> c_int:
-		...
-
-	@glBlendDestFactorAlpha.setter
-	def glBlendDestFactorAlpha(self, i: c_int) -> None:
-		...
-
-	@property
-	def glBlendEquationRGB(self) -> c_int:
-		...
-
-	@glBlendEquationRGB.setter
-	def glBlendEquationRGB(self, i: c_int) -> None:
-		...
-
-	@property
-	def glBlendEquationAlpha(self) -> c_int:
-		...
-
-	@glBlendEquationAlpha.setter
-	def glBlendEquationAlpha(self, i: c_int) -> None:
-		...
-
-	@property
-	def glCustomBlendModeModified(self) -> c_bool:
-		...
-
-	@glCustomBlendModeModified.setter
-	def glCustomBlendModeModified(self, i: c_bool) -> None:
 		...
 
 	@property

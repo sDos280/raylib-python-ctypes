@@ -657,32 +657,7 @@
           "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
         },
         {
-          "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "rlDrawCall",
-          "description": ""
-        },
-        {
           "type": "unsigned int *",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
-        },
-        {
-          "type": "#endif",
-          "name": "rlRenderBatch",
-          "description": ""
-        },
-        {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
-        },
-        {
-          "type": "unsigned short *",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
-        },
-        {
-          "type": "#endif",
           "name": "indices",
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },

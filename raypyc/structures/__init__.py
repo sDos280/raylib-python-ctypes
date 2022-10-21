@@ -2,156 +2,6 @@ from ctypes import *
 from raypyc.defines import *
 
 
-class Matrix(Structure):
-	"""Matrix, 4x4 components, column major, OpenGL style, right handed"""
-	_fields_ = [
-		('m0', c_float),  # Matrix first row (4 components)
-		('m4', c_float),  # Matrix first row (4 components)
-		('m8', c_float),  # Matrix first row (4 components)
-		('m12', c_float),  # Matrix first row (4 components)
-		('m1', c_float),  # Matrix second row (4 components)
-		('m5', c_float),  # Matrix second row (4 components)
-		('m9', c_float),  # Matrix second row (4 components)
-		('m13', c_float),  # Matrix second row (4 components)
-		('m2', c_float),  # Matrix third row (4 components)
-		('m6', c_float),  # Matrix third row (4 components)
-		('m10', c_float),  # Matrix third row (4 components)
-		('m14', c_float),  # Matrix third row (4 components)
-		('m3', c_float),  # Matrix fourth row (4 components)
-		('m7', c_float),  # Matrix fourth row (4 components)
-		('m11', c_float),  # Matrix fourth row (4 components)
-		('m15', c_float)  # Matrix fourth row (4 components)
-	]
-
-	@property
-	def m0(self) -> c_float:
-		return self.m0
-
-	@m0.setter
-	def m0(self, i: c_float) -> None:
-		self.m0 = i
-
-	@property
-	def m4(self) -> c_float:
-		return self.m4
-
-	@m4.setter
-	def m4(self, i: c_float) -> None:
-		self.m4 = i
-
-	@property
-	def m8(self) -> c_float:
-		return self.m8
-
-	@m8.setter
-	def m8(self, i: c_float) -> None:
-		self.m8 = i
-
-	@property
-	def m12(self) -> c_float:
-		return self.m12
-
-	@m12.setter
-	def m12(self, i: c_float) -> None:
-		self.m12 = i
-
-	@property
-	def m1(self) -> c_float:
-		return self.m1
-
-	@m1.setter
-	def m1(self, i: c_float) -> None:
-		self.m1 = i
-
-	@property
-	def m5(self) -> c_float:
-		return self.m5
-
-	@m5.setter
-	def m5(self, i: c_float) -> None:
-		self.m5 = i
-
-	@property
-	def m9(self) -> c_float:
-		return self.m9
-
-	@m9.setter
-	def m9(self, i: c_float) -> None:
-		self.m9 = i
-
-	@property
-	def m13(self) -> c_float:
-		return self.m13
-
-	@m13.setter
-	def m13(self, i: c_float) -> None:
-		self.m13 = i
-
-	@property
-	def m2(self) -> c_float:
-		return self.m2
-
-	@m2.setter
-	def m2(self, i: c_float) -> None:
-		self.m2 = i
-
-	@property
-	def m6(self) -> c_float:
-		return self.m6
-
-	@m6.setter
-	def m6(self, i: c_float) -> None:
-		self.m6 = i
-
-	@property
-	def m10(self) -> c_float:
-		return self.m10
-
-	@m10.setter
-	def m10(self, i: c_float) -> None:
-		self.m10 = i
-
-	@property
-	def m14(self) -> c_float:
-		return self.m14
-
-	@m14.setter
-	def m14(self, i: c_float) -> None:
-		self.m14 = i
-
-	@property
-	def m3(self) -> c_float:
-		return self.m3
-
-	@m3.setter
-	def m3(self, i: c_float) -> None:
-		self.m3 = i
-
-	@property
-	def m7(self) -> c_float:
-		return self.m7
-
-	@m7.setter
-	def m7(self, i: c_float) -> None:
-		self.m7 = i
-
-	@property
-	def m11(self) -> c_float:
-		return self.m11
-
-	@m11.setter
-	def m11(self, i: c_float) -> None:
-		self.m11 = i
-
-	@property
-	def m15(self) -> c_float:
-		return self.m15
-
-	@m15.setter
-	def m15(self, i: c_float) -> None:
-		self.m15 = i
-
-
 class rlVertexBuffer(Structure):
 	"""Dynamic vertex buffers (position + texcoords + colors + indices arrays)"""
 	_fields_ = [
@@ -323,6 +173,156 @@ class rlRenderBatch(Structure):
 		self.currentDepth = i
 
 
+class Matrix(Structure):
+	"""Matrix, 4x4 components, column major, OpenGL style, right handed"""
+	_fields_ = [
+		('m0', c_float),  # Matrix first row (4 components)
+		('m4', c_float),  # Matrix first row (4 components)
+		('m8', c_float),  # Matrix first row (4 components)
+		('m12', c_float),  # Matrix first row (4 components)
+		('m1', c_float),  # Matrix second row (4 components)
+		('m5', c_float),  # Matrix second row (4 components)
+		('m9', c_float),  # Matrix second row (4 components)
+		('m13', c_float),  # Matrix second row (4 components)
+		('m2', c_float),  # Matrix third row (4 components)
+		('m6', c_float),  # Matrix third row (4 components)
+		('m10', c_float),  # Matrix third row (4 components)
+		('m14', c_float),  # Matrix third row (4 components)
+		('m3', c_float),  # Matrix fourth row (4 components)
+		('m7', c_float),  # Matrix fourth row (4 components)
+		('m11', c_float),  # Matrix fourth row (4 components)
+		('m15', c_float)  # Matrix fourth row (4 components)
+	]
+
+	@property
+	def m0(self) -> c_float:
+		return self.m0
+
+	@m0.setter
+	def m0(self, i: c_float) -> None:
+		self.m0 = i
+
+	@property
+	def m4(self) -> c_float:
+		return self.m4
+
+	@m4.setter
+	def m4(self, i: c_float) -> None:
+		self.m4 = i
+
+	@property
+	def m8(self) -> c_float:
+		return self.m8
+
+	@m8.setter
+	def m8(self, i: c_float) -> None:
+		self.m8 = i
+
+	@property
+	def m12(self) -> c_float:
+		return self.m12
+
+	@m12.setter
+	def m12(self, i: c_float) -> None:
+		self.m12 = i
+
+	@property
+	def m1(self) -> c_float:
+		return self.m1
+
+	@m1.setter
+	def m1(self, i: c_float) -> None:
+		self.m1 = i
+
+	@property
+	def m5(self) -> c_float:
+		return self.m5
+
+	@m5.setter
+	def m5(self, i: c_float) -> None:
+		self.m5 = i
+
+	@property
+	def m9(self) -> c_float:
+		return self.m9
+
+	@m9.setter
+	def m9(self, i: c_float) -> None:
+		self.m9 = i
+
+	@property
+	def m13(self) -> c_float:
+		return self.m13
+
+	@m13.setter
+	def m13(self, i: c_float) -> None:
+		self.m13 = i
+
+	@property
+	def m2(self) -> c_float:
+		return self.m2
+
+	@m2.setter
+	def m2(self, i: c_float) -> None:
+		self.m2 = i
+
+	@property
+	def m6(self) -> c_float:
+		return self.m6
+
+	@m6.setter
+	def m6(self, i: c_float) -> None:
+		self.m6 = i
+
+	@property
+	def m10(self) -> c_float:
+		return self.m10
+
+	@m10.setter
+	def m10(self, i: c_float) -> None:
+		self.m10 = i
+
+	@property
+	def m14(self) -> c_float:
+		return self.m14
+
+	@m14.setter
+	def m14(self, i: c_float) -> None:
+		self.m14 = i
+
+	@property
+	def m3(self) -> c_float:
+		return self.m3
+
+	@m3.setter
+	def m3(self, i: c_float) -> None:
+		self.m3 = i
+
+	@property
+	def m7(self) -> c_float:
+		return self.m7
+
+	@m7.setter
+	def m7(self, i: c_float) -> None:
+		self.m7 = i
+
+	@property
+	def m11(self) -> c_float:
+		return self.m11
+
+	@m11.setter
+	def m11(self, i: c_float) -> None:
+		self.m11 = i
+
+	@property
+	def m15(self) -> c_float:
+		return self.m15
+
+	@m15.setter
+	def m15(self, i: c_float) -> None:
+		self.m15 = i
+
+
 class rlglData(Structure):
 	""""""
 	_fields_ = [
@@ -361,13 +361,6 @@ class rlglData(Structure):
 		('glBlendSrcFactor', c_int),  # Blending source factor
 		('glBlendDstFactor', c_int),  # Blending destination factor
 		('glBlendEquation', c_int),  # Blending equation
-		('glBlendSrcFactorRGB', c_int),  # Blending source RGB factor
-		('glBlendDestFactorRGB', c_int),  # Blending destination RGB factor
-		('glBlendSrcFactorAlpha', c_int),  # Blending source alpha factor
-		('glBlendDestFactorAlpha', c_int),  # Blending destination alpha factor
-		('glBlendEquationRGB', c_int),  # Blending equation for RGB
-		('glBlendEquationAlpha', c_int),  # Blending equation for alpha
-		('glCustomBlendModeModified', c_bool),  # Custom blending factor and equation modification status
 		('framebufferWidth', c_int),  # Current framebuffer width
 		('framebufferHeight', c_int)  # Current framebuffer height
 	]
@@ -651,62 +644,6 @@ class rlglData(Structure):
 	@glBlendEquation.setter
 	def glBlendEquation(self, i: c_int) -> None:
 		self.glBlendEquation = i
-
-	@property
-	def glBlendSrcFactorRGB(self) -> c_int:
-		return self.glBlendSrcFactorRGB
-
-	@glBlendSrcFactorRGB.setter
-	def glBlendSrcFactorRGB(self, i: c_int) -> None:
-		self.glBlendSrcFactorRGB = i
-
-	@property
-	def glBlendDestFactorRGB(self) -> c_int:
-		return self.glBlendDestFactorRGB
-
-	@glBlendDestFactorRGB.setter
-	def glBlendDestFactorRGB(self, i: c_int) -> None:
-		self.glBlendDestFactorRGB = i
-
-	@property
-	def glBlendSrcFactorAlpha(self) -> c_int:
-		return self.glBlendSrcFactorAlpha
-
-	@glBlendSrcFactorAlpha.setter
-	def glBlendSrcFactorAlpha(self, i: c_int) -> None:
-		self.glBlendSrcFactorAlpha = i
-
-	@property
-	def glBlendDestFactorAlpha(self) -> c_int:
-		return self.glBlendDestFactorAlpha
-
-	@glBlendDestFactorAlpha.setter
-	def glBlendDestFactorAlpha(self, i: c_int) -> None:
-		self.glBlendDestFactorAlpha = i
-
-	@property
-	def glBlendEquationRGB(self) -> c_int:
-		return self.glBlendEquationRGB
-
-	@glBlendEquationRGB.setter
-	def glBlendEquationRGB(self, i: c_int) -> None:
-		self.glBlendEquationRGB = i
-
-	@property
-	def glBlendEquationAlpha(self) -> c_int:
-		return self.glBlendEquationAlpha
-
-	@glBlendEquationAlpha.setter
-	def glBlendEquationAlpha(self, i: c_int) -> None:
-		self.glBlendEquationAlpha = i
-
-	@property
-	def glCustomBlendModeModified(self) -> c_bool:
-		return self.glCustomBlendModeModified
-
-	@glCustomBlendModeModified.setter
-	def glCustomBlendModeModified(self, i: c_bool) -> None:
-		self.glCustomBlendModeModified = i
 
 	@property
 	def framebufferWidth(self) -> c_int:

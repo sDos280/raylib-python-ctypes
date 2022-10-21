@@ -1,12 +1,38 @@
 from enum import IntEnum
 
 class rlGlVersion(IntEnum):
-	"""OpenGL version"""
-	RL_OPENGL_11: int  # OpenGL 1.1
-	RL_OPENGL_21: int  # OpenGL 2.1 (GLSL 120)
-	RL_OPENGL_33: int  # OpenGL 3.3 (GLSL 330)
-	RL_OPENGL_43: int  # OpenGL 4.3 (using GLSL 330)
-	RL_OPENGL_ES_20: int  # OpenGL ES 2.0 (GLSL 100)
+	""""""
+	OPENGL_11: int  # 
+	OPENGL_21: int  # 
+	OPENGL_33: int  # 
+	OPENGL_43: int  # 
+	OPENGL_ES_20: int  # 
+
+
+class rlFramebufferAttachType(IntEnum):
+	""""""
+	RL_ATTACHMENT_COLOR_CHANNEL0: int  # 
+	RL_ATTACHMENT_COLOR_CHANNEL1: int  # 
+	RL_ATTACHMENT_COLOR_CHANNEL2: int  # 
+	RL_ATTACHMENT_COLOR_CHANNEL3: int  # 
+	RL_ATTACHMENT_COLOR_CHANNEL4: int  # 
+	RL_ATTACHMENT_COLOR_CHANNEL5: int  # 
+	RL_ATTACHMENT_COLOR_CHANNEL6: int  # 
+	RL_ATTACHMENT_COLOR_CHANNEL7: int  # 
+	RL_ATTACHMENT_DEPTH: int  # 
+	RL_ATTACHMENT_STENCIL: int  # 
+
+
+class rlFramebufferAttachTextureType(IntEnum):
+	""""""
+	RL_ATTACHMENT_CUBEMAP_POSITIVE_X: int  # 
+	RL_ATTACHMENT_CUBEMAP_NEGATIVE_X: int  # 
+	RL_ATTACHMENT_CUBEMAP_POSITIVE_Y: int  # 
+	RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y: int  # 
+	RL_ATTACHMENT_CUBEMAP_POSITIVE_Z: int  # 
+	RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z: int  # 
+	RL_ATTACHMENT_TEXTURE2D: int  # 
+	RL_ATTACHMENT_RENDERBUFFER: int  # 
 
 
 class rlTraceLogLevel(IntEnum):
@@ -22,7 +48,7 @@ class rlTraceLogLevel(IntEnum):
 
 
 class rlPixelFormat(IntEnum):
-	"""Texture pixel formats"""
+	"""Texture formats (support depends on OpenGL version)"""
 	RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE: int  # 8 bit per pixel (no alpha)
 	RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA: int  # 8*2 bpp (2 channels)
 	RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5: int  # 16 bpp
@@ -65,7 +91,6 @@ class rlBlendMode(IntEnum):
 	RL_BLEND_SUBTRACT_COLORS: int  # Blend textures subtracting colors (alternative)
 	RL_BLEND_ALPHA_PREMULTIPLY: int  # Blend premultiplied textures considering alpha
 	RL_BLEND_CUSTOM: int  # Blend textures using custom src/dst factors (use rlSetBlendFactors())
-	RL_BLEND_CUSTOM_SEPARATE: int  # Blend textures using custom src/dst factors (use rlSetBlendFactorsSeparate())
 
 
 class rlShaderLocationIndex(IntEnum):
@@ -117,32 +142,6 @@ class rlShaderAttributeDataType(IntEnum):
 	RL_SHADER_ATTRIB_VEC2: int  # Shader attribute type: vec2 (2 float)
 	RL_SHADER_ATTRIB_VEC3: int  # Shader attribute type: vec3 (3 float)
 	RL_SHADER_ATTRIB_VEC4: int  # Shader attribute type: vec4 (4 float)
-
-
-class rlFramebufferAttachType(IntEnum):
-	"""Framebuffer attachment type"""
-	RL_ATTACHMENT_COLOR_CHANNEL0: int  # Framebuffer attachmment type: color 0
-	RL_ATTACHMENT_COLOR_CHANNEL1: int  # Framebuffer attachmment type: color 1
-	RL_ATTACHMENT_COLOR_CHANNEL2: int  # Framebuffer attachmment type: color 2
-	RL_ATTACHMENT_COLOR_CHANNEL3: int  # Framebuffer attachmment type: color 3
-	RL_ATTACHMENT_COLOR_CHANNEL4: int  # Framebuffer attachmment type: color 4
-	RL_ATTACHMENT_COLOR_CHANNEL5: int  # Framebuffer attachmment type: color 5
-	RL_ATTACHMENT_COLOR_CHANNEL6: int  # Framebuffer attachmment type: color 6
-	RL_ATTACHMENT_COLOR_CHANNEL7: int  # Framebuffer attachmment type: color 7
-	RL_ATTACHMENT_DEPTH: int  # Framebuffer attachmment type: depth
-	RL_ATTACHMENT_STENCIL: int  # Framebuffer attachmment type: stencil
-
-
-class rlFramebufferAttachTextureType(IntEnum):
-	"""Framebuffer texture attachment type"""
-	RL_ATTACHMENT_CUBEMAP_POSITIVE_X: int  # Framebuffer texture attachment type: cubemap, +X side
-	RL_ATTACHMENT_CUBEMAP_NEGATIVE_X: int  # Framebuffer texture attachment type: cubemap, -X side
-	RL_ATTACHMENT_CUBEMAP_POSITIVE_Y: int  # Framebuffer texture attachment type: cubemap, +Y side
-	RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y: int  # Framebuffer texture attachment type: cubemap, -Y side
-	RL_ATTACHMENT_CUBEMAP_POSITIVE_Z: int  # Framebuffer texture attachment type: cubemap, +Z side
-	RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z: int  # Framebuffer texture attachment type: cubemap, -Z side
-	RL_ATTACHMENT_TEXTURE2D: int  # Framebuffer texture attachment type: texture2d
-	RL_ATTACHMENT_RENDERBUFFER: int  # Framebuffer texture attachment type: renderbuffer
 
 
 class ConfigFlags(IntEnum):
