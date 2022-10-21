@@ -3,6 +3,586 @@ from raypyc.enums import *
 from raypyc.structures import *
 
 
+def rl_matrix_mode(mode: c_int) -> None:
+	"""Choose the current matrix to be transformed"""
+	...
+
+def rl_push_matrix() -> None:
+	"""Push the current matrix to stack"""
+	...
+
+def rl_pop_matrix() -> None:
+	"""Pop lattest inserted matrix from stack"""
+	...
+
+def rl_load_identity() -> None:
+	"""Reset current matrix to identity matrix"""
+	...
+
+def rl_translatef(x: c_float, y: c_float, z: c_float) -> None:
+	"""Multiply the current matrix by a translation matrix"""
+	...
+
+def rl_rotatef(angle: c_float, x: c_float, y: c_float, z: c_float) -> None:
+	"""Multiply the current matrix by a rotation matrix"""
+	...
+
+def rl_scalef(x: c_float, y: c_float, z: c_float) -> None:
+	"""Multiply the current matrix by a scaling matrix"""
+	...
+
+def rl_mult_matrixf(matf: POINTER(c_float)) -> None:
+	"""Multiply the current matrix by another matrix"""
+	...
+
+def rl_frustum(left: c_double, right: c_double, bottom: c_double, top: c_double, znear: c_double, zfar: c_double) -> None:
+	""""""
+	...
+
+def rl_ortho(left: c_double, right: c_double, bottom: c_double, top: c_double, znear: c_double, zfar: c_double) -> None:
+	""""""
+	...
+
+def rl_viewport(x: c_int, y: c_int, width: c_int, height: c_int) -> None:
+	"""Set the viewport area"""
+	...
+
+def rl_begin(mode: c_int) -> None:
+	"""Initialize drawing mode (how to organize vertex)"""
+	...
+
+def rl_end() -> None:
+	"""Finish vertex providing"""
+	...
+
+def rl_vertex2i(x: c_int, y: c_int) -> None:
+	"""Define one vertex (position) - 2 int"""
+	...
+
+def rl_vertex2f(x: c_float, y: c_float) -> None:
+	"""Define one vertex (position) - 2 float"""
+	...
+
+def rl_vertex3f(x: c_float, y: c_float, z: c_float) -> None:
+	"""Define one vertex (position) - 3 float"""
+	...
+
+def rl_tex_coord2f(x: c_float, y: c_float) -> None:
+	"""Define one vertex (texture coordinate) - 2 float"""
+	...
+
+def rl_normal3f(x: c_float, y: c_float, z: c_float) -> None:
+	"""Define one vertex (normal) - 3 float"""
+	...
+
+def rl_color4ub(r: c_ubyte, g: c_ubyte, b: c_ubyte, a: c_ubyte) -> None:
+	"""Define one vertex (color) - 4 byte"""
+	...
+
+def rl_color3f(x: c_float, y: c_float, z: c_float) -> None:
+	"""Define one vertex (color) - 3 float"""
+	...
+
+def rl_color4f(x: c_float, y: c_float, z: c_float, w: c_float) -> None:
+	"""Define one vertex (color) - 4 float"""
+	...
+
+def rl_enable_vertex_array(vaoId: c_uint) -> c_bool:
+	"""Enable vertex array (VAO, if supported)"""
+	...
+
+def rl_disable_vertex_array() -> None:
+	"""Disable vertex array (VAO, if supported)"""
+	...
+
+def rl_enable_vertex_buffer(id: c_uint) -> None:
+	"""Enable vertex buffer (VBO)"""
+	...
+
+def rl_disable_vertex_buffer() -> None:
+	"""Disable vertex buffer (VBO)"""
+	...
+
+def rl_enable_vertex_buffer_element(id: c_uint) -> None:
+	"""Enable vertex buffer element (VBO element)"""
+	...
+
+def rl_disable_vertex_buffer_element() -> None:
+	"""Disable vertex buffer element (VBO element)"""
+	...
+
+def rl_enable_vertex_attribute(index: c_uint) -> None:
+	"""Enable vertex attribute index"""
+	...
+
+def rl_disable_vertex_attribute(index: c_uint) -> None:
+	"""Disable vertex attribute index"""
+	...
+
+def rl_enable_state_pointer(vertexAttribType: c_int, buffer: c_void_p) -> None:
+	"""Enable attribute state pointer"""
+	...
+
+def rl_disable_state_pointer(vertexAttribType: c_int) -> None:
+	"""Disable attribute state pointer"""
+	...
+
+def rl_active_texture_slot(slot: c_int) -> None:
+	"""Select and active a texture slot"""
+	...
+
+def rl_enable_texture(id: c_uint) -> None:
+	"""Enable texture"""
+	...
+
+def rl_disable_texture() -> None:
+	"""Disable texture"""
+	...
+
+def rl_enable_texture_cubemap(id: c_uint) -> None:
+	"""Enable texture cubemap"""
+	...
+
+def rl_disable_texture_cubemap() -> None:
+	"""Disable texture cubemap"""
+	...
+
+def rl_texture_parameters(id: c_uint, param: c_int, value: c_int) -> None:
+	"""Set texture parameters (filter, wrap)"""
+	...
+
+def rl_enable_shader(id: c_uint) -> None:
+	"""Enable shader program"""
+	...
+
+def rl_disable_shader() -> None:
+	"""Disable shader program"""
+	...
+
+def rl_enable_framebuffer(id: c_uint) -> None:
+	"""Enable render texture (fbo)"""
+	...
+
+def rl_disable_framebuffer() -> None:
+	"""Disable render texture (fbo), return to default framebuffer"""
+	...
+
+def rl_active_draw_buffers(count: c_int) -> None:
+	"""Activate multiple draw color buffers"""
+	...
+
+def rl_enable_color_blend() -> None:
+	"""Enable color blending"""
+	...
+
+def rl_disable_color_blend() -> None:
+	"""Disable color blending"""
+	...
+
+def rl_enable_depth_test() -> None:
+	"""Enable depth test"""
+	...
+
+def rl_disable_depth_test() -> None:
+	"""Disable depth test"""
+	...
+
+def rl_enable_depth_mask() -> None:
+	"""Enable depth write"""
+	...
+
+def rl_disable_depth_mask() -> None:
+	"""Disable depth write"""
+	...
+
+def rl_enable_backface_culling() -> None:
+	"""Enable backface culling"""
+	...
+
+def rl_disable_backface_culling() -> None:
+	"""Disable backface culling"""
+	...
+
+def rl_enable_scissor_test() -> None:
+	"""Enable scissor test"""
+	...
+
+def rl_disable_scissor_test() -> None:
+	"""Disable scissor test"""
+	...
+
+def rl_scissor(x: c_int, y: c_int, width: c_int, height: c_int) -> None:
+	"""Scissor test"""
+	...
+
+def rl_enable_wire_mode() -> None:
+	"""Enable wire mode"""
+	...
+
+def rl_disable_wire_mode() -> None:
+	"""Disable wire mode"""
+	...
+
+def rl_set_line_width(width: c_float) -> None:
+	"""Set the line drawing width"""
+	...
+
+def rl_get_line_width() -> c_float:
+	"""Get the line drawing width"""
+	...
+
+def rl_enable_smooth_lines() -> None:
+	"""Enable line aliasing"""
+	...
+
+def rl_disable_smooth_lines() -> None:
+	"""Disable line aliasing"""
+	...
+
+def rl_enable_stereo_render() -> None:
+	"""Enable stereo rendering"""
+	...
+
+def rl_disable_stereo_render() -> None:
+	"""Disable stereo rendering"""
+	...
+
+def rl_is_stereo_render_enabled() -> c_bool:
+	"""Check if stereo render is enabled"""
+	...
+
+def rl_clear_color(r: c_ubyte, g: c_ubyte, b: c_ubyte, a: c_ubyte) -> None:
+	"""Clear color buffer with color"""
+	...
+
+def rl_clear_screen_buffers() -> None:
+	"""Clear used screen buffers (color and depth)"""
+	...
+
+def rl_check_errors() -> None:
+	"""Check and log OpenGL error codes"""
+	...
+
+def rl_set_blend_mode(mode: c_int) -> None:
+	"""Set blending mode"""
+	...
+
+def rl_set_blend_factors(glSrcFactor: c_int, glDstFactor: c_int, glEquation: c_int) -> None:
+	"""Set blending mode factor and equation (using OpenGL factors)"""
+	...
+
+def rl_set_blend_factors_separate(glSrcRGB: c_int, glDstRGB: c_int, glSrcAlpha: c_int, glDstAlpha: c_int, glEqRGB: c_int, glEqAlpha: c_int) -> None:
+	"""Set blending mode factors and equations separately (using OpenGL factors)"""
+	...
+
+def rlgl_init(width: c_int, height: c_int) -> None:
+	"""Initialize rlgl (buffers, shaders, textures, states)"""
+	...
+
+def rlgl_close() -> None:
+	"""De-inititialize rlgl (buffers, shaders, textures)"""
+	...
+
+def rl_load_extensions(loader: c_void_p) -> None:
+	"""Load OpenGL extensions (loader function required)"""
+	...
+
+def rl_get_version() -> c_int:
+	"""Get current OpenGL version"""
+	...
+
+def rl_set_framebuffer_width(width: c_int) -> None:
+	"""Set current framebuffer width"""
+	...
+
+def rl_get_framebuffer_width() -> c_int:
+	"""Get default framebuffer width"""
+	...
+
+def rl_set_framebuffer_height(height: c_int) -> None:
+	"""Set current framebuffer height"""
+	...
+
+def rl_get_framebuffer_height() -> c_int:
+	"""Get default framebuffer height"""
+	...
+
+def rl_get_texture_id_default() -> c_uint:
+	"""Get default texture id"""
+	...
+
+def rl_get_shader_id_default() -> c_uint:
+	"""Get default shader id"""
+	...
+
+def rl_get_shader_locs_default() -> POINTER(c_int):
+	"""Get default shader locations"""
+	...
+
+def rl_load_render_batch(numBuffers: c_int, bufferElements: c_int) -> rlRenderBatch:
+	"""Load a render batch system"""
+	...
+
+def rl_unload_render_batch(batch: rlRenderBatch) -> None:
+	"""Unload render batch system"""
+	...
+
+def rl_draw_render_batch(batch: POINTER(rlRenderBatch)) -> None:
+	"""Draw render batch data (Update->Draw->Reset)"""
+	...
+
+def rl_set_render_batch_active(batch: POINTER(rlRenderBatch)) -> None:
+	"""Set the active render batch for rlgl (NULL for default internal)"""
+	...
+
+def rl_draw_render_batch_active() -> None:
+	"""Update and draw internal render batch"""
+	...
+
+def rl_check_render_batch_limit(vCount: c_int) -> c_bool:
+	"""Check internal buffer overflow for a given number of vertex"""
+	...
+
+def rl_set_texture(id: c_uint) -> None:
+	"""Set current texture for render batch and check buffers limits"""
+	...
+
+def rl_load_vertex_array() -> c_uint:
+	"""Load vertex array (vao) if supported"""
+	...
+
+def rl_load_vertex_buffer(buffer: c_void_p, size: c_int, dynamic: c_bool) -> c_uint:
+	"""Load a vertex buffer attribute"""
+	...
+
+def rl_load_vertex_buffer_element(buffer: c_void_p, size: c_int, dynamic: c_bool) -> c_uint:
+	"""Load a new attributes element buffer"""
+	...
+
+def rl_update_vertex_buffer(bufferId: c_uint, data: c_void_p, dataSize: c_int, offset: c_int) -> None:
+	"""Update GPU buffer with new data"""
+	...
+
+def rl_update_vertex_buffer_elements(id: c_uint, data: c_void_p, dataSize: c_int, offset: c_int) -> None:
+	"""Update vertex buffer elements with new data"""
+	...
+
+def rl_unload_vertex_array(vaoId: c_uint) -> None:
+	""""""
+	...
+
+def rl_unload_vertex_buffer(vboId: c_uint) -> None:
+	""""""
+	...
+
+def rl_set_vertex_attribute(index: c_uint, compSize: c_int, type: c_int, normalized: c_bool, stride: c_int, pointer: c_void_p) -> None:
+	""""""
+	...
+
+def rl_set_vertex_attribute_divisor(index: c_uint, divisor: c_int) -> None:
+	""""""
+	...
+
+def rl_set_vertex_attribute_default(locIndex: c_int, value: c_void_p, attribType: c_int, count: c_int) -> None:
+	"""Set vertex attribute default value"""
+	...
+
+def rl_draw_vertex_array(offset: c_int, count: c_int) -> None:
+	""""""
+	...
+
+def rl_draw_vertex_array_elements(offset: c_int, count: c_int, buffer: c_void_p) -> None:
+	""""""
+	...
+
+def rl_draw_vertex_array_instanced(offset: c_int, count: c_int, instances: c_int) -> None:
+	""""""
+	...
+
+def rl_draw_vertex_array_elements_instanced(offset: c_int, count: c_int, buffer: c_void_p, instances: c_int) -> None:
+	""""""
+	...
+
+def rl_load_texture(data: c_void_p, width: c_int, height: c_int, format: c_int, mipmapCount: c_int) -> c_uint:
+	"""Load texture in GPU"""
+	...
+
+def rl_load_texture_depth(width: c_int, height: c_int, useRenderBuffer: c_bool) -> c_uint:
+	"""Load depth texture/renderbuffer (to be attached to fbo)"""
+	...
+
+def rl_load_texture_cubemap(data: c_void_p, size: c_int, format: c_int) -> c_uint:
+	"""Load texture cubemap"""
+	...
+
+def rl_update_texture(id: c_uint, offsetX: c_int, offsetY: c_int, width: c_int, height: c_int, format: c_int, data: c_void_p) -> None:
+	"""Update GPU texture with new data"""
+	...
+
+def rl_get_gl_texture_formats(format: c_int, glInternalFormat: POINTER(c_uint), glFormat: POINTER(c_uint), glType: POINTER(c_uint)) -> None:
+	"""Get OpenGL internal formats"""
+	...
+
+def rl_get_pixel_format_name(format: c_uint) -> c_char_p:
+	"""Get name string for pixel format"""
+	...
+
+def rl_unload_texture(id: c_uint) -> None:
+	"""Unload texture from GPU memory"""
+	...
+
+def rl_gen_texture_mipmaps(id: c_uint, width: c_int, height: c_int, format: c_int, mipmaps: POINTER(c_int)) -> None:
+	"""Generate mipmap data for selected texture"""
+	...
+
+def rl_read_texture_pixels(id: c_uint, width: c_int, height: c_int, format: c_int) -> c_void_p:
+	"""Read texture pixel data"""
+	...
+
+def rl_read_screen_pixels(width: c_int, height: c_int) -> POINTER(c_ubyte):
+	"""Read screen pixel data (color buffer)"""
+	...
+
+def rl_load_framebuffer(width: c_int, height: c_int) -> c_uint:
+	"""Load an empty framebuffer"""
+	...
+
+def rl_framebuffer_attach(fboId: c_uint, texId: c_uint, attachType: c_int, texType: c_int, mipLevel: c_int) -> None:
+	"""Attach texture/renderbuffer to a framebuffer"""
+	...
+
+def rl_framebuffer_complete(id: c_uint) -> c_bool:
+	"""Verify framebuffer is complete"""
+	...
+
+def rl_unload_framebuffer(id: c_uint) -> None:
+	"""Delete framebuffer from GPU"""
+	...
+
+def rl_load_shader_code(vsCode: c_char_p, fsCode: c_char_p) -> c_uint:
+	"""Load shader from code strings"""
+	...
+
+def rl_compile_shader(shaderCode: c_char_p, type: c_int) -> c_uint:
+	"""Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)"""
+	...
+
+def rl_load_shader_program(vShaderId: c_uint, fShaderId: c_uint) -> c_uint:
+	"""Load custom shader program"""
+	...
+
+def rl_unload_shader_program(id: c_uint) -> None:
+	"""Unload shader program"""
+	...
+
+def rl_get_location_uniform(shaderId: c_uint, uniformName: c_char_p) -> c_int:
+	"""Get shader location uniform"""
+	...
+
+def rl_get_location_attrib(shaderId: c_uint, attribName: c_char_p) -> c_int:
+	"""Get shader location attribute"""
+	...
+
+def rl_set_uniform(locIndex: c_int, value: c_void_p, uniformType: c_int, count: c_int) -> None:
+	"""Set shader value uniform"""
+	...
+
+def rl_set_uniform_matrix(locIndex: c_int, mat: Matrix) -> None:
+	"""Set shader value matrix"""
+	...
+
+def rl_set_uniform_sampler(locIndex: c_int, textureId: c_uint) -> None:
+	"""Set shader value sampler"""
+	...
+
+def rl_set_shader(id: c_uint, locs: POINTER(c_int)) -> None:
+	"""Set shader currently active (id and locations)"""
+	...
+
+def rl_load_compute_shader_program(shaderId: c_uint) -> c_uint:
+	"""Load compute shader program"""
+	...
+
+def rl_compute_shader_dispatch(groupX: c_uint, groupY: c_uint, groupZ: c_uint) -> None:
+	"""Dispatch compute shader (equivalent to *draw* for graphics pilepine)"""
+	...
+
+def rl_load_shader_buffer(size: c_uint, data: c_void_p, usageHint: c_int) -> c_uint:
+	"""Load shader storage buffer object (SSBO)"""
+	...
+
+def rl_unload_shader_buffer(ssboId: c_uint) -> None:
+	"""Unload shader storage buffer object (SSBO)"""
+	...
+
+def rl_update_shader_buffer(id: c_uint, data: c_void_p, dataSize: c_uint, offset: c_uint) -> None:
+	"""Update SSBO buffer data"""
+	...
+
+def rl_bind_shader_buffer(id: c_uint, index: c_uint) -> None:
+	"""Bind SSBO buffer"""
+	...
+
+def rl_read_shader_buffer(id: c_uint, dest: c_void_p, count: c_uint, offset: c_uint) -> None:
+	"""Read SSBO buffer data (GPU->CPU)"""
+	...
+
+def rl_copy_shader_buffer(destId: c_uint, srcId: c_uint, destOffset: c_uint, srcOffset: c_uint, count: c_uint) -> None:
+	"""Copy SSBO data between buffers"""
+	...
+
+def rl_get_shader_buffer_size(id: c_uint) -> c_uint:
+	"""Get SSBO buffer size"""
+	...
+
+def rl_bind_image_texture(id: c_uint, index: c_uint, format: c_uint, readonly: c_int) -> None:
+	"""Bind image texture"""
+	...
+
+def rl_get_matrix_modelview() -> Matrix:
+	"""Get internal modelview matrix"""
+	...
+
+def rl_get_matrix_projection() -> Matrix:
+	"""Get internal projection matrix"""
+	...
+
+def rl_get_matrix_transform() -> Matrix:
+	"""Get internal accumulated transform matrix"""
+	...
+
+def rl_get_matrix_projection_stereo(eye: c_int) -> Matrix:
+	"""Get internal projection matrix for stereo render (selected eye)"""
+	...
+
+def rl_get_matrix_view_offset_stereo(eye: c_int) -> Matrix:
+	"""Get internal view offset matrix for stereo render (selected eye)"""
+	...
+
+def rl_set_matrix_projection(proj: Matrix) -> None:
+	"""Set a custom projection matrix (replaces internal projection matrix)"""
+	...
+
+def rl_set_matrix_modelview(view: Matrix) -> None:
+	"""Set a custom modelview matrix (replaces internal modelview matrix)"""
+	...
+
+def rl_set_matrix_projection_stereo(right: Matrix, left: Matrix) -> None:
+	"""Set eyes projection matrices for stereo rendering"""
+	...
+
+def rl_set_matrix_view_offset_stereo(right: Matrix, left: Matrix) -> None:
+	"""Set eyes view offsets matrices for stereo rendering"""
+	...
+
+def rl_load_draw_cube() -> None:
+	"""Load and draw a cube"""
+	...
+
+def rl_load_draw_quad() -> None:
+	"""Load and draw a quad"""
+	...
+
 def init_window(width: c_int, height: c_int, title: c_char_p) -> None:
 	"""Initialize window and OpenGL context"""
 	...

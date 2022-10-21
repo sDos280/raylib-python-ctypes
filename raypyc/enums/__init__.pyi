@@ -1,5 +1,150 @@
 from enum import IntEnum
 
+class rlGlVersion(IntEnum):
+	"""OpenGL version"""
+	RL_OPENGL_11: int  # OpenGL 1.1
+	RL_OPENGL_21: int  # OpenGL 2.1 (GLSL 120)
+	RL_OPENGL_33: int  # OpenGL 3.3 (GLSL 330)
+	RL_OPENGL_43: int  # OpenGL 4.3 (using GLSL 330)
+	RL_OPENGL_ES_20: int  # OpenGL ES 2.0 (GLSL 100)
+
+
+class rlTraceLogLevel(IntEnum):
+	"""Trace log level"""
+	RL_LOG_ALL: int  # Display all logs
+	RL_LOG_TRACE: int  # Trace logging, intended for internal use only
+	RL_LOG_DEBUG: int  # Debug logging, used for internal debugging, it should be disabled on release builds
+	RL_LOG_INFO: int  # Info logging, used for program execution info
+	RL_LOG_WARNING: int  # Warning logging, used on recoverable failures
+	RL_LOG_ERROR: int  # Error logging, used on unrecoverable failures
+	RL_LOG_FATAL: int  # Fatal logging, used to abort program: exit(EXIT_FAILURE)
+	RL_LOG_NONE: int  # Disable logging
+
+
+class rlPixelFormat(IntEnum):
+	"""Texture pixel formats"""
+	RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE: int  # 8 bit per pixel (no alpha)
+	RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA: int  # 8*2 bpp (2 channels)
+	RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5: int  # 16 bpp
+	RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8: int  # 24 bpp
+	RL_PIXELFORMAT_UNCOMPRESSED_R5G5B5A1: int  # 16 bpp (1 bit alpha)
+	RL_PIXELFORMAT_UNCOMPRESSED_R4G4B4A4: int  # 16 bpp (4 bit alpha)
+	RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8A8: int  # 32 bpp
+	RL_PIXELFORMAT_UNCOMPRESSED_R32: int  # 32 bpp (1 channel - float)
+	RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32: int  # 32*3 bpp (3 channels - float)
+	RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32: int  # 32*4 bpp (4 channels - float)
+	RL_PIXELFORMAT_COMPRESSED_DXT1_RGB: int  # 4 bpp (no alpha)
+	RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA: int  # 4 bpp (1 bit alpha)
+	RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA: int  # 8 bpp
+	RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA: int  # 8 bpp
+	RL_PIXELFORMAT_COMPRESSED_ETC1_RGB: int  # 4 bpp
+	RL_PIXELFORMAT_COMPRESSED_ETC2_RGB: int  # 4 bpp
+	RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA: int  # 8 bpp
+	RL_PIXELFORMAT_COMPRESSED_PVRT_RGB: int  # 4 bpp
+	RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA: int  # 4 bpp
+	RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA: int  # 8 bpp
+	RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA: int  # 2 bpp
+
+
+class rlTextureFilter(IntEnum):
+	"""Texture parameters: filter mode"""
+	RL_TEXTURE_FILTER_POINT: int  # No filter, just pixel approximation
+	RL_TEXTURE_FILTER_BILINEAR: int  # Linear filtering
+	RL_TEXTURE_FILTER_TRILINEAR: int  # Trilinear filtering (linear with mipmaps)
+	RL_TEXTURE_FILTER_ANISOTROPIC_4X: int  # Anisotropic filtering 4x
+	RL_TEXTURE_FILTER_ANISOTROPIC_8X: int  # Anisotropic filtering 8x
+	RL_TEXTURE_FILTER_ANISOTROPIC_16X: int  # Anisotropic filtering 16x
+
+
+class rlBlendMode(IntEnum):
+	"""Color blending modes (pre-defined)"""
+	RL_BLEND_ALPHA: int  # Blend textures considering alpha (default)
+	RL_BLEND_ADDITIVE: int  # Blend textures adding colors
+	RL_BLEND_MULTIPLIED: int  # Blend textures multiplying colors
+	RL_BLEND_ADD_COLORS: int  # Blend textures adding colors (alternative)
+	RL_BLEND_SUBTRACT_COLORS: int  # Blend textures subtracting colors (alternative)
+	RL_BLEND_ALPHA_PREMULTIPLY: int  # Blend premultiplied textures considering alpha
+	RL_BLEND_CUSTOM: int  # Blend textures using custom src/dst factors (use rlSetBlendFactors())
+	RL_BLEND_CUSTOM_SEPARATE: int  # Blend textures using custom src/dst factors (use rlSetBlendFactorsSeparate())
+
+
+class rlShaderLocationIndex(IntEnum):
+	"""Shader location point type"""
+	RL_SHADER_LOC_VERTEX_POSITION: int  # Shader location: vertex attribute: position
+	RL_SHADER_LOC_VERTEX_TEXCOORD01: int  # Shader location: vertex attribute: texcoord01
+	RL_SHADER_LOC_VERTEX_TEXCOORD02: int  # Shader location: vertex attribute: texcoord02
+	RL_SHADER_LOC_VERTEX_NORMAL: int  # Shader location: vertex attribute: normal
+	RL_SHADER_LOC_VERTEX_TANGENT: int  # Shader location: vertex attribute: tangent
+	RL_SHADER_LOC_VERTEX_COLOR: int  # Shader location: vertex attribute: color
+	RL_SHADER_LOC_MATRIX_MVP: int  # Shader location: matrix uniform: model-view-projection
+	RL_SHADER_LOC_MATRIX_VIEW: int  # Shader location: matrix uniform: view (camera transform)
+	RL_SHADER_LOC_MATRIX_PROJECTION: int  # Shader location: matrix uniform: projection
+	RL_SHADER_LOC_MATRIX_MODEL: int  # Shader location: matrix uniform: model (transform)
+	RL_SHADER_LOC_MATRIX_NORMAL: int  # Shader location: matrix uniform: normal
+	RL_SHADER_LOC_VECTOR_VIEW: int  # Shader location: vector uniform: view
+	RL_SHADER_LOC_COLOR_DIFFUSE: int  # Shader location: vector uniform: diffuse color
+	RL_SHADER_LOC_COLOR_SPECULAR: int  # Shader location: vector uniform: specular color
+	RL_SHADER_LOC_COLOR_AMBIENT: int  # Shader location: vector uniform: ambient color
+	RL_SHADER_LOC_MAP_ALBEDO: int  # Shader location: sampler2d texture: albedo (same as: RL_SHADER_LOC_MAP_DIFFUSE)
+	RL_SHADER_LOC_MAP_METALNESS: int  # Shader location: sampler2d texture: metalness (same as: RL_SHADER_LOC_MAP_SPECULAR)
+	RL_SHADER_LOC_MAP_NORMAL: int  # Shader location: sampler2d texture: normal
+	RL_SHADER_LOC_MAP_ROUGHNESS: int  # Shader location: sampler2d texture: roughness
+	RL_SHADER_LOC_MAP_OCCLUSION: int  # Shader location: sampler2d texture: occlusion
+	RL_SHADER_LOC_MAP_EMISSION: int  # Shader location: sampler2d texture: emission
+	RL_SHADER_LOC_MAP_HEIGHT: int  # Shader location: sampler2d texture: height
+	RL_SHADER_LOC_MAP_CUBEMAP: int  # Shader location: samplerCube texture: cubemap
+	RL_SHADER_LOC_MAP_IRRADIANCE: int  # Shader location: samplerCube texture: irradiance
+	RL_SHADER_LOC_MAP_PREFILTER: int  # Shader location: samplerCube texture: prefilter
+	RL_SHADER_LOC_MAP_BRDF: int  # Shader location: sampler2d texture: brdf
+
+
+class rlShaderUniformDataType(IntEnum):
+	"""Shader uniform data type"""
+	RL_SHADER_UNIFORM_FLOAT: int  # Shader uniform type: float
+	RL_SHADER_UNIFORM_VEC2: int  # Shader uniform type: vec2 (2 float)
+	RL_SHADER_UNIFORM_VEC3: int  # Shader uniform type: vec3 (3 float)
+	RL_SHADER_UNIFORM_VEC4: int  # Shader uniform type: vec4 (4 float)
+	RL_SHADER_UNIFORM_INT: int  # Shader uniform type: int
+	RL_SHADER_UNIFORM_IVEC2: int  # Shader uniform type: ivec2 (2 int)
+	RL_SHADER_UNIFORM_IVEC3: int  # Shader uniform type: ivec3 (3 int)
+	RL_SHADER_UNIFORM_IVEC4: int  # Shader uniform type: ivec4 (4 int)
+	RL_SHADER_UNIFORM_SAMPLER2D: int  # Shader uniform type: sampler2d
+
+
+class rlShaderAttributeDataType(IntEnum):
+	"""Shader attribute data types"""
+	RL_SHADER_ATTRIB_FLOAT: int  # Shader attribute type: float
+	RL_SHADER_ATTRIB_VEC2: int  # Shader attribute type: vec2 (2 float)
+	RL_SHADER_ATTRIB_VEC3: int  # Shader attribute type: vec3 (3 float)
+	RL_SHADER_ATTRIB_VEC4: int  # Shader attribute type: vec4 (4 float)
+
+
+class rlFramebufferAttachType(IntEnum):
+	"""Framebuffer attachment type"""
+	RL_ATTACHMENT_COLOR_CHANNEL0: int  # Framebuffer attachmment type: color 0
+	RL_ATTACHMENT_COLOR_CHANNEL1: int  # Framebuffer attachmment type: color 1
+	RL_ATTACHMENT_COLOR_CHANNEL2: int  # Framebuffer attachmment type: color 2
+	RL_ATTACHMENT_COLOR_CHANNEL3: int  # Framebuffer attachmment type: color 3
+	RL_ATTACHMENT_COLOR_CHANNEL4: int  # Framebuffer attachmment type: color 4
+	RL_ATTACHMENT_COLOR_CHANNEL5: int  # Framebuffer attachmment type: color 5
+	RL_ATTACHMENT_COLOR_CHANNEL6: int  # Framebuffer attachmment type: color 6
+	RL_ATTACHMENT_COLOR_CHANNEL7: int  # Framebuffer attachmment type: color 7
+	RL_ATTACHMENT_DEPTH: int  # Framebuffer attachmment type: depth
+	RL_ATTACHMENT_STENCIL: int  # Framebuffer attachmment type: stencil
+
+
+class rlFramebufferAttachTextureType(IntEnum):
+	"""Framebuffer texture attachment type"""
+	RL_ATTACHMENT_CUBEMAP_POSITIVE_X: int  # Framebuffer texture attachment type: cubemap, +X side
+	RL_ATTACHMENT_CUBEMAP_NEGATIVE_X: int  # Framebuffer texture attachment type: cubemap, -X side
+	RL_ATTACHMENT_CUBEMAP_POSITIVE_Y: int  # Framebuffer texture attachment type: cubemap, +Y side
+	RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y: int  # Framebuffer texture attachment type: cubemap, -Y side
+	RL_ATTACHMENT_CUBEMAP_POSITIVE_Z: int  # Framebuffer texture attachment type: cubemap, +Z side
+	RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z: int  # Framebuffer texture attachment type: cubemap, -Z side
+	RL_ATTACHMENT_TEXTURE2D: int  # Framebuffer texture attachment type: texture2d
+	RL_ATTACHMENT_RENDERBUFFER: int  # Framebuffer texture attachment type: renderbuffer
+
+
 class ConfigFlags(IntEnum):
 	"""System/Window config flags"""
 	FLAG_VSYNC_HINT: int  # Set to try enabling V-Sync on GPU
