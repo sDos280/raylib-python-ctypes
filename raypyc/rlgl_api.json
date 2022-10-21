@@ -9,7 +9,7 @@
     {
       "name": "RLGL_VERSION",
       "type": "STRING",
-      "value": "4.2",
+      "value": "4.0",
       "description": ""
     },
     {
@@ -179,12 +179,6 @@
       "type": "INT",
       "value": 12288,
       "description": "Anisotropic filter (custom identifier)"
-    },
-    {
-      "name": "RL_TEXTURE_MIPMAP_BIAS_RATIO",
-      "type": "INT",
-      "value": 16384,
-      "description": "Texture mipmap bias, percentage ratio (custom identifier)"
     },
     {
       "name": "RL_TEXTURE_WRAP_REPEAT",
@@ -639,6 +633,134 @@
   ],
   "structs": [
     {
+      "name": "rlVertexBuffer",
+      "description": "Dynamic vertex buffers (position + texcoords + colors + indices arrays)",
+      "fields": [
+        {
+          "type": "int",
+          "name": "elementCount",
+          "description": "Number of elements in the buffer (QUADS)"
+        },
+        {
+          "type": "float *",
+          "name": "vertices",
+          "description": "Vertex position (XYZ - 3 components per vertex) (shader-location = 0)"
+        },
+        {
+          "type": "float *",
+          "name": "texcoords",
+          "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
+        },
+        {
+          "type": "unsigned char *",
+          "name": "colors",
+          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
+        },
+        {
+          "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
+          "name": "rlDrawCall",
+          "description": ""
+        },
+        {
+          "type": "unsigned int *",
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+        },
+        {
+          "type": "#endif",
+          "name": "rlRenderBatch",
+          "description": ""
+        },
+        {
+          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+        },
+        {
+          "type": "unsigned short *",
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+        },
+        {
+          "type": "#endif",
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+        },
+        {
+          "type": "unsigned int",
+          "name": "vaoId",
+          "description": "OpenGL Vertex Array Object id"
+        },
+        {
+          "type": "unsigned int[4]",
+          "name": "vboId",
+          "description": "OpenGL Vertex Buffer Objects id (4 types of vertex data)"
+        }
+      ]
+    },
+    {
+      "name": "rlDrawCall",
+      "description": "of those state-change happens (this is done in core module)",
+      "fields": [
+        {
+          "type": "int",
+          "name": "mode",
+          "description": "Drawing mode: LINES, TRIANGLES, QUADS"
+        },
+        {
+          "type": "int",
+          "name": "vertexCount",
+          "description": "Number of vertex of the draw"
+        },
+        {
+          "type": "int",
+          "name": "vertexAlignment",
+          "description": "Number of vertex required for index alignment (LINES, TRIANGLES)"
+        },
+        {
+          "type": "unsigned int",
+          "name": "textureId",
+          "description": "Texture id to be used on the draw -> Use to create new draw call if changes"
+        }
+      ]
+    },
+    {
+      "name": "rlRenderBatch",
+      "description": "rlRenderBatch type",
+      "fields": [
+        {
+          "type": "int",
+          "name": "bufferCount",
+          "description": "Number of vertex buffers (multi-buffering support)"
+        },
+        {
+          "type": "int",
+          "name": "currentBuffer",
+          "description": "Current buffer tracking in case of multi-buffering"
+        },
+        {
+          "type": "rlVertexBuffer *",
+          "name": "vertexBuffer",
+          "description": "Dynamic buffer(s) for vertex data"
+        },
+        {
+          "type": "rlDrawCall *",
+          "name": "draws",
+          "description": "Draw calls array, depends on textureId"
+        },
+        {
+          "type": "int",
+          "name": "drawCounter",
+          "description": "Draw calls counter"
+        },
+        {
+          "type": "float",
+          "name": "currentDepth",
+          "description": "Current depth value for next draw"
+        }
+      ]
+    },
+    {
       "name": "Matrix",
       "description": "Matrix, 4x4 components, column major, OpenGL style, right handed",
       "fields": [
@@ -721,109 +843,6 @@
           "type": "float",
           "name": "m15",
           "description": "Matrix fourth row (4 components)"
-        }
-      ]
-    },
-    {
-      "name": "rlVertexBuffer",
-      "description": "Dynamic vertex buffers (position + texcoords + colors + indices arrays)",
-      "fields": [
-        {
-          "type": "int",
-          "name": "elementCount",
-          "description": "Number of elements in the buffer (QUADS)"
-        },
-        {
-          "type": "float *",
-          "name": "vertices",
-          "description": "Vertex position (XYZ - 3 components per vertex) (shader-location = 0)"
-        },
-        {
-          "type": "float *",
-          "name": "texcoords",
-          "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
-        },
-        {
-          "type": "unsigned char *",
-          "name": "colors",
-          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
-        },
-        {
-          "type": "unsigned int *",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
-        },
-        {
-          "type": "unsigned int",
-          "name": "vaoId",
-          "description": "OpenGL Vertex Array Object id"
-        },
-        {
-          "type": "unsigned int[4]",
-          "name": "vboId",
-          "description": "OpenGL Vertex Buffer Objects id (4 types of vertex data)"
-        }
-      ]
-    },
-    {
-      "name": "rlDrawCall",
-      "description": "of those state-change happens (this is done in core module)",
-      "fields": [
-        {
-          "type": "int",
-          "name": "mode",
-          "description": "Drawing mode: LINES, TRIANGLES, QUADS"
-        },
-        {
-          "type": "int",
-          "name": "vertexCount",
-          "description": "Number of vertex of the draw"
-        },
-        {
-          "type": "int",
-          "name": "vertexAlignment",
-          "description": "Number of vertex required for index alignment (LINES, TRIANGLES)"
-        },
-        {
-          "type": "unsigned int",
-          "name": "textureId",
-          "description": "Texture id to be used on the draw -> Use to create new draw call if changes"
-        }
-      ]
-    },
-    {
-      "name": "rlRenderBatch",
-      "description": "rlRenderBatch type",
-      "fields": [
-        {
-          "type": "int",
-          "name": "bufferCount",
-          "description": "Number of vertex buffers (multi-buffering support)"
-        },
-        {
-          "type": "int",
-          "name": "currentBuffer",
-          "description": "Current buffer tracking in case of multi-buffering"
-        },
-        {
-          "type": "rlVertexBuffer *",
-          "name": "vertexBuffer",
-          "description": "Dynamic buffer(s) for vertex data"
-        },
-        {
-          "type": "rlDrawCall *",
-          "name": "draws",
-          "description": "Draw calls array, depends on textureId"
-        },
-        {
-          "type": "int",
-          "name": "drawCounter",
-          "description": "Draw calls counter"
-        },
-        {
-          "type": "float",
-          "name": "currentDepth",
-          "description": "Current depth value for next draw"
         }
       ]
     },
@@ -1008,41 +1027,6 @@
         },
         {
           "type": "int",
-          "name": "glBlendSrcFactorRGB",
-          "description": "Blending source RGB factor"
-        },
-        {
-          "type": "int",
-          "name": "glBlendDestFactorRGB",
-          "description": "Blending destination RGB factor"
-        },
-        {
-          "type": "int",
-          "name": "glBlendSrcFactorAlpha",
-          "description": "Blending source alpha factor"
-        },
-        {
-          "type": "int",
-          "name": "glBlendDestFactorAlpha",
-          "description": "Blending destination alpha factor"
-        },
-        {
-          "type": "int",
-          "name": "glBlendEquationRGB",
-          "description": "Blending equation for RGB"
-        },
-        {
-          "type": "int",
-          "name": "glBlendEquationAlpha",
-          "description": "Blending equation for alpha"
-        },
-        {
-          "type": "bool",
-          "name": "glCustomBlendModeModified",
-          "description": "Custom blending factor and equation modification status"
-        },
-        {
-          "type": "int",
           "name": "framebufferWidth",
           "description": "Current framebuffer width"
         },
@@ -1059,32 +1043,134 @@
   "enums": [
     {
       "name": "rlGlVersion",
-      "description": "OpenGL version",
+      "description": "",
       "values": [
         {
-          "name": "RL_OPENGL_11",
+          "name": "OPENGL_11",
           "value": 1,
-          "description": "OpenGL 1.1"
+          "description": ""
         },
         {
-          "name": "RL_OPENGL_21",
+          "name": "OPENGL_21",
           "value": 2,
-          "description": "OpenGL 2.1 (GLSL 120)"
+          "description": ""
         },
         {
-          "name": "RL_OPENGL_33",
+          "name": "OPENGL_33",
           "value": 3,
-          "description": "OpenGL 3.3 (GLSL 330)"
+          "description": ""
         },
         {
-          "name": "RL_OPENGL_43",
+          "name": "OPENGL_43",
           "value": 4,
-          "description": "OpenGL 4.3 (using GLSL 330)"
+          "description": ""
         },
         {
-          "name": "RL_OPENGL_ES_20",
+          "name": "OPENGL_ES_20",
           "value": 5,
-          "description": "OpenGL ES 2.0 (GLSL 100)"
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "rlFramebufferAttachType",
+      "description": "",
+      "values": [
+        {
+          "name": "RL_ATTACHMENT_COLOR_CHANNEL0",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_COLOR_CHANNEL1",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_COLOR_CHANNEL2",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_COLOR_CHANNEL3",
+          "value": 3,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_COLOR_CHANNEL4",
+          "value": 4,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_COLOR_CHANNEL5",
+          "value": 5,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_COLOR_CHANNEL6",
+          "value": 6,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_COLOR_CHANNEL7",
+          "value": 7,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_DEPTH",
+          "value": 100,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_STENCIL",
+          "value": 200,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "rlFramebufferAttachTextureType",
+      "description": "",
+      "values": [
+        {
+          "name": "RL_ATTACHMENT_CUBEMAP_POSITIVE_X",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_CUBEMAP_NEGATIVE_X",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_CUBEMAP_POSITIVE_Y",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y",
+          "value": 3,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_CUBEMAP_POSITIVE_Z",
+          "value": 4,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z",
+          "value": 5,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_TEXTURE2D",
+          "value": 100,
+          "description": ""
+        },
+        {
+          "name": "RL_ATTACHMENT_RENDERBUFFER",
+          "value": 200,
+          "description": ""
         }
       ]
     },
@@ -1136,7 +1222,7 @@
     },
     {
       "name": "rlPixelFormat",
-      "description": "Texture pixel formats",
+      "description": "Texture formats (support depends on OpenGL version)",
       "values": [
         {
           "name": "RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE",
@@ -1319,11 +1405,6 @@
           "name": "RL_BLEND_CUSTOM",
           "value": 6,
           "description": "Blend textures using custom src/dst factors (use rlSetBlendFactors())"
-        },
-        {
-          "name": "RL_BLEND_CUSTOM_SEPARATE",
-          "value": 7,
-          "description": "Blend textures using custom src/dst factors (use rlSetBlendFactorsSeparate())"
         }
       ]
     },
@@ -1537,108 +1618,6 @@
           "name": "RL_SHADER_ATTRIB_VEC4",
           "value": 3,
           "description": "Shader attribute type: vec4 (4 float)"
-        }
-      ]
-    },
-    {
-      "name": "rlFramebufferAttachType",
-      "description": "Framebuffer attachment type",
-      "values": [
-        {
-          "name": "RL_ATTACHMENT_COLOR_CHANNEL0",
-          "value": 0,
-          "description": "Framebuffer attachmment type: color 0"
-        },
-        {
-          "name": "RL_ATTACHMENT_COLOR_CHANNEL1",
-          "value": 1,
-          "description": "Framebuffer attachmment type: color 1"
-        },
-        {
-          "name": "RL_ATTACHMENT_COLOR_CHANNEL2",
-          "value": 2,
-          "description": "Framebuffer attachmment type: color 2"
-        },
-        {
-          "name": "RL_ATTACHMENT_COLOR_CHANNEL3",
-          "value": 3,
-          "description": "Framebuffer attachmment type: color 3"
-        },
-        {
-          "name": "RL_ATTACHMENT_COLOR_CHANNEL4",
-          "value": 4,
-          "description": "Framebuffer attachmment type: color 4"
-        },
-        {
-          "name": "RL_ATTACHMENT_COLOR_CHANNEL5",
-          "value": 5,
-          "description": "Framebuffer attachmment type: color 5"
-        },
-        {
-          "name": "RL_ATTACHMENT_COLOR_CHANNEL6",
-          "value": 6,
-          "description": "Framebuffer attachmment type: color 6"
-        },
-        {
-          "name": "RL_ATTACHMENT_COLOR_CHANNEL7",
-          "value": 7,
-          "description": "Framebuffer attachmment type: color 7"
-        },
-        {
-          "name": "RL_ATTACHMENT_DEPTH",
-          "value": 100,
-          "description": "Framebuffer attachmment type: depth"
-        },
-        {
-          "name": "RL_ATTACHMENT_STENCIL",
-          "value": 200,
-          "description": "Framebuffer attachmment type: stencil"
-        }
-      ]
-    },
-    {
-      "name": "rlFramebufferAttachTextureType",
-      "description": "Framebuffer texture attachment type",
-      "values": [
-        {
-          "name": "RL_ATTACHMENT_CUBEMAP_POSITIVE_X",
-          "value": 0,
-          "description": "Framebuffer texture attachment type: cubemap, +X side"
-        },
-        {
-          "name": "RL_ATTACHMENT_CUBEMAP_NEGATIVE_X",
-          "value": 1,
-          "description": "Framebuffer texture attachment type: cubemap, -X side"
-        },
-        {
-          "name": "RL_ATTACHMENT_CUBEMAP_POSITIVE_Y",
-          "value": 2,
-          "description": "Framebuffer texture attachment type: cubemap, +Y side"
-        },
-        {
-          "name": "RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y",
-          "value": 3,
-          "description": "Framebuffer texture attachment type: cubemap, -Y side"
-        },
-        {
-          "name": "RL_ATTACHMENT_CUBEMAP_POSITIVE_Z",
-          "value": 4,
-          "description": "Framebuffer texture attachment type: cubemap, +Z side"
-        },
-        {
-          "name": "RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z",
-          "value": 5,
-          "description": "Framebuffer texture attachment type: cubemap, -Z side"
-        },
-        {
-          "name": "RL_ATTACHMENT_TEXTURE2D",
-          "value": 100,
-          "description": "Framebuffer texture attachment type: texture2d"
-        },
-        {
-          "name": "RL_ATTACHMENT_RENDERBUFFER",
-          "value": 200,
-          "description": "Framebuffer texture attachment type: renderbuffer"
         }
       ]
     }
@@ -2075,32 +2054,6 @@
       ]
     },
     {
-      "name": "rlEnableStatePointer",
-      "description": "Enable attribute state pointer",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "vertexAttribType"
-        },
-        {
-          "type": "void *",
-          "name": "buffer"
-        }
-      ]
-    },
-    {
-      "name": "rlDisableStatePointer",
-      "description": "Disable attribute state pointer",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "vertexAttribType"
-        }
-      ]
-    },
-    {
       "name": "rlActiveTextureSlot",
       "description": "Select and active a texture slot",
       "returnType": "void",
@@ -2389,37 +2342,6 @@
         {
           "type": "int",
           "name": "glEquation"
-        }
-      ]
-    },
-    {
-      "name": "rlSetBlendFactorsSeparate",
-      "description": "Set blending mode factors and equations separately (using OpenGL factors)",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "glSrcRGB"
-        },
-        {
-          "type": "int",
-          "name": "glDstRGB"
-        },
-        {
-          "type": "int",
-          "name": "glSrcAlpha"
-        },
-        {
-          "type": "int",
-          "name": "glDstAlpha"
-        },
-        {
-          "type": "int",
-          "name": "glEqRGB"
-        },
-        {
-          "type": "int",
-          "name": "glEqAlpha"
         }
       ]
     },
@@ -3301,7 +3223,7 @@
       "returnType": "unsigned int",
       "params": [
         {
-          "type": "unsigned int",
+          "type": "unsigned long long",
           "name": "size"
         },
         {
@@ -3326,7 +3248,7 @@
       ]
     },
     {
-      "name": "rlUpdateShaderBuffer",
+      "name": "rlUpdateShaderBufferElements",
       "description": "Update SSBO buffer data",
       "returnType": "void",
       "params": [
@@ -3339,18 +3261,52 @@
           "name": "data"
         },
         {
-          "type": "unsigned int",
+          "type": "unsigned long long",
           "name": "dataSize"
         },
         {
+          "type": "unsigned long long",
+          "name": "offset"
+        }
+      ]
+    },
+    {
+      "name": "rlGetShaderBufferSize",
+      "description": "Get SSBO buffer size",
+      "returnType": "unsigned long long",
+      "params": [
+        {
           "type": "unsigned int",
+          "name": "id"
+        }
+      ]
+    },
+    {
+      "name": "rlReadShaderBufferElements",
+      "description": "Bind SSBO buffer",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "unsigned int",
+          "name": "id"
+        },
+        {
+          "type": "void *",
+          "name": "dest"
+        },
+        {
+          "type": "unsigned long long",
+          "name": "count"
+        },
+        {
+          "type": "unsigned long long",
           "name": "offset"
         }
       ]
     },
     {
       "name": "rlBindShaderBuffer",
-      "description": "Bind SSBO buffer",
+      "description": "Copy SSBO buffer data",
       "returnType": "void",
       "params": [
         {
@@ -3364,31 +3320,8 @@
       ]
     },
     {
-      "name": "rlReadShaderBuffer",
-      "description": "Read SSBO buffer data (GPU->CPU)",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "unsigned int",
-          "name": "id"
-        },
-        {
-          "type": "void *",
-          "name": "dest"
-        },
-        {
-          "type": "unsigned int",
-          "name": "count"
-        },
-        {
-          "type": "unsigned int",
-          "name": "offset"
-        }
-      ]
-    },
-    {
-      "name": "rlCopyShaderBuffer",
-      "description": "Copy SSBO data between buffers",
+      "name": "rlCopyBuffersElements",
+      "description": "Copy SSBO buffer data",
       "returnType": "void",
       "params": [
         {
@@ -3400,27 +3333,16 @@
           "name": "srcId"
         },
         {
-          "type": "unsigned int",
+          "type": "unsigned long long",
           "name": "destOffset"
         },
         {
-          "type": "unsigned int",
+          "type": "unsigned long long",
           "name": "srcOffset"
         },
         {
-          "type": "unsigned int",
+          "type": "unsigned long long",
           "name": "count"
-        }
-      ]
-    },
-    {
-      "name": "rlGetShaderBufferSize",
-      "description": "Get SSBO buffer size",
-      "returnType": "unsigned int",
-      "params": [
-        {
-          "type": "unsigned int",
-          "name": "id"
         }
       ]
     },

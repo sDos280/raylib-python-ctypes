@@ -288,6 +288,15 @@ def wrap_functions_to_ctypes_functions_add_function_to_this_module(functions_to_
             f = wrap_function(function_to_wrap_ctype['name'], function_to_wrap_ctype['parametersTypes'], function_to_wrap_ctype['returnType'])
             add_function_to_module(current_module, name_of_function, f)
 
+# load rlgl data
+with open(Path(Path(__file__).parent / 'rlgl_api.json')) as reader:
+    rlgl_api = json.load(reader)
+
+rlgl_api_functions = rlgl_api['functions']
+
+rlgl_functions_to_wrapped = check_for_functions_that_can_wrap(rlgl_api_functions)
+
+wrap_functions_to_ctypes_functions_add_function_to_this_module(rlgl_functions_to_wrapped, current_module)
 
 # load raylib data
 with open(Path(Path(__file__).parent / 'raylib_api.json')) as reader:

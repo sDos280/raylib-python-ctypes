@@ -1,4 +1,5 @@
 from ctypes import *
+from raypyc.defines import *
 
 
 class Matrix(Structure):

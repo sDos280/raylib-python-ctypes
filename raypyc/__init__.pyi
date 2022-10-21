@@ -1,3 +1,4 @@
+from raypyc.defines import *
 from raypyc.colors import *
 from raypyc.enums import *
 from raypyc.structures import *

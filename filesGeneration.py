@@ -181,7 +181,7 @@ def generate_define_code(define_data):
     if define_data['type'] not in ["FLOAT_MATH", "FLOAT", "STRING", "INT"]: return ""
     elif define_data['type'] == "FLOAT_MATH": return f"{define_data['name']}: float = {define_data['value'].replace('f', '')}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
     elif define_data['type'] in ["INT", "FLOAT"]: return f"{define_data['name']}: int = {define_data['value']}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
-    elif define_data['type'] == "STRING": return f"{define_data['name']}: str = {define_data['value']}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+    elif define_data['type'] == "STRING": return f"{define_data['name']}: str = \"{define_data['value']}\"{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
     else: return ""
 
 def generate_define_code_stub(define_data):
@@ -321,23 +321,27 @@ def generate_enums_py_pyi_code(enums_api):
 def generate_structs_py_pyi_files():
     if Path(STRUCTURES_FOLDER_PATH / '__init__.py').exists():
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from ctypes import *\n\n\n')
+            structs_code_file_write.write('from ctypes import *\n')
+            structs_code_file_write.write('from raypyc.defines import *\n\n\n')
     else:
         print(f"there isn\'t a __init__.py in {Path(STRUCTURES_FOLDER_PATH / '__init__.py')}, regenerating a new one here")
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "x"):  # generate __init__.py file => struct logic
             pass
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from ctypes import *\n\n\n')
+            structs_code_file_write.write('from ctypes import *\n')
+            structs_code_file_write.write('from raypyc.defines import *\n\n\n')
 
     if Path(STRUCTURES_FOLDER_PATH / '__init__.pyi').exists():
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from ctypes import *\n\n\n')
+            structs_code_file_write.write('from ctypes import *\n')
+            structs_code_file_write.write('from raypyc.defines import *\n\n\n')
     else:
         print(f"there isn\'t a __init__.pyi in {Path(STRUCTURES_FOLDER_PATH / '__init__.pyi')}, regenerating a new one here")
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => struct signature
             pass
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from ctypes import *\n\n\n')
+            structs_code_file_write.write('from ctypes import *\n')
+            structs_code_file_write.write('from raypyc.defines import *\n\n\n')
 
 
 def generate_structs_py_pyi_code(structs_api, aliases_api):
@@ -459,6 +463,7 @@ def generate_struct_setters_getters_code_stub(struct_data):
 def generate_functions_code_pyi_file():
     if Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi').exists():
         with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+            structs_code_file_write.write('from raypyc.defines import *\n')
             structs_code_file_write.write('from raypyc.colors import *\n')
             structs_code_file_write.write('from raypyc.enums import *\n')
             structs_code_file_write.write('from raypyc.structures import *\n\n\n')
@@ -467,6 +472,7 @@ def generate_functions_code_pyi_file():
         with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => function signature
             pass
         with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+            structs_code_file_write.write('from raypyc.defines import *\n')
             structs_code_file_write.write('from raypyc.colors import *\n')
             structs_code_file_write.write('from raypyc.enums import *\n')
             structs_code_file_write.write('from raypyc.structures import *\n\n\n')
