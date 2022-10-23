@@ -158,6 +158,9 @@ def convert_c_type_string_to_ctype_type_sting(c_type_string: str):
 def str_to_class(classname):
     return eval(classname)
 
+def add_code_to_file(file_path, string_to_add):
+    with open(file_path, "a") as writer:  # add import stuff
+        writer.write(string_to_add)
 
 # get numbers from string
 def get_numbers_from_string(string):
@@ -458,6 +461,13 @@ def generate_struct_setters_getters_code_stub(struct_data):
 
     return indentString(struct_setters_getters_string, 1)[:-1]
 
+def generate_structures_dictionary_code(wrapped_structures):
+    dictionary_sting = "__structs = {\n"
+    for struct in wrapped_structures:
+        dictionary_sting += f"\t\"{struct}\": {struct},\n"
+    dictionary_sting = dictionary_sting[:-2]
+    dictionary_sting += "\n}"
+    return dictionary_sting
 
 # remove the current functions_code.pyi file and generated new one
 def generate_functions_code_pyi_file():
@@ -584,6 +594,9 @@ generate_structs_py_pyi_code(rlgl_api_structs, rlgl_api_aliases)
 generate_structs_py_pyi_code(raylib_api_structs, raylib_api_aliases)
 generate_structs_py_pyi_code(raymath_api_structs, raymath_api_aliases)
 generate_structs_py_pyi_code(raygui_api_structs, raygui_api_aliases)
+add_code_to_file(STRUCTURES_FOLDER_PATH / "__init__.py", generate_structures_dictionary_code(wrapped_structures_names_py))
+add_code_to_file(STRUCTURES_FOLDER_PATH / "__init__.pyi", generate_structures_dictionary_code(wrapped_structures_names_pyi))
+
 
 # generate the enums files
 generate_enums_py_pyi_files()
