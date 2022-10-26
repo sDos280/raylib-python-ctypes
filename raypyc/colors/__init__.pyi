@@ -4,8 +4,8 @@ LIGHTGRAY: Color  # Light Gray
 GRAY: Color  # Gray
 DARKGRAY: Color  # Dark Gray
 YELLOW: Color  # Yellow
-Gold: Color  # Gold
-Orange: Color  # Orange
+GOLD: Color  # Gold
+ORANGE: Color  # Orange
 PINK: Color  # Pink
 RED: Color  # Red
 MAROON: Color  # Maroon
