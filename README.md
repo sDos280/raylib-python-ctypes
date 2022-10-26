@@ -106,4 +106,5 @@ secondly, here are some of the things that contributing on will help this wrappe
 [^2] NOTE: at least for now, all the non-functions wrapper stuff need be implemented in the [filesGeneration.py](https://github.com/sDos280/raylib-python-ctypes/blob/main/filesGeneration.py) file, and all the functions wrapper stuff need be implemented in the [raypyc/__init__.py](https://github.com/sDos280/raylib-python-ctypes/blob/main/raypyc/__init__.py)
 
 ## thanks
-thanks to [raysun5](https://github.com/raysan5), [raylibpy](https://github.com/Ho011/pyraylib) and [pyray](https://github.com/sDos280/raylib-python-cffi) for their good work, I took all the inspiration (and some code ;) ) from them, so thanks you guys very much
+thanks to [raysun5](https://github.com/raysan5), [raylibpy](https://github.com/Ho011/pyraylib) and [pyray](https://github.com/sDos280/raylib-python-cffi) for their good work, I took all the inspiration (and some code ;) ) from them, so thanks you guys very much.
+also a big thanks for the people that helped testing and reviewing the library :)!!!
