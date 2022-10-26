@@ -1,11 +1,8 @@
-include raypyc/colors/__init__.py
-include raypyc/colors/__init__.pyi
-include raypyc/enums/__init__.py
-include raypyc/enums/__init__.pyi
-include raypyc/structures/__init__.py
-include raypyc/structures/__init__.pyi
+include raypyc/defines/*
+include raypyc/colors/*
+include raypyc/enums/*
+include raypyc/structures/*
 include raypyc/__init__.py
 include raypyc/__init__.pyi
-include raypyc/raylib_api.json
-include raypyc/raymath_api.json
+include raypyc/*.json
 include raypyc/lib/*

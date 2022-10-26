@@ -1,145 +1,176 @@
 from ctypes import *
+from raypyc.defines import *
 
 
-class Vector2(Structure):
-	"""Vector2, 2 components"""
+class rlVertexBuffer(Structure):
+	"""Dynamic vertex buffers (position + texcoords + colors + indices arrays)"""
 	_fields_ = [
-		('x', c_float),  # Vector x component
-		('y', c_float)  # Vector y component
+		('elementCount', c_int),  # Number of elements in the buffer (QUADS)
+		('vertices', POINTER(c_float)),  # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
+		('texcoords', POINTER(c_float)),  # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
+		('colors', POINTER(c_ubyte)),  # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
+		('indices', POINTER(c_uint)),  # Vertex indices (in case vertex data comes indexed) (6 indices per quad)
+		('vaoId', c_uint),  # OpenGL Vertex Array Object id
+		('vboId', c_uint * 4)  # OpenGL Vertex Buffer Objects id (4 types of vertex data)
 	]
 
 	@property
-	def x(self) -> c_float:
-		return self.x
+	def elementCount(self) -> c_int:
+		return self.elementCount
 
-	@x.setter
-	def x(self, i: c_float) -> None:
-		self.x = i
+	@elementCount.setter
+	def elementCount(self, i: c_int) -> None:
+		self.elementCount = i
 
 	@property
-	def y(self) -> c_float:
-		return self.y
+	def vertices(self) -> POINTER(c_float):
+		return self.vertices
 
-	@y.setter
-	def y(self, i: c_float) -> None:
-		self.y = i
+	@vertices.setter
+	def vertices(self, i: POINTER(c_float)) -> None:
+		self.vertices = i
+
+	@property
+	def texcoords(self) -> POINTER(c_float):
+		return self.texcoords
+
+	@texcoords.setter
+	def texcoords(self, i: POINTER(c_float)) -> None:
+		self.texcoords = i
+
+	@property
+	def colors(self) -> POINTER(c_ubyte):
+		return self.colors
+
+	@colors.setter
+	def colors(self, i: POINTER(c_ubyte)) -> None:
+		self.colors = i
+
+	@property
+	def indices(self) -> POINTER(c_uint):
+		return self.indices
+
+	@indices.setter
+	def indices(self, i: POINTER(c_uint)) -> None:
+		self.indices = i
+
+	@property
+	def vaoId(self) -> c_uint:
+		return self.vaoId
+
+	@vaoId.setter
+	def vaoId(self, i: c_uint) -> None:
+		self.vaoId = i
+
+	@property
+	def vboId(self) -> c_uint * 4:
+		return self.vboId
+
+	@vboId.setter
+	def vboId(self, i: c_uint * 4) -> None:
+		self.vboId = i
 
 
-class Vector3(Structure):
-	"""Vector3, 3 components"""
+class rlDrawCall(Structure):
+	"""of those state-change happens (this is done in core module)"""
 	_fields_ = [
-		('x', c_float),  # Vector x component
-		('y', c_float),  # Vector y component
-		('z', c_float)  # Vector z component
+		('mode', c_int),  # Drawing mode: LINES, TRIANGLES, QUADS
+		('vertexCount', c_int),  # Number of vertex of the draw
+		('vertexAlignment', c_int),  # Number of vertex required for index alignment (LINES, TRIANGLES)
+		('textureId', c_uint)  # Texture id to be used on the draw -> Use to create new draw call if changes
 	]
 
 	@property
-	def x(self) -> c_float:
-		return self.x
+	def mode(self) -> c_int:
+		return self.mode
 
-	@x.setter
-	def x(self, i: c_float) -> None:
-		self.x = i
-
-	@property
-	def y(self) -> c_float:
-		return self.y
-
-	@y.setter
-	def y(self, i: c_float) -> None:
-		self.y = i
+	@mode.setter
+	def mode(self, i: c_int) -> None:
+		self.mode = i
 
 	@property
-	def z(self) -> c_float:
-		return self.z
+	def vertexCount(self) -> c_int:
+		return self.vertexCount
 
-	@z.setter
-	def z(self, i: c_float) -> None:
-		self.z = i
+	@vertexCount.setter
+	def vertexCount(self, i: c_int) -> None:
+		self.vertexCount = i
+
+	@property
+	def vertexAlignment(self) -> c_int:
+		return self.vertexAlignment
+
+	@vertexAlignment.setter
+	def vertexAlignment(self, i: c_int) -> None:
+		self.vertexAlignment = i
+
+	@property
+	def textureId(self) -> c_uint:
+		return self.textureId
+
+	@textureId.setter
+	def textureId(self, i: c_uint) -> None:
+		self.textureId = i
 
 
-class Vector4(Structure):
-	"""Vector4, 4 components"""
+class rlRenderBatch(Structure):
+	"""rlRenderBatch type"""
 	_fields_ = [
-		('x', c_float),  # Vector x component
-		('y', c_float),  # Vector y component
-		('z', c_float),  # Vector z component
-		('w', c_float)  # Vector w component
+		('bufferCount', c_int),  # Number of vertex buffers (multi-buffering support)
+		('currentBuffer', c_int),  # Current buffer tracking in case of multi-buffering
+		('vertexBuffer', POINTER(rlVertexBuffer)),  # Dynamic buffer(s) for vertex data
+		('draws', POINTER(rlDrawCall)),  # Draw calls array, depends on textureId
+		('drawCounter', c_int),  # Draw calls counter
+		('currentDepth', c_float)  # Current depth value for next draw
 	]
 
 	@property
-	def x(self) -> c_float:
-		return self.x
+	def bufferCount(self) -> c_int:
+		return self.bufferCount
 
-	@x.setter
-	def x(self, i: c_float) -> None:
-		self.x = i
-
-	@property
-	def y(self) -> c_float:
-		return self.y
-
-	@y.setter
-	def y(self, i: c_float) -> None:
-		self.y = i
+	@bufferCount.setter
+	def bufferCount(self, i: c_int) -> None:
+		self.bufferCount = i
 
 	@property
-	def z(self) -> c_float:
-		return self.z
+	def currentBuffer(self) -> c_int:
+		return self.currentBuffer
 
-	@z.setter
-	def z(self, i: c_float) -> None:
-		self.z = i
-
-	@property
-	def w(self) -> c_float:
-		return self.w
-
-	@w.setter
-	def w(self, i: c_float) -> None:
-		self.w = i
-
-
-class Quaternion(Structure):
-	"""Quaternion, 4 components (Vector4 alias)"""
-	_fields_ = [
-		('x', c_float),  # Vector x component
-		('y', c_float),  # Vector y component
-		('z', c_float),  # Vector z component
-		('w', c_float)  # Vector w component
-	]
+	@currentBuffer.setter
+	def currentBuffer(self, i: c_int) -> None:
+		self.currentBuffer = i
 
 	@property
-	def x(self) -> c_float:
-		return self.x
+	def vertexBuffer(self) -> POINTER(rlVertexBuffer):
+		return self.vertexBuffer
 
-	@x.setter
-	def x(self, i: c_float) -> None:
-		self.x = i
-
-	@property
-	def y(self) -> c_float:
-		return self.y
-
-	@y.setter
-	def y(self, i: c_float) -> None:
-		self.y = i
+	@vertexBuffer.setter
+	def vertexBuffer(self, i: POINTER(rlVertexBuffer)) -> None:
+		self.vertexBuffer = i
 
 	@property
-	def z(self) -> c_float:
-		return self.z
+	def draws(self) -> POINTER(rlDrawCall):
+		return self.draws
 
-	@z.setter
-	def z(self, i: c_float) -> None:
-		self.z = i
+	@draws.setter
+	def draws(self, i: POINTER(rlDrawCall)) -> None:
+		self.draws = i
 
 	@property
-	def w(self) -> c_float:
-		return self.w
+	def drawCounter(self) -> c_int:
+		return self.drawCounter
 
-	@w.setter
-	def w(self, i: c_float) -> None:
-		self.w = i
+	@drawCounter.setter
+	def drawCounter(self, i: c_int) -> None:
+		self.drawCounter = i
+
+	@property
+	def currentDepth(self) -> c_float:
+		return self.currentDepth
+
+	@currentDepth.setter
+	def currentDepth(self, i: c_float) -> None:
+		self.currentDepth = i
 
 
 class Matrix(Structure):
@@ -290,6 +321,486 @@ class Matrix(Structure):
 	@m15.setter
 	def m15(self, i: c_float) -> None:
 		self.m15 = i
+
+
+class rlglData(Structure):
+	""""""
+	_fields_ = [
+		('currentBatch', POINTER(rlRenderBatch)),  # Current render batch
+		('defaultBatch', rlRenderBatch),  # Default internal render batch
+		('vertexCounter', c_int),  # Current active render batch vertex counter (generic, used for all batches)
+		('texcoordx', c_float),  # Current active texture coordinate (added on glVertex*())
+		('texcoordy', c_float),  # Current active texture coordinate (added on glVertex*())
+		('normalx', c_float),  # Current active normal (added on glVertex*())
+		('normaly', c_float),  # Current active normal (added on glVertex*())
+		('normalz', c_float),  # Current active normal (added on glVertex*())
+		('colorr', c_ubyte),  # Current active color (added on glVertex*())
+		('colorg', c_ubyte),  # Current active color (added on glVertex*())
+		('colorb', c_ubyte),  # Current active color (added on glVertex*())
+		('colora', c_ubyte),  # Current active color (added on glVertex*())
+		('currentMatrixMode', c_int),  # Current matrix mode
+		('currentMatrix', POINTER(Matrix)),  # Current matrix pointer
+		('modelview', Matrix),  # Default modelview matrix
+		('projection', Matrix),  # Default projection matrix
+		('transform', Matrix),  # Transform matrix to be used with rlTranslate, rlRotate, rlScale
+		('transformRequired', c_bool),  # Require transform matrix application to current draw-call vertex (if required)
+		('stack', Matrix * RL_MAX_MATRIX_STACK_SIZE),  # Matrix stack for push/pop
+		('stackCounter', c_int),  # Matrix stack counter
+		('defaultTextureId', c_uint),  # Default texture used on shapes/poly drawing (required by shader)
+		('activeTextureId', c_uint * RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS),  # Active texture ids to be enabled on batch drawing (0 active by default)
+		('defaultVShaderId', c_uint),  # Default vertex shader id (used by default shader program)
+		('defaultFShaderId', c_uint),  # Default fragment shader id (used by default shader program)
+		('defaultShaderId', c_uint),  # Default shader program id, supports vertex color and diffuse texture
+		('defaultShaderLocs', POINTER(c_int)),  # Default shader locations pointer to be used on rendering
+		('currentShaderId', c_uint),  # Current shader id to be used on rendering (by default, defaultShaderId)
+		('currentShaderLocs', POINTER(c_int)),  # Current shader locations pointer to be used on rendering (by default, defaultShaderLocs)
+		('stereoRender', c_bool),  # Stereo rendering flag
+		('projectionStereo', Matrix * 2),  # VR stereo rendering eyes projection matrices
+		('viewOffsetStereo', Matrix * 2),  # VR stereo rendering eyes view offset matrices
+		('currentBlendMode', c_int),  # Blending mode active
+		('glBlendSrcFactor', c_int),  # Blending source factor
+		('glBlendDstFactor', c_int),  # Blending destination factor
+		('glBlendEquation', c_int),  # Blending equation
+		('framebufferWidth', c_int),  # Current framebuffer width
+		('framebufferHeight', c_int)  # Current framebuffer height
+	]
+
+	@property
+	def currentBatch(self) -> POINTER(rlRenderBatch):
+		return self.currentBatch
+
+	@currentBatch.setter
+	def currentBatch(self, i: POINTER(rlRenderBatch)) -> None:
+		self.currentBatch = i
+
+	@property
+	def defaultBatch(self) -> rlRenderBatch:
+		return self.defaultBatch
+
+	@defaultBatch.setter
+	def defaultBatch(self, i: rlRenderBatch) -> None:
+		self.defaultBatch = i
+
+	@property
+	def vertexCounter(self) -> c_int:
+		return self.vertexCounter
+
+	@vertexCounter.setter
+	def vertexCounter(self, i: c_int) -> None:
+		self.vertexCounter = i
+
+	@property
+	def texcoordx(self) -> c_float:
+		return self.texcoordx
+
+	@texcoordx.setter
+	def texcoordx(self, i: c_float) -> None:
+		self.texcoordx = i
+
+	@property
+	def texcoordy(self) -> c_float:
+		return self.texcoordy
+
+	@texcoordy.setter
+	def texcoordy(self, i: c_float) -> None:
+		self.texcoordy = i
+
+	@property
+	def normalx(self) -> c_float:
+		return self.normalx
+
+	@normalx.setter
+	def normalx(self, i: c_float) -> None:
+		self.normalx = i
+
+	@property
+	def normaly(self) -> c_float:
+		return self.normaly
+
+	@normaly.setter
+	def normaly(self, i: c_float) -> None:
+		self.normaly = i
+
+	@property
+	def normalz(self) -> c_float:
+		return self.normalz
+
+	@normalz.setter
+	def normalz(self, i: c_float) -> None:
+		self.normalz = i
+
+	@property
+	def colorr(self) -> c_ubyte:
+		return self.colorr
+
+	@colorr.setter
+	def colorr(self, i: c_ubyte) -> None:
+		self.colorr = i
+
+	@property
+	def colorg(self) -> c_ubyte:
+		return self.colorg
+
+	@colorg.setter
+	def colorg(self, i: c_ubyte) -> None:
+		self.colorg = i
+
+	@property
+	def colorb(self) -> c_ubyte:
+		return self.colorb
+
+	@colorb.setter
+	def colorb(self, i: c_ubyte) -> None:
+		self.colorb = i
+
+	@property
+	def colora(self) -> c_ubyte:
+		return self.colora
+
+	@colora.setter
+	def colora(self, i: c_ubyte) -> None:
+		self.colora = i
+
+	@property
+	def currentMatrixMode(self) -> c_int:
+		return self.currentMatrixMode
+
+	@currentMatrixMode.setter
+	def currentMatrixMode(self, i: c_int) -> None:
+		self.currentMatrixMode = i
+
+	@property
+	def currentMatrix(self) -> POINTER(Matrix):
+		return self.currentMatrix
+
+	@currentMatrix.setter
+	def currentMatrix(self, i: POINTER(Matrix)) -> None:
+		self.currentMatrix = i
+
+	@property
+	def modelview(self) -> Matrix:
+		return self.modelview
+
+	@modelview.setter
+	def modelview(self, i: Matrix) -> None:
+		self.modelview = i
+
+	@property
+	def projection(self) -> Matrix:
+		return self.projection
+
+	@projection.setter
+	def projection(self, i: Matrix) -> None:
+		self.projection = i
+
+	@property
+	def transform(self) -> Matrix:
+		return self.transform
+
+	@transform.setter
+	def transform(self, i: Matrix) -> None:
+		self.transform = i
+
+	@property
+	def transformRequired(self) -> c_bool:
+		return self.transformRequired
+
+	@transformRequired.setter
+	def transformRequired(self, i: c_bool) -> None:
+		self.transformRequired = i
+
+	@property
+	def stack(self) -> Matrix * RL_MAX_MATRIX_STACK_SIZE:
+		return self.stack
+
+	@stack.setter
+	def stack(self, i: Matrix * RL_MAX_MATRIX_STACK_SIZE) -> None:
+		self.stack = i
+
+	@property
+	def stackCounter(self) -> c_int:
+		return self.stackCounter
+
+	@stackCounter.setter
+	def stackCounter(self, i: c_int) -> None:
+		self.stackCounter = i
+
+	@property
+	def defaultTextureId(self) -> c_uint:
+		return self.defaultTextureId
+
+	@defaultTextureId.setter
+	def defaultTextureId(self, i: c_uint) -> None:
+		self.defaultTextureId = i
+
+	@property
+	def activeTextureId(self) -> c_uint * RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS:
+		return self.activeTextureId
+
+	@activeTextureId.setter
+	def activeTextureId(self, i: c_uint * RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS) -> None:
+		self.activeTextureId = i
+
+	@property
+	def defaultVShaderId(self) -> c_uint:
+		return self.defaultVShaderId
+
+	@defaultVShaderId.setter
+	def defaultVShaderId(self, i: c_uint) -> None:
+		self.defaultVShaderId = i
+
+	@property
+	def defaultFShaderId(self) -> c_uint:
+		return self.defaultFShaderId
+
+	@defaultFShaderId.setter
+	def defaultFShaderId(self, i: c_uint) -> None:
+		self.defaultFShaderId = i
+
+	@property
+	def defaultShaderId(self) -> c_uint:
+		return self.defaultShaderId
+
+	@defaultShaderId.setter
+	def defaultShaderId(self, i: c_uint) -> None:
+		self.defaultShaderId = i
+
+	@property
+	def defaultShaderLocs(self) -> POINTER(c_int):
+		return self.defaultShaderLocs
+
+	@defaultShaderLocs.setter
+	def defaultShaderLocs(self, i: POINTER(c_int)) -> None:
+		self.defaultShaderLocs = i
+
+	@property
+	def currentShaderId(self) -> c_uint:
+		return self.currentShaderId
+
+	@currentShaderId.setter
+	def currentShaderId(self, i: c_uint) -> None:
+		self.currentShaderId = i
+
+	@property
+	def currentShaderLocs(self) -> POINTER(c_int):
+		return self.currentShaderLocs
+
+	@currentShaderLocs.setter
+	def currentShaderLocs(self, i: POINTER(c_int)) -> None:
+		self.currentShaderLocs = i
+
+	@property
+	def stereoRender(self) -> c_bool:
+		return self.stereoRender
+
+	@stereoRender.setter
+	def stereoRender(self, i: c_bool) -> None:
+		self.stereoRender = i
+
+	@property
+	def projectionStereo(self) -> Matrix * 2:
+		return self.projectionStereo
+
+	@projectionStereo.setter
+	def projectionStereo(self, i: Matrix * 2) -> None:
+		self.projectionStereo = i
+
+	@property
+	def viewOffsetStereo(self) -> Matrix * 2:
+		return self.viewOffsetStereo
+
+	@viewOffsetStereo.setter
+	def viewOffsetStereo(self, i: Matrix * 2) -> None:
+		self.viewOffsetStereo = i
+
+	@property
+	def currentBlendMode(self) -> c_int:
+		return self.currentBlendMode
+
+	@currentBlendMode.setter
+	def currentBlendMode(self, i: c_int) -> None:
+		self.currentBlendMode = i
+
+	@property
+	def glBlendSrcFactor(self) -> c_int:
+		return self.glBlendSrcFactor
+
+	@glBlendSrcFactor.setter
+	def glBlendSrcFactor(self, i: c_int) -> None:
+		self.glBlendSrcFactor = i
+
+	@property
+	def glBlendDstFactor(self) -> c_int:
+		return self.glBlendDstFactor
+
+	@glBlendDstFactor.setter
+	def glBlendDstFactor(self, i: c_int) -> None:
+		self.glBlendDstFactor = i
+
+	@property
+	def glBlendEquation(self) -> c_int:
+		return self.glBlendEquation
+
+	@glBlendEquation.setter
+	def glBlendEquation(self, i: c_int) -> None:
+		self.glBlendEquation = i
+
+	@property
+	def framebufferWidth(self) -> c_int:
+		return self.framebufferWidth
+
+	@framebufferWidth.setter
+	def framebufferWidth(self, i: c_int) -> None:
+		self.framebufferWidth = i
+
+	@property
+	def framebufferHeight(self) -> c_int:
+		return self.framebufferHeight
+
+	@framebufferHeight.setter
+	def framebufferHeight(self, i: c_int) -> None:
+		self.framebufferHeight = i
+
+
+class Vector2(Structure):
+	"""Vector2, 2 components"""
+	_fields_ = [
+		('x', c_float),  # Vector x component
+		('y', c_float)  # Vector y component
+	]
+
+	@property
+	def x(self) -> c_float:
+		return self.x
+
+	@x.setter
+	def x(self, i: c_float) -> None:
+		self.x = i
+
+	@property
+	def y(self) -> c_float:
+		return self.y
+
+	@y.setter
+	def y(self, i: c_float) -> None:
+		self.y = i
+
+
+class Vector3(Structure):
+	"""Vector3, 3 components"""
+	_fields_ = [
+		('x', c_float),  # Vector x component
+		('y', c_float),  # Vector y component
+		('z', c_float)  # Vector z component
+	]
+
+	@property
+	def x(self) -> c_float:
+		return self.x
+
+	@x.setter
+	def x(self, i: c_float) -> None:
+		self.x = i
+
+	@property
+	def y(self) -> c_float:
+		return self.y
+
+	@y.setter
+	def y(self, i: c_float) -> None:
+		self.y = i
+
+	@property
+	def z(self) -> c_float:
+		return self.z
+
+	@z.setter
+	def z(self, i: c_float) -> None:
+		self.z = i
+
+
+class Vector4(Structure):
+	"""Vector4, 4 components"""
+	_fields_ = [
+		('x', c_float),  # Vector x component
+		('y', c_float),  # Vector y component
+		('z', c_float),  # Vector z component
+		('w', c_float)  # Vector w component
+	]
+
+	@property
+	def x(self) -> c_float:
+		return self.x
+
+	@x.setter
+	def x(self, i: c_float) -> None:
+		self.x = i
+
+	@property
+	def y(self) -> c_float:
+		return self.y
+
+	@y.setter
+	def y(self, i: c_float) -> None:
+		self.y = i
+
+	@property
+	def z(self) -> c_float:
+		return self.z
+
+	@z.setter
+	def z(self, i: c_float) -> None:
+		self.z = i
+
+	@property
+	def w(self) -> c_float:
+		return self.w
+
+	@w.setter
+	def w(self, i: c_float) -> None:
+		self.w = i
+
+
+class Quaternion(Structure):
+	"""Quaternion, 4 components (Vector4 alias)"""
+	_fields_ = [
+		('x', c_float),  # Vector x component
+		('y', c_float),  # Vector y component
+		('z', c_float),  # Vector z component
+		('w', c_float)  # Vector w component
+	]
+
+	@property
+	def x(self) -> c_float:
+		return self.x
+
+	@x.setter
+	def x(self, i: c_float) -> None:
+		self.x = i
+
+	@property
+	def y(self) -> c_float:
+		return self.y
+
+	@y.setter
+	def y(self, i: c_float) -> None:
+		self.y = i
+
+	@property
+	def z(self) -> c_float:
+		return self.z
+
+	@z.setter
+	def z(self, i: c_float) -> None:
+		self.z = i
+
+	@property
+	def w(self) -> c_float:
+		return self.w
+
+	@w.setter
+	def w(self, i: c_float) -> None:
+		self.w = i
 
 
 class Color(Structure):
@@ -1738,3 +2249,45 @@ class GuiStyleProp(Structure):
 		self.propertyValue = i
 
 
+__structs = {
+	"rlVertexBuffer": rlVertexBuffer,
+	"rlDrawCall": rlDrawCall,
+	"rlRenderBatch": rlRenderBatch,
+	"Matrix": Matrix,
+	"rlglData": rlglData,
+	"Vector2": Vector2,
+	"Vector3": Vector3,
+	"Vector4": Vector4,
+	"Quaternion": Quaternion,
+	"Color": Color,
+	"Rectangle": Rectangle,
+	"Image": Image,
+	"Texture": Texture,
+	"Texture2D": Texture2D,
+	"TextureCubemap": TextureCubemap,
+	"RenderTexture": RenderTexture,
+	"RenderTexture2D": RenderTexture2D,
+	"NPatchInfo": NPatchInfo,
+	"GlyphInfo": GlyphInfo,
+	"Font": Font,
+	"Camera3D": Camera3D,
+	"Camera": Camera,
+	"Camera2D": Camera2D,
+	"Mesh": Mesh,
+	"Shader": Shader,
+	"MaterialMap": MaterialMap,
+	"Material": Material,
+	"Transform": Transform,
+	"BoneInfo": BoneInfo,
+	"Model": Model,
+	"ModelAnimation": ModelAnimation,
+	"Ray": Ray,
+	"RayCollision": RayCollision,
+	"BoundingBox": BoundingBox,
+	"VrDeviceInfo": VrDeviceInfo,
+	"VrStereoConfig": VrStereoConfig,
+	"FilePathList": FilePathList,
+	"float3": float3,
+	"float16": float16,
+	"GuiStyleProp": GuiStyleProp
+}

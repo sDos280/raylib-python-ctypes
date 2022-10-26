@@ -657,34 +657,9 @@
           "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
         },
         {
-          "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "mode",
-          "description": "Drawing mode: LINES, TRIANGLES, QUADS"
-        },
-        {
           "type": "unsigned int *",
           "name": "indices",
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
-        },
-        {
-          "type": "#endif",
-          "name": "vertexCount",
-          "description": "Number of vertex of the draw"
-        },
-        {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "rlVertexBuffer",
-          "description": ""
-        },
-        {
-          "type": "unsigned short *",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
-        },
-        {
-          "type": "#endif",
-          "name": "mode",
-          "description": "Drawing mode: LINES, TRIANGLES, QUADS"
         },
         {
           "type": "unsigned int",
@@ -2050,32 +2025,6 @@
         {
           "type": "unsigned int",
           "name": "index"
-        }
-      ]
-    },
-    {
-      "name": "rlEnableStatePointer",
-      "description": "Enable attribute state pointer",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "vertexAttribType"
-        },
-        {
-          "type": "void *",
-          "name": "buffer"
-        }
-      ]
-    },
-    {
-      "name": "rlDisableStatePointer",
-      "description": "Disable attribute state pointer",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "vertexAttribType"
         }
       ]
     },
