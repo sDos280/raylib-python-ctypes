@@ -39,7 +39,7 @@ wrapped_functions_names = []
 
 current_module = __import__(__name__)
 
-_rl = cdll.LoadLibrary(str(Path(__file__).parent / 'lib/raylib.dll'))
+_rl = cdll.LoadLibrary(str(Path(__file__).parent / 'raylib.dll'))
 
 
 # -----------------------------------------
