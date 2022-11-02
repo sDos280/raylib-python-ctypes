@@ -208,3 +208,69 @@ def ease_expo_in_out(t: float, b: float, c: float, d: float) -> float:
     if t < 1.0: return c / 2.0 * math.pow(2.0, 10.0 * (t - 1.0)) + b
 
     return c / 2.0 * (-math.pow(2.0, -10.0 * (t - 1.0)) + 2.0) + b
+
+
+# Back Easing functions
+
+def ease_back_in(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Back In"""
+    s: float = 1.70158
+    t /= d
+    post_fix: float = t
+    return c * post_fix * t * ((s + 1.0) * t - s) + b
+
+
+def ease_back_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Back Out"""
+    s: float = 1.70158
+    t = t / d - 1.0
+    return c * (t * t * ((s + 1.0) * t + s) + 1.0) + b
+
+
+def ease_back_in_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Back In Out"""
+    s: float = 1.70158
+    t /= d / 2.0
+
+    if t < 1.0:
+        s *= 1.525
+        return c / 2.0 * (t * t * ((s + 1.0) * t - s)) + b
+
+    t -= 2.0
+    post_fix: float = t
+    s *= 1.525
+    return c / 2.0 * (post_fix * t * ((s + 1.0) * t + s) + 2.0) + b
+
+
+# Bounce Easing functions
+
+def ease_bounce_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Bounce Out"""
+    t /= d
+    if t < 1.0 / 2.75:
+        return c * (7.5625 * t * t) + b
+    elif t < 2.0 / 2.75:
+        t -= 1.5 / 2.75
+        postFix: float = t
+        return c * (7.5625 * postFix * t + 0.75) + b
+    elif t < 2.5 / 2.75:
+        t -= 2.25 / 2.75
+        postFix: float = t
+        return c * (7.5625 * postFix * t + 0.9375) + b
+    else:
+        t -= 2.625 / 2.75
+        postFix: float = t
+        return c * (7.5625 * postFix * t + 0.984375) + b
+
+
+def ease_bounce_in(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Bounce In"""
+    return c - ease_bounce_out(d - t, 0.0, c, d) + b
+
+
+def ease_bounce_in_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Bounce In Out"""
+    if t < d / 2.0:
+        return ease_bounce_in(t * 2.0, 0.0, c, d) * 0.5 + b
+    else:
+        return ease_bounce_out(t * 2.0 - d, 0.0, c, d) * 0.5 + c * 0.5 + b
