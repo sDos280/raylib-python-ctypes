@@ -76,3 +76,44 @@
      3. This notice may not be removed or altered from any source distribution.
 
 **********************************************************************************************"""
+
+import math  # Required for: sin(), cos(), sqrt(), pow(), pi
+
+
+# Linear Easing functions
+
+def ease_linear_none(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Linear"""
+    return c * t / d + b
+
+
+def ease_linear_in(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Linear In"""
+    return c * t / d + b
+
+
+def ease_linear_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Linear Out"""
+    return c * t / d + b
+
+
+def ease_linear_in_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Linear In Out"""
+    return c * t / d + b
+
+
+# Sine Easing functions
+
+def ease_sine_in(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Sine In"""
+    return -c * math.cos(t / d * (math.pi / 2.0)) + c + b
+
+
+def ease_sine_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Sine Out"""
+    return c * math.sin(t / d * (math.PI / 2.0)) + b
+
+
+def ease_sine_in_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Sine In Out"""
+    return -c / 2.0 * (math.cos(math.pi * t / d) - 1.0) + b
