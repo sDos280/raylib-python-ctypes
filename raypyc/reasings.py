@@ -251,16 +251,16 @@ def ease_bounce_out(t: float, b: float, c: float, d: float) -> float:
         return c * (7.5625 * t * t) + b
     elif t < 2.0 / 2.75:
         t -= 1.5 / 2.75
-        postFix: float = t
-        return c * (7.5625 * postFix * t + 0.75) + b
+        post_fix: float = t
+        return c * (7.5625 * post_fix * t + 0.75) + b
     elif t < 2.5 / 2.75:
         t -= 2.25 / 2.75
-        postFix: float = t
-        return c * (7.5625 * postFix * t + 0.9375) + b
+        post_fix: float = t
+        return c * (7.5625 * post_fix * t + 0.9375) + b
     else:
         t -= 2.625 / 2.75
-        postFix: float = t
-        return c * (7.5625 * postFix * t + 0.984375) + b
+        post_fix: float = t
+        return c * (7.5625 * post_fix * t + 0.984375) + b
 
 
 def ease_bounce_in(t: float, b: float, c: float, d: float) -> float:
@@ -274,3 +274,54 @@ def ease_bounce_in_out(t: float, b: float, c: float, d: float) -> float:
         return ease_bounce_in(t * 2.0, 0.0, c, d) * 0.5 + b
     else:
         return ease_bounce_out(t * 2.0 - d, 0.0, c, d) * 0.5 + c * 0.5 + b
+
+
+# Elastic Easing functions
+
+def ease_elastic_in(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Elastic In"""
+    if t == 0.0: return b
+    t /= d
+    if t == 1.0: return b + c
+
+    p: float = d * 0.3
+    a: float = c
+    s: float = p / 4.0
+    t -= 1.0
+    post_fix: float = a * math.pow(2.0, 10.0 * t)
+
+    return -(post_fix * math.sin((t * d - s) * (2.0 * math.pi) / p)) + b
+
+
+def ease_elastic_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Elastic Out"""
+    if t == 0.0: return b
+    t /= d
+    if t == 1.0: return b + c
+
+    p: float = d * 0.3
+    a: float = c
+    s: float = p / 4.0
+
+    return a * math.pow(2.0, -10.0 * t) * math.sin((t * d - s) * (2.0 * math.pi) / p) + c + b
+
+
+def ease_elastic_in_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Elastic In Out"""
+    if t == 0.0: return b
+    t /= d / 2.0
+    if t == 2.0: return b + c
+
+    p: float = d * (0.3 * 1.5)
+    a: float = c
+    s: float = p / 4.0
+
+    if t < 1.0:
+        t -= 1.0
+        post_fix: float = a * math.pow(2.0, 10.0 * t)
+        return -0.5 * (post_fix * math.sin((t * d - s) * (2.0 * math.pi) / p)) + b
+
+    t -= 1.0
+    post_fix: float = a * math.pow(2.0, -10.0 * t)
+
+    return post_fix * math.sin((t * d - s) * (2.0 * math.pi) / p) * 0.5 + c + b
