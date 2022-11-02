@@ -111,7 +111,7 @@ def ease_sine_in(t: float, b: float, c: float, d: float) -> float:
 
 def ease_sine_out(t: float, b: float, c: float, d: float) -> float:
     """Ease: Sine Out"""
-    return c * math.sin(t / d * (math.PI / 2.0)) + b
+    return c * math.sin(t / d * (math.pi / 2.0)) + b
 
 
 def ease_sine_in_out(t: float, b: float, c: float, d: float) -> float:
