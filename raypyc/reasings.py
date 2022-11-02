@@ -186,3 +186,25 @@ def ease_quad_in_out(t: float, b: float, c: float, d: float) -> float:
         return ((c / 2) * (t * t)) + b
 
     return -c / 2.0 * (((t - 1.0) * (t - 3.0)) - 1.0) + b
+
+
+# Exponential Easing functions
+
+def EaseExpoIn(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Exponential In"""
+    return b if t == 0.0 else c * math.pow(2.0, 10.0 * (t / d - 1.0)) + b
+
+
+def EaseExpoOut(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Exponential Out"""
+    return b + c if t == d else c * (-math.pow(2.0, -10.0 * t / d) + 1.0) + b
+
+
+def EaseExpoInOut(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Exponential In Out"""
+    if t == 0.0: return b
+    if t == d: return b + c
+    t /= d / 2.0
+    if t < 1.0: return c / 2.0 * math.pow(2.0, 10.0 * (t - 1.0)) + b
+
+    return c / 2.0 * (-math.pow(2.0, -10.0 * (t - 1.0)) + 2.0) + b
