@@ -2,6 +2,7 @@ include raypyc/defines/*
 include raypyc/colors/*
 include raypyc/enums/*
 include raypyc/structures/*
+include raypyc/reasings.py
 include raypyc/__init__.py
 include raypyc/__init__.pyi
 include raypyc/*.json

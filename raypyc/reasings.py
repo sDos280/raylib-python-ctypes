@@ -117,3 +117,26 @@ def ease_sine_out(t: float, b: float, c: float, d: float) -> float:
 def ease_sine_in_out(t: float, b: float, c: float, d: float) -> float:
     """Ease: Sine In Out"""
     return -c / 2.0 * (math.cos(math.pi * t / d) - 1.0) + b
+
+
+# Circular Easing functions
+
+def ease_circ_in(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Circular In"""
+    t /= d
+    return -c * (math.sqrt(1.0 - t * t) - 1.0) + b
+
+
+def ease_circ_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Circular Out"""
+    t = t / d - 1.0
+    return c * math.sqrt(1.0 - t * t) + b
+
+
+def ease_circ_in_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Circular In Out"""
+    t /= d / 2.0
+    if t < 1.0:
+        return -c / 2.0 * (math.sqrt(1.0 - t * t) - 1.0) + b
+    t -= 2.0
+    return c / 2.0 * (math.sqrt(1.0 - t * t) + 1.0) + b
