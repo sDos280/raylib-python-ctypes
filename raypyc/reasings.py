@@ -143,6 +143,7 @@ def ease_circ_in_out(t: float, b: float, c: float, d: float) -> float:
 
 
 # Cubic Easing functions
+
 def ease_cubic_in(t: float, b: float, c: float, d: float) -> float:
     """Ease: Cubic In"""
     t /= d
@@ -162,3 +163,26 @@ def ease_cubic_in_out(t: float, b: float, c: float, d: float) -> float:
         return c / 2.0 * t * t * t + b
     t -= 2.0
     return c / 2.0 * (t * t * t + 2.0) + b
+
+
+# Quadratic Easing functions
+
+def ease_quad_in(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Quadratic In"""
+    t /= d
+    return c * t * t + b
+
+
+def ease_quad_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Quadratic Out"""
+    t /= d
+    return -c * t * (t - 2.0) + b
+
+
+def ease_quad_in_out(t: float, b: float, c: float, d: float) -> float:
+    """Ease: Quadratic In Out"""
+    t /= d / 2
+    if t < 1:
+        return ((c / 2) * (t * t)) + b
+
+    return -c / 2.0 * (((t - 1.0) * (t - 3.0)) - 1.0) + b
