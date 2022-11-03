@@ -24,12 +24,12 @@ def main():
     init_window(SCREEN_WIDTH, SCREEN_HEIGHT, b"raylib [shapes] example - easings ball anim")
 
     # Ball variable value to be animated with easings
-    ballPositionX = -100
-    ballRadius = 20
-    ballAlpha = 0.0
+    ball_position_x = -100
+    ball_radius = 20
+    ball_alpha = 0.0
 
     state = 0
-    framesCounter = 0
+    frames_counter = 0
 
     set_target_fps(60)  # Set our game to run at 60 frames-per-second
     # ------------------------------------------------------------------------------------
@@ -39,38 +39,38 @@ def main():
         # Update
         # ----------------------------------------------------------------------------------
         if state == 0:  # Move ball position X with easing
-            framesCounter += 1
-            ballPositionX = int(ease_elastic_out(float(framesCounter), -100, SCREEN_WIDTH / 2.0 + 100, 120))
+            frames_counter += 1
+            ball_position_x = int(ease_elastic_out(float(frames_counter), -100, SCREEN_WIDTH / 2.0 + 100, 120))
 
-            if framesCounter >= 120:
-                framesCounter = 0
+            if frames_counter >= 120:
+                frames_counter = 0
                 state = 1
 
         elif state == 1:  # Increase ball radius with easing
-            framesCounter += 1
-            ballRadius = int(ease_elastic_in(float(framesCounter), 20, 500, 200))
+            frames_counter += 1
+            ball_radius = int(ease_elastic_in(float(frames_counter), 20, 500, 200))
 
-            if framesCounter >= 200:
-                framesCounter = 0
+            if frames_counter >= 200:
+                frames_counter = 0
                 state = 2
 
         elif state == 2:  # Change ball alpha with easing (background color blending)
-            framesCounter += 1
-            ballAlpha = ease_cubic_out(float(framesCounter), 0.0, 1.0, 200)
+            frames_counter += 1
+            ball_alpha = ease_cubic_out(float(frames_counter), 0.0, 1.0, 200)
 
-            if framesCounter >= 200:
-                framesCounter = 0
+            if frames_counter >= 200:
+                frames_counter = 0
                 state = 3
 
         elif state == 3:  # Reset state to play again
             if is_key_pressed(KeyboardKey.KEY_ENTER):
                 # Reset required variables to play again
-                ballPositionX = -100
-                ballRadius = 20
-                ballAlpha = 0.0
+                ball_position_x = -100
+                ball_radius = 20
+                ball_alpha = 0.0
                 state = 0
 
-        if is_key_pressed(KeyboardKey.KEY_R): framesCounter = 0
+        if is_key_pressed(KeyboardKey.KEY_R): frames_counter = 0
         # ----------------------------------------------------------------------------------
 
         # Draw
@@ -80,7 +80,7 @@ def main():
         clear_background(RAYWHITE)
 
         if state >= 2: draw_rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GREEN)
-        draw_circle(ballPositionX, 200, float(ballRadius), fade(RED, 1.0 - ballAlpha))
+        draw_circle(ball_position_x, 200, float(ball_radius), fade(RED, 1.0 - ball_alpha))
 
         if state == 3: draw_text(b"PRESS [ENTER] TO PLAY AGAIN!", 240, 200, 20, BLACK)
 
