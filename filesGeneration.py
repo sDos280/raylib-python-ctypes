@@ -111,6 +111,12 @@ def convert_c_type_string_to_ctype_type_sting(c_type_string):
     is_array = ']' in c_type_string
     pointer_level = c_type_string.count("*")
 
+    if c_type_string == 'void':  # void shouldn't be in the form of ctypes.None
+        return "None"
+
+    if c_type_string in cStringToCtypesString:  # "regular" value not a pointer or an array
+        return "ctypes." + cStringToCtypesString[c_type_string]
+
     if is_array and pointer_level > 0:  # array of pointers to structures
         type_of_array = c_type_string.split('[')[0]
         array_size = c_type_string.split('[')[1][:-1]
@@ -148,10 +154,8 @@ def convert_c_type_string_to_ctype_type_sting(c_type_string):
             for i in range(pointer_level):
                 type_of_pointer_end = f"ctypes.POINTER({type_of_pointer_end})"
             return f"{type_of_pointer_end}"
-    else:  # "regular" value not a pointer or an array
-        if c_type_string in cStringToCtypesString:
-            return "ctypes." + cStringToCtypesString[c_type_string]
-        return c_type_string  # a struct
+
+    return c_type_string  # a struct
 
 
 # get class object by string name
@@ -498,6 +502,7 @@ def generate_structures_dictionary_code_stub(wrapped_structures):
 def generate_functions_code_pyi_file():
     if Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi').exists():
         with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+            structs_code_file_write.write('import ctypes\n')
             structs_code_file_write.write('from raypyc.defines import *\n')
             structs_code_file_write.write('from raypyc.colors import *\n')
             structs_code_file_write.write('from raypyc.enums import *\n')
@@ -507,6 +512,7 @@ def generate_functions_code_pyi_file():
         with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => function signature
             pass
         with open(Path(FUNCTIONS_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+            structs_code_file_write.write('import ctypes\n')
             structs_code_file_write.write('from raypyc.defines import *\n')
             structs_code_file_write.write('from raypyc.colors import *\n')
             structs_code_file_write.write('from raypyc.enums import *\n')
