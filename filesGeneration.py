@@ -116,41 +116,41 @@ def convert_c_type_string_to_ctype_type_sting(c_type_string):
         array_size = c_type_string.split('[')[1][:-1]
         type_of_array_without_pointers = type_of_array.replace('*', '')
         if type_of_array in cStringToCtypesString:  # basic type pointer (int*, char*, float*, ...)
-            return f"{cStringToCtypesString[type_of_array]} * {array_size}"
+            return f"ctypes.{cStringToCtypesString[type_of_array]} * {array_size}"
         if type_of_array_without_pointers in cStringToCtypesString:  # basic type pointer(probably double+ pointer level) (int**, char**, float**, ...)
             type_of_array_end = cStringToCtypesString[type_of_array_without_pointers]
             for i in range(pointer_level):
-                type_of_array_end = f"POINTER({type_of_array_end})"
-            return f"{type_of_array_end} * {array_size}"
+                type_of_array_end = f"ctypes.POINTER({type_of_array_end})"
+            return f"ctypes.{type_of_array_end} * {array_size}"
         else:  # a struct array pointer level 1+ or just a pointer level 1
             type_of_array_end = type_of_array_without_pointers
             for i in range(pointer_level):
-                type_of_array_end = f"POINTER({type_of_array_end})"
+                type_of_array_end = f"ctypes.POINTER({type_of_array_end})"
             return f"{type_of_array_end} * {array_size}"
     elif is_array:
         type_of_array = c_type_string.split('[')[0]
         array_size = c_type_string.split('[')[1][:-1]
         if type_of_array in cStringToCtypesString:  # basic type array (int, char, float, ...)
-            return f"{cStringToCtypesString[type_of_array]} * {array_size}"
+            return f"ctypes.{cStringToCtypesString[type_of_array]} * {array_size}"
         else:  # a struct array
             return f"{type_of_array} * {array_size}"
     elif pointer_level > 0:
         type_without_pointers = c_type_string.replace('*', '')
-        if c_type_string in cStringToCtypesString:  # basic type pointer (int**, char*, float*, ...)
-            return f"{cStringToCtypesString[c_type_string]}"
+        if c_type_string in cStringToCtypesString:  # basic type pointer (int*, char*, float*, ...)
+            return f"ctypes.{cStringToCtypesString[c_type_string]}"
         if type_without_pointers in cStringToCtypesString:  # basic type pointer(probably double+ pointer level) (int**, char**, float**, ...)
-            type_of_pointer_end = cStringToCtypesString[type_without_pointers]
+            type_of_pointer_end = "ctypes." + cStringToCtypesString[type_without_pointers]
             for i in range(pointer_level):
-                type_of_pointer_end = f"POINTER({type_of_pointer_end})"
+                type_of_pointer_end = f"ctypes.POINTER({type_of_pointer_end})"
             return f"{type_of_pointer_end}"
         else:  # a struct pointer level 1+ or just a pointer level 1
-            type_of_pointer_end = type_without_pointers
+            type_of_pointer_end = c_type_string.replace('*', '')
             for i in range(pointer_level):
-                type_of_pointer_end = f"POINTER({type_of_pointer_end})"
+                type_of_pointer_end = f"ctypes.POINTER({type_of_pointer_end})"
             return f"{type_of_pointer_end}"
     else:  # "regular" value not a pointer or an array
         if c_type_string in cStringToCtypesString:
-            return cStringToCtypesString[c_type_string]
+            return "ctypes." + cStringToCtypesString[c_type_string]
         return c_type_string  # a struct
 
 
@@ -234,33 +234,33 @@ def generate_enum_values_string_code_stub(enum_data):
 
 
 def generate_struct_signature_code(struct_data):
-    return f"class {struct_data['name']}(Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
+    return f"class {struct_data['name']}(ctypes.Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
 
 
 def generate_struct_signature_code_stub(struct_data):
-    return f"class {struct_data['name']}(Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
+    return f"class {struct_data['name']}(ctypes.Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
 
 
 # remove the current defines/__init__.py defines enums/__init__.pyi files and generated new ones
 def generate_defines_py_pyi_files():
     if Path(DEFINES_FOLDER_PATH / '__init__.py').exists():
-        with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "w") as defines_code_file_write:  # add import stuff
             pass
     else:
         print(f"there isn\'t a __init__.py in {Path(DEFINES_FOLDER_PATH / '__init__.py')}, regenerating a new one here")
         with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "x"):  # generate __init__.py file => define logic
             pass
-        with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "w") as defines_code_file_write:  # add import stuff
             pass
 
     if Path(DEFINES_FOLDER_PATH / '__init__.pyi').exists():
-        with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "w") as defines_code_file_write:  # add import stuff
             pass
     else:
         print(f"there isn\'t a __init__.pyi in {Path(DEFINES_FOLDER_PATH / '__init__.pyi')}, regenerating a new one here")
         with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => define signature
             pass
-        with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "w") as defines_code_file_write:  # add import stuff
             pass
 
 
@@ -339,26 +339,26 @@ def generate_enums_py_pyi_code(enums_api):
 def generate_structs_py_pyi_files():
     if Path(STRUCTURES_FOLDER_PATH / '__init__.py').exists():
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from ctypes import *\n')
+            structs_code_file_write.write('import ctypes\n')
             structs_code_file_write.write('from raypyc.defines import *\n\n\n')
     else:
         print(f"there isn\'t a __init__.py in {Path(STRUCTURES_FOLDER_PATH / '__init__.py')}, regenerating a new one here")
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "x"):  # generate __init__.py file => struct logic
             pass
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from ctypes import *\n')
+            structs_code_file_write.write('import ctypes\n')
             structs_code_file_write.write('from raypyc.defines import *\n\n\n')
 
     if Path(STRUCTURES_FOLDER_PATH / '__init__.pyi').exists():
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from ctypes import *\n')
+            structs_code_file_write.write('import ctypes\n')
             structs_code_file_write.write('from raypyc.defines import *\n\n\n')
     else:
         print(f"there isn\'t a __init__.pyi in {Path(STRUCTURES_FOLDER_PATH / '__init__.pyi')}, regenerating a new one here")
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => struct signature
             pass
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
-            structs_code_file_write.write('from ctypes import *\n')
+            structs_code_file_write.write('import ctypes\n')
             structs_code_file_write.write('from raypyc.defines import *\n\n\n')
 
 
