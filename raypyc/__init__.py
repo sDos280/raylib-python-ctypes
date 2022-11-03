@@ -1,73 +1,49 @@
+import ctypes
 import json
-from ctypes import (
-    POINTER,
-    c_bool,
-    c_char,
-    c_char_p,
-    c_double,
-    c_short,
-    c_ubyte,
-    c_float,
-    c_void_p,
-    c_int,
-    c_uint,
-    c_wchar,
-    c_ushort,
-    c_long,
-    c_ulong,
-    c_longlong,
-    c_ulonglong,
-    c_size_t,
-    c_ssize_t,
-    c_longdouble,
-    c_wchar_p,
-    cdll
-)
-from pathlib import Path
+import pathlib
 
 import inflection
 
-import raypyc.structures as raypyc_structures_module
-from raypyc.defines import *
+import raypyc.structures
 from raypyc.colors import *
+from raypyc.defines import *
 from raypyc.enums import *
 from raypyc.structures import *
-
 
 # -----------------------------------------
 wrapped_functions_names = []
 
 current_module = __import__(__name__)
 
-_rl = cdll.LoadLibrary(str(Path(__file__).parent / 'raylib.dll'))
+_rl = ctypes.cdll.LoadLibrary(str(pathlib.Path(__file__).parent / 'raylib.dll'))
 
 
 # -----------------------------------------
 
 def evaluate_c_type_string_to_ctype_type(c_type_string):
     cStringToCtypesString = {
-        'bool': c_bool,  # C type: _Bool  Python type: bool (1)
-        'char': c_char,  # C type: char  Python type: 1-character bytes object
-        'wchar_t': c_wchar,  # C type: wchar_t  Python type: 1-character string
+        'bool': ctypes.c_bool,  # C type: _Bool  Python type: bool (1)
+        'char': ctypes.c_char,  # C type: char  Python type: 1-character bytes object
+        'wchar_t': ctypes.c_wchar,  # C type: wchar_t  Python type: 1-character string
         # 'char': c_byte,  # C type: char  Python type: int
-        'unsignedchar': c_ubyte,  # C type: unsigned char  Python type: int
-        'short': c_short,  # C type: short  Python  # type: int
-        'unsignedshort': c_ushort,  # C type: unsigned short  Python type: int
-        'int': c_int,  # C type: int  Python type: int
-        'unsignedint': c_uint,  # C type: unsigned int  Python type: int
-        'long': c_long,  # C type: long  Python type: int
-        'unsignedlong': c_ulong,  # C type: unsigned long  Python type: int
-        'uint64': c_longlong,  # C type: __int64 or long-long  Python type: int
-        'unsigneduint64': c_ulonglong,  # C type: unsigned __int64 or unsigned long-long  Python type: int
-        'unsignedlonglong': c_ulonglong,  # C type: unsigned __int64 or unsigned long-long  Python type: int
-        'size_t': c_size_t,  # C type: unsigned size_t  Python type: int
-        'ssize_t': c_ssize_t,  # C type: ssize_t or Py_ssize_t  Python type: int
-        'float': c_float,  # C type: float  Python type: float
-        'double': c_double,  # C type: double  Python type: float
-        'longdouble': c_longdouble,  # C type: long double  Python type: float
-        'char*': c_char_p,  # C type: char* (NUL terminated)  Python type: bytes object or None
-        'wchar_t*': c_wchar_p,  # C type: wchar_t* (NUL terminated)  Python type: string object or None
-        'void*': c_void_p,  # C type: wchar_t* (NUL terminated)  Python type: int or None
+        'unsignedchar': ctypes.c_ubyte,  # C type: unsigned char  Python type: int
+        'short': ctypes.c_short,  # C type: short  Python  # type: int
+        'unsignedshort': ctypes.c_ushort,  # C type: unsigned short  Python type: int
+        'int': ctypes.c_int,  # C type: int  Python type: int
+        'unsignedint': ctypes.c_uint,  # C type: unsigned int  Python type: int
+        'long': ctypes.c_long,  # C type: long  Python type: int
+        'unsignedlong': ctypes.c_ulong,  # C type: unsigned long  Python type: int
+        'uint64': ctypes.c_longlong,  # C type: __int64 or long-long  Python type: int
+        'unsigneduint64': ctypes.c_ulonglong,  # C type: unsigned __int64 or unsigned long-long  Python type: int
+        'unsignedlonglong': ctypes.c_ulonglong,  # C type: unsigned __int64 or unsigned long-long  Python type: int
+        'size_t': ctypes.c_size_t,  # C type: unsigned size_t  Python type: int
+        'ssize_t': ctypes.c_ssize_t,  # C type: ssize_t or Py_ssize_t  Python type: int
+        'float': ctypes.c_float,  # C type: float  Python type: float
+        'double': ctypes.c_double,  # C type: double  Python type: float
+        'longdouble': ctypes.c_longdouble,  # C type: long double  Python type: float
+        'char*': ctypes.c_char_p,  # C type: char* (NUL terminated)  Python type: bytes object or None
+        'wchar_t*': ctypes.c_wchar_p,  # C type: wchar_t* (NUL terminated)  Python type: string object or None
+        'void*': ctypes.c_void_p,  # C type: wchar_t* (NUL terminated)  Python type: int or None
         'void': None,  # C type: void  Python type: None
     }
 
@@ -89,8 +65,8 @@ def evaluate_c_type_string_to_ctype_type(c_type_string):
                 type_of_array_end = POINTER(type_of_array_end)
             return type_of_array_end * array_size
 
-        if type_of_array_without_pointers_string in raypyc_structures_module.__structs:  # a struct array pointer level 1+ or just a pointer level 1
-            type_of_array_end = raypyc_structures_module.__structs[type_of_array_without_pointers_string]
+        if type_of_array_without_pointers_string in raypyc.structures.__structs:  # a struct array pointer level 1+ or just a pointer level 1
+            type_of_array_end = raypyc.structures.__structs[type_of_array_without_pointers_string]
             for i in range(pointer_level):
                 type_of_array_end = POINTER(type_of_array_end)
             return type_of_array_end * array_size
@@ -104,8 +80,8 @@ def evaluate_c_type_string_to_ctype_type(c_type_string):
         if type_of_array_string in cStringToCtypesString:  # basic type array (int, char, float, ...)
             return cStringToCtypesString[type_of_array_string] * array_size
 
-        if type_of_array_string in raypyc_structures_module.__structs:  # a struct array
-            return raypyc_structures_module.__structs[type_of_array_string] * array_size
+        if type_of_array_string in raypyc.structures.__structs:  # a struct array
+            return raypyc.structures.__structs[type_of_array_string] * array_size
 
         raise TypeError(f"can wrapped this string, the string: {c_type_string}")
 
@@ -121,8 +97,8 @@ def evaluate_c_type_string_to_ctype_type(c_type_string):
                 type_of_pointer_end = POINTER(type_of_pointer_end)
             return type_of_pointer_end
 
-        if type_without_pointers_string in raypyc_structures_module.__structs:  # a struct pointer level 1+ or just a pointer level 1
-            type_of_pointer_end = raypyc_structures_module.__structs[type_without_pointers_string]
+        if type_without_pointers_string in raypyc.structures.__structs:  # a struct pointer level 1+ or just a pointer level 1
+            type_of_pointer_end = raypyc.structures.__structs[type_without_pointers_string]
             for i in range(pointer_level):
                 type_of_pointer_end = POINTER(type_of_pointer_end)
             return type_of_pointer_end
@@ -132,8 +108,8 @@ def evaluate_c_type_string_to_ctype_type(c_type_string):
     if c_type_string in cStringToCtypesString:  # "regular" value not a pointer or an array
         return cStringToCtypesString[c_type_string]
 
-    if c_type_string in raypyc_structures_module.__structs:  # a struct
-        return raypyc_structures_module.__structs[c_type_string]
+    if c_type_string in raypyc.structures.__structs:  # a struct
+        return raypyc.structures.__structs[c_type_string]
 
     raise TypeError(f"can wrapped this string, the string: {c_type_string}")
 
@@ -221,25 +197,25 @@ def wrap_functions_to_ctypes_functions_add_function_to_this_module(functions_to_
 
 
 # load rlgl data
-with open(Path(Path(__file__).parent / 'rlgl_api.json')) as reader:
+with open(pathlib.Path(pathlib.Path(__file__).parent / 'rlgl_api.json')) as reader:
     rlgl_api = json.load(reader)
 
 rlgl_api_functions = rlgl_api['functions']
 
 # load raylib data
-with open(Path(Path(__file__).parent / 'raylib_api.json')) as reader:
+with open(pathlib.Path(pathlib.Path(__file__).parent / 'raylib_api.json')) as reader:
     raylib_api = json.load(reader)
 
 raylib_api_functions = raylib_api['functions']
 
 # load raymath data
-with open(Path(Path(__file__).parent / 'raymath_api.json')) as reader:
+with open(pathlib.Path(pathlib.Path(__file__).parent / 'raymath_api.json')) as reader:
     raymath_api = json.load(reader)
 
 raymath_api_functions = raymath_api['functions']
 
 # load raygui data
-with open(Path(Path(__file__).parent / 'raygui_api.json')) as reader:
+with open(pathlib.Path(pathlib.Path(__file__).parent / 'raygui_api.json')) as reader:
     raygui_api = json.load(reader)
 
 raygui_api_functions = raygui_api['functions']
