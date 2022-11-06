@@ -961,6 +961,10 @@ def set_config_flags(flags: ctypes.c_uint) -> None:
 	"""Setup init configuration flags (view FLAGS)"""
 	...
 
+def trace_log(logLevel: ctypes.c_int, text: ctypes.c_char_p, args: ...) -> None:
+	"""Show trace log messages (LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR...)"""
+	...
+
 def set_trace_log_level(logLevel: ctypes.c_int) -> None:
 	"""Set the current threshold (minimum) log level"""
 	...
@@ -1987,6 +1991,10 @@ def text_is_equal(text1: ctypes.c_char_p, text2: ctypes.c_char_p) -> ctypes.c_bo
 
 def text_length(text: ctypes.c_char_p) -> ctypes.c_uint:
 	"""Get text length, checks for '\0' ending"""
+	...
+
+def text_format(text: ctypes.c_char_p, args: ...) -> ctypes.c_char_p:
+	"""Text formatting with variables (sprintf() style)"""
 	...
 
 def text_subtext(text: ctypes.c_char_p, position: ctypes.c_int, length: ctypes.c_int) -> ctypes.c_char_p:

@@ -528,13 +528,13 @@ def check_for_functions_that_can_wrap(functions_set):
         do_wrapper_this_function = True
         if 'params' in function.keys():
             for function_param in function['params']:
-                if function_param['type'] in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback', '...']:
+                if function_param['type'] in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
                     do_wrapper_this_function = False
                     break
 
         if do_wrapper_this_function:
             if function['returnType'].replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '') in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback',
-                                                                                                                                   'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback', '...']:
+                                                                                                                                   'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
                 do_wrapper_this_function = False
 
         if do_wrapper_this_function:

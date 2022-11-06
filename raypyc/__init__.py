@@ -51,6 +51,9 @@ def evaluate_c_type_string_to_ctype_type(c_type_string):
     is_array = ']' in c_type_string
     pointer_level = c_type_string.count("*")
 
+    if c_type_string == "...":
+        return None
+
     if is_array and pointer_level > 0:  # array of pointers to structures
         type_of_array_string = c_type_string.split('[')[0]
         array_size = int(c_type_string.split('[')[1][:-1])
@@ -153,7 +156,7 @@ def check_for_functions_that_can_wrap(functions_set):
                 except:
                     do_wrapper_this_function = False
 
-                if function_param_processed in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback', '...']:
+                if function_param_processed in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
                     do_wrapper_this_function = False
                     break
 
@@ -167,7 +170,7 @@ def check_for_functions_that_can_wrap(functions_set):
             except:
                 do_wrapper_this_function = False
 
-            if function_returnType_processed in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback', '...']:
+            if function_returnType_processed in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
                 do_wrapper_this_function = False
 
         if do_wrapper_this_function:
@@ -188,8 +191,8 @@ def wrap_functions_to_ctypes_functions_add_function_to_this_module(functions_to_
 
             if 'params' in function_to_wrap.keys():
                 for function_param in function_to_wrap['params']:
-                    function_to_wrap_ctype['parametersTypes'].append(evaluate_c_type_string_to_ctype_type(function_param['type']))
-
+                    if function_param['type'] != "...":
+                        function_to_wrap_ctype['parametersTypes'].append(evaluate_c_type_string_to_ctype_type(function_param['type']))
             function_to_wrap_ctype['returnType'] = evaluate_c_type_string_to_ctype_type(function_to_wrap['returnType'])
 
             f = wrap_function(function_to_wrap_ctype['name'], function_to_wrap_ctype['parametersTypes'], function_to_wrap_ctype['returnType'])
