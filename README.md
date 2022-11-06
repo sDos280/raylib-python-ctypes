@@ -107,4 +107,6 @@ secondly, here are some of the things that contributing on will help this wrappe
 
 ## thanks
 thanks to [raysun5](https://github.com/raysan5), [raylibpy](https://github.com/Ho011/pyraylib) and [pyray](https://github.com/sDos280/raylib-python-cffi) for their good work, I took all the inspiration (and some code ;) ) from them, so thanks you guys very much.
-also a big thanks for the people that helped testing and reviewing the library :)!!!
+also a big thanks for the people that helped to test and reviewing the library :)!!!
+
+also a special thanks to [Peter0x44](https://github.com/Peter0x44) and [Its-Kenta](https://github.com/Its-Kenta) 
