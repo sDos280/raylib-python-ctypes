@@ -489,6 +489,7 @@ def generate_structures_dictionary_code(wrapped_structures):
     dictionary_sting += "\n}"
     return dictionary_sting
 
+
 def generate_structures_dictionary_code_stub(wrapped_structures):
     dictionary_sting = "__structs = {\n"
     for struct in wrapped_structures:
@@ -550,7 +551,7 @@ def generate_functions_code_in_code_pyi_file(functions_set):
         for function in functions_set:
             if function['name'] not in wrapped_functions_names_pyi:
                 wrapped_functions_names_pyi.append(function['name'])
-                name_of_function = inflection.underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d')
+                name_of_function = inflection.underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d').replace('vector_2', 'vector_2').replace('vector_3', 'vector3_')
                 function_copy = dict(function)
                 function_copy['name'] = str(name_of_function)
                 function_string = generate_function_signature_code(function_copy)
@@ -579,7 +580,7 @@ def generate_functions_list_code(wrapped_functions):
     dictionary_sting += "\n]\n\n"
     dictionary_sting += "__functions_python_api = [\n"
     for function in wrapped_functions:
-        dictionary_sting += f"\t\"{inflection.underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d')}\",\n"
+        dictionary_sting += f"\t\"{inflection.underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d').replace('vector_2', 'vector2_').replace('vector_3', 'vector3_')}\",\n"
     dictionary_sting = dictionary_sting[:-2]
     dictionary_sting += "\n]"
     return dictionary_sting

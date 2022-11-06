@@ -2569,15 +2569,15 @@ def vector3_length_sqr(v: Vector3) -> ctypes.c_float:
 	""""""
 	...
 
-def vector_3dot_product(v1: Vector3, v2: Vector3) -> ctypes.c_float:
+def vector3_dot_product(v1: Vector3, v2: Vector3) -> ctypes.c_float:
 	""""""
 	...
 
-def vector_3distance(v1: Vector3, v2: Vector3) -> ctypes.c_float:
+def vector3_distance(v1: Vector3, v2: Vector3) -> ctypes.c_float:
 	""""""
 	...
 
-def vector_3distance_sqr(v1: Vector3, v2: Vector3) -> ctypes.c_float:
+def vector3_distance_sqr(v1: Vector3, v2: Vector3) -> ctypes.c_float:
 	""""""
 	...
 
@@ -2589,7 +2589,7 @@ def vector3_negate(v: Vector3) -> Vector3:
 	""""""
 	...
 
-def vector_3divide(v1: Vector3, v2: Vector3) -> Vector3:
+def vector3_divide(v1: Vector3, v2: Vector3) -> Vector3:
 	""""""
 	...
 
