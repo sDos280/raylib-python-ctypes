@@ -1,4 +1,4 @@
-RLGL_VERSION: str = "4.0"
+RLGL_VERSION: str = "4.2"
 RL_DEFAULT_BATCH_BUFFER_ELEMENTS: int = 8192
 RL_DEFAULT_BATCH_BUFFERS: int = 1  # Default number of batch buffers (multi-buffering)
 RL_DEFAULT_BATCH_DRAWCALLS: int = 256  # Default number of batch draw calls (by state changes: mode, texture)
@@ -16,6 +16,7 @@ RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR: int = 9986  # GL_NEAREST_MIPMAP_LINEAR
 RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST: int = 9985  # GL_LINEAR_MIPMAP_NEAREST
 RL_TEXTURE_FILTER_MIP_LINEAR: int = 9987  # GL_LINEAR_MIPMAP_LINEAR
 RL_TEXTURE_FILTER_ANISOTROPIC: int = 12288  # Anisotropic filter (custom identifier)
+RL_TEXTURE_MIPMAP_BIAS_RATIO: int = 16384  # Texture mipmap bias, percentage ratio (custom identifier)
 RL_TEXTURE_WRAP_REPEAT: int = 10497  # GL_REPEAT
 RL_TEXTURE_WRAP_CLAMP: int = 33071  # GL_CLAMP_TO_EDGE
 RL_TEXTURE_WRAP_MIRROR_REPEAT: int = 33648  # GL_MIRRORED_REPEAT
