@@ -3,56 +3,6 @@ from pathlib import Path
 
 import inflection
 
-typesDictionaryCstringToPythonTypesString = {
-    'bool': 'bool',  # C type: _Bool  Python type: bool (1)
-    'char': 'bytes',  # C type: char  Python type: 1-character bytes object
-    'wchar_t': 'str',  # C type: wchar_t  Python type: 1-character string
-    # 'char': c_byte,  # C type: char  Python type: int
-    'unsignedchar': 'int',  # C type: unsigned char  Python type: int
-    'short': 'int',  # C type: short  Python type: int
-    'unsignedshort': 'int',  # C type: unsigned short  Python type: int
-    'int': 'int',  # C type: int  Python type: int
-    'unsignedint': 'int',  # C type: unsigned int  Python type: int
-    'long': 'int',  # C type: long  Python type: int
-    'unsignedlong': 'int',  # C type: unsigned long  Python type: int
-    'uint64': 'int',  # C type: __int64 or long-long  Python type: int
-    'unsigneduint64': 'int',  # C type: unsigned __int64 or unsigned long-long  Python type: int
-    'size_t': 'int',  # C type: unsigned size_t  Python type: int
-    'ssize_t': 'int',  # C type: ssize_t or Py_ssize_t  Python type: int
-    'float': 'float',  # C type: float  Python type: float
-    'double': 'float',  # C type: double  Python type: float
-    'longdouble': 'float',  # C type: long double  Python type: float
-    'char*': 'bytes',  # C type: char* (NUL terminated)  Python type: bytes object or None
-    'wchar_t*': 'string',  # C type: wchar_t* (NUL terminated)  Python type: string object or None
-    'void*': 'int',  # C type: wchar_t* (NUL terminated)  Python type: int or None
-    'void': 'None',  # C type: void  Python type: None
-}
-
-typesDictionaryCstringToCtypesString = {
-    'bool': 'c_bool',  # C type: _Bool  Python type: bool (1)
-    'char': 'c_char',  # C type: char  Python type: 1-character bytes object
-    'wchar_t': 'c_wchar',  # C type: wchar_t  Python type: 1-character string
-    # 'char': c_byte,  # C type: char  Python type: int
-    'unsignedchar': 'c_ubyte',  # C type: unsigned char  Python type: int
-    'short': 'c_short',  # C type: short  Python type: int
-    'unsignedshort': 'c_ushort',  # C type: unsigned short  Python type: int
-    'int': 'c_int',  # C type: int  Python type: int
-    'unsignedint': 'c_uint',  # C type: unsigned int  Python type: int
-    'long': 'c_long',  # C type: long  Python type: int
-    'unsignedlong': 'c_ulong',  # C type: unsigned long  Python type: int
-    'uint64': 'c_longlong',  # C type: __int64 or long-long  Python type: int
-    'unsigneduint64': 'c_ulonglong',  # C type: unsigned __int64 or unsigned long-long  Python type: int
-    'size_t': 'c_size_t',  # C type: unsigned size_t  Python type: int
-    'ssize_t': 'c_ssize_t',  # C type: ssize_t or Py_ssize_t  Python type: int
-    'float': 'c_float',  # C type: float  Python type: float
-    'double': 'c_double',  # C type: double  Python type: float
-    'longdouble': 'c_longdouble',  # C type: long double  Python type: float
-    'char*': 'c_char_p',  # C type: char* (NUL terminated)  Python type: bytes object or None
-    'wchar_t*': 'c_wchar_p',  # C type: wchar_t* (NUL terminated)  Python type: string object or None
-    'void*': 'c_void_p',  # C type: wchar_t* (NUL terminated)  Python type: int or None
-    'void': 'None',  # C type: void  Python type: None
-}
-
 # -----------------------------------------
 DEFINES_FOLDER_PATH = Path(__file__).parent / 'raypyc/defines'
 ENUMS_FOLDER_PATH = Path(__file__).parent / 'raypyc/enums'
@@ -70,14 +20,6 @@ wrapped_structures_names_py = []
 wrapped_structures_names_pyi = []
 
 wrapped_functions_names_pyi = []
-
-
-# -----------------------------------------
-
-
-# -----------------------------------------
-
-# **all the functions raypyc use are here**
 
 
 # convert c type string to ctype type sting
