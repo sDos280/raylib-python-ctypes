@@ -1979,6 +1979,57 @@ class BoundingBox(ctypes.Structure):
 		self.max = i
 
 
+class Wave(ctypes.Structure):
+	"""Wave, audio wave data"""
+	_fields_ = [
+		('frameCount', ctypes.c_uint),  # Total number of frames (considering channels)
+		('sampleRate', ctypes.c_uint),  # Frequency (samples per second)
+		('sampleSize', ctypes.c_uint),  # Bit depth (bits per sample): 8, 16, 32 (24 not supported)
+		('channels', ctypes.c_uint),  # Number of channels (1-mono, 2-stereo, ...)
+		('data', ctypes.c_void_p)  # Buffer data pointer
+	]
+
+	@property
+	def frameCount(self) -> ctypes.c_uint:
+		return self.frameCount
+
+	@frameCount.setter
+	def frameCount(self, i: ctypes.c_uint) -> None:
+		self.frameCount = i
+
+	@property
+	def sampleRate(self) -> ctypes.c_uint:
+		return self.sampleRate
+
+	@sampleRate.setter
+	def sampleRate(self, i: ctypes.c_uint) -> None:
+		self.sampleRate = i
+
+	@property
+	def sampleSize(self) -> ctypes.c_uint:
+		return self.sampleSize
+
+	@sampleSize.setter
+	def sampleSize(self, i: ctypes.c_uint) -> None:
+		self.sampleSize = i
+
+	@property
+	def channels(self) -> ctypes.c_uint:
+		return self.channels
+
+	@channels.setter
+	def channels(self, i: ctypes.c_uint) -> None:
+		self.channels = i
+
+	@property
+	def data(self) -> ctypes.c_void_p:
+		return self.data
+
+	@data.setter
+	def data(self, i: ctypes.c_void_p) -> None:
+		self.data = i
+
+
 class VrDeviceInfo(ctypes.Structure):
 	"""VrDeviceInfo, Head-Mounted-Display device parameters"""
 	_fields_ = [
@@ -2284,6 +2335,7 @@ __structs = {
 	"Ray": Ray,
 	"RayCollision": RayCollision,
 	"BoundingBox": BoundingBox,
+	"Wave": Wave,
 	"VrDeviceInfo": VrDeviceInfo,
 	"VrStereoConfig": VrStereoConfig,
 	"FilePathList": FilePathList,

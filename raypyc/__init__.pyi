@@ -2329,6 +2329,26 @@ def set_master_volume(volume: ctypes.c_float) -> None:
 	"""Set master volume (listener)"""
 	...
 
+def load_wave(fileName: ctypes.c_char_p) -> Wave:
+	"""Load wave data from file"""
+	...
+
+def load_wave_from_memory(fileType: ctypes.c_char_p, fileData: ctypes.POINTER(ctypes.c_ubyte), dataSize: ctypes.c_int) -> Wave:
+	"""Load wave from memory buffer, fileType refers to extension: i.e. '.wav'"""
+	...
+
+def unload_wave(wave: Wave) -> None:
+	"""Unload wave data"""
+	...
+
+def export_wave(wave: Wave, fileName: ctypes.c_char_p) -> ctypes.c_bool:
+	"""Export wave data to file, returns true on success"""
+	...
+
+def export_wave_as_code(wave: Wave, fileName: ctypes.c_char_p) -> ctypes.c_bool:
+	"""Export wave sample data to code (.h), returns true on success"""
+	...
+
 def stop_sound_multi() -> None:
 	"""Stop any sound playing (using multichannel buffer pool)"""
 	...
@@ -2337,12 +2357,20 @@ def get_sounds_playing() -> ctypes.c_int:
 	"""Get number of sounds playing in the multichannel"""
 	...
 
+def wave_copy(wave: Wave) -> Wave:
+	"""Copy a wave to a new wave"""
+	...
+
 def wave_crop(wave: ctypes.POINTER(Wave), initSample: ctypes.c_int, finalSample: ctypes.c_int) -> None:
 	"""Crop a wave to defined samples range"""
 	...
 
 def wave_format(wave: ctypes.POINTER(Wave), sampleRate: ctypes.c_int, sampleSize: ctypes.c_int, channels: ctypes.c_int) -> None:
 	"""Convert wave data to desired format"""
+	...
+
+def load_wave_samples(wave: Wave) -> ctypes.POINTER(ctypes.c_float):
+	"""Load samples data from wave as a 32bit float data array"""
 	...
 
 def unload_wave_samples(samples: ctypes.POINTER(ctypes.c_float)) -> None:

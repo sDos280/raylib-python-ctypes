@@ -1680,6 +1680,49 @@ class BoundingBox(ctypes.Structure):
 		...
 
 
+class Wave(ctypes.Structure):
+	"""Wave, audio wave data"""
+	@property
+	def frameCount(self) -> ctypes.c_uint:
+		...
+
+	@frameCount.setter
+	def frameCount(self, i: ctypes.c_uint) -> None:
+		...
+
+	@property
+	def sampleRate(self) -> ctypes.c_uint:
+		...
+
+	@sampleRate.setter
+	def sampleRate(self, i: ctypes.c_uint) -> None:
+		...
+
+	@property
+	def sampleSize(self) -> ctypes.c_uint:
+		...
+
+	@sampleSize.setter
+	def sampleSize(self, i: ctypes.c_uint) -> None:
+		...
+
+	@property
+	def channels(self) -> ctypes.c_uint:
+		...
+
+	@channels.setter
+	def channels(self, i: ctypes.c_uint) -> None:
+		...
+
+	@property
+	def data(self) -> ctypes.c_void_p:
+		...
+
+	@data.setter
+	def data(self, i: ctypes.c_void_p) -> None:
+		...
+
+
 class VrDeviceInfo(ctypes.Structure):
 	"""VrDeviceInfo, Head-Mounted-Display device parameters"""
 	@property
@@ -1941,6 +1984,7 @@ __structs = {
 	"Ray": ...,
 	"RayCollision": ...,
 	"BoundingBox": ...,
+	"Wave": ...,
 	"VrDeviceInfo": ...,
 	"VrStereoConfig": ...,
 	"FilePathList": ...,

@@ -370,7 +370,7 @@ def generate_structs_py_pyi_code(structs_api, aliases_api):
     # generate __init__.py code
     with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "a") as structs_code_file_w:
         for struct in structs_api:
-            if not struct['name'] in ['AudioStream', 'Wave', 'Sound', 'Music']:
+            if not struct['name'] in ['AudioStream', 'Sound', 'Music']:
                 if struct['name'] not in wrapped_structures_names_py:
                     wrapped_structures_names_py.append(struct['name'])
                     struct_string_logic = ""
@@ -399,7 +399,7 @@ def generate_structs_py_pyi_code(structs_api, aliases_api):
     # generate __init__.pyi code
     with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "a") as structs_code_stub_file_w:
         for struct in structs_api:
-            if not struct['name'] in ['AudioStream', 'Wave', 'Sound', 'Music']:
+            if not struct['name'] in ['AudioStream', 'Sound', 'Music']:
                 if struct['name'] not in wrapped_structures_names_pyi:
                     wrapped_structures_names_pyi.append(struct['name'])
                     struct_string_logic = ""
@@ -528,12 +528,12 @@ def check_for_functions_that_can_wrap(functions_set):
         do_wrapper_this_function = True
         if 'params' in function.keys():
             for function_param in function['params']:
-                if function_param['type'] in ['AudioStream', 'Wave', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback', '...']:
+                if function_param['type'] in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback', '...']:
                     do_wrapper_this_function = False
                     break
 
         if do_wrapper_this_function:
-            if function['returnType'].replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '') in ['AudioStream', 'Wave', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback',
+            if function['returnType'].replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '') in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback',
                                                                                                                                    'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback', '...']:
                 do_wrapper_this_function = False
 
