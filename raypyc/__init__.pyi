@@ -121,6 +121,14 @@ def rl_disable_vertex_attribute(index: ctypes.c_uint) -> None:
 	"""Disable vertex attribute index"""
 	...
 
+def rl_enable_state_pointer(vertexAttribType: ctypes.c_int, buffer: ctypes.c_void_p) -> None:
+	"""Enable attribute state pointer"""
+	...
+
+def rl_disable_state_pointer(vertexAttribType: ctypes.c_int) -> None:
+	"""Disable attribute state pointer"""
+	...
+
 def rl_active_texture_slot(slot: ctypes.c_int) -> None:
 	"""Select and active a texture slot"""
 	...
@@ -263,10 +271,6 @@ def rl_set_blend_mode(mode: ctypes.c_int) -> None:
 
 def rl_set_blend_factors(glSrcFactor: ctypes.c_int, glDstFactor: ctypes.c_int, glEquation: ctypes.c_int) -> None:
 	"""Set blending mode factor and equation (using OpenGL factors)"""
-	...
-
-def rl_set_blend_factors_separate(glSrcRGB: ctypes.c_int, glDstRGB: ctypes.c_int, glSrcAlpha: ctypes.c_int, glDstAlpha: ctypes.c_int, glEqRGB: ctypes.c_int, glEqAlpha: ctypes.c_int) -> None:
-	"""Set blending mode factors and equations separately (using OpenGL factors)"""
 	...
 
 def rlgl_init(width: ctypes.c_int, height: ctypes.c_int) -> None:
@@ -501,7 +505,7 @@ def rl_compute_shader_dispatch(groupX: ctypes.c_uint, groupY: ctypes.c_uint, gro
 	"""Dispatch compute shader (equivalent to *draw* for graphics pilepine)"""
 	...
 
-def rl_load_shader_buffer(size: ctypes.c_uint, data: ctypes.c_void_p, usageHint: ctypes.c_int) -> ctypes.c_uint:
+def rl_load_shader_buffer(size: ctypes.c_ulonglong, data: ctypes.c_void_p, usageHint: ctypes.c_int) -> ctypes.c_uint:
 	"""Load shader storage buffer object (SSBO)"""
 	...
 
@@ -509,24 +513,24 @@ def rl_unload_shader_buffer(ssboId: ctypes.c_uint) -> None:
 	"""Unload shader storage buffer object (SSBO)"""
 	...
 
-def rl_update_shader_buffer(id: ctypes.c_uint, data: ctypes.c_void_p, dataSize: ctypes.c_uint, offset: ctypes.c_uint) -> None:
+def rl_update_shader_buffer_elements(id: ctypes.c_uint, data: ctypes.c_void_p, dataSize: ctypes.c_ulonglong, offset: ctypes.c_ulonglong) -> None:
 	"""Update SSBO buffer data"""
 	...
 
-def rl_bind_shader_buffer(id: ctypes.c_uint, index: ctypes.c_uint) -> None:
+def rl_get_shader_buffer_size(id: ctypes.c_uint) -> ctypes.c_ulonglong:
+	"""Get SSBO buffer size"""
+	...
+
+def rl_read_shader_buffer_elements(id: ctypes.c_uint, dest: ctypes.c_void_p, count: ctypes.c_ulonglong, offset: ctypes.c_ulonglong) -> None:
 	"""Bind SSBO buffer"""
 	...
 
-def rl_read_shader_buffer(id: ctypes.c_uint, dest: ctypes.c_void_p, count: ctypes.c_uint, offset: ctypes.c_uint) -> None:
-	"""Read SSBO buffer data (GPU->CPU)"""
+def rl_bind_shader_buffer(id: ctypes.c_uint, index: ctypes.c_uint) -> None:
+	"""Copy SSBO buffer data"""
 	...
 
-def rl_copy_shader_buffer(destId: ctypes.c_uint, srcId: ctypes.c_uint, destOffset: ctypes.c_uint, srcOffset: ctypes.c_uint, count: ctypes.c_uint) -> None:
-	"""Copy SSBO data between buffers"""
-	...
-
-def rl_get_shader_buffer_size(id: ctypes.c_uint) -> ctypes.c_uint:
-	"""Get SSBO buffer size"""
+def rl_copy_buffers_elements(destId: ctypes.c_uint, srcId: ctypes.c_uint, destOffset: ctypes.c_ulonglong, srcOffset: ctypes.c_ulonglong, count: ctypes.c_ulonglong) -> None:
+	"""Copy SSBO buffer data"""
 	...
 
 def rl_bind_image_texture(id: ctypes.c_uint, index: ctypes.c_uint, format: ctypes.c_uint, readonly: ctypes.c_int) -> None:

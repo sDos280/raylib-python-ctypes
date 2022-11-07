@@ -38,6 +38,7 @@ def convert_c_type_string_to_ctype_type_sting(c_type_string):
         'unsignedlong': 'c_ulong',  # C type: unsigned long  Python type: int
         'uint64': 'c_longlong',  # C type: __int64 or long-long  Python type: int
         'unsigneduint64': 'c_ulonglong',  # C type: unsigned __int64 or unsigned long-long  Python type: int
+        'unsignedlonglong': 'c_ulonglong',  # C type: unsigned __int64 or unsigned long-long  Python type: int
         'size_t': 'c_size_t',  # C type: unsigned size_t  Python type: int
         'ssize_t': 'c_ssize_t',  # C type: ssize_t or Py_ssize_t  Python type: int
         'float': 'c_float',  # C type: float  Python type: float
