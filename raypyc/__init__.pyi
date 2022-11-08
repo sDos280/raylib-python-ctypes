@@ -121,14 +121,6 @@ def rl_disable_vertex_attribute(index: ctypes.c_uint) -> None:
 	"""Disable vertex attribute index"""
 	...
 
-def rl_enable_state_pointer(vertexAttribType: ctypes.c_int, buffer: ctypes.c_void_p) -> None:
-	"""Enable attribute state pointer"""
-	...
-
-def rl_disable_state_pointer(vertexAttribType: ctypes.c_int) -> None:
-	"""Disable attribute state pointer"""
-	...
-
 def rl_active_texture_slot(slot: ctypes.c_int) -> None:
 	"""Select and active a texture slot"""
 	...
