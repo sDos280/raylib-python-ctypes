@@ -217,23 +217,23 @@ def generate_struct_signature_code_stub(struct_data):
 # remove the current defines/__init__.py defines enums/__init__.pyi files and generated new ones
 def generate_defines_py_pyi_files():
     if Path(DEFINES_FOLDER_PATH / '__init__.py').exists():
-        with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "w") as defines_code_file_write:  # add import stuff
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "w"):  # add import stuff
             pass
     else:
         print(f"there isn\'t a __init__.py in {Path(DEFINES_FOLDER_PATH / '__init__.py')}, regenerating a new one here")
         with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "x"):  # generate __init__.py file => define logic
             pass
-        with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "w") as defines_code_file_write:  # add import stuff
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.py'), "w"):  # add import stuff
             pass
 
     if Path(DEFINES_FOLDER_PATH / '__init__.pyi').exists():
-        with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "w") as defines_code_file_write:  # add import stuff
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "w"):  # add import stuff
             pass
     else:
         print(f"there isn\'t a __init__.pyi in {Path(DEFINES_FOLDER_PATH / '__init__.pyi')}, regenerating a new one here")
         with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "x"):  # generate __init__.pyi file => define signature
             pass
-        with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "w") as defines_code_file_write:  # add import stuff
+        with open(Path(DEFINES_FOLDER_PATH / '__init__.pyi'), "w"):  # add import stuff
             pass
 
 
@@ -286,8 +286,8 @@ def generate_enums_py_pyi_code(enums_api):
     # generate __init__.py code
     with open(Path(ENUMS_FOLDER_PATH / '__init__.py'), "a") as enums_code_file_w:
         for enum in enums_api:
-            if enum['name'] not in wrapped_structures_names_py:
-                wrapped_structures_names_py.append(enum['name'])
+            if enum['name'] not in wrapped_enums_names_py:
+                wrapped_enums_names_py.append(enum['name'])
                 enum_string_logic = ""
                 enum_string_logic += generate_enum_signature_code(enum)
                 enum_string_logic += generate_enum_values_string_code(enum)
@@ -298,8 +298,8 @@ def generate_enums_py_pyi_code(enums_api):
     # generate __init__.pyi code
     with open(Path(ENUMS_FOLDER_PATH / '__init__.pyi'), "a") as enums_code_file_w:
         for enum in enums_api:
-            if enum['name'] not in wrapped_structures_names_pyi:
-                wrapped_structures_names_pyi.append(enum['name'])
+            if enum['name'] not in wrapped_enums_names_pyi:
+                wrapped_enums_names_pyi.append(enum['name'])
                 enum_string_logic = ""
                 enum_string_logic += generate_enum_signature_code_stub(enum)
                 enum_string_logic += generate_enum_values_string_code_stub(enum)
@@ -359,60 +359,58 @@ def generate_structs_py_pyi_code(structs_api, aliases_api):
     # generate __init__.py code
     with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "a") as structs_code_file_w:
         for struct in structs_api:
-            if not struct['name'] in ['AudioStream', 'Sound', 'Music']:
-                if struct['name'] not in wrapped_structures_names_py:
-                    wrapped_structures_names_py.append(struct['name'])
-                    struct_string_logic = ""
-                    struct_string_logic += generate_struct_signature_code(struct)
-                    struct_string_logic += generate_struct_fields_string_code(struct)
-                    struct_string_logic += generate_struct_setters_getters_code(struct)
-                    struct_string_logic += "\n"
+            if struct['name'] not in wrapped_structures_names_py:
+                wrapped_structures_names_py.append(struct['name'])
+                struct_string_logic = ""
+                struct_string_logic += generate_struct_signature_code(struct)
+                struct_string_logic += generate_struct_fields_string_code(struct)
+                struct_string_logic += generate_struct_setters_getters_code(struct)
+                struct_string_logic += "\n"
 
-                    structs_code_file_w.write(struct_string_logic.replace('\n\t\n', '\n\n'))
+                structs_code_file_w.write(struct_string_logic.replace('\n\t\n', '\n\n'))
 
-                    for aliase in aliases_api:
-                        if struct['name'] == aliase['type']:
-                            if aliase['name'] not in wrapped_structures_names_py:
-                                wrapped_structures_names_py.append(aliase['name'])
-                                aliase_data = dict(struct)
-                                aliase_data['name'] = str(aliase['name'])
-                                aliase_data['description'] = str(aliase['description'])
-                                aliase_string_logic = ""
-                                aliase_string_logic += generate_struct_signature_code(aliase_data)
-                                aliase_string_logic += generate_struct_fields_string_code(aliase_data)
-                                aliase_string_logic += generate_struct_setters_getters_code(aliase_data)
-                                aliase_string_logic += "\n"
+                for aliase in aliases_api:
+                    if struct['name'] == aliase['type']:
+                        if aliase['name'] not in wrapped_structures_names_py:
+                            wrapped_structures_names_py.append(aliase['name'])
+                            aliase_data = dict(struct)
+                            aliase_data['name'] = str(aliase['name'])
+                            aliase_data['description'] = str(aliase['description'])
+                            aliase_string_logic = ""
+                            aliase_string_logic += generate_struct_signature_code(aliase_data)
+                            aliase_string_logic += generate_struct_fields_string_code(aliase_data)
+                            aliase_string_logic += generate_struct_setters_getters_code(aliase_data)
+                            aliase_string_logic += "\n"
 
-                                structs_code_file_w.write(aliase_string_logic.replace('\n\t\n', '\n\n'))
+                            structs_code_file_w.write(aliase_string_logic.replace('\n\t\n', '\n\n'))
 
     # generate __init__.pyi code
     with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "a") as structs_code_stub_file_w:
         for struct in structs_api:
-            if not struct['name'] in ['AudioStream', 'Sound', 'Music']:
-                if struct['name'] not in wrapped_structures_names_pyi:
-                    wrapped_structures_names_pyi.append(struct['name'])
-                    struct_string_logic = ""
-                    struct_string_logic += generate_struct_signature_code(struct)
-                    # struct_string_logic += generate_struct_fields_string_code_stub(struct)  # we don't really need that in the __init__.pyi file
-                    struct_string_logic += generate_struct_setters_getters_code_stub(struct)
-                    struct_string_logic += "\n"
+            if struct['name'] not in wrapped_structures_names_pyi:
+                wrapped_structures_names_pyi.append(struct['name'])
+                struct_string_logic = ""
+                struct_string_logic += generate_struct_signature_code(struct)
+                # struct_string_logic += generate_struct_fields_string_code_stub(struct)  # we don't really need that in the __init__.pyi file
+                struct_string_logic += generate_struct_setters_getters_code_stub(struct)
+                struct_string_logic += "\n"
 
-                    structs_code_stub_file_w.write(struct_string_logic.replace('\n\t\n', '\n\n'))
+                structs_code_stub_file_w.write(struct_string_logic.replace('\n\t\n', '\n\n'))
 
-                    for aliase in aliases_api:
-                        if struct['name'] == aliase['type']:
-                            if aliase['name'] not in wrapped_structures_names_pyi:
-                                wrapped_structures_names_pyi.append(aliase['name'])
-                                aliase_data = dict(struct)
-                                aliase_data['name'] = str(aliase['name'])
-                                aliase_data['description'] = str(aliase['description'])
-                                aliase_string_logic = ""
-                                aliase_string_logic += generate_struct_signature_code_stub(aliase_data)
-                                # aliase_string_logic += generate_struct_fields_string_code(struct) we don't really need that in the __init__.pyi file
-                                aliase_string_logic += generate_struct_setters_getters_code_stub(aliase_data)
-                                aliase_string_logic += "\n"
+                for aliase in aliases_api:
+                    if struct['name'] == aliase['type']:
+                        if aliase['name'] not in wrapped_structures_names_pyi:
+                            wrapped_structures_names_pyi.append(aliase['name'])
+                            aliase_data = dict(struct)
+                            aliase_data['name'] = str(aliase['name'])
+                            aliase_data['description'] = str(aliase['description'])
+                            aliase_string_logic = ""
+                            aliase_string_logic += generate_struct_signature_code_stub(aliase_data)
+                            # aliase_string_logic += generate_struct_fields_string_code(struct) we don't really need that in the __init__.pyi file
+                            aliase_string_logic += generate_struct_setters_getters_code_stub(aliase_data)
+                            aliase_string_logic += "\n"
 
-                                structs_code_stub_file_w.write(aliase_string_logic.replace('\n\t\n', '\n\n'))
+                            structs_code_stub_file_w.write(aliase_string_logic.replace('\n\t\n', '\n\n'))
 
 
 def generate_struct_fields_string_code(struct_data):
@@ -518,12 +516,12 @@ def check_for_functions_that_can_wrap(functions_set):
         do_wrapper_this_function = True
         if 'params' in function.keys():
             for function_param in function['params']:
-                if function_param['type'] in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
+                if function_param['type'] in ['Sound', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
                     do_wrapper_this_function = False
                     break
 
         if do_wrapper_this_function:
-            if function['returnType'].replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '') in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback',
+            if function['returnType'].replace('const', '').replace(" ", "").replace("*", "").replace('[', '').replace(']', '') in ['Sound', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback',
                                                                                                                                    'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
                 do_wrapper_this_function = False
 

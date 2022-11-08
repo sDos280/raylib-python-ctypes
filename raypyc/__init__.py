@@ -156,7 +156,7 @@ def check_for_functions_that_can_wrap(functions_set):
                 except:
                     do_wrapper_this_function = False
 
-                if function_param_processed in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
+                if function_param_processed in ['Sound', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
                     do_wrapper_this_function = False
                     break
 
@@ -170,7 +170,7 @@ def check_for_functions_that_can_wrap(functions_set):
             except:
                 do_wrapper_this_function = False
 
-            if function_returnType_processed in ['AudioStream', 'Sound', 'Music', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
+            if function_returnType_processed in ['AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']:
                 do_wrapper_this_function = False
 
         if do_wrapper_this_function:

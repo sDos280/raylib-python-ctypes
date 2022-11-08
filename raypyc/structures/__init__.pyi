@@ -1731,6 +1731,111 @@ class Wave(ctypes.Structure):
 		...
 
 
+class AudioStream(ctypes.Structure):
+	"""AudioStream, custom audio stream"""
+	@property
+	def buffer(self) -> ctypes.POINTER(rAudioBuffer):
+		...
+
+	@buffer.setter
+	def buffer(self, i: ctypes.POINTER(rAudioBuffer)) -> None:
+		...
+
+	@property
+	def processor(self) -> ctypes.POINTER(rAudioProcessor):
+		...
+
+	@processor.setter
+	def processor(self, i: ctypes.POINTER(rAudioProcessor)) -> None:
+		...
+
+	@property
+	def sampleRate(self) -> ctypes.c_uint:
+		...
+
+	@sampleRate.setter
+	def sampleRate(self, i: ctypes.c_uint) -> None:
+		...
+
+	@property
+	def sampleSize(self) -> ctypes.c_uint:
+		...
+
+	@sampleSize.setter
+	def sampleSize(self, i: ctypes.c_uint) -> None:
+		...
+
+	@property
+	def channels(self) -> ctypes.c_uint:
+		...
+
+	@channels.setter
+	def channels(self, i: ctypes.c_uint) -> None:
+		...
+
+
+class Sound(ctypes.Structure):
+	"""Sound"""
+	@property
+	def stream(self) -> AudioStream:
+		...
+
+	@stream.setter
+	def stream(self, i: AudioStream) -> None:
+		...
+
+	@property
+	def frameCount(self) -> ctypes.c_uint:
+		...
+
+	@frameCount.setter
+	def frameCount(self, i: ctypes.c_uint) -> None:
+		...
+
+
+class Music(ctypes.Structure):
+	"""Music, audio stream, anything longer than ~10 seconds should be streamed"""
+	@property
+	def stream(self) -> AudioStream:
+		...
+
+	@stream.setter
+	def stream(self, i: AudioStream) -> None:
+		...
+
+	@property
+	def frameCount(self) -> ctypes.c_uint:
+		...
+
+	@frameCount.setter
+	def frameCount(self, i: ctypes.c_uint) -> None:
+		...
+
+	@property
+	def looping(self) -> ctypes.c_bool:
+		...
+
+	@looping.setter
+	def looping(self, i: ctypes.c_bool) -> None:
+		...
+
+	@property
+	def ctxType(self) -> ctypes.c_int:
+		...
+
+	@ctxType.setter
+	def ctxType(self, i: ctypes.c_int) -> None:
+		...
+
+	@property
+	def ctxData(self) -> ctypes.c_void_p:
+		...
+
+	@ctxData.setter
+	def ctxData(self, i: ctypes.c_void_p) -> None:
+		...
+
+
 class VrDeviceInfo(ctypes.Structure):
 	"""VrDeviceInfo, Head-Mounted-Display device parameters"""
 	@property
@@ -1993,6 +2098,9 @@ __structs = {
 	"RayCollision": ...,
 	"BoundingBox": ...,
 	"Wave": ...,
+	"AudioStream": ...,
+	"Sound": ...,
+	"Music": ...,
 	"VrDeviceInfo": ...,
 	"VrStereoConfig": ...,
 	"FilePathList": ...,

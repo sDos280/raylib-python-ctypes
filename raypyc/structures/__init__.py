@@ -2044,6 +2044,132 @@ class Wave(ctypes.Structure):
 		self.data = i
 
 
+class AudioStream(ctypes.Structure):
+	"""AudioStream, custom audio stream"""
+	_fields_ = [
+		('buffer', ctypes.POINTER(rAudioBuffer)),  # Pointer to internal data used by the audio system
+		('processor', ctypes.POINTER(rAudioProcessor)),  # Pointer to internal data processor, useful for audio effects
+		('sampleRate', ctypes.c_uint),  # Frequency (samples per second)
+		('sampleSize', ctypes.c_uint),  # Bit depth (bits per sample): 8, 16, 32 (24 not supported)
+		('channels', ctypes.c_uint),  # Number of channels (1-mono, 2-stereo ...)
+	]
+
+	@property
+	def buffer(self) -> ctypes.POINTER(rAudioBuffer):
+		return self.buffer
+
+	@buffer.setter
+	def buffer(self, i: ctypes.POINTER(rAudioBuffer)) -> None:
+		self.buffer = i
+
+	@property
+	def processor(self) -> ctypes.POINTER(rAudioProcessor):
+		return self.processor
+
+	@processor.setter
+	def processor(self, i: ctypes.POINTER(rAudioProcessor)) -> None:
+		self.processor = i
+
+	@property
+	def sampleRate(self) -> ctypes.c_uint:
+		return self.sampleRate
+
+	@sampleRate.setter
+	def sampleRate(self, i: ctypes.c_uint) -> None:
+		self.sampleRate = i
+
+	@property
+	def sampleSize(self) -> ctypes.c_uint:
+		return self.sampleSize
+
+	@sampleSize.setter
+	def sampleSize(self, i: ctypes.c_uint) -> None:
+		self.sampleSize = i
+
+	@property
+	def channels(self) -> ctypes.c_uint:
+		return self.channels
+
+	@channels.setter
+	def channels(self, i: ctypes.c_uint) -> None:
+		self.channels = i
+
+
+class Sound(ctypes.Structure):
+	"""Sound"""
+	_fields_ = [
+		('stream', AudioStream),  # Audio stream
+		('frameCount', ctypes.c_uint)  # Total number of frames (considering channels)
+	]
+
+	@property
+	def stream(self) -> AudioStream:
+		return self.stream
+
+	@stream.setter
+	def stream(self, i: AudioStream) -> None:
+		self.stream = i
+
+	@property
+	def frameCount(self) -> ctypes.c_uint:
+		return self.frameCount
+
+	@frameCount.setter
+	def frameCount(self, i: ctypes.c_uint) -> None:
+		self.frameCount = i
+
+
+class Music(ctypes.Structure):
+	"""Music, audio stream, anything longer than ~10 seconds should be streamed"""
+	_fields_ = [
+		('stream', AudioStream),  # Audio stream
+		('frameCount', ctypes.c_uint),  # Total number of frames (considering channels)
+		('looping', ctypes.c_bool),  # Music looping enable
+		('ctxType', ctypes.c_int),  # Type of music context (audio filetype)
+		('ctxData', ctypes.c_void_p),  # Audio context data depends on type
+	]
+
+	@property
+	def stream(self) -> AudioStream:
+		return self.stream
+
+	@stream.setter
+	def stream(self, i: AudioStream) -> None:
+		self.stream = i
+
+	@property
+	def frameCount(self) -> ctypes.c_uint:
+		return self.frameCount
+
+	@frameCount.setter
+	def frameCount(self, i: ctypes.c_uint) -> None:
+		self.frameCount = i
+
+	@property
+	def looping(self) -> ctypes.c_bool:
+		return self.looping
+
+	@looping.setter
+	def looping(self, i: ctypes.c_bool) -> None:
+		self.looping = i
+
+	@property
+	def ctxType(self) -> ctypes.c_int:
+		return self.ctxType
+
+	@ctxType.setter
+	def ctxType(self, i: ctypes.c_int) -> None:
+		self.ctxType = i
+
+	@property
+	def ctxData(self) -> ctypes.c_void_p:
+		return self.ctxData
+
+	@ctxData.setter
+	def ctxData(self, i: ctypes.c_void_p) -> None:
+		self.ctxData = i
+
+
 class VrDeviceInfo(ctypes.Structure):
 	"""VrDeviceInfo, Head-Mounted-Display device parameters"""
 	_fields_ = [
@@ -2350,6 +2476,9 @@ __structs = {
 	"RayCollision": RayCollision,
 	"BoundingBox": BoundingBox,
 	"Wave": Wave,
+	"AudioStream": AudioStream,
+	"Sound": Sound,
+	"Music": Music,
 	"VrDeviceInfo": VrDeviceInfo,
 	"VrStereoConfig": VrStereoConfig,
 	"FilePathList": FilePathList,

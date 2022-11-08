@@ -2385,6 +2385,114 @@ def unload_wave_samples(samples: ctypes.POINTER(ctypes.c_float)) -> None:
 	"""Unload samples data loaded with LoadWaveSamples()"""
 	...
 
+def load_music_stream(fileName: ctypes.c_char_p) -> Music:
+	"""Load music stream from file"""
+	...
+
+def load_music_stream_from_memory(fileType: ctypes.c_char_p, data: ctypes.POINTER(ctypes.c_ubyte), dataSize: ctypes.c_int) -> Music:
+	"""Load music stream from data"""
+	...
+
+def unload_music_stream(music: Music) -> None:
+	"""Unload music stream"""
+	...
+
+def play_music_stream(music: Music) -> None:
+	"""Start music playing"""
+	...
+
+def is_music_stream_playing(music: Music) -> ctypes.c_bool:
+	"""Check if music is playing"""
+	...
+
+def update_music_stream(music: Music) -> None:
+	"""Updates buffers for music streaming"""
+	...
+
+def stop_music_stream(music: Music) -> None:
+	"""Stop music playing"""
+	...
+
+def pause_music_stream(music: Music) -> None:
+	"""Pause music playing"""
+	...
+
+def resume_music_stream(music: Music) -> None:
+	"""Resume playing paused music"""
+	...
+
+def seek_music_stream(music: Music, position: ctypes.c_float) -> None:
+	"""Seek music to a position (in seconds)"""
+	...
+
+def set_music_volume(music: Music, volume: ctypes.c_float) -> None:
+	"""Set volume for music (1.0 is max level)"""
+	...
+
+def set_music_pitch(music: Music, pitch: ctypes.c_float) -> None:
+	"""Set pitch for a music (1.0 is base level)"""
+	...
+
+def set_music_pan(music: Music, pan: ctypes.c_float) -> None:
+	"""Set pan for a music (0.5 is center)"""
+	...
+
+def get_music_time_length(music: Music) -> ctypes.c_float:
+	"""Get music time length (in seconds)"""
+	...
+
+def get_music_time_played(music: Music) -> ctypes.c_float:
+	"""Get current music time played (in seconds)"""
+	...
+
+def load_audio_stream(sampleRate: ctypes.c_uint, sampleSize: ctypes.c_uint, channels: ctypes.c_uint) -> AudioStream:
+	"""Load audio stream (to stream raw audio pcm data)"""
+	...
+
+def unload_audio_stream(stream: AudioStream) -> None:
+	"""Unload audio stream and free memory"""
+	...
+
+def update_audio_stream(stream: AudioStream, data: ctypes.c_void_p, frameCount: ctypes.c_int) -> None:
+	"""Update audio stream buffers with data"""
+	...
+
+def is_audio_stream_processed(stream: AudioStream) -> ctypes.c_bool:
+	"""Check if any audio stream buffers requires refill"""
+	...
+
+def play_audio_stream(stream: AudioStream) -> None:
+	"""Play audio stream"""
+	...
+
+def pause_audio_stream(stream: AudioStream) -> None:
+	"""Pause audio stream"""
+	...
+
+def resume_audio_stream(stream: AudioStream) -> None:
+	"""Resume audio stream"""
+	...
+
+def is_audio_stream_playing(stream: AudioStream) -> ctypes.c_bool:
+	"""Check if audio stream is playing"""
+	...
+
+def stop_audio_stream(stream: AudioStream) -> None:
+	"""Stop audio stream"""
+	...
+
+def set_audio_stream_volume(stream: AudioStream, volume: ctypes.c_float) -> None:
+	"""Set volume for audio stream (1.0 is max level)"""
+	...
+
+def set_audio_stream_pitch(stream: AudioStream, pitch: ctypes.c_float) -> None:
+	"""Set pitch for audio stream (1.0 is base level)"""
+	...
+
+def set_audio_stream_pan(stream: AudioStream, pan: ctypes.c_float) -> None:
+	"""Set pan for audio stream (0.5 is centered)"""
+	...
+
 def set_audio_stream_buffer_size_default(size: ctypes.c_int) -> None:
 	"""Default size for new audio streams"""
 	...
