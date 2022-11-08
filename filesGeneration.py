@@ -1,3 +1,4 @@
+import ctypes
 import json
 from pathlib import Path
 
@@ -9,6 +10,7 @@ ENUMS_FOLDER_PATH = Path(__file__).parent / 'raypyc/enums'
 STRUCTURES_FOLDER_PATH = Path(__file__).parent / 'raypyc/structures'
 FUNCTIONS_FOLDER_PATH = Path(__file__).parent / 'raypyc'
 JSON_FOLDER_PATH = Path(__file__).parent / 'raypyc'
+DYNAMIC_LIBRARIES_PATH = Path(__file__).parent / 'raypyc'
 
 wrapped_defines_names_py = []
 wrapped_defines_names_pyi = []
@@ -20,6 +22,8 @@ wrapped_structures_names_py = []
 wrapped_structures_names_pyi = []
 
 wrapped_functions_names_pyi = []
+
+_rl = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / 'raylib.dll'))
 
 
 # convert c type string to ctype type sting
@@ -99,6 +103,28 @@ def convert_c_type_string_to_ctype_type_sting(c_type_string):
             return f"{type_of_pointer_end}"
 
     return c_type_string  # a struct
+
+
+def generate_dummy_structure_code(structure_name: str, size: int) -> str:
+    """
+    generate dummy structure string
+    :param structure_name: the name of the dummy structure
+    :param size: the size in bytes of the dummy structure
+    :return: structure string
+    """
+    return f"class {structure_name}(ctypes.Structure):\n\t\"\"\"dummy structure\"\"\"\n" \
+           f"\t_fields_ = [\n" \
+           f"\t\t(\"data\", ctypes.c_byte * {size})\n" \
+           f"\t]\n\n\n"
+
+
+def generate_dummy_structure_code_stub(structure_name: str) -> str:
+    """
+    generate dummy structure string
+    :param structure_name: the name of the dummy structure
+    :return: structure string
+    """
+    return f"class {structure_name}(ctypes.Structure):\n\t\"\"\"dummy structure\"\"\"\n\n\n"
 
 
 # get class object by string name
@@ -307,6 +333,26 @@ def generate_structs_py_pyi_files():
         with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "w") as structs_code_file_write:  # add import stuff
             structs_code_file_write.write('import ctypes\n')
             structs_code_file_write.write('from raypyc.defines import *\n\n\n')
+
+
+def generate_dummy_structs_py_pyi_code():
+    GetrAudioBufferSize = _rl.__getattr__("GetrAudioBufferSize")
+    GetrAudioBufferSize.argtypes = None
+    GetrAudioBufferSize.restype = ctypes.c_int
+
+    GetrAudioProcessorSize = _rl.__getattr__("GetrAudioProcessorSize")
+    GetrAudioProcessorSize.argtypes = None
+    GetrAudioProcessorSize.restype = ctypes.c_int
+
+    # generate __init__.py code
+    with open(Path(STRUCTURES_FOLDER_PATH / '__init__.py'), "a") as structs_code_file_w:
+        structs_code_file_w.write(generate_dummy_structure_code("rAudioBuffer", int(GetrAudioBufferSize())))
+        structs_code_file_w.write(generate_dummy_structure_code("rAudioProcessor", int(GetrAudioProcessorSize())))
+
+    # generate __init__.pyi code
+    with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "a") as structs_code_stub_file_w:
+        structs_code_stub_file_w.write(generate_dummy_structure_code_stub("rAudioBuffer"))
+        structs_code_stub_file_w.write(generate_dummy_structure_code_stub("rAudioProcessor"))
 
 
 def generate_structs_py_pyi_code(structs_api, aliases_api):
@@ -579,6 +625,8 @@ generate_defines_py_pyi_code(raymath_api_defines)
 generate_defines_py_pyi_code(raygui_api_defines)
 
 generate_structs_py_pyi_files()
+
+generate_dummy_structs_py_pyi_code()
 
 generate_structs_py_pyi_code(rlgl_api_structs, rlgl_api_aliases)
 generate_structs_py_pyi_code(raylib_api_structs, raylib_api_aliases)

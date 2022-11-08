@@ -2,6 +2,14 @@ import ctypes
 from raypyc.defines import *
 
 
+class rAudioBuffer(ctypes.Structure):
+	"""dummy structure"""
+
+
+class rAudioProcessor(ctypes.Structure):
+	"""dummy structure"""
+
+
 class rlVertexBuffer(ctypes.Structure):
 	"""Dynamic vertex buffers (position + texcoords + colors + indices arrays)"""
 	@property
