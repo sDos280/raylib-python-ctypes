@@ -38,7 +38,7 @@ def main():
     while not window_should_close():  # Detect window close button or ESC key
         # Update
         # ----------------------------------------------------------------------------------
-        update_music_stream(music)  # pdate music buffer with new stream data
+        update_music_stream(music)  # Update music buffer with new stream data
 
         # Restart music playing (stop and play)
         if is_key_pressed(KeyboardKey.KEY_SPACE):
