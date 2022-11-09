@@ -60,7 +60,7 @@ def main():
             # Check if more characters have been pressed on the same frame
             while key > 0:
                 # NOTE: Only allow keys in range [32..125]
-                if (key >= 32) and (key <= 125) and (letter_count < MAX_INPUT_CHARS):
+                if 32 <= key <= 125 and letter_count < MAX_INPUT_CHARS:
                     name[letter_count] = ctypes.c_char(key)
                     name[letter_count + 1] = b'\0'  # Add null terminator at the end of the string.
                     letter_count += 1
