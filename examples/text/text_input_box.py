@@ -35,7 +35,6 @@ def main():
     letter_count = 0
 
     text_box = Rectangle(SCREEN_WIDTH / 2.0 - 100, 180, 225, 50)
-    mouse_on_text = False
 
     frames_counter = False
 
@@ -53,7 +52,7 @@ def main():
 
         if mouse_on_text:
             # Set the window's cursor to the I-Beam
-            set_mouse_cursor(MouseCursor.MOUSE_CURSOR_IBEAM);
+            set_mouse_cursor(MouseCursor.MOUSE_CURSOR_IBEAM)
 
             # Get char pressed (unicode character) on the queue
             key = get_char_pressed()
