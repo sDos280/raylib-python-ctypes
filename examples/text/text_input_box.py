@@ -35,6 +35,7 @@ def main():
     letter_count = 0
 
     text_box = Rectangle(SCREEN_WIDTH / 2.0 - 100, 180, 225, 50)
+    mouse_on_text = False
 
     frames_counter = False
 
@@ -102,7 +103,7 @@ def main():
         if mouse_on_text:
             if letter_count < MAX_INPUT_CHARS:
                 # Draw blinking underscore char
-                if ((frames_counter / 20) % 2) == 0:
+                if (frames_counter / 20) % 2 == 0:
                     draw_text(b"_", int(text_box.x + 8 + measure_text(name, 40)), int(text_box.y + 12), 40, MAROON)
             else:
                 draw_text(b"Press BACKSPACE to delete chars...", 230, 300, 20, GRAY)
