@@ -180,6 +180,9 @@ def main():
 
     # De-Initialization
     # ----------------------------------------------------------------------------------
+    unload_shader(shader)  # Unload shader
+    unload_render_texture(target)  # Unload render texture
+
     close_window()  # Close window and OpenGL context
     # ----------------------------------------------------------------------------------
 
