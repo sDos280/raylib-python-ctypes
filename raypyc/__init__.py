@@ -65,13 +65,13 @@ def evaluate_c_type_string_to_ctype_type(c_type_string):
         if type_of_array_without_pointers_string in cStringToCtypesString:  # basic type pointer(probably double+ pointer level) (int**, char**, float**, ...)
             type_of_array_end = cStringToCtypesString[type_of_array_without_pointers_string]
             for i in range(pointer_level):
-                type_of_array_end = POINTER(type_of_array_end)
+                type_of_array_end = ctypes.POINTER(type_of_array_end)
             return type_of_array_end * array_size
 
         if type_of_array_without_pointers_string in raypyc.structures.__structs:  # a struct array pointer level 1+ or just a pointer level 1
             type_of_array_end = raypyc.structures.__structs[type_of_array_without_pointers_string]
             for i in range(pointer_level):
-                type_of_array_end = POINTER(type_of_array_end)
+                type_of_array_end = ctypes.POINTER(type_of_array_end)
             return type_of_array_end * array_size
 
         raise TypeError(f"can wrapped this string, the string: {c_type_string}")
@@ -97,13 +97,13 @@ def evaluate_c_type_string_to_ctype_type(c_type_string):
         if type_without_pointers_string in cStringToCtypesString:  # basic type pointer(probably double+ pointer level) (int**, char**, float**, ...)
             type_of_pointer_end = cStringToCtypesString[type_without_pointers_string]
             for i in range(pointer_level):
-                type_of_pointer_end = POINTER(type_of_pointer_end)
+                type_of_pointer_end = ctypes.POINTER(type_of_pointer_end)
             return type_of_pointer_end
 
         if type_without_pointers_string in raypyc.structures.__structs:  # a struct pointer level 1+ or just a pointer level 1
             type_of_pointer_end = raypyc.structures.__structs[type_without_pointers_string]
             for i in range(pointer_level):
-                type_of_pointer_end = POINTER(type_of_pointer_end)
+                type_of_pointer_end = ctypes.POINTER(type_of_pointer_end)
             return type_of_pointer_end
 
         raise TypeError(f"can wrapped this string, the string: {c_type_string}")
