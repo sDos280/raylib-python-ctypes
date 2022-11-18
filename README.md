@@ -100,7 +100,6 @@ secondly, here are some of the things that contributing on will help this wrappe
  * porting examples from c to python(if you can, please follow along with the [conventions](https://github.com/sDos280/raylib-python-ctypes/blob/main/CONVENTIONS.md) when porting). ([_C_ examples](https://github.com/raysan5/raylib/tree/master/examples), [_Python_ examples](https://github.com/sDos280/raylib-python-ctypes))
  * fixing(refactoring) my [fileGeneration](https://github.com/sDos280/raylib-python-ctypes/blob/main/filesGeneration.py), so it will look neater...
  * making the wrapper able to port to more operating systems
- * adding support to sound with the library. (make the library wrap sound functions/structures) 
  * wrapping more [_c_ raylib header](https://github.com/raysan5/raylib/tree/master/src) to this library[^2]
 
 [^2] NOTE: at least for now, all the non-functions wrapper stuff need be implemented in the [filesGeneration.py](https://github.com/sDos280/raylib-python-ctypes/blob/main/filesGeneration.py) file, and all the functions wrapper stuff need be implemented in the [raypyc/__init__.py](https://github.com/sDos280/raylib-python-ctypes/blob/main/raypyc/__init__.py)
