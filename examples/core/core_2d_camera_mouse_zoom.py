@@ -4,10 +4,8 @@ raylib [core] example - 2d camera mouse zoom
 
 """
 
-# Import
-# ------------------------------------------------------------------------------------
 from raypyc import *
-# ------------------------------------------------------------------------------------
+
 
 # ------------------------------------------------------------------------------------
 # Program main entry point
@@ -32,7 +30,7 @@ def main():
         # ----------------------------------------------------------------------------------
         if is_mouse_button_down(MouseButton.MOUSE_BUTTON_RIGHT):
             delta = get_mouse_delta()
-            delta = vector2_scale(delta, -1.0/camera.zoom)
+            delta = vector2_scale(delta, -1.0 / camera.zoom)
 
             camera.target = vector2_add(camera.target, delta)
 
@@ -52,7 +50,7 @@ def main():
             # Zoom increment
             ZOOM_INCREMENT = 0.125
 
-            camera.zoom += (wheel*ZOOM_INCREMENT)
+            camera.zoom += (wheel * ZOOM_INCREMENT)
             if camera.zoom < ZOOM_INCREMENT: camera.zoom = ZOOM_INCREMENT
         # ----------------------------------------------------------------------------------
 
@@ -67,7 +65,7 @@ def main():
         # Draw the 3d grid, rotated 90 degrees and centered around 0,0
         # just so we have something in the XY plane
         rl_push_matrix()
-        rl_translatef(0, 25*50, 0)
+        rl_translatef(0, 25 * 50, 0)
         rl_rotatef(90, 1, 0, 0)
         draw_grid(100, 50)
         rl_pop_matrix()

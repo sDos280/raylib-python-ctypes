@@ -4,12 +4,8 @@ raylib [shapes] example - bouncing ball
 
 """
 
-# Import
-# ------------------------------------------------------------------------------------
 from raypyc import *
 
-
-# ------------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------------
 # Program main entry point
@@ -22,7 +18,7 @@ def main():
 
     init_window(SCREEN_WIDTH, SCREEN_HEIGHT, b"raylib [shapes] example - bouncing ball")
 
-    ball_position = Vector2(get_screen_height()/2.0, get_screen_height()/2.0)
+    ball_position = Vector2(get_screen_height() / 2.0, get_screen_height() / 2.0)
     ball_speed = Vector2(5.0, 4.0)
     ball_radius = 20
 

@@ -21,20 +21,22 @@ Here is a list with some code conventions used by raylib in python:
 | Functions           |   lowerCase & wordSeparationBy_   | `init_window()`, `update_camera_center()` |
 | Functions params    |             lowerCase             | `width`, `height`                         |
 | Ternary Operator    | result1 if condition else result2 | `print("yes" if value == 0 else "no")`    |
-[^1] like `macro definitions` of value in C 
+
+[^1] like `macro definitions` of value in C
 
 [^2] most of the time we use "..." for string and ' ' to char
 
-[^3] most of the time raypyc need you to use bytes object and not a string object to convert. 
+[^3] most of the time raypyc need you to use bytes object and not a string object to convert.
 to convert string object to bytes object use or b"..." or "...".encode('uft-8')
 
-
 Some other conventions to follow:
- - **ALWAYS** initialize all defined variables.
- - **Ues Tabs**.
- - Avoid trailing spaces, please, avoid them
- - Avoid using **semicolon** as you can
- - Control flow statements always are followed **by a space**:
+
+- **ALWAYS** initialize all defined variables.
+- **Ues Tabs**.
+- Avoid trailing spaces, please, avoid them
+- Avoid using **semicolon** as you can
+- Control flow statements always are followed **by a space**:
+
 ```python
 if condition : value = 0
 
@@ -43,16 +45,20 @@ while not window_should_close():
 
 for i in range(NUM_VALUES): print(i)
 ```
+
 ```python
 if value > 1 and value1 < 50 and valueActive:
     #Do something here!
 ```
 
-**If proposing new functions, please try to use a clear naming for function-name and functions-parameters, in case of doubt, open an issue for discussion.**
+**If proposing new functions, please try to use a clear naming for function-name and functions-parameters, in case of
+doubt, open an issue for discussion.**
 
 ## Import libraries and Module
- - import libraries with the form `from library import *`
- - import modules/variables from libraries with the form `from library import (module1, ..., variable1, ...)`
+
+- import libraries with the form `from library import *`
+- import modules/variables from libraries with the form `from library import (module1, ..., variable1, ...)`
+
 ```python
 from raypyc import *
 from raypyc.colors import (
@@ -64,17 +70,20 @@ from raypyc.colors import (
 
 ## Files and Directories Naming Conventions
 
-  - Directories will be named using `snake_case`: `resources/models`, `resources/fonts`
+- Directories will be named using `snake_case`: `resources/models`, `resources/fonts`
 
-  - Files will be named using `snake_case`: `main_title.png`, `cubicmap.png`, `sound.wav`
+- Files will be named using `snake_case`: `main_title.png`, `cubicmap.png`, `sound.wav`
 
 _NOTE: Avoid any space or special character in the files/dir naming!_
 
 ## Games/Examples Directories Organization Conventions
 
- - Data files should be organized by context and usage in the game, think about the loading requirements for data and put all the resources that need to be loaded at the same time together.
- - Use descriptive names for the files, it would be perfect if just reading the name of the file, it was possible to know what is that file and where fits in the game.
- - Here is an example, note that some resources require to be loaded all at once while other require to be loaded only at initialization (gui, font).
+- Data files should be organized by context and usage in the game, think about the loading requirements for data and put
+  all the resources that need to be loaded at the same time together.
+- Use descriptive names for the files, it would be perfect if just reading the name of the file, it was possible to know
+  what is that file and where fits in the game.
+- Here is an example, note that some resources require to be loaded all at once while other require to be loaded only at
+  initialization (gui, font).
 
 ```
 resources/audio/fx/long_jump.wav
@@ -89,7 +98,9 @@ resources/common/gui.png
 ```
 
 ## Example Conventions For Python API
- - examples ***should*** have the following structure
+
+- examples ***should*** have the following structure
+
 ```python
 """
 
@@ -97,10 +108,8 @@ raylib [raylib module] example - example explanation
 
 """
 
-# Import
-# ------------------------------------------------------------------------------------
-# Do something here!
-# ------------------------------------------------------------------------------------
+# do all the import stuff here
+
 
 # Definitions
 # ------------------------------------------------------------------------------------
@@ -137,7 +146,9 @@ def main():
 if __name__ == '__main__':
     main()
 ```
- - temple (basic window example):
+
+- temple (basic window example):
+
 ```python
 """
 
@@ -145,10 +156,8 @@ raylib [core] example - Basic Window
 
 """
 
-# Import
-# ------------------------------------------------------------------------------------
 from raypyc import *
-# ------------------------------------------------------------------------------------
+
 
 # ------------------------------------------------------------------------------------
 # Program main entry point
@@ -197,28 +206,45 @@ if __name__ == '__main__':
     main()
 ```
 
-## Ctypes Classes 
-to use the raypyc function we will need to use the structs that provided with raylib, that why we need to learn to convert c struct to python class.
+## Ctypes Classes
+
+to use the raypyc function we will need to use the structs that provided with raylib, that why we need to learn to
+convert c struct to python class.
+
 - when we want to use c structs in python we create a ctypes class object
 - here is an example of converting the c vector2 struct to a valid python class that can be used by raypyc
 - the c struct:
+
 ```c
 typedef struct Vector2 {
     float x;
     float y;
 } Vector2;
 ```
-- 1. first we need to import all the stuff from ctypes for later use (you can also just include raypyc, ctypes already included in there...)
+
+-
+    1. first we need to import all the stuff from ctypes for later use (you can also just include raypyc, ctypes already
+       included in there...)
+
 ```python
 "from ctypes import *"
 
 # the rest of the code will go here
 ```
-- 2. create a class named Vector2 that inherits from "Structure"
+
+-
+    2. create a class named Vector2 that inherits from "Structure"
+
 ```python
 class Vector2(Structures):
 ```
-- 3. add the data of the structure(class), the \_fields_ list has pairs of `("name of variable", ctypes type)`( for example: x is a variable of Vector2 with the c_float type, to see the types and their usage look in here: [fundamental-data-types](https://docs.python.org/3/library/ctypes.html#fundamental-data-types) ), can you see how the c_float type match with the float type
+
+-
+    3. add the data of the structure(class), the \_fields_ list has pairs of `("name of variable", ctypes type)`( for
+       example: x is a variable of Vector2 with the c_float type, to see the types and their usage look in
+       here: [fundamental-data-types](https://docs.python.org/3/library/ctypes.html#fundamental-data-types) ), can you
+       see how the c_float type match with the float type
+
 ```python
 class Vector2(Structures):
     _fields_ = [
@@ -226,7 +252,10 @@ class Vector2(Structures):
 		('y', c_float)
 	]
 ```
-- 4. recommended: add setter and getter to structure(class)
+
+-
+    4. recommended: add setter and getter to structure(class)
+
 ```python
 class Vector2(Structure):
 	_fields_ = [
@@ -250,4 +279,5 @@ class Vector2(Structure):
 	def y(self, i: float) -> None:
 		self.y = i
 ```
+
 - and here we finished 😃. to see more example of c struct to python classes look [here](raypyc/structures/__init__.py)

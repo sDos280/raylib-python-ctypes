@@ -3,9 +3,12 @@
 A python wrapper for the greatest graphic library **[raylib](https://github.com/raysan5/raylib)**.
 
 ### Prerequisites
-_raypyc_ uses type [annotations](https://www.python.org/dev/peps/pep-3107/#id30) in its source, so a Python version that supports it is required.
+
+_raypyc_ uses type [annotations](https://www.python.org/dev/peps/pep-3107/#id30) in its source, so a Python version that
+supports it is required.
 
 ### Installing
+
 the fastest way to use raypyc is by using the pip install command:
 
 ```
@@ -18,7 +21,8 @@ or
 python -m pip install raypyc
 ```
 
-## Using raypyc 
+## Using raypyc
+
 using raypyc is really simple, take a look at an example:
 
 ```python
@@ -28,10 +32,8 @@ raylib [core] example - Basic Window
 
 """
 
-# Import
-# ------------------------------------------------------------------------------------
 from raypyc import *
-# ------------------------------------------------------------------------------------
+
 
 # ------------------------------------------------------------------------------------
 # Program main entry point
@@ -91,21 +93,35 @@ Python [enums](https://docs.python.org/3/library/enum.html).
 
 ### Structures
 
-In general, all structures inherit from `ctypes.Structure` class. At the moment, all the structures have a setters & getter
+In general, all structures inherit from `ctypes.Structure` class. At the moment, all the structures have a setters &
+getter
 
 ### Contributing
+
 firstly, Contributions of any kind welcome!.
 
 secondly, here are some of the things that contributing on will help this wrapper the most:
- * porting examples from c to python(if you can, please follow along with the [conventions](https://github.com/sDos280/raylib-python-ctypes/blob/main/CONVENTIONS.md) when porting). ([_C_ examples](https://github.com/raysan5/raylib/tree/master/examples), [_Python_ examples](https://github.com/sDos280/raylib-python-ctypes))
- * fixing(refactoring) my [fileGeneration](https://github.com/sDos280/raylib-python-ctypes/blob/main/filesGeneration.py), so it will look neater...
- * making the wrapper able to port to more operating systems
- * wrapping more [_c_ raylib header](https://github.com/raysan5/raylib/tree/master/src) to this library[^2]
 
-[^2] NOTE: at least for now, all the non-functions wrapper stuff need be implemented in the [filesGeneration.py](https://github.com/sDos280/raylib-python-ctypes/blob/main/filesGeneration.py) file, and all the functions wrapper stuff need be implemented in the [raypyc/__init__.py](https://github.com/sDos280/raylib-python-ctypes/blob/main/raypyc/__init__.py)
+* porting examples from c to python(if you can, please follow along with
+  the [conventions](https://github.com/sDos280/raylib-python-ctypes/blob/main/CONVENTIONS.md) when porting). ([_
+  C_ examples](https://github.com/raysan5/raylib/tree/master/examples), [_
+  Python_ examples](https://github.com/sDos280/raylib-python-ctypes))
+* fixing(refactoring) my [fileGeneration](https://github.com/sDos280/raylib-python-ctypes/blob/main/filesGeneration.py),
+  so it will look neater...
+* making the wrapper able to port to more operating systems
+* wrapping more [_c_ raylib header](https://github.com/raysan5/raylib/tree/master/src) to this library[^2]
+
+[^2] NOTE: at least for now, all the non-functions wrapper stuff need be implemented in
+the [filesGeneration.py](https://github.com/sDos280/raylib-python-ctypes/blob/main/filesGeneration.py) file, and all the
+functions wrapper stuff need be implemented in the [raypyc/__
+init__.py](https://github.com/sDos280/raylib-python-ctypes/blob/main/raypyc/__init__.py)
 
 ## thanks
-thanks to [raysun5](https://github.com/raysan5), [raylibpy](https://github.com/Ho011/pyraylib) and [pyray](https://github.com/sDos280/raylib-python-cffi) for their good work, I took all the inspiration (and some code ;) ) from them, so thanks you guys very much.
+
+thanks to [raysun5](https://github.com/raysan5), [raylibpy](https://github.com/Ho011/pyraylib)
+and [pyray](https://github.com/sDos280/raylib-python-cffi) for their good work, I took all the inspiration (and some
+code ;) ) from them, so thanks you guys very much.
 also a big thanks for the people that helped to test and reviewing the library :)!!!
 
-also a special thanks to [Peter0x44](https://github.com/Peter0x44), [Its-Kenta](https://github.com/Its-Kenta) and [sol-vin](https://github.com/sol-vin)
+also a special thanks to [Peter0x44](https://github.com/Peter0x44), [Its-Kenta](https://github.com/Its-Kenta)
+and [sol-vin](https://github.com/sol-vin)
