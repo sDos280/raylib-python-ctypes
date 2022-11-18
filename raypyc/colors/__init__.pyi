@@ -1,29 +1,29 @@
-from raypyc.structures import Color
+import raypyc
 
-LIGHTGRAY: Color  # Light Gray
-GRAY: Color  # Gray
-DARKGRAY: Color  # Dark Gray
-YELLOW: Color  # Yellow
-GOLD: Color  # Gold
-ORANGE: Color  # Orange
-PINK: Color  # Pink
-RED: Color  # Red
-MAROON: Color  # Maroon
-GREEN: Color  # Green
-LIME: Color  # LIME
-DARKGREEN: Color  # Lime
-SKYBLUE: Color  # Sky Blue
-BLUE: Color  # Blue
-DARKBLUE: Color  # Dark Blue
-PURPLE: Color  # Purple
-VIOLET: Color  # Violet
-DARKPURPLE: Color  # Dark Purple
-BEIGE: Color  # Beige
-BROWN: Color  # Brown
-DARKBROWN: Color  # Dark Brown
 
-WHITE: Color  # White
-BLACK: Color  # Black
-BLANK: Color  # Blank (Transparent)
-MAGENTA: Color  # Magenta
-RAYWHITE: Color  # My own White (raylib logo)
+LIGHTGRAY: raypyc.structures.Color
+GRAY: raypyc.structures.Color
+DARKGRAY: raypyc.structures.Color
+YELLOW: raypyc.structures.Color
+GOLD: raypyc.structures.Color
+ORANGE: raypyc.structures.Color
+PINK: raypyc.structures.Color
+RED: raypyc.structures.Color
+MAROON: raypyc.structures.Color
+GREEN: raypyc.structures.Color
+LIME: raypyc.structures.Color
+DARKGREEN: raypyc.structures.Color
+SKYBLUE: raypyc.structures.Color
+BLUE: raypyc.structures.Color
+DARKBLUE: raypyc.structures.Color
+PURPLE: raypyc.structures.Color
+VIOLET: raypyc.structures.Color
+DARKPURPLE: raypyc.structures.Color
+BEIGE: raypyc.structures.Color
+BROWN: raypyc.structures.Color
+DARKBROWN: raypyc.structures.Color
+WHITE: raypyc.structures.Color
+BLACK: raypyc.structures.Color
+BLANK: raypyc.structures.Color
+MAGENTA: raypyc.structures.Color
+RAYWHITE: raypyc.structures.Color
