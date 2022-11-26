@@ -161,12 +161,14 @@ def indentString(string: str, indent_by: int) -> str:
 
 
 def generate_define_code(define_data):
-    if define_data['type'] not in ["FLOAT_MATH", "FLOAT", "STRING", "INT"]:
+    if define_data['type'] not in ["FLOAT_MATH", "FLOAT", "DOUBLE", "STRING", "INT"]:
         return ""
     elif define_data['type'] == "FLOAT_MATH":
         return f"{define_data['name']}: float = {define_data['value'].replace('f', '')}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
-    elif define_data['type'] in ["INT", "FLOAT"]:
+    elif define_data['type'] in ["INT"]:
         return f"{define_data['name']}: int = {define_data['value']}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+    elif define_data['type'] in ["DOUBLE", "FLOAT"]:
+        return f"{define_data['name']}: float = {define_data['value']}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
     elif define_data['type'] == "STRING":
         return f"{define_data['name']}: str = \"{define_data['value']}\"{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
     else:
@@ -174,9 +176,9 @@ def generate_define_code(define_data):
 
 
 def generate_define_code_stub(define_data):
-    if define_data['type'] not in ["FLOAT_MATH", "FLOAT", "STRING", "INT"]:
+    if define_data['type'] not in ["FLOAT_MATH", "FLOAT", "DOUBLE", "STRING", "INT"]:
         return ""
-    elif define_data['type'] in ["FLOAT_MATH", "FLOAT"]:
+    elif define_data['type'] in ["FLOAT_MATH", "FLOAT", "DOUBLE"]:
         return f"{define_data['name']}: float{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
     elif define_data['type'] == "INT":
         return f"{define_data['name']}: int{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"

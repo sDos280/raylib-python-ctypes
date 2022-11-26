@@ -27,6 +27,8 @@ RL_DEFAULT_BATCH_DRAWCALLS: int  # Default number of batch draw calls (by state 
 RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS: int  # Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
 RL_MAX_MATRIX_STACK_SIZE: int  # Maximum size of internal Matrix stack
 RL_MAX_SHADER_LOCATIONS: int  # Maximum number of shader locations supported
+RL_CULL_DISTANCE_NEAR: float  # Default projection matrix near cull distance
+RL_CULL_DISTANCE_FAR: float  # Default projection matrix far cull distance
 RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION: str  # Binded by default to shader location: 0
 RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD: str  # Binded by default to shader location: 1
 RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL: str  # Binded by default to shader location: 2
