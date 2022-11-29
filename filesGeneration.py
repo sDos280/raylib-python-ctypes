@@ -116,10 +116,10 @@ def generate_dummy_structure_code(structure_name: str, size: int) -> str:
     :param size: the size in bytes of the dummy structure
     :return: structure string
     """
-    return f"class {structure_name}(ctypes.Structure):\n\t\"\"\"dummy structure\"\"\"\n" \
-           f"\t_fields_ = [\n" \
-           f"\t\t(\"data\", ctypes.c_byte * {size})\n" \
-           f"\t]\n\n\n"
+    return f"class {structure_name}(ctypes.Structure):\n    \"\"\"dummy structure\"\"\"\n" \
+           f"    _fields_ = [\n" \
+           f"        (\"data\", ctypes.c_byte * {size})\n" \
+           f"    ]\n\n\n"
 
 
 def generate_dummy_structure_code_stub(structure_name: str) -> str:
@@ -128,7 +128,7 @@ def generate_dummy_structure_code_stub(structure_name: str) -> str:
     :param structure_name: the name of the dummy structure
     :return: structure string
     """
-    return f"class {structure_name}(ctypes.Structure):\n\t\"\"\"dummy structure\"\"\"\n\n\n"
+    return f"class {structure_name}(ctypes.Structure):\n    \"\"\"dummy structure\"\"\"\n\n\n"
 
 
 # get class object by string name
@@ -157,7 +157,7 @@ def find_char_in_str(string, char):
 
 # return a string that indented in the start of the string and in every \n of the string
 def indentString(string: str, indent_by: int) -> str:
-    return '\t' * indent_by + string.replace('\n', '\n' + '\t' * indent_by)
+    return '    ' * indent_by + string.replace('\n', '\n' + '    ' * indent_by)
 
 
 def generate_define_code(define_data):
@@ -204,11 +204,11 @@ def generate_color_code_stub(define_data):
 
 
 def generate_enum_signature_code(enum_data):
-    return f"class {enum_data['name']}(IntEnum):\n\t\"\"\"{enum_data['description']}\"\"\"\n"
+    return f"class {enum_data['name']}(IntEnum):\n    \"\"\"{enum_data['description']}\"\"\"\n"
 
 
 def generate_enum_signature_code_stub(enum_data):
-    return f"class {enum_data['name']}(IntEnum):\n\t\"\"\"{enum_data['description']}\"\"\"\n"
+    return f"class {enum_data['name']}(IntEnum):\n    \"\"\"{enum_data['description']}\"\"\"\n"
 
 
 def generate_enum_values_string_code(enum_data):
@@ -216,7 +216,7 @@ def generate_enum_values_string_code(enum_data):
     for enum_value in enum_data['values']:
         enum_members_string += f"{enum_value['name']}: int = {enum_value['value']}  # {enum_value['description']}\n"
 
-    return f"{indentString(enum_members_string, 1)[:-1]}\n"
+    return f"{indentString(enum_members_string, 1)[:-4]}\n"
 
 
 def generate_enum_values_string_code_stub(enum_data):
@@ -224,15 +224,19 @@ def generate_enum_values_string_code_stub(enum_data):
     for enum_value in enum_data['values']:
         enum_members_string += f"{enum_value['name']}: int  # {enum_value['description']}\n"
 
-    return f"{indentString(enum_members_string, 1)[:-1]}\n"
+    return f"{indentString(enum_members_string, 1)[:-4]}\n"
+
+
+def generate_aliase_code(aliase_name, object_name):
+    return f"{aliase_name} = {object_name}\n"
 
 
 def generate_struct_signature_code(struct_data):
-    return f"class {struct_data['name']}(ctypes.Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
+    return f"class {struct_data['name']}(ctypes.Structure):\n    \"\"\"{struct_data['description']}\"\"\"\n"
 
 
 def generate_struct_signature_code_stub(struct_data):
-    return f"class {struct_data['name']}(ctypes.Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
+    return f"class {struct_data['name']}(ctypes.Structure):\n    \"\"\"{struct_data['description']}\"\"\"\n"
 
 
 # remove the current defines/__init__.py defines/__init__.pyi files and generated new ones
@@ -359,7 +363,7 @@ def generate_enums_py_pyi_code(enums_api):
                 enum_string_logic += generate_enum_values_string_code(enum)
                 enum_string_logic += "\n"
 
-                enums_code_file_w.write(enum_string_logic.replace('\n\t\n', '\n\n'))
+                enums_code_file_w.write(enum_string_logic.replace('\n    \n', '\n\n'))
 
     # generate __init__.pyi code
     with open(Path(ENUMS_FOLDER_PATH / '__init__.pyi'), "a") as enums_code_file_w:
@@ -371,7 +375,7 @@ def generate_enums_py_pyi_code(enums_api):
                 enum_string_logic += generate_enum_values_string_code_stub(enum)
                 enum_string_logic += "\n"
 
-                enums_code_file_w.write(enum_string_logic.replace('\n\t\n', '\n\n'))
+                enums_code_file_w.write(enum_string_logic.replace('\n    \n', '\n\n'))
 
 
 # remove the current structures/__init__.py and structures/__init__.pyi files and generated new ones
@@ -433,22 +437,17 @@ def generate_structs_py_pyi_code(structs_api, aliases_api):
                 struct_string_logic += generate_struct_setters_getters_code(struct)
                 struct_string_logic += "\n"
 
-                structs_code_file_w.write(struct_string_logic.replace('\n\t\n', '\n\n'))
+                structs_code_file_w.write(struct_string_logic.replace('\n    \n', '\n\n'))
 
                 for aliase in aliases_api:
                     if struct['name'] == aliase['type']:
                         if aliase['name'] not in wrapped_structures_names_py:
                             wrapped_structures_names_py.append(aliase['name'])
-                            aliase_data = dict(struct)
-                            aliase_data['name'] = str(aliase['name'])
-                            aliase_data['description'] = str(aliase['description'])
                             aliase_string_logic = ""
-                            aliase_string_logic += generate_struct_signature_code(aliase_data)
-                            aliase_string_logic += generate_struct_fields_string_code(aliase_data)
-                            aliase_string_logic += generate_struct_setters_getters_code(aliase_data)
+                            aliase_string_logic += generate_aliase_code(aliase['name'], struct['name'])
                             aliase_string_logic += "\n"
 
-                            structs_code_file_w.write(aliase_string_logic.replace('\n\t\n', '\n\n'))
+                            structs_code_file_w.write(aliase_string_logic.replace('\n    \n', '\n\n'))
 
     # generate __init__.pyi code
     with open(Path(STRUCTURES_FOLDER_PATH / '__init__.pyi'), "a") as structs_code_stub_file_w:
@@ -461,22 +460,17 @@ def generate_structs_py_pyi_code(structs_api, aliases_api):
                 struct_string_logic += generate_struct_setters_getters_code_stub(struct)
                 struct_string_logic += "\n"
 
-                structs_code_stub_file_w.write(struct_string_logic.replace('\n\t\n', '\n\n'))
+                structs_code_stub_file_w.write(struct_string_logic.replace('\n    \n', '\n\n'))
 
                 for aliase in aliases_api:
                     if struct['name'] == aliase['type']:
                         if aliase['name'] not in wrapped_structures_names_pyi:
                             wrapped_structures_names_pyi.append(aliase['name'])
-                            aliase_data = dict(struct)
-                            aliase_data['name'] = str(aliase['name'])
-                            aliase_data['description'] = str(aliase['description'])
                             aliase_string_logic = ""
-                            aliase_string_logic += generate_struct_signature_code_stub(aliase_data)
-                            # aliase_string_logic += generate_struct_fields_string_code(struct) we don't really need that in the __init__.pyi file
-                            aliase_string_logic += generate_struct_setters_getters_code_stub(aliase_data)
+                            aliase_string_logic += generate_aliase_code(aliase['name'], struct['name'])
                             aliase_string_logic += "\n"
 
-                            structs_code_stub_file_w.write(aliase_string_logic.replace('\n\t\n', '\n\n'))
+                            structs_code_stub_file_w.write(aliase_string_logic.replace('\n    \n', '\n\n'))
 
 
 def generate_struct_fields_string_code(struct_data):
@@ -486,14 +480,14 @@ def generate_struct_fields_string_code(struct_data):
         struct_data_field_name = struct_data_field['name']
         struct_data_field_type = struct_data_field['type']
         struct_data_field_description = struct_data_field['description']
-        struct_fields += f"\t('{struct_data_field_name}', {convert_c_type_string_to_ctype_type_sting(struct_data_field_type)}),  # {struct_data_field_description}\n"
+        struct_fields += f"    ('{struct_data_field_name}', {convert_c_type_string_to_ctype_type_sting(struct_data_field_type)}),  # {struct_data_field_description}\n"
 
     temp = find_char_in_str(struct_fields, ',')
     if len(temp) != 0:
         struct_fields = struct_fields[: temp[-1]] + struct_fields[temp[-1] + 1:]
     struct_fields += ']\n\n'
 
-    return indentString(struct_fields, 1)[:-1]
+    return indentString(struct_fields, 1)[:-4]
 
 
 def generate_struct_fields_string_code_stub(struct_data):
@@ -503,13 +497,13 @@ def generate_struct_fields_string_code_stub(struct_data):
         struct_data_field_name = struct_data_field['name']
         struct_data_field_type = struct_data_field['type']
         struct_data_field_description = struct_data_field['description']
-        struct_fields += f"\t('{struct_data_field_name}', {convert_c_type_string_to_ctype_type_sting(struct_data_field_type)}),  # {struct_data_field_description}\n"
+        struct_fields += f"    ('{struct_data_field_name}', {convert_c_type_string_to_ctype_type_sting(struct_data_field_type)}),  # {struct_data_field_description}\n"
     temp = find_char_in_str(struct_fields, ',')
     if len(temp) != 0:
         struct_fields = struct_fields[: temp[-1]] + struct_fields[temp[-1] + 1:]
     struct_fields += ']\n\n'
 
-    return indentString(struct_fields, 1)[:-1]
+    return indentString(struct_fields, 1)[:-4]
 
 
 def generate_struct_setters_getters_code(struct_data):
@@ -517,10 +511,10 @@ def generate_struct_setters_getters_code(struct_data):
 
     for struct_data_field in struct_data['fields']:
         use_type = convert_c_type_string_to_ctype_type_sting(struct_data_field['type'])
-        struct_setters_getters_string += f"@property\ndef {struct_data_field['name']}(self) -> {use_type}:\n\treturn self.{struct_data_field['name']}\n\n" \
-                                         f"@{struct_data_field['name']}.setter\ndef {struct_data_field['name']}(self, i: {use_type}) -> None:\n\tself.{struct_data_field['name']} = i\n\n"
+        struct_setters_getters_string += f"@property\ndef {struct_data_field['name']}(self) -> {use_type}:\n    return self.{struct_data_field['name']}\n\n" \
+                                         f"@{struct_data_field['name']}.setter\ndef {struct_data_field['name']}(self, i: {use_type}) -> None:\n    self.{struct_data_field['name']} = i\n\n"
 
-    return indentString(struct_setters_getters_string, 1)[:-1]
+    return indentString(struct_setters_getters_string, 1)[:-4]
 
 
 def generate_struct_setters_getters_code_stub(struct_data):
@@ -528,16 +522,16 @@ def generate_struct_setters_getters_code_stub(struct_data):
 
     for struct_data_field in struct_data['fields']:
         use_type = convert_c_type_string_to_ctype_type_sting(struct_data_field['type'])
-        struct_setters_getters_string += f"@property\ndef {struct_data_field['name']}(self) -> {use_type}:\n\t...\n\n" \
-                                         f"@{struct_data_field['name']}.setter\ndef {struct_data_field['name']}(self, i: {use_type}) -> None:\n\t...\n\n"
+        struct_setters_getters_string += f"@property\ndef {struct_data_field['name']}(self) -> {use_type}:\n    ...\n\n" \
+                                         f"@{struct_data_field['name']}.setter\ndef {struct_data_field['name']}(self, i: {use_type}) -> None:\n    ...\n\n"
 
-    return indentString(struct_setters_getters_string, 1)[:-1]
+    return indentString(struct_setters_getters_string, 1)[:-4]
 
 
 def generate_structures_dictionary_code(wrapped_structures):
     dictionary_sting = "__structs = {\n"
     for struct in wrapped_structures:
-        dictionary_sting += f"\t\"{struct}\": {struct},\n"
+        dictionary_sting += f"    \"{struct}\": {struct},\n"
     dictionary_sting = dictionary_sting[:-2]
     dictionary_sting += "\n}"
     return dictionary_sting
@@ -546,7 +540,7 @@ def generate_structures_dictionary_code(wrapped_structures):
 def generate_structures_dictionary_code_stub(wrapped_structures):
     dictionary_sting = "__structs = {\n"
     for struct in wrapped_structures:
-        dictionary_sting += f"\t\"{struct}\": ...,\n"
+        dictionary_sting += f"    \"{struct}\": ...,\n"
     dictionary_sting = dictionary_sting[:-2]
     dictionary_sting += "\n}"
     return dictionary_sting
@@ -620,7 +614,7 @@ def generate_function_signature_code(function_data):
         function_string = function_string[:-2]
 
     function_string += ") -> "
-    function_string += f"{convert_c_type_string_to_ctype_type_sting(function_data['returnType'])}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
+    function_string += f"{convert_c_type_string_to_ctype_type_sting(function_data['returnType'])}:\n    \"\"\"{function_data['description']}\"\"\"\n    ...\n\n"
 
     return function_string
 
@@ -628,12 +622,12 @@ def generate_function_signature_code(function_data):
 def generate_functions_list_code(wrapped_functions):
     dictionary_sting = "__functions_c_api = [\n"
     for function in wrapped_functions:
-        dictionary_sting += f"\t\"{function['name']}\",\n"
+        dictionary_sting += f"    \"{function['name']}\",\n"
     dictionary_sting = dictionary_sting[:-2]
     dictionary_sting += "\n]\n\n"
     dictionary_sting += "__functions_python_api = [\n"
     for function in wrapped_functions:
-        dictionary_sting += f"\t\"{inflection.underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d').replace('vector_2', 'vector2_').replace('vector_3', 'vector3_')}\",\n"
+        dictionary_sting += f"    \"{inflection.underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d').replace('vector_2', 'vector2_').replace('vector_3', 'vector3_')}\",\n"
     dictionary_sting = dictionary_sting[:-2]
     dictionary_sting += "\n]"
     return dictionary_sting
