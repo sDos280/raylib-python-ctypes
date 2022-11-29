@@ -5,7 +5,7 @@ raylib [core] example - Initialize 3d camera free
 """
 
 from raypyc import *
-
+from ctypes import c_char, c_int
 
 # ------------------------------------------------------------------------------------
 # Program main entry point
@@ -36,7 +36,7 @@ def main():
         # Update
         # ----------------------------------------------------------------------------------
         update_camera(camera)
-        if is_key_down(ord('z')): camera.target = Vector3(0.0, 0.0, 0.0)
+        if is_key_down(ord('Z')): camera.target = Vector3(0.0, 0.0, 0.0)
         # ----------------------------------------------------------------------------------
 
         # Draw
