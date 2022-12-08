@@ -80,6 +80,7 @@ def main():
 # Execute the main function
 if __name__ == '__main__':
     main()
+
 ```
 
 ## _raylib_ vs _raypyc_
@@ -118,7 +119,7 @@ init__.py](https://github.com/sDos280/raylib-python-ctypes/blob/main/raypyc/__in
 
 ## thanks
 
-thanks to [raysun5](https://github.com/raysan5), [raylibpy](https://github.com/Ho011/pyraylib)
+thanks to [raysun5](https://github.com/raysan5), [pyraylib](https://github.com/Ho011/pyraylib)
 and [pyray](https://github.com/sDos280/raylib-python-cffi) for their good work, I took all the inspiration (and some
 code ;) ) from them, so thanks you guys very much.
 also a big thanks for the people that helped to test and reviewing the library :)!!!
