@@ -1,9 +1,12 @@
+[submodule "raylib"]
+	path = raylib
+	url = https://github.com/raysan5/raylib
 [submodule "build/raylib"]
 	path = build/raylib
 	url = https://github.com/raysan5/raylib
-[submodule "build/raudio"]
-	path = build/raudio
-	url = https://github.com/raysan5/raudio
 [submodule "build/raygui"]
 	path = build/raygui
 	url = https://github.com/raysan5/raygui
+[submodule "build/raudio"]
+	path = build/raudio
+	url = https://github.com/raysan5/raudio
