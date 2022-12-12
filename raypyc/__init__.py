@@ -1,3 +1,4 @@
+import sys
 import ctypes
 import json
 import pathlib
@@ -14,8 +15,12 @@ from raypyc.structures import *
 wrapped_functions_names = []
 
 current_module = __import__(__name__)
+if sys.platform in ['emscripten','linux']:
+    dllname = 'libraylib.so'
+else:
+    dllname = 'raylib.dll'
 
-_rl = ctypes.cdll.LoadLibrary(str(pathlib.Path(__file__).parent / 'raylib.dll'))
+_rl = ctypes.cdll.LoadLibrary(str(pathlib.Path(__file__).parent / dllname ))
 
 
 # -----------------------------------------
