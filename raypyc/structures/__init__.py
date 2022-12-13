@@ -1,5 +1,4 @@
 import ctypes
-
 from raypyc.defines import *
 
 
@@ -778,7 +777,6 @@ class Vector4(ctypes.Structure):
 
 Quaternion = Vector4
 
-
 class Color(ctypes.Structure):
     """Color, 4 components, R8G8B8A8 (32bit)"""
     _fields_ = [
@@ -969,7 +967,6 @@ Texture2D = Texture
 
 TextureCubemap = Texture
 
-
 class RenderTexture(ctypes.Structure):
     """RenderTexture, fbo for texture rendering"""
     _fields_ = [
@@ -1004,7 +1001,6 @@ class RenderTexture(ctypes.Structure):
 
 
 RenderTexture2D = RenderTexture
-
 
 class NPatchInfo(ctypes.Structure):
     """NPatchInfo, n-patch layout info"""
@@ -1229,7 +1225,6 @@ class Camera3D(ctypes.Structure):
 
 
 Camera = Camera3D
-
 
 class Camera2D(ctypes.Structure):
     """Camera2D, defines position/orientation in 2d space"""

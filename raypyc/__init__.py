@@ -1,8 +1,7 @@
 import ctypes
 import json
 import pathlib
-
-import inflection
+import re
 
 import raypyc.structures
 from raypyc.colors import *
@@ -126,6 +125,13 @@ def get_numbers_from_string(string):
     return ints
 
 
+def underscore(_string):
+    _string = re.sub(r"([A-Z]+)([A-Z][a-z])", r'\1_\2', _string)
+    _string = re.sub(r"([a-z\d])([A-Z])", r'\1_\2', _string)
+    _string = _string.replace("-", "_")
+    return _string.lower()
+
+
 def wrap_function(funcname, _argtypes, _restype):
     func = _rl.__getattr__(funcname)
     func.argtypes = _argtypes
@@ -186,7 +192,7 @@ def wrap_functions_to_ctypes_functions_add_function_to_this_module(functions_to_
     for function_to_wrap in functions_to_wrap:
         if function_to_wrap['name'] not in wrapped_functions_names:
             wrapped_functions_names.append(function_to_wrap['name'])
-            name_of_function = inflection.underscore(function_to_wrap['name']).replace('3_d', '_3d').replace('2_d', '_2d')
+            name_of_function = underscore(function_to_wrap['name']).replace('3_d', '_3d').replace('2_d', '_2d')
             function_to_wrap_ctype = {'name': function_to_wrap['name'], 'parametersTypes': [], 'returnType': None}
 
             if 'params' in function_to_wrap.keys():

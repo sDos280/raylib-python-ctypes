@@ -1,8 +1,7 @@
 import ctypes
 import json
+import re
 from pathlib import Path
-
-import inflection
 
 # -----------------------------------------
 DEFINES_FOLDER_PATH = Path(__file__).parent / 'raypyc/defines'
@@ -158,6 +157,13 @@ def find_char_in_str(string, char):
 # return a string that indented in the start of the string and in every \n of the string
 def indentString(string: str, indent_by: int) -> str:
     return '    ' * indent_by + string.replace('\n', '\n' + '    ' * indent_by)
+
+
+def underscore(_string):
+    _string = re.sub(r"([A-Z]+)([A-Z][a-z])", r'\1_\2', _string)
+    _string = re.sub(r"([a-z\d])([A-Z])", r'\1_\2', _string)
+    _string = _string.replace("-", "_")
+    return _string.lower()
 
 
 def generate_define_code(define_data):
@@ -598,7 +604,7 @@ def generate_functions_code_in_code_pyi_file(functions_set):
         for function in functions_set:
             if function['name'] not in wrapped_functions_names_pyi:
                 wrapped_functions_names_pyi.append(function['name'])
-                name_of_function = inflection.underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d').replace('vector_2', 'vector_2').replace('vector_3', 'vector3_')
+                name_of_function = underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d').replace('vector_2', 'vector_2').replace('vector_3', 'vector3_')
                 function_copy = dict(function)
                 function_copy['name'] = str(name_of_function)
                 function_string = generate_function_signature_code(function_copy)
@@ -627,7 +633,7 @@ def generate_functions_list_code(wrapped_functions):
     dictionary_sting += "\n]\n\n"
     dictionary_sting += "__functions_python_api = [\n"
     for function in wrapped_functions:
-        dictionary_sting += f"    \"{inflection.underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d').replace('vector_2', 'vector2_').replace('vector_3', 'vector3_')}\",\n"
+        dictionary_sting += f"    \"{underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d').replace('vector_2', 'vector_2').replace('vector_3', 'vector3_')}\",\n"
     dictionary_sting = dictionary_sting[:-2]
     dictionary_sting += "\n]"
     return dictionary_sting
