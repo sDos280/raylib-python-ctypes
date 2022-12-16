@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build/raudio" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build/raygui" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build/raylib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/manual build/raudio" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/manual build/raygui" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/manual build/raylib" vcs="Git" />
+  </component>
+</project>

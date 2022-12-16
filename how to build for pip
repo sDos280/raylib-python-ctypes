@@ -1,0 +1,4 @@
+pip install .
+python -m build
+python -m twine upload --repository testpypi dist/*     to upload to test.pypi.org
+python -m twine upload --repository pypi dist/*     to upload to pypi.org
