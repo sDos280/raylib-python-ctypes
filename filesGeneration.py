@@ -10,7 +10,7 @@ ENUMS_FOLDER_PATH = Path(__file__).parent / 'raypyc/enums'
 STRUCTURES_FOLDER_PATH = Path(__file__).parent / 'raypyc/structures'
 FUNCTIONS_FOLDER_PATH = Path(__file__).parent / 'raypyc'
 JSON_FOLDER_PATH = Path(__file__).parent / 'raypyc'
-DYNAMIC_LIBRARIES_PATH = Path(__file__).parent / 'raypyc'
+DYNAMIC_LIBRARIES_PATH = Path(__file__).parent / 'raypyc/libs'
 
 wrapped_defines_names_py = []
 wrapped_defines_names_pyi = []
