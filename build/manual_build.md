@@ -52,7 +52,6 @@ make rlgl_api.json FORMAT=JSON EXTENSION=json
 make raygui_api.json FORMAT=JSON EXTENSION=json
 cd ../..
 ```
-<<<<<<< HEAD
 
 So what exactly did we build here:
 
