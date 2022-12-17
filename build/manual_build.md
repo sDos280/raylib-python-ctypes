@@ -4,7 +4,7 @@
 * get raypyc and go to build folder.
 
 ```cmd
-git clone --depth 1https://github.com/sDos280/raylib-python-ctypes
+git clone --depth 1 https://github.com/sDos280/raylib-python-ctypes
 cd ./raylib-python-ctypes/build
 ```
 
@@ -52,6 +52,7 @@ make rlgl_api.json FORMAT=JSON EXTENSION=json
 make raygui_api.json FORMAT=JSON EXTENSION=json
 cd ../..
 ```
+<<<<<<< HEAD
 
 So what exactly did we build here:
 
@@ -75,4 +76,4 @@ what do we do with the generated files:
 * replace the `raylib.dll` in the "raypyc/libs" folder with the `raylib.dll` in the "build\raylib\src" folder.
 * replace the `raypyc_extra_functions.dll` in the "raypyc/libs" folder with the `raypyc_extra_functions.dll` in the "build" folder.
 
-We are done 😀, if you got/find any errors along the way fill free to open an issue on git. 
+We are done 😀, if you got/find any errors along the way fill free to open an issue on git.
