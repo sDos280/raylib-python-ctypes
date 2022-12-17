@@ -22,7 +22,7 @@ if sys.platform in ['emscripten', 'linux']:
 else:
     dllname = 'raylib.dll'
 
-_rl = ctypes.cdll.LoadLibrary(str(pathlib.Path(__file__).parent / DYNAMIC_LIBRARIES_PATH / dllname))
+_raylib_dynamic_library = ctypes.cdll.LoadLibrary(str(pathlib.Path(__file__).parent / DYNAMIC_LIBRARIES_PATH / dllname))
 
 
 # -----------------------------------------
@@ -141,7 +141,7 @@ def underscore(_string):
 
 
 def wrap_function(funcname, _argtypes, _restype):
-    func = _rl.__getattr__(funcname)
+    func = _raylib_dynamic_library.__getattr__(funcname)
     func.argtypes = _argtypes
     func.restype = _restype
     return func
@@ -195,7 +195,7 @@ def check_for_functions_that_can_wrap(functions_set):
     return functions_that_can_be_wrap
 
 
-# wrap functions to ctypes functions => to _rl ctypes functions
+# wrap functions to ctypes functions => to _raylib_dynamic_library ctypes functions
 def wrap_functions_to_ctypes_functions_add_function_to_this_module(functions_to_wrap, _current_module):
     for function_to_wrap in functions_to_wrap:
         if function_to_wrap['name'] not in wrapped_functions_names:

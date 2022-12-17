@@ -26,7 +26,8 @@ wrapped_structures_names_pyi = []
 
 wrapped_functions_names_pyi = []
 
-_rl = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / 'raylib.dll'))
+_raylib_dynamic_library = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / 'raylib.dll'))
+_raypyc_extra_functions = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / 'raypyc_extra_functions.dll'))
 
 
 # convert c type string to ctype type sting
@@ -412,11 +413,11 @@ def generate_structs_py_pyi_files():
 
 
 def generate_dummy_structs_py_pyi_code():
-    GetrAudioBufferSize = _rl.__getattr__("GetrAudioBufferSize")
+    GetrAudioBufferSize = _raypyc_extra_functions.__getattr__("GetrAudioBufferSize")
     GetrAudioBufferSize.argtypes = None
     GetrAudioBufferSize.restype = ctypes.c_int
 
-    GetrAudioProcessorSize = _rl.__getattr__("GetrAudioProcessorSize")
+    GetrAudioProcessorSize = _raypyc_extra_functions.__getattr__("GetrAudioProcessorSize")
     GetrAudioProcessorSize.argtypes = None
     GetrAudioProcessorSize.restype = ctypes.c_int
 

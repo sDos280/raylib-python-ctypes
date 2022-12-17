@@ -75,5 +75,6 @@ what do we do with the generated files:
   build\raylib\parser".
 * replace the `raylib.dll` in the "raypyc/libs" folder with the `raylib.dll` in the "build\raylib\src" folder.
 * replace the `raypyc_extra_functions.dll` in the "raypyc/libs" folder with the `raypyc_extra_functions.dll` in the "build" folder.
+* run the [filesGeneration.py](../filesGeneration.py) file.
 
 We are done 😀, if you got/find any errors along the way fill free to open an issue on git.

@@ -5,7 +5,7 @@ from raypyc.defines import *
 class rAudioBuffer(ctypes.Structure):
     """dummy structure"""
     _fields_ = [
-        ("data", ctypes.c_byte * 24)
+        ("data", ctypes.c_byte * 392)
     ]
 
 
