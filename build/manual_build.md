@@ -3,7 +3,7 @@
 * before we start make sure that you have `make` and `git` on your device.
 * get raypyc and go to build folder
 ```cmd
-git clone --depth 1https://github.com/sDos280/raylib-python-ctypes
+git clone --depth 1 https://github.com/sDos280/raylib-python-ctypes
 cd ./raylib-python-ctypes/build
 ```
 * get raudio, raylib and raygui 
