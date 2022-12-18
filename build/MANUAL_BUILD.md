@@ -43,16 +43,16 @@ cd ../..
 
 ```cmd
 copy raygui\src\raygui.h raylib
+copy raylib\src\config.h raylib\parser
 cd raylib/parser
-make clean
 make raylib_parser
 make raylib_api.json FORMAT=JSON EXTENSION=json
 make raymath_api.json FORMAT=JSON EXTENSION=json
 make rlgl_api.json FORMAT=JSON EXTENSION=json
 make raygui_api.json FORMAT=JSON EXTENSION=json
+raylib_parser --input config.h --output config_api.json --format JSON
 cd ../..
 ```
-<<<<<<< HEAD
 
 So what exactly did we build here:
 
