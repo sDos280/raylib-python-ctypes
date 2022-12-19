@@ -18,7 +18,7 @@ current_module = __import__(__name__)
 DYNAMIC_LIBRARIES_PATH = pathlib.Path(__file__).parent / 'libs'
 
 if sys.platform in ['emscripten', 'linux']:
-    dllname = 'libraylib.so'
+    dllname = 'wasmraylib.so'
 else:
     dllname = 'raylib.dll'
 
