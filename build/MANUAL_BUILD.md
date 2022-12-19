@@ -80,7 +80,10 @@ what do we do with the generated files:
 
 ## Linux build steps
 
-* before we start make sure that you have `make` and `git` on your device.
+#### Install required tools
+You need a **GCC** (or alternative C99 compiler), **make** and **git** (to download raylib repo). 
+
+    sudo apt install build-essential git
 
 #### Install required libraries
 
@@ -131,8 +134,8 @@ cd ../..
 * compile raylib parser and API(s).
 
 ```cmd
-copy raygui\src\raygui.h raylib
-copy raylib\src\config.h raylib\parser
+cp raygui\src\raygui.h raylib
+cp raylib\src\config.h raylib\parser
 cd raylib/parser
 make raylib_parser
 make raylib_api.json FORMAT=JSON EXTENSION=json
