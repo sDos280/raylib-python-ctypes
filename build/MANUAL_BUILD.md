@@ -134,8 +134,8 @@ cd ../..
 * compile raylib parser and API(s).
 
 ```cmd
-cp raygui\src\raygui.h raylib
-cp raylib\src\config.h raylib\parser
+cp './raygui/src/raygui.h' './raylib'
+cp './raylib/src/config.h' './raylib/parser
 cd raylib/parser
 make raylib_parser
 make raylib_api.json FORMAT=JSON EXTENSION=json
