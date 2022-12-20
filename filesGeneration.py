@@ -2,7 +2,7 @@ import ctypes
 import json
 import re
 from pathlib import Path
-
+import sys
 # -----------------------------------------
 DEFINES_FOLDER_PATH = Path(__file__).parent / 'raypyc/defines'
 COLORS_FOLDER_PATH = Path(__file__).parent / 'raypyc/colors'
@@ -26,8 +26,18 @@ wrapped_structures_names_pyi = []
 
 wrapped_functions_names_pyi = []
 
-_raylib_dynamic_library = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / 'raylib.dll'))
-_raypyc_extra_functions = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / 'raypyc_extra_functions.dll'))
+if sys.platform == 'linux':
+    _raylib_dynamic_library_name = 'libraylib.so'
+else:  # windows
+    _raylib_dynamic_library_name = 'raylib.dll'
+
+if sys.platform == 'linux':
+    _raypyc_extra_functions_name = 'raypyc_extra_functions.so'
+else:  # windows
+    _raypyc_extra_functions_name = 'raypyc_extra_functions.dll'
+
+_raylib_dynamic_library = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / _raylib_dynamic_library_name))
+_raypyc_extra_functions = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / _raypyc_extra_functions_name))
 
 
 # convert c type string to ctype type sting
