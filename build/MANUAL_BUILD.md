@@ -145,5 +145,28 @@ make raygui_api.json FORMAT=JSON EXTENSION=json
 raylib_parser --input config.h --output config_api.json --format JSON
 cd ../..
 ```
+So what exactly did we build here:
+
+* `raypyc_extra_functions.so` (in the "build" folder) used to help raypyc with some external stuff.
+* `libraylib.so.a.b.c` (in the "build\raylib\src" folder) used to call raylib functions from python ("a.b.c" is the raylib api version).
+* `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` (in the "build\raylib\parser" folder)
+  used to tell raypyc some data about raylib stuff.
+
+Some notes before used the generated files:
+
+* we compiled raylib with the `GRAPHICS_API_OPENGL_43` (openGL 4.3) but some GPUs just doesn't support that, if your GPU
+  doesn't support openGL 4.3 try to compile raylib with the `GRAPHICS_API_OPENGL_11` or `GRAPHICS_API_OPENGL_21`
+  or `GRAPHICS_API_OPENGL_33` flags.
+* some API(s) may be broken while using the raylib parser, so before using the API(s) make sure that they aren't broken.
+
+what do we do with the generated files:
+
+* replace all the `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "raypyc"
+  folder with the `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "
+  build\raylib\parser".
+* replace the `libraylib.so` in the "raypyc/libs" folder with the `libraylib.so.a.b.c` in the "build\raylib\src" folder, only then rename the `libraylib.so.a.b.c` in the "raypyc/libs" folder to `libraylib.so`
+* replace the `raypyc_extra_functions.so` in the "raypyc/libs" folder with the `raypyc_extra_functions.so` in the "
+  build" folder.
+* run the [filesGeneration.py](../filesGeneration.py) file.
 
 We are done 😀, if you got/find any errors along the way fill free to open an issue on GitHub.
