@@ -1,6 +1,5 @@
 import ctypes
 import json
-import re
 from pathlib import Path
 import sys
 
@@ -118,11 +117,11 @@ def generate_structs_code(structs_api, aliases_api):
 	for struct in structs_api:
 		if struct['name'] not in wrapped_structures_names:
 			wrapped_structures_names.append(struct['name'])
-			define_string_logic = generate_struct_code(struct)
-			if define_string_logic != "":
-				define_string_logic += "\n\n"
+			struct_string_logic = generate_struct_code(struct)
+			if struct_string_logic != "":
+				struct_string_logic += "\n\n"
 
-			_string += define_string_logic
+			_string += struct_string_logic
 		for alias in aliases_api:
 			if struct['name'] == alias['type']:
 				if alias['name'] not in wrapped_structures_names:
@@ -132,6 +131,38 @@ def generate_structs_code(structs_api, aliases_api):
 						alias_string_logic += "\n\n"
 
 					_string += alias_string_logic
+	return _string
+
+
+def generate_function_code(function_data):
+	_string = function_data['returnType'] if function_data['returnType'] != 'bool' else 'bint'
+	_string += ' ' + function_data['name'] + '('
+	parameters = function_data.get('params')
+
+	if parameters is None:
+
+		_string += ');' + (('  # ' + function_data['description']) if function_data['description'] != '' else '')
+		_string += '\n'
+		return _string
+	else:
+		for parameter in parameters:
+			if parameter['type'] in ['SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback', 'AudioCallback', '...']:
+				return ''
+			_temp = True
+			_string += f"{parameter['type'] if parameter['type'] != 'bool' else 'bint'} {parameter['name']}, "
+		_string = _string[:-2]
+		_string += ');'
+		_string += ('  # ' + function_data['description']) if function_data['description'] != '' else ''
+		_string += '\n'
+		return _string
+
+
+def generate_functions_code(functions_api):
+	_string = ""
+	for function in functions_api:
+		if function['name'] not in wrapped_functions_names:
+			wrapped_functions_names.append(function['name'])
+			_string += generate_function_code(function)
 	return _string
 
 
@@ -208,25 +239,37 @@ raylib_structs_code = indent_string(generate_structs_code(raylib_api_structs, ra
 raymath_structs_code = indent_string(generate_structs_code(raymath_api_structs, raymath_api_aliases), 1)[:-4] + "\n"
 raygui_structs_code = indent_string(generate_structs_code(raygui_api_structs, raygui_api_aliases), 1)[:-4] + "\n"
 
+config_functions_code = indent_string(generate_functions_code(config_api_functions), 1) + "\n"
+rlgl_functions_code = indent_string(generate_functions_code(rlgl_api_functions), 1) + "\n"
+raylib_functions_code = indent_string(generate_functions_code(raylib_api_functions), 1) + "\n"
+raymath_functions_code = indent_string(generate_functions_code(raymath_api_functions), 1) + "\n"
+
+raygui_functions_code = indent_string(generate_functions_code(raygui_api_functions), 1)[:-4] + "\n"
+
 generate_file(LIBRARY_FOLDER_PATH / '__init__.pxd')
 
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', 'cdef extern from "config.h":\n')
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_defines_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', dummy_structs_code)  # we add the dummy structs earliest as possible
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_structs_code)
+add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_functions_code)
 
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', 'cdef extern from "rlgl.h":\n')
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', rlgl_defines_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', rlgl_structs_code)
+add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', rlgl_functions_code)
 
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', 'cdef extern from "raylib.h":\n')
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raylib_defines_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raylib_structs_code)
+add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raylib_functions_code)
 
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', 'cdef extern from "raymath.h":\n')
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raymath_defines_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raymath_structs_code)
+add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raymath_functions_code)
 
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', 'cdef extern from "raygui.h":\n')
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raygui_defines_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raygui_structs_code)
+add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raygui_functions_code)
