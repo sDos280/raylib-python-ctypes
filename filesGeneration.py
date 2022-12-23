@@ -31,6 +31,8 @@ else:  # windows
 _raypyc_extra_functions = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / _raypyc_extra_functions_name))
 
 
+# -----------------------------------------
+
 def indent_string(string: str, indent_by: int) -> str:
 	"""return a string that indented in the start of the string and in every \\n of the string"""
 	return '    ' * indent_by + string.replace('\n', '\n' + '    ' * indent_by)
@@ -146,7 +148,8 @@ def generate_function_code(function_data):
 		return _string
 	else:
 		for parameter in parameters:
-			if parameter['type'] in ['SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback', 'AudioCallback', '...']:
+			if parameter['type'] in ['SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback',
+			                         'LoadFileDataCallback', 'SaveFileDataCallback', 'AudioCallback', '...']:
 				return ''
 			_temp = True
 			_string += f"{parameter['type'] if parameter['type'] != 'bool' else 'bint'} {parameter['name']}, "
@@ -250,7 +253,8 @@ generate_file(LIBRARY_FOLDER_PATH / '__init__.pxd')
 
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', 'cdef extern from "config.h":\n')
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_defines_code)
-add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', dummy_structs_code)  # we add the dummy structs earliest as possible
+add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd',
+                 dummy_structs_code)  # we add the dummy structs earliest as possible
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_structs_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_functions_code)
 
