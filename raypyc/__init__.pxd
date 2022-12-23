@@ -79,6 +79,17 @@ cdef extern from "config.h":
     cdef int SUPPORT_TRACELOG = 1
     cdef int MAX_TRACELOG_MSG_LENGTH = 128  # Max length of one trace-log message
 
+    #  dummy structure
+    ctypedef struct rAudioBuffer:
+    	signed char[392] data;
+    
+    
+    #  dummy structure
+    ctypedef struct rAudioProcessor:
+    	signed char[24] data;
+    
+    
+
 
 cdef extern from "rlgl.h":
     cdef char* RLGL_VERSION = "4.0"
@@ -256,6 +267,10 @@ cdef extern from "raylib.h":
     	float w;  # Vector w component
     
     
+    #  Quaternion, 4 components (Vector4 alias)
+    ctypedef Vector4 Quaternion;
+    
+    
     #  Color, 4 components, R8G8B8A8 (32bit)
     ctypedef struct Color:
     	unsigned char r;  # Color red value
@@ -290,11 +305,23 @@ cdef extern from "raylib.h":
     	int format;  # Data format (PixelFormat type)
     
     
+    #  Texture2D, same as Texture
+    ctypedef Texture Texture2D;
+    
+    
+    #  TextureCubemap, same as Texture
+    ctypedef Texture TextureCubemap;
+    
+    
     #  RenderTexture, fbo for texture rendering
     ctypedef struct RenderTexture:
     	unsigned int id;  # OpenGL framebuffer object id
     	Texture texture;  # Color buffer attachment texture
     	Texture depth;  # Depth buffer attachment texture
+    
+    
+    #  RenderTexture2D, same as RenderTexture
+    ctypedef RenderTexture RenderTexture2D;
     
     
     #  NPatchInfo, n-patch layout info
@@ -333,6 +360,10 @@ cdef extern from "raylib.h":
     	Vector3 up;  # Camera up vector (rotation over its axis)
     	float fovy;  # Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic
     	int projection;  # Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
+    
+    
+    #  Camera type fallback, defaults to Camera3D
+    ctypedef Camera3D Camera;
     
     
     #  Camera2D, defines position/orientation in 2d space
@@ -553,15 +584,6 @@ cdef extern from "raygui.h":
     cdef int RAYGUI_TEXTSPLIT_MAX_TEXT_SIZE = 1024
     cdef int RAYGUI_TEXTFORMAT_MAX_SIZE = 256
 
-    #  It should be redesigned to be provided by user
-    ctypedef struct Texture2D:
-    	unsigned int id;  # OpenGL texture id
-    	int width;  # Texture base width
-    	int height;  # Texture base height
-    	int mipmaps;  # Mipmap levels, 1 by default
-    	int format;  # Data format (PixelFormat type)
-    
-    
     #  Style property
     ctypedef struct GuiStyleProp:
     	unsigned short controlId;
