@@ -36,7 +36,6 @@ if sys.platform == 'linux':
 else:  # windows
     _raypyc_extra_functions_name = 'raypyc_extra_functions.dll'
 
-_raylib_dynamic_library = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / _raylib_dynamic_library_name))
 _raypyc_extra_functions = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / _raypyc_extra_functions_name))
 
 
@@ -704,53 +703,11 @@ raygui_api_functions = raygui_api['functions']
 
 generate_defines_py_pyi_files()
 
-generate_defines_py_pyi_code(config_api_defines)
-generate_defines_py_pyi_code(rlgl_api_defines)
-generate_defines_py_pyi_code(raylib_api_defines)
-generate_defines_py_pyi_code(raymath_api_defines)
-generate_defines_py_pyi_code(raygui_api_defines)
-
 generate_colors_py_pyi_files()
-
-generate_colors_py_pyi_code(config_api_defines)
-generate_colors_py_pyi_code(rlgl_api_defines)
-generate_colors_py_pyi_code(raylib_api_defines)
-generate_colors_py_pyi_code(raymath_api_defines)
-generate_colors_py_pyi_code(raygui_api_defines)
 
 generate_structs_py_pyi_files()
 
-generate_dummy_structs_py_pyi_code()
-
-generate_structs_py_pyi_code(config_api_structs, config_api_aliases)
-generate_structs_py_pyi_code(rlgl_api_structs, rlgl_api_aliases)
-generate_structs_py_pyi_code(raylib_api_structs, raylib_api_aliases)
-generate_structs_py_pyi_code(raymath_api_structs, raymath_api_aliases)
-generate_structs_py_pyi_code(raygui_api_structs, raygui_api_aliases)
-add_code_to_file(STRUCTURES_FOLDER_PATH / "__init__.py", generate_structures_dictionary_code(wrapped_structures_names_py))
-add_code_to_file(STRUCTURES_FOLDER_PATH / "__init__.pyi", generate_structures_dictionary_code_stub(wrapped_structures_names_pyi))
-
-# generate the enums files
 generate_enums_py_pyi_files()
-
-generate_enums_py_pyi_code(config_api_enums)
-generate_enums_py_pyi_code(rlgl_api_enums)
-generate_enums_py_pyi_code(raylib_api_enums)
-generate_enums_py_pyi_code(raymath_api_enums)
-generate_enums_py_pyi_code(raygui_api_enums)
 
 # generate the raylib functions signature file
 generate_functions_code_pyi_file()
-
-config_functions_to_wrapped = check_for_functions_that_can_wrap(config_api_functions)
-rlgl_functions_to_wrapped = check_for_functions_that_can_wrap(rlgl_api_functions)
-raylib_functions_to_wrapped = check_for_functions_that_can_wrap(raylib_api_functions)
-raymath_functions_to_wrapped = check_for_functions_that_can_wrap(raymath_api_functions)
-raygui_functions_to_wrapped = check_for_functions_that_can_wrap(raygui_api_functions)
-
-# add the functions signature file
-generate_functions_code_in_code_pyi_file(config_functions_to_wrapped)
-generate_functions_code_in_code_pyi_file(rlgl_functions_to_wrapped)
-generate_functions_code_in_code_pyi_file(raylib_functions_to_wrapped)
-generate_functions_code_in_code_pyi_file(raymath_functions_to_wrapped)
-generate_functions_code_in_code_pyi_file(raygui_functions_to_wrapped)
