@@ -55,6 +55,7 @@ cd ../..
 
 ```cmd
 cp './raygui/src/raygui.h' './raylib'
+cp './raygui/src/raygui.h' './raylib/src'
 cp './raylib/src/config.h' './raylib/parser'
 cd raylib/parser
 make raylib_parser
@@ -81,9 +82,10 @@ Some notes before used the generated files:
 
 what do we do with the generated files:
 
+* replace all the `config.h`, `rlgl.h`, `raymath.h`, `raylib.h` and `raygui.h` files in the "raypyc\includes"
+  folder with the `config.h`, `rlgl.h`, `raymath.h`, `raylib.h` and `raygui.h` files in the "build\raylib\src" folder.
 * replace all the `config_api.json`, `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "raypyc"
-  folder with the `config_api.json`, `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "
-  build\raylib\parser".
+  folder with the `config_api.json`, `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "build\raylib\parser".
 * replace the `libraylib.a` in the "raypyc/libs" folder with the `libraylib.a` in the "build\raylib\src" folder.
 * replace the `raypyc_extra_functions.so` in the "raypyc/libs" folder with the `raypyc_extra_functions.so` in the "
   build" folder.
