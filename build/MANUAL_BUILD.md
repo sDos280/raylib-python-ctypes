@@ -69,7 +69,7 @@ So what exactly did we build here:
 
 * `raypyc_extra_functions.so` (in the "build" folder) used to help raypyc with some external stuff.
 * `libraylib.a` (in the "build\raylib\src" folder) used to call raylib functions from python.
-* `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` (in the "build\raylib\parser" folder)
+* `config_api.json`, `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` (in the "build\raylib\parser" folder)
   used to tell raypyc some data about raylib stuff.
 
 Some notes before used the generated files:
