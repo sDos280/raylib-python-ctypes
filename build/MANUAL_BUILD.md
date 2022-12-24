@@ -81,8 +81,8 @@ Some notes before used the generated files:
 
 what do we do with the generated files:
 
-* replace all the `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "raypyc"
-  folder with the `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "
+* replace all the `config_api.json`, `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "raypyc"
+  folder with the `config_api.json`, `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "
   build\raylib\parser".
 * replace the `libraylib.a` in the "raypyc/libs" folder with the `libraylib.a` in the "build\raylib\src" folder.
 * replace the `raypyc_extra_functions.so` in the "raypyc/libs" folder with the `raypyc_extra_functions.so` in the "
