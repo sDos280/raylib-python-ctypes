@@ -59,13 +59,13 @@ def generate_define_code(define_data):
 	if define_data['type'] not in ["FLOAT_MATH", "FLOAT", "DOUBLE", "STRING", "INT"]:
 		return ""
 	elif define_data['type'] == "FLOAT_MATH":
-		return f"cdef float {define_data['name']} = {define_data['value'].replace('f', '')}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+		return f"DEF {define_data['name']} = {define_data['value'].replace('f', '')}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
 	elif define_data['type'] in ["INT"]:
-		return f"cdef int {define_data['name']} = {define_data['value']}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+		return f"DEF {define_data['name']} = {define_data['value']}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
 	elif define_data['type'] in ["DOUBLE", "FLOAT"]:
-		return f"cdef float {define_data['name']} = {define_data['value']}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+		return f"DEF {define_data['name']} = {define_data['value']}{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
 	elif define_data['type'] == "STRING":
-		return f"cdef char* {define_data['name']} = \"{define_data['value']}\"{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+		return f"DEF {define_data['name']} = \"{define_data['value']}\"{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
 	else:
 		return ""
 
@@ -105,7 +105,7 @@ def generate_dummy_structs_code(names):
 def generate_struct_code(struct_data):
 	_string = f"#  {struct_data['description']}\nctypedef struct {struct_data['name']}:\n"
 	for field in struct_data['fields']:
-		_string += f"\t{field['type']} {field['name']};{('  # ' + field['description']) if field['description'] != '' else ''}\n"
+		_string += f"\t{field['type'] if field['type'] != 'bool' else 'bint'} {field['name']};{('  # ' + field['description']) if field['description'] != '' else ''}\n"
 	return _string
 
 
@@ -148,8 +148,7 @@ def generate_function_code(function_data):
 		return _string
 	else:
 		for parameter in parameters:
-			if parameter['type'] in ['SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback',
-			                         'LoadFileDataCallback', 'SaveFileDataCallback', 'AudioCallback', '...']:
+			if parameter['type'] in ['SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback', 'AudioCallback', '...']:
 				return ''
 			_temp = True
 			_string += f"{parameter['type'] if parameter['type'] != 'bool' else 'bint'} {parameter['name']}, "

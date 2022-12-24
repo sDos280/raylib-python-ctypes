@@ -1,83 +1,83 @@
 cdef extern from "config.h":
-	cdef int SUPPORT_MODULE_RSHAPES = 1
-	cdef int SUPPORT_MODULE_RTEXTURES = 1
-	cdef int SUPPORT_MODULE_RTEXT = 1  # WARNING: It requires SUPPORT_MODULE_RTEXTURES to load sprite font textures
-	cdef int SUPPORT_MODULE_RMODELS = 1
-	cdef int SUPPORT_MODULE_RAUDIO = 1
-	cdef int SUPPORT_CAMERA_SYSTEM = 1
-	cdef int SUPPORT_GESTURES_SYSTEM = 1
-	cdef int SUPPORT_MOUSE_GESTURES = 1
-	cdef int SUPPORT_SSH_KEYBOARD_RPI = 1
-	cdef int SUPPORT_WINMM_HIGHRES_TIMER = 1
-	cdef int SUPPORT_SCREEN_CAPTURE = 1
-	cdef int SUPPORT_GIF_RECORDING = 1
-	cdef int SUPPORT_COMPRESSION_API = 1
-	cdef int MAX_FILEPATH_CAPACITY = 8192  # Maximum file paths capacity
-	cdef int MAX_FILEPATH_LENGTH = 4096  # Maximum length for filepaths (Linux PATH_MAX default value)
-	cdef int MAX_KEYBOARD_KEYS = 512  # Maximum number of keyboard keys supported
-	cdef int MAX_MOUSE_BUTTONS = 8  # Maximum number of mouse buttons supported
-	cdef int MAX_GAMEPADS = 4  # Maximum number of gamepads supported
-	cdef int MAX_GAMEPAD_AXIS = 8  # Maximum number of axis supported (per gamepad)
-	cdef int MAX_GAMEPAD_BUTTONS = 32  # Maximum number of buttons supported (per gamepad)
-	cdef int MAX_TOUCH_POINTS = 8  # Maximum number of touch points supported
-	cdef int MAX_KEY_PRESSED_QUEUE = 16  # Maximum number of keys in the key input queue
-	cdef int MAX_CHAR_PRESSED_QUEUE = 16  # Maximum number of characters in the char input queue
-	cdef int MAX_DECOMPRESSION_SIZE = 64  # Max size allocated for decompression in MB
-	cdef int RL_DEFAULT_BATCH_BUFFERS = 1  # Default number of batch buffers (multi-buffering)
-	cdef int RL_DEFAULT_BATCH_DRAWCALLS = 256  # Default number of batch draw calls (by state changes: mode, texture)
-	cdef int RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS = 4  # Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
-	cdef int RL_MAX_MATRIX_STACK_SIZE = 32  # Maximum size of internal Matrix stack
-	cdef int RL_MAX_SHADER_LOCATIONS = 32  # Maximum number of shader locations supported
-	cdef float RL_CULL_DISTANCE_NEAR = 0.01  # Default projection matrix near cull distance
-	cdef float RL_CULL_DISTANCE_FAR = 1000.0  # Default projection matrix far cull distance
-	cdef char* RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION = "vertexPosition"  # Binded by default to shader location: 0
-	cdef char* RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD = "vertexTexCoord"  # Binded by default to shader location: 1
-	cdef char* RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL = "vertexNormal"  # Binded by default to shader location: 2
-	cdef char* RL_DEFAULT_SHADER_ATTRIB_NAME_COLOR = "vertexColor"  # Binded by default to shader location: 3
-	cdef char* RL_DEFAULT_SHADER_ATTRIB_NAME_TANGENT = "vertexTangent"  # Binded by default to shader location: 4
-	cdef char* RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD2 = "vertexTexCoord2"  # Binded by default to shader location: 5
-	cdef char* RL_DEFAULT_SHADER_UNIFORM_NAME_MVP = "mvp"  # model-view-projection matrix
-	cdef char* RL_DEFAULT_SHADER_UNIFORM_NAME_VIEW = "matView"  # view matrix
-	cdef char* RL_DEFAULT_SHADER_UNIFORM_NAME_PROJECTION = "matProjection"  # projection matrix
-	cdef char* RL_DEFAULT_SHADER_UNIFORM_NAME_MODEL = "matModel"  # model matrix
-	cdef char* RL_DEFAULT_SHADER_UNIFORM_NAME_NORMAL = "matNormal"  # normal matrix (transpose(inverse(matModelView))
-	cdef char* RL_DEFAULT_SHADER_UNIFORM_NAME_COLOR = "colDiffuse"  # color diffuse (base tint color, multiplied by texture color)
-	cdef char* RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE0 = "texture0"  # texture0 (texture slot active 0)
-	cdef char* RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE1 = "texture1"  # texture1 (texture slot active 1)
-	cdef char* RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE2 = "texture2"  # texture2 (texture slot active 2)
-	cdef int SUPPORT_QUADS_DRAW_MODE = 1
-	cdef int SUPPORT_FILEFORMAT_PNG = 1
-	cdef int SUPPORT_FILEFORMAT_GIF = 1
-	cdef int SUPPORT_FILEFORMAT_QOI = 1
-	cdef int SUPPORT_FILEFORMAT_DDS = 1
-	cdef int SUPPORT_FILEFORMAT_HDR = 1
-	cdef int SUPPORT_IMAGE_EXPORT = 1
-	cdef int SUPPORT_IMAGE_GENERATION = 1
-	cdef int SUPPORT_IMAGE_MANIPULATION = 1
-	cdef int SUPPORT_DEFAULT_FONT = 1
-	cdef int SUPPORT_FILEFORMAT_FNT = 1
-	cdef int SUPPORT_FILEFORMAT_TTF = 1
-	cdef int SUPPORT_TEXT_MANIPULATION = 1
-	cdef int MAX_TEXT_BUFFER_LENGTH = 1024  # Size of internal static buffers used on some functions:
-	cdef int MAX_TEXTSPLIT_COUNT = 128  # Maximum number of substrings to split: TextSplit()
-	cdef int SUPPORT_FILEFORMAT_OBJ = 1
-	cdef int SUPPORT_FILEFORMAT_MTL = 1
-	cdef int SUPPORT_FILEFORMAT_IQM = 1
-	cdef int SUPPORT_FILEFORMAT_GLTF = 1
-	cdef int SUPPORT_FILEFORMAT_VOX = 1
-	cdef int SUPPORT_MESH_GENERATION = 1
-	cdef int MAX_MATERIAL_MAPS = 12  # Maximum number of shader maps supported
-	cdef int MAX_MESH_VERTEX_BUFFERS = 7  # Maximum vertex buffers (VBO) per mesh
-	cdef int SUPPORT_FILEFORMAT_WAV = 1
-	cdef int SUPPORT_FILEFORMAT_OGG = 1
-	cdef int SUPPORT_FILEFORMAT_XM = 1
-	cdef int SUPPORT_FILEFORMAT_MOD = 1
-	cdef int SUPPORT_FILEFORMAT_MP3 = 1
-	cdef int AUDIO_DEVICE_CHANNELS = 2  # Device output channels: stereo
-	cdef int AUDIO_DEVICE_SAMPLE_RATE = 0  # Device sample rate (device default)
-	cdef int MAX_AUDIO_BUFFER_POOL_CHANNELS = 16  # Maximum number of audio pool channels
-	cdef int SUPPORT_TRACELOG = 1
-	cdef int MAX_TRACELOG_MSG_LENGTH = 128  # Max length of one trace-log message
+	DEF SUPPORT_MODULE_RSHAPES = 1
+	DEF SUPPORT_MODULE_RTEXTURES = 1
+	DEF SUPPORT_MODULE_RTEXT = 1  # WARNING: It requires SUPPORT_MODULE_RTEXTURES to load sprite font textures
+	DEF SUPPORT_MODULE_RMODELS = 1
+	DEF SUPPORT_MODULE_RAUDIO = 1
+	DEF SUPPORT_CAMERA_SYSTEM = 1
+	DEF SUPPORT_GESTURES_SYSTEM = 1
+	DEF SUPPORT_MOUSE_GESTURES = 1
+	DEF SUPPORT_SSH_KEYBOARD_RPI = 1
+	DEF SUPPORT_WINMM_HIGHRES_TIMER = 1
+	DEF SUPPORT_SCREEN_CAPTURE = 1
+	DEF SUPPORT_GIF_RECORDING = 1
+	DEF SUPPORT_COMPRESSION_API = 1
+	DEF MAX_FILEPATH_CAPACITY = 8192  # Maximum file paths capacity
+	DEF MAX_FILEPATH_LENGTH = 4096  # Maximum length for filepaths (Linux PATH_MAX default value)
+	DEF MAX_KEYBOARD_KEYS = 512  # Maximum number of keyboard keys supported
+	DEF MAX_MOUSE_BUTTONS = 8  # Maximum number of mouse buttons supported
+	DEF MAX_GAMEPADS = 4  # Maximum number of gamepads supported
+	DEF MAX_GAMEPAD_AXIS = 8  # Maximum number of axis supported (per gamepad)
+	DEF MAX_GAMEPAD_BUTTONS = 32  # Maximum number of buttons supported (per gamepad)
+	DEF MAX_TOUCH_POINTS = 8  # Maximum number of touch points supported
+	DEF MAX_KEY_PRESSED_QUEUE = 16  # Maximum number of keys in the key input queue
+	DEF MAX_CHAR_PRESSED_QUEUE = 16  # Maximum number of characters in the char input queue
+	DEF MAX_DECOMPRESSION_SIZE = 64  # Max size allocated for decompression in MB
+	DEF RL_DEFAULT_BATCH_BUFFERS = 1  # Default number of batch buffers (multi-buffering)
+	DEF RL_DEFAULT_BATCH_DRAWCALLS = 256  # Default number of batch draw calls (by state changes: mode, texture)
+	DEF RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS = 4  # Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
+	DEF RL_MAX_MATRIX_STACK_SIZE = 32  # Maximum size of internal Matrix stack
+	DEF RL_MAX_SHADER_LOCATIONS = 32  # Maximum number of shader locations supported
+	DEF RL_CULL_DISTANCE_NEAR = 0.01  # Default projection matrix near cull distance
+	DEF RL_CULL_DISTANCE_FAR = 1000.0  # Default projection matrix far cull distance
+	DEF RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION = "vertexPosition"  # Binded by default to shader location: 0
+	DEF RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD = "vertexTexCoord"  # Binded by default to shader location: 1
+	DEF RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL = "vertexNormal"  # Binded by default to shader location: 2
+	DEF RL_DEFAULT_SHADER_ATTRIB_NAME_COLOR = "vertexColor"  # Binded by default to shader location: 3
+	DEF RL_DEFAULT_SHADER_ATTRIB_NAME_TANGENT = "vertexTangent"  # Binded by default to shader location: 4
+	DEF RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD2 = "vertexTexCoord2"  # Binded by default to shader location: 5
+	DEF RL_DEFAULT_SHADER_UNIFORM_NAME_MVP = "mvp"  # model-view-projection matrix
+	DEF RL_DEFAULT_SHADER_UNIFORM_NAME_VIEW = "matView"  # view matrix
+	DEF RL_DEFAULT_SHADER_UNIFORM_NAME_PROJECTION = "matProjection"  # projection matrix
+	DEF RL_DEFAULT_SHADER_UNIFORM_NAME_MODEL = "matModel"  # model matrix
+	DEF RL_DEFAULT_SHADER_UNIFORM_NAME_NORMAL = "matNormal"  # normal matrix (transpose(inverse(matModelView))
+	DEF RL_DEFAULT_SHADER_UNIFORM_NAME_COLOR = "colDiffuse"  # color diffuse (base tint color, multiplied by texture color)
+	DEF RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE0 = "texture0"  # texture0 (texture slot active 0)
+	DEF RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE1 = "texture1"  # texture1 (texture slot active 1)
+	DEF RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE2 = "texture2"  # texture2 (texture slot active 2)
+	DEF SUPPORT_QUADS_DRAW_MODE = 1
+	DEF SUPPORT_FILEFORMAT_PNG = 1
+	DEF SUPPORT_FILEFORMAT_GIF = 1
+	DEF SUPPORT_FILEFORMAT_QOI = 1
+	DEF SUPPORT_FILEFORMAT_DDS = 1
+	DEF SUPPORT_FILEFORMAT_HDR = 1
+	DEF SUPPORT_IMAGE_EXPORT = 1
+	DEF SUPPORT_IMAGE_GENERATION = 1
+	DEF SUPPORT_IMAGE_MANIPULATION = 1
+	DEF SUPPORT_DEFAULT_FONT = 1
+	DEF SUPPORT_FILEFORMAT_FNT = 1
+	DEF SUPPORT_FILEFORMAT_TTF = 1
+	DEF SUPPORT_TEXT_MANIPULATION = 1
+	DEF MAX_TEXT_BUFFER_LENGTH = 1024  # Size of internal static buffers used on some functions:
+	DEF MAX_TEXTSPLIT_COUNT = 128  # Maximum number of substrings to split: TextSplit()
+	DEF SUPPORT_FILEFORMAT_OBJ = 1
+	DEF SUPPORT_FILEFORMAT_MTL = 1
+	DEF SUPPORT_FILEFORMAT_IQM = 1
+	DEF SUPPORT_FILEFORMAT_GLTF = 1
+	DEF SUPPORT_FILEFORMAT_VOX = 1
+	DEF SUPPORT_MESH_GENERATION = 1
+	DEF MAX_MATERIAL_MAPS = 12  # Maximum number of shader maps supported
+	DEF MAX_MESH_VERTEX_BUFFERS = 7  # Maximum vertex buffers (VBO) per mesh
+	DEF SUPPORT_FILEFORMAT_WAV = 1
+	DEF SUPPORT_FILEFORMAT_OGG = 1
+	DEF SUPPORT_FILEFORMAT_XM = 1
+	DEF SUPPORT_FILEFORMAT_MOD = 1
+	DEF SUPPORT_FILEFORMAT_MP3 = 1
+	DEF AUDIO_DEVICE_CHANNELS = 2  # Device output channels: stereo
+	DEF AUDIO_DEVICE_SAMPLE_RATE = 0  # Device sample rate (device default)
+	DEF MAX_AUDIO_BUFFER_POOL_CHANNELS = 16  # Maximum number of audio pool channels
+	DEF SUPPORT_TRACELOG = 1
+	DEF MAX_TRACELOG_MSG_LENGTH = 128  # Max length of one trace-log message
 
 	#  dummy structure
 	ctypedef struct rAudioBuffer:
@@ -93,65 +93,65 @@ cdef extern from "config.h":
 
 	
 cdef extern from "rlgl.h":
-	cdef char* RLGL_VERSION = "4.0"
-	cdef int RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
-	cdef int RL_TEXTURE_WRAP_S = 10242  # GL_TEXTURE_WRAP_S
-	cdef int RL_TEXTURE_WRAP_T = 10243  # GL_TEXTURE_WRAP_T
-	cdef int RL_TEXTURE_MAG_FILTER = 10240  # GL_TEXTURE_MAG_FILTER
-	cdef int RL_TEXTURE_MIN_FILTER = 10241  # GL_TEXTURE_MIN_FILTER
-	cdef int RL_TEXTURE_FILTER_NEAREST = 9728  # GL_NEAREST
-	cdef int RL_TEXTURE_FILTER_LINEAR = 9729  # GL_LINEAR
-	cdef int RL_TEXTURE_FILTER_MIP_NEAREST = 9984  # GL_NEAREST_MIPMAP_NEAREST
-	cdef int RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR = 9986  # GL_NEAREST_MIPMAP_LINEAR
-	cdef int RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST = 9985  # GL_LINEAR_MIPMAP_NEAREST
-	cdef int RL_TEXTURE_FILTER_MIP_LINEAR = 9987  # GL_LINEAR_MIPMAP_LINEAR
-	cdef int RL_TEXTURE_FILTER_ANISOTROPIC = 12288  # Anisotropic filter (custom identifier)
-	cdef int RL_TEXTURE_WRAP_REPEAT = 10497  # GL_REPEAT
-	cdef int RL_TEXTURE_WRAP_CLAMP = 33071  # GL_CLAMP_TO_EDGE
-	cdef int RL_TEXTURE_WRAP_MIRROR_REPEAT = 33648  # GL_MIRRORED_REPEAT
-	cdef int RL_TEXTURE_WRAP_MIRROR_CLAMP = 34626  # GL_MIRROR_CLAMP_EXT
-	cdef int RL_MODELVIEW = 5888  # GL_MODELVIEW
-	cdef int RL_PROJECTION = 5889  # GL_PROJECTION
-	cdef int RL_TEXTURE = 5890  # GL_TEXTURE
-	cdef int RL_LINES = 1  # GL_LINES
-	cdef int RL_TRIANGLES = 4  # GL_TRIANGLES
-	cdef int RL_QUADS = 7  # GL_QUADS
-	cdef int RL_UNSIGNED_BYTE = 5121  # GL_UNSIGNED_BYTE
-	cdef int RL_FLOAT = 5126  # GL_FLOAT
-	cdef int RL_STREAM_DRAW = 35040  # GL_STREAM_DRAW
-	cdef int RL_STREAM_READ = 35041  # GL_STREAM_READ
-	cdef int RL_STREAM_COPY = 35042  # GL_STREAM_COPY
-	cdef int RL_STATIC_DRAW = 35044  # GL_STATIC_DRAW
-	cdef int RL_STATIC_READ = 35045  # GL_STATIC_READ
-	cdef int RL_STATIC_COPY = 35046  # GL_STATIC_COPY
-	cdef int RL_DYNAMIC_DRAW = 35048  # GL_DYNAMIC_DRAW
-	cdef int RL_DYNAMIC_READ = 35049  # GL_DYNAMIC_READ
-	cdef int RL_DYNAMIC_COPY = 35050  # GL_DYNAMIC_COPY
-	cdef int RL_FRAGMENT_SHADER = 35632  # GL_FRAGMENT_SHADER
-	cdef int RL_VERTEX_SHADER = 35633  # GL_VERTEX_SHADER
-	cdef int RL_COMPUTE_SHADER = 37305  # GL_COMPUTE_SHADER
-	cdef float PI = 3.141592653589793
-	cdef float DEG2RAD = (PI/180.0)
-	cdef float RAD2DEG = (180.0/PI)
-	cdef int GL_SHADING_LANGUAGE_VERSION = 35724
-	cdef int GL_COMPRESSED_RGB_S3TC_DXT1_EXT = 33776
-	cdef int GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = 33777
-	cdef int GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = 33778
-	cdef int GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = 33779
-	cdef int GL_ETC1_RGB8_OES = 36196
-	cdef int GL_COMPRESSED_RGB8_ETC2 = 37492
-	cdef int GL_COMPRESSED_RGBA8_ETC2_EAC = 37496
-	cdef int GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG = 35840
-	cdef int GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG = 35842
-	cdef int GL_COMPRESSED_RGBA_ASTC_4x4_KHR = 37808
-	cdef int GL_COMPRESSED_RGBA_ASTC_8x8_KHR = 37815
-	cdef int GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = 34047
-	cdef int GL_TEXTURE_MAX_ANISOTROPY_EXT = 34046
-	cdef int GL_UNSIGNED_SHORT_5_6_5 = 33635
-	cdef int GL_UNSIGNED_SHORT_5_5_5_1 = 32820
-	cdef int GL_UNSIGNED_SHORT_4_4_4_4 = 32819
-	cdef int GL_LUMINANCE = 6409
-	cdef int GL_LUMINANCE_ALPHA = 6410
+	DEF RLGL_VERSION = "4.0"
+	DEF RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
+	DEF RL_TEXTURE_WRAP_S = 10242  # GL_TEXTURE_WRAP_S
+	DEF RL_TEXTURE_WRAP_T = 10243  # GL_TEXTURE_WRAP_T
+	DEF RL_TEXTURE_MAG_FILTER = 10240  # GL_TEXTURE_MAG_FILTER
+	DEF RL_TEXTURE_MIN_FILTER = 10241  # GL_TEXTURE_MIN_FILTER
+	DEF RL_TEXTURE_FILTER_NEAREST = 9728  # GL_NEAREST
+	DEF RL_TEXTURE_FILTER_LINEAR = 9729  # GL_LINEAR
+	DEF RL_TEXTURE_FILTER_MIP_NEAREST = 9984  # GL_NEAREST_MIPMAP_NEAREST
+	DEF RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR = 9986  # GL_NEAREST_MIPMAP_LINEAR
+	DEF RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST = 9985  # GL_LINEAR_MIPMAP_NEAREST
+	DEF RL_TEXTURE_FILTER_MIP_LINEAR = 9987  # GL_LINEAR_MIPMAP_LINEAR
+	DEF RL_TEXTURE_FILTER_ANISOTROPIC = 12288  # Anisotropic filter (custom identifier)
+	DEF RL_TEXTURE_WRAP_REPEAT = 10497  # GL_REPEAT
+	DEF RL_TEXTURE_WRAP_CLAMP = 33071  # GL_CLAMP_TO_EDGE
+	DEF RL_TEXTURE_WRAP_MIRROR_REPEAT = 33648  # GL_MIRRORED_REPEAT
+	DEF RL_TEXTURE_WRAP_MIRROR_CLAMP = 34626  # GL_MIRROR_CLAMP_EXT
+	DEF RL_MODELVIEW = 5888  # GL_MODELVIEW
+	DEF RL_PROJECTION = 5889  # GL_PROJECTION
+	DEF RL_TEXTURE = 5890  # GL_TEXTURE
+	DEF RL_LINES = 1  # GL_LINES
+	DEF RL_TRIANGLES = 4  # GL_TRIANGLES
+	DEF RL_QUADS = 7  # GL_QUADS
+	DEF RL_UNSIGNED_BYTE = 5121  # GL_UNSIGNED_BYTE
+	DEF RL_FLOAT = 5126  # GL_FLOAT
+	DEF RL_STREAM_DRAW = 35040  # GL_STREAM_DRAW
+	DEF RL_STREAM_READ = 35041  # GL_STREAM_READ
+	DEF RL_STREAM_COPY = 35042  # GL_STREAM_COPY
+	DEF RL_STATIC_DRAW = 35044  # GL_STATIC_DRAW
+	DEF RL_STATIC_READ = 35045  # GL_STATIC_READ
+	DEF RL_STATIC_COPY = 35046  # GL_STATIC_COPY
+	DEF RL_DYNAMIC_DRAW = 35048  # GL_DYNAMIC_DRAW
+	DEF RL_DYNAMIC_READ = 35049  # GL_DYNAMIC_READ
+	DEF RL_DYNAMIC_COPY = 35050  # GL_DYNAMIC_COPY
+	DEF RL_FRAGMENT_SHADER = 35632  # GL_FRAGMENT_SHADER
+	DEF RL_VERTEX_SHADER = 35633  # GL_VERTEX_SHADER
+	DEF RL_COMPUTE_SHADER = 37305  # GL_COMPUTE_SHADER
+	DEF PI = 3.141592653589793
+	DEF DEG2RAD = (PI/180.0)
+	DEF RAD2DEG = (180.0/PI)
+	DEF GL_SHADING_LANGUAGE_VERSION = 35724
+	DEF GL_COMPRESSED_RGB_S3TC_DXT1_EXT = 33776
+	DEF GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = 33777
+	DEF GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = 33778
+	DEF GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = 33779
+	DEF GL_ETC1_RGB8_OES = 36196
+	DEF GL_COMPRESSED_RGB8_ETC2 = 37492
+	DEF GL_COMPRESSED_RGBA8_ETC2_EAC = 37496
+	DEF GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG = 35840
+	DEF GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG = 35842
+	DEF GL_COMPRESSED_RGBA_ASTC_4x4_KHR = 37808
+	DEF GL_COMPRESSED_RGBA_ASTC_8x8_KHR = 37815
+	DEF GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = 34047
+	DEF GL_TEXTURE_MAX_ANISOTROPY_EXT = 34046
+	DEF GL_UNSIGNED_SHORT_5_6_5 = 33635
+	DEF GL_UNSIGNED_SHORT_5_5_5_1 = 32820
+	DEF GL_UNSIGNED_SHORT_4_4_4_4 = 32819
+	DEF GL_LUMINANCE = 6409
+	DEF GL_LUMINANCE_ALPHA = 6410
 
 	#  Dynamic vertex buffers (position + texcoords + colors + indices arrays)
 	ctypedef struct rlVertexBuffer:
@@ -221,7 +221,7 @@ cdef extern from "rlgl.h":
 		Matrix modelview;  # Default modelview matrix
 		Matrix projection;  # Default projection matrix
 		Matrix transform;  # Transform matrix to be used with rlTranslate, rlRotate, rlScale
-		bool transformRequired;  # Require transform matrix application to current draw-call vertex (if required)
+		bint transformRequired;  # Require transform matrix application to current draw-call vertex (if required)
 		Matrix[RL_MAX_MATRIX_STACK_SIZE] stack;  # Matrix stack for push/pop
 		int stackCounter;  # Matrix stack counter
 		unsigned int defaultTextureId;  # Default texture used on shapes/poly drawing (required by shader)
@@ -232,7 +232,7 @@ cdef extern from "rlgl.h":
 		int * defaultShaderLocs;  # Default shader locations pointer to be used on rendering
 		unsigned int currentShaderId;  # Current shader id to be used on rendering (by default, defaultShaderId)
 		int * currentShaderLocs;  # Current shader locations pointer to be used on rendering (by default, defaultShaderLocs)
-		bool stereoRender;  # Stereo rendering flag
+		bint stereoRender;  # Stereo rendering flag
 		Matrix[2] projectionStereo;  # VR stereo rendering eyes projection matrices
 		Matrix[2] viewOffsetStereo;  # VR stereo rendering eyes view offset matrices
 		int currentBlendMode;  # Blending mode active
@@ -388,7 +388,7 @@ cdef extern from "rlgl.h":
 	void rlLoadDrawQuad();  # Load and draw a quad
 	
 cdef extern from "raylib.h":
-	cdef char* RAYLIB_VERSION = "4.2"
+	DEF RAYLIB_VERSION = "4.2"
 
 	#  Vector2, 2 components
 	ctypedef struct Vector2:
@@ -599,7 +599,7 @@ cdef extern from "raylib.h":
 	
 	#  RayCollision, ray hit information
 	ctypedef struct RayCollision:
-		bool hit;  # Did the ray hit something?
+		bint hit;  # Did the ray hit something?
 		float distance;  # Distance to nearest hit
 		Vector3 point;  # Point of nearest hit
 		Vector3 normal;  # Surface normal of hit
@@ -639,7 +639,7 @@ cdef extern from "raylib.h":
 	ctypedef struct Music:
 		AudioStream stream;  # Audio stream
 		unsigned int frameCount;  # Total number of frames (considering channels)
-		bool looping;  # Music looping enable
+		bint looping;  # Music looping enable
 		int ctxType;  # Type of music context (audio filetype)
 		void * ctxData;  # Audio context data, depends on type
 	
@@ -1172,7 +1172,7 @@ cdef extern from "raylib.h":
 	void SetAudioStreamBufferSizeDefault(int size);  # Default size for new audio streams
 	
 cdef extern from "raymath.h":
-	cdef float EPSILON = 1e-06
+	DEF EPSILON = 1e-06
 
 	#  NOTE: Helper types to be used instead of array return types for *ToFloat functions
 	ctypedef struct float3:
@@ -1298,40 +1298,40 @@ cdef extern from "raymath.h":
 	int QuaternionEquals(Quaternion p, Quaternion q);
 	
 cdef extern from "raygui.h":
-	cdef char* RAYGUI_VERSION = "3.2"
-	cdef int SCROLLBAR_LEFT_SIDE = 0
-	cdef int SCROLLBAR_RIGHT_SIDE = 1
-	cdef int RAYGUI_ICON_SIZE = 16  # Size of icons in pixels (squared)
-	cdef int RAYGUI_ICON_MAX_ICONS = 256  # Maximum number of icons
-	cdef int RAYGUI_ICON_MAX_NAME_LENGTH = 32  # Maximum length of icon name id
-	cdef int RAYGUI_MAX_CONTROLS = 16  # Maximum number of standard controls
-	cdef int RAYGUI_MAX_PROPS_BASE = 16  # Maximum number of standard properties
-	cdef int RAYGUI_MAX_PROPS_EXTENDED = 8  # Maximum number of extended properties
-	cdef int KEY_RIGHT = 262
-	cdef int KEY_LEFT = 263
-	cdef int KEY_DOWN = 264
-	cdef int KEY_UP = 265
-	cdef int KEY_BACKSPACE = 259
-	cdef int KEY_ENTER = 257
-	cdef int RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT = 24
-	cdef int RAYGUI_GROUPBOX_LINE_THICK = 1
-	cdef int RAYGUI_LINE_MARGIN_TEXT = 12
-	cdef int RAYGUI_LINE_TEXT_PADDING = 4
-	cdef int RAYGUI_PANEL_BORDER_WIDTH = 1
-	cdef int RAYGUI_TOGGLEGROUP_MAX_ITEMS = 32
-	cdef int RAYGUI_VALUEBOX_MAX_CHARS = 32
-	cdef int RAYGUI_COLORBARALPHA_CHECKED_SIZE = 10
-	cdef int RAYGUI_MESSAGEBOX_BUTTON_HEIGHT = 24
-	cdef int RAYGUI_MESSAGEBOX_BUTTON_PADDING = 12
-	cdef int RAYGUI_TEXTINPUTBOX_BUTTON_HEIGHT = 28
-	cdef int RAYGUI_TEXTINPUTBOX_BUTTON_PADDING = 12
-	cdef int RAYGUI_TEXTINPUTBOX_HEIGHT = 28
-	cdef float RAYGUI_GRID_ALPHA = 0.15
-	cdef int MAX_LINE_BUFFER_SIZE = 256
-	cdef int ICON_TEXT_PADDING = 4
-	cdef int RAYGUI_TEXTSPLIT_MAX_ITEMS = 128
-	cdef int RAYGUI_TEXTSPLIT_MAX_TEXT_SIZE = 1024
-	cdef int RAYGUI_TEXTFORMAT_MAX_SIZE = 256
+	DEF RAYGUI_VERSION = "3.2"
+	DEF SCROLLBAR_LEFT_SIDE = 0
+	DEF SCROLLBAR_RIGHT_SIDE = 1
+	DEF RAYGUI_ICON_SIZE = 16  # Size of icons in pixels (squared)
+	DEF RAYGUI_ICON_MAX_ICONS = 256  # Maximum number of icons
+	DEF RAYGUI_ICON_MAX_NAME_LENGTH = 32  # Maximum length of icon name id
+	DEF RAYGUI_MAX_CONTROLS = 16  # Maximum number of standard controls
+	DEF RAYGUI_MAX_PROPS_BASE = 16  # Maximum number of standard properties
+	DEF RAYGUI_MAX_PROPS_EXTENDED = 8  # Maximum number of extended properties
+	DEF KEY_RIGHT = 262
+	DEF KEY_LEFT = 263
+	DEF KEY_DOWN = 264
+	DEF KEY_UP = 265
+	DEF KEY_BACKSPACE = 259
+	DEF KEY_ENTER = 257
+	DEF RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT = 24
+	DEF RAYGUI_GROUPBOX_LINE_THICK = 1
+	DEF RAYGUI_LINE_MARGIN_TEXT = 12
+	DEF RAYGUI_LINE_TEXT_PADDING = 4
+	DEF RAYGUI_PANEL_BORDER_WIDTH = 1
+	DEF RAYGUI_TOGGLEGROUP_MAX_ITEMS = 32
+	DEF RAYGUI_VALUEBOX_MAX_CHARS = 32
+	DEF RAYGUI_COLORBARALPHA_CHECKED_SIZE = 10
+	DEF RAYGUI_MESSAGEBOX_BUTTON_HEIGHT = 24
+	DEF RAYGUI_MESSAGEBOX_BUTTON_PADDING = 12
+	DEF RAYGUI_TEXTINPUTBOX_BUTTON_HEIGHT = 28
+	DEF RAYGUI_TEXTINPUTBOX_BUTTON_PADDING = 12
+	DEF RAYGUI_TEXTINPUTBOX_HEIGHT = 28
+	DEF RAYGUI_GRID_ALPHA = 0.15
+	DEF MAX_LINE_BUFFER_SIZE = 256
+	DEF ICON_TEXT_PADDING = 4
+	DEF RAYGUI_TEXTSPLIT_MAX_ITEMS = 128
+	DEF RAYGUI_TEXTSPLIT_MAX_TEXT_SIZE = 1024
+	DEF RAYGUI_TEXTFORMAT_MAX_SIZE = 256
 
 	#  Style property
 	ctypedef struct GuiStyleProp:
