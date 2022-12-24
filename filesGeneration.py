@@ -1,7 +1,7 @@
 import ctypes
 import json
-from pathlib import Path
 import sys
+from pathlib import Path
 
 # -----------------------------------------
 LIBRARY_FOLDER_PATH = Path(__file__).parent / 'raypyc'
@@ -35,7 +35,7 @@ _raypyc_extra_functions = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / _
 
 def indent_string(string: str, indent_by: int) -> str:
 	"""return a string that indented in the start of the string and in every \\n of the string"""
-	return '    ' * indent_by + string.replace('\n', '\n' + '    ' * indent_by)
+	return '\t' * indent_by + string.replace('\n', '\n\t' * indent_by)
 
 
 def generate_file(file_path):
@@ -229,32 +229,31 @@ raygui_api_enums = raygui_api['enums']
 raygui_api_functions = raygui_api['functions']
 # -----------------------------------------
 
-config_defines_code = indent_string(generate_defines_code(config_api_defines), 1)[:-4] + "\n"
-rlgl_defines_code = indent_string(generate_defines_code(rlgl_api_defines), 1)[:-4] + "\n"
-raylib_defines_code = indent_string(generate_defines_code(raylib_api_defines), 1)[:-4] + "\n"
-raymath_defines_code = indent_string(generate_defines_code(raymath_api_defines), 1)[:-4] + "\n"
-raygui_defines_code = indent_string(generate_defines_code(raygui_api_defines), 1)[:-4] + "\n"
+config_defines_code = indent_string(generate_defines_code(config_api_defines), 1)[:-1] + "\n"
+rlgl_defines_code = indent_string(generate_defines_code(rlgl_api_defines), 1)[:-1] + "\n"
+raylib_defines_code = indent_string(generate_defines_code(raylib_api_defines), 1)[:-1] + "\n"
+raymath_defines_code = indent_string(generate_defines_code(raymath_api_defines), 1)[:-1] + "\n"
+raygui_defines_code = indent_string(generate_defines_code(raygui_api_defines), 1)[:-1] + "\n"
 
-dummy_structs_code = indent_string(generate_dummy_structs_code(['rAudioBuffer', 'rAudioProcessor']), 1)[:-4] + "\n"
-config_structs_code = indent_string(generate_structs_code(config_api_structs, config_api_aliases), 1)[:-4] + "\n"
-rlgl_structs_code = indent_string(generate_structs_code(rlgl_api_structs, rlgl_api_aliases), 1)[:-4] + "\n"
-raylib_structs_code = indent_string(generate_structs_code(raylib_api_structs, raylib_api_aliases), 1)[:-4] + "\n"
-raymath_structs_code = indent_string(generate_structs_code(raymath_api_structs, raymath_api_aliases), 1)[:-4] + "\n"
-raygui_structs_code = indent_string(generate_structs_code(raygui_api_structs, raygui_api_aliases), 1)[:-4] + "\n"
+dummy_structs_code = indent_string(generate_dummy_structs_code(['rAudioBuffer', 'rAudioProcessor']), 1)[:-1] + "\n"
+config_structs_code = indent_string(generate_structs_code(config_api_structs, config_api_aliases), 1)[:-1] + "\n"
+rlgl_structs_code = indent_string(generate_structs_code(rlgl_api_structs, rlgl_api_aliases), 1)[:-1] + "\n"
+raylib_structs_code = indent_string(generate_structs_code(raylib_api_structs, raylib_api_aliases), 1)[:-1] + "\n"
+raymath_structs_code = indent_string(generate_structs_code(raymath_api_structs, raymath_api_aliases), 1)[:-1] + "\n"
+raygui_structs_code = indent_string(generate_structs_code(raygui_api_structs, raygui_api_aliases), 1)[:-1] + "\n"
 
 config_functions_code = indent_string(generate_functions_code(config_api_functions), 1) + "\n"
 rlgl_functions_code = indent_string(generate_functions_code(rlgl_api_functions), 1) + "\n"
 raylib_functions_code = indent_string(generate_functions_code(raylib_api_functions), 1) + "\n"
 raymath_functions_code = indent_string(generate_functions_code(raymath_api_functions), 1) + "\n"
 
-raygui_functions_code = indent_string(generate_functions_code(raygui_api_functions), 1)[:-4] + "\n"
+raygui_functions_code = indent_string(generate_functions_code(raygui_api_functions), 1)[:-1] + "\n"
 
 generate_file(LIBRARY_FOLDER_PATH / '__init__.pxd')
 
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', 'cdef extern from "config.h":\n')
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_defines_code)
-add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd',
-                 dummy_structs_code)  # we add the dummy structs earliest as possible
+add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', dummy_structs_code)  # we add the dummy structs earliest as possible
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_structs_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_functions_code)
 
