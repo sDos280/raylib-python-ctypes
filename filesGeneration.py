@@ -83,6 +83,31 @@ def generate_defines_code(defines_api):
 	return _string
 
 
+def generate_enum_code(enum_data):
+	_string = ('#  ' + enum_data['description'] + '\n') if enum_data['description'] != '' else ''
+	_string += f"ctypedef enum {enum_data['name']}:\n"
+	for index, value in enumerate(enum_data['values']):
+		_description = ('  #  ' + value['description'] + '\n') if value['description'] != '' else '\n'
+		_string += f"\t{value['name']} = {value['value']},"
+		if index == len(enum_data['values']) - 1:
+			_string = _string[:-1]
+		_string += _description
+	return _string
+
+
+def generate_enums_code(enums_api):
+	_string = ""
+	for enum in enums_api:
+		if enum['name'] not in wrapped_enums_names:
+			wrapped_enums_names.append(enum['name'])
+			enum_string_logic = generate_enum_code(enum)
+			if enum_string_logic != "":
+				enum_string_logic += "\n\n"
+
+			_string += enum_string_logic
+	return _string
+
+
 def generate_dummy_struct_code(struct_name, bytes_size):
 	return f"#  dummy structure\nctypedef struct {struct_name}:\n\tsigned char[{bytes_size}] data;\n"
 
@@ -121,7 +146,7 @@ def generate_structs_code(structs_api, aliases_api):
 			wrapped_structures_names.append(struct['name'])
 			struct_string_logic = generate_struct_code(struct)
 			if struct_string_logic != "":
-				struct_string_logic += "\n\n"
+				struct_string_logic += "\n"
 
 			_string += struct_string_logic
 		for alias in aliases_api:
@@ -130,7 +155,7 @@ def generate_structs_code(structs_api, aliases_api):
 					wrapped_structures_names.append(alias['name'])
 					alias_string_logic = generate_alias_code(alias)
 					if alias_string_logic != "":
-						alias_string_logic += "\n\n"
+						alias_string_logic += "\n"
 
 					_string += alias_string_logic
 	return _string
@@ -234,6 +259,12 @@ raylib_defines_code = indent_string(generate_defines_code(raylib_api_defines), 1
 raymath_defines_code = indent_string(generate_defines_code(raymath_api_defines), 1)[:-1] + "\n"
 raygui_defines_code = indent_string(generate_defines_code(raygui_api_defines), 1)[:-1] + "\n"
 
+config_enums_code = indent_string(generate_enums_code(config_api_enums), 1)[:-1] + "\n"
+rlgl_enums_code = indent_string(generate_enums_code(rlgl_api_enums), 1)[:-1] + "\n"
+raylib_enums_code = indent_string(generate_enums_code(raylib_api_enums), 1)[:-1] + "\n"
+raymath_enums_code = indent_string(generate_enums_code(raymath_api_enums), 1)[:-1] + "\n"
+raygui_enums_code = indent_string(generate_enums_code(raygui_api_enums), 1)[:-1] + "\n"
+
 dummy_structs_code = indent_string(generate_dummy_structs_code(['rAudioBuffer', 'rAudioProcessor']), 1)[:-1] + "\n"
 config_structs_code = indent_string(generate_structs_code(config_api_structs, config_api_aliases), 1)[:-1] + "\n"
 rlgl_structs_code = indent_string(generate_structs_code(rlgl_api_structs, rlgl_api_aliases), 1)[:-1] + "\n"
@@ -252,26 +283,31 @@ generate_file(LIBRARY_FOLDER_PATH / '__init__.pxd')
 
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', 'cdef extern from "config.h":\n')
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_defines_code)
+add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_enums_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', dummy_structs_code)  # we add the dummy structs earliest as possible
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_structs_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', config_functions_code)
 
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', 'cdef extern from "rlgl.h":\n')
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', rlgl_defines_code)
+add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', rlgl_enums_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', rlgl_structs_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', rlgl_functions_code)
 
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', 'cdef extern from "raylib.h":\n')
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raylib_defines_code)
+add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raylib_enums_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raylib_structs_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raylib_functions_code)
 
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', 'cdef extern from "raymath.h":\n')
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raymath_defines_code)
+add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raymath_enums_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raymath_structs_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raymath_functions_code)
 
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', 'cdef extern from "raygui.h":\n')
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raygui_defines_code)
+add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raygui_enums_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raygui_structs_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raygui_functions_code)
