@@ -4,7 +4,7 @@ raylib [core] example - Basic Window
 
 """
 
-from raypyc import *
+from raypyc cimport *
 
 
 # ------------------------------------------------------------------------------------
