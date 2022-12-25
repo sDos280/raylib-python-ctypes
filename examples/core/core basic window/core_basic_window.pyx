@@ -34,7 +34,7 @@ def main():
         # ----------------------------------------------------------------------------------
         BeginDrawing()
 
-        ClearBackground(Color(255, 255, 255, 255))
+        ClearBackground(Color(245, 245, 245, 255))
         DrawText("Congrats! You created your first window!", 190, 200, 20, Color(200, 200, 200, 255))
 
         EndDrawing()

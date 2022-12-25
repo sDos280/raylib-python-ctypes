@@ -1,1090 +1,85 @@
-DEF SUPPORT_MODULE_RSHAPES = 1
-DEF SUPPORT_MODULE_RTEXTURES = 1
-DEF SUPPORT_MODULE_RTEXT = 1  # WARNING: It requires SUPPORT_MODULE_RTEXTURES to load sprite font textures
-DEF SUPPORT_MODULE_RMODELS = 1
-DEF SUPPORT_MODULE_RAUDIO = 1
-DEF SUPPORT_CAMERA_SYSTEM = 1
-DEF SUPPORT_GESTURES_SYSTEM = 1
-DEF SUPPORT_MOUSE_GESTURES = 1
-DEF SUPPORT_SSH_KEYBOARD_RPI = 1
-DEF SUPPORT_WINMM_HIGHRES_TIMER = 1
-DEF SUPPORT_SCREEN_CAPTURE = 1
-DEF SUPPORT_GIF_RECORDING = 1
-DEF SUPPORT_COMPRESSION_API = 1
-DEF MAX_FILEPATH_CAPACITY = 8192  # Maximum file paths capacity
-DEF MAX_FILEPATH_LENGTH = 4096  # Maximum length for filepaths (Linux PATH_MAX default value)
-DEF MAX_KEYBOARD_KEYS = 512  # Maximum number of keyboard keys supported
-DEF MAX_MOUSE_BUTTONS = 8  # Maximum number of mouse buttons supported
-DEF MAX_GAMEPADS = 4  # Maximum number of gamepads supported
-DEF MAX_GAMEPAD_AXIS = 8  # Maximum number of axis supported (per gamepad)
-DEF MAX_GAMEPAD_BUTTONS = 32  # Maximum number of buttons supported (per gamepad)
-DEF MAX_TOUCH_POINTS = 8  # Maximum number of touch points supported
-DEF MAX_KEY_PRESSED_QUEUE = 16  # Maximum number of keys in the key input queue
-DEF MAX_CHAR_PRESSED_QUEUE = 16  # Maximum number of characters in the char input queue
-DEF MAX_DECOMPRESSION_SIZE = 64  # Max size allocated for decompression in MB
-DEF RL_DEFAULT_BATCH_BUFFERS = 1  # Default number of batch buffers (multi-buffering)
-DEF RL_DEFAULT_BATCH_DRAWCALLS = 256  # Default number of batch draw calls (by state changes: mode, texture)
-DEF RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS = 4  # Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
-DEF RL_MAX_MATRIX_STACK_SIZE = 32  # Maximum size of internal Matrix stack
-DEF RL_MAX_SHADER_LOCATIONS = 32  # Maximum number of shader locations supported
-DEF RL_CULL_DISTANCE_NEAR = 0.01  # Default projection matrix near cull distance
-DEF RL_CULL_DISTANCE_FAR = 1000.0  # Default projection matrix far cull distance
-DEF RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION = "vertexPosition"  # Binded by default to shader location: 0
-DEF RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD = "vertexTexCoord"  # Binded by default to shader location: 1
-DEF RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL = "vertexNormal"  # Binded by default to shader location: 2
-DEF RL_DEFAULT_SHADER_ATTRIB_NAME_COLOR = "vertexColor"  # Binded by default to shader location: 3
-DEF RL_DEFAULT_SHADER_ATTRIB_NAME_TANGENT = "vertexTangent"  # Binded by default to shader location: 4
-DEF RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD2 = "vertexTexCoord2"  # Binded by default to shader location: 5
-DEF RL_DEFAULT_SHADER_UNIFORM_NAME_MVP = "mvp"  # model-view-projection matrix
-DEF RL_DEFAULT_SHADER_UNIFORM_NAME_VIEW = "matView"  # view matrix
-DEF RL_DEFAULT_SHADER_UNIFORM_NAME_PROJECTION = "matProjection"  # projection matrix
-DEF RL_DEFAULT_SHADER_UNIFORM_NAME_MODEL = "matModel"  # model matrix
-DEF RL_DEFAULT_SHADER_UNIFORM_NAME_NORMAL = "matNormal"  # normal matrix (transpose(inverse(matModelView))
-DEF RL_DEFAULT_SHADER_UNIFORM_NAME_COLOR = "colDiffuse"  # color diffuse (base tint color, multiplied by texture color)
-DEF RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE0 = "texture0"  # texture0 (texture slot active 0)
-DEF RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE1 = "texture1"  # texture1 (texture slot active 1)
-DEF RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE2 = "texture2"  # texture2 (texture slot active 2)
-DEF SUPPORT_QUADS_DRAW_MODE = 1
-DEF SUPPORT_FILEFORMAT_PNG = 1
-DEF SUPPORT_FILEFORMAT_GIF = 1
-DEF SUPPORT_FILEFORMAT_QOI = 1
-DEF SUPPORT_FILEFORMAT_DDS = 1
-DEF SUPPORT_FILEFORMAT_HDR = 1
-DEF SUPPORT_IMAGE_EXPORT = 1
-DEF SUPPORT_IMAGE_GENERATION = 1
-DEF SUPPORT_IMAGE_MANIPULATION = 1
-DEF SUPPORT_DEFAULT_FONT = 1
-DEF SUPPORT_FILEFORMAT_FNT = 1
-DEF SUPPORT_FILEFORMAT_TTF = 1
-DEF SUPPORT_TEXT_MANIPULATION = 1
-DEF MAX_TEXT_BUFFER_LENGTH = 1024  # Size of internal static buffers used on some functions:
-DEF MAX_TEXTSPLIT_COUNT = 128  # Maximum number of substrings to split: TextSplit()
-DEF SUPPORT_FILEFORMAT_OBJ = 1
-DEF SUPPORT_FILEFORMAT_MTL = 1
-DEF SUPPORT_FILEFORMAT_IQM = 1
-DEF SUPPORT_FILEFORMAT_GLTF = 1
-DEF SUPPORT_FILEFORMAT_VOX = 1
-DEF SUPPORT_MESH_GENERATION = 1
-DEF MAX_MATERIAL_MAPS = 12  # Maximum number of shader maps supported
-DEF MAX_MESH_VERTEX_BUFFERS = 7  # Maximum vertex buffers (VBO) per mesh
-DEF SUPPORT_FILEFORMAT_WAV = 1
-DEF SUPPORT_FILEFORMAT_OGG = 1
-DEF SUPPORT_FILEFORMAT_XM = 1
-DEF SUPPORT_FILEFORMAT_MOD = 1
-DEF SUPPORT_FILEFORMAT_MP3 = 1
-DEF AUDIO_DEVICE_CHANNELS = 2  # Device output channels: stereo
-DEF AUDIO_DEVICE_SAMPLE_RATE = 0  # Device sample rate (device default)
-DEF MAX_AUDIO_BUFFER_POOL_CHANNELS = 16  # Maximum number of audio pool channels
-DEF SUPPORT_TRACELOG = 1
-DEF MAX_TRACELOG_MSG_LENGTH = 128  # Max length of one trace-log message
-DEF RLGL_VERSION = "4.0"
-DEF RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
-DEF RL_TEXTURE_WRAP_S = 10242  # GL_TEXTURE_WRAP_S
-DEF RL_TEXTURE_WRAP_T = 10243  # GL_TEXTURE_WRAP_T
-DEF RL_TEXTURE_MAG_FILTER = 10240  # GL_TEXTURE_MAG_FILTER
-DEF RL_TEXTURE_MIN_FILTER = 10241  # GL_TEXTURE_MIN_FILTER
-DEF RL_TEXTURE_FILTER_NEAREST = 9728  # GL_NEAREST
-DEF RL_TEXTURE_FILTER_LINEAR = 9729  # GL_LINEAR
-DEF RL_TEXTURE_FILTER_MIP_NEAREST = 9984  # GL_NEAREST_MIPMAP_NEAREST
-DEF RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR = 9986  # GL_NEAREST_MIPMAP_LINEAR
-DEF RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST = 9985  # GL_LINEAR_MIPMAP_NEAREST
-DEF RL_TEXTURE_FILTER_MIP_LINEAR = 9987  # GL_LINEAR_MIPMAP_LINEAR
-DEF RL_TEXTURE_FILTER_ANISOTROPIC = 12288  # Anisotropic filter (custom identifier)
-DEF RL_TEXTURE_WRAP_REPEAT = 10497  # GL_REPEAT
-DEF RL_TEXTURE_WRAP_CLAMP = 33071  # GL_CLAMP_TO_EDGE
-DEF RL_TEXTURE_WRAP_MIRROR_REPEAT = 33648  # GL_MIRRORED_REPEAT
-DEF RL_TEXTURE_WRAP_MIRROR_CLAMP = 34626  # GL_MIRROR_CLAMP_EXT
-DEF RL_MODELVIEW = 5888  # GL_MODELVIEW
-DEF RL_PROJECTION = 5889  # GL_PROJECTION
-DEF RL_TEXTURE = 5890  # GL_TEXTURE
-DEF RL_LINES = 1  # GL_LINES
-DEF RL_TRIANGLES = 4  # GL_TRIANGLES
-DEF RL_QUADS = 7  # GL_QUADS
-DEF RL_UNSIGNED_BYTE = 5121  # GL_UNSIGNED_BYTE
-DEF RL_FLOAT = 5126  # GL_FLOAT
-DEF RL_STREAM_DRAW = 35040  # GL_STREAM_DRAW
-DEF RL_STREAM_READ = 35041  # GL_STREAM_READ
-DEF RL_STREAM_COPY = 35042  # GL_STREAM_COPY
-DEF RL_STATIC_DRAW = 35044  # GL_STATIC_DRAW
-DEF RL_STATIC_READ = 35045  # GL_STATIC_READ
-DEF RL_STATIC_COPY = 35046  # GL_STATIC_COPY
-DEF RL_DYNAMIC_DRAW = 35048  # GL_DYNAMIC_DRAW
-DEF RL_DYNAMIC_READ = 35049  # GL_DYNAMIC_READ
-DEF RL_DYNAMIC_COPY = 35050  # GL_DYNAMIC_COPY
-DEF RL_FRAGMENT_SHADER = 35632  # GL_FRAGMENT_SHADER
-DEF RL_VERTEX_SHADER = 35633  # GL_VERTEX_SHADER
-DEF RL_COMPUTE_SHADER = 37305  # GL_COMPUTE_SHADER
-DEF PI = 3.141592653589793
-DEF DEG2RAD = (PI/180.0)
-DEF RAD2DEG = (180.0/PI)
-DEF GL_SHADING_LANGUAGE_VERSION = 35724
-DEF GL_COMPRESSED_RGB_S3TC_DXT1_EXT = 33776
-DEF GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = 33777
-DEF GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = 33778
-DEF GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = 33779
-DEF GL_ETC1_RGB8_OES = 36196
-DEF GL_COMPRESSED_RGB8_ETC2 = 37492
-DEF GL_COMPRESSED_RGBA8_ETC2_EAC = 37496
-DEF GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG = 35840
-DEF GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG = 35842
-DEF GL_COMPRESSED_RGBA_ASTC_4x4_KHR = 37808
-DEF GL_COMPRESSED_RGBA_ASTC_8x8_KHR = 37815
-DEF GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = 34047
-DEF GL_TEXTURE_MAX_ANISOTROPY_EXT = 34046
-DEF GL_UNSIGNED_SHORT_5_6_5 = 33635
-DEF GL_UNSIGNED_SHORT_5_5_5_1 = 32820
-DEF GL_UNSIGNED_SHORT_4_4_4_4 = 32819
-DEF GL_LUMINANCE = 6409
-DEF GL_LUMINANCE_ALPHA = 6410
-DEF RAYLIB_VERSION = "4.2"
-DEF EPSILON = 1e-06
-DEF RAYGUI_VERSION = "3.2"
-DEF SCROLLBAR_LEFT_SIDE = 0
-DEF SCROLLBAR_RIGHT_SIDE = 1
-DEF RAYGUI_ICON_SIZE = 16  # Size of icons in pixels (squared)
-DEF RAYGUI_ICON_MAX_ICONS = 256  # Maximum number of icons
-DEF RAYGUI_ICON_MAX_NAME_LENGTH = 32  # Maximum length of icon name id
-DEF RAYGUI_MAX_CONTROLS = 16  # Maximum number of standard controls
-DEF RAYGUI_MAX_PROPS_BASE = 16  # Maximum number of standard properties
-DEF RAYGUI_MAX_PROPS_EXTENDED = 8  # Maximum number of extended properties
-DEF KEY_RIGHT = 262
-DEF KEY_LEFT = 263
-DEF KEY_DOWN = 264
-DEF KEY_UP = 265
-DEF KEY_BACKSPACE = 259
-DEF KEY_ENTER = 257
-DEF RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT = 24
-DEF RAYGUI_GROUPBOX_LINE_THICK = 1
-DEF RAYGUI_LINE_MARGIN_TEXT = 12
-DEF RAYGUI_LINE_TEXT_PADDING = 4
-DEF RAYGUI_PANEL_BORDER_WIDTH = 1
-DEF RAYGUI_TOGGLEGROUP_MAX_ITEMS = 32
-DEF RAYGUI_VALUEBOX_MAX_CHARS = 32
-DEF RAYGUI_COLORBARALPHA_CHECKED_SIZE = 10
-DEF RAYGUI_MESSAGEBOX_BUTTON_HEIGHT = 24
-DEF RAYGUI_MESSAGEBOX_BUTTON_PADDING = 12
-DEF RAYGUI_TEXTINPUTBOX_BUTTON_HEIGHT = 28
-DEF RAYGUI_TEXTINPUTBOX_BUTTON_PADDING = 12
-DEF RAYGUI_TEXTINPUTBOX_HEIGHT = 28
-DEF RAYGUI_GRID_ALPHA = 0.15
-DEF MAX_LINE_BUFFER_SIZE = 256
-DEF ICON_TEXT_PADDING = 4
-DEF RAYGUI_TEXTSPLIT_MAX_ITEMS = 128
-DEF RAYGUI_TEXTSPLIT_MAX_TEXT_SIZE = 1024
-DEF RAYGUI_TEXTFORMAT_MAX_SIZE = 256
-cdef enum rlGlVersion:
-	OPENGL_11 = 1,
-	OPENGL_21 = 2,
-	OPENGL_33 = 3,
-	OPENGL_43 = 4,
-	OPENGL_ES_20 = 5
-
-
-cdef enum rlFramebufferAttachType:
-	RL_ATTACHMENT_COLOR_CHANNEL0 = 0,
-	RL_ATTACHMENT_COLOR_CHANNEL1 = 1,
-	RL_ATTACHMENT_COLOR_CHANNEL2 = 2,
-	RL_ATTACHMENT_COLOR_CHANNEL3 = 3,
-	RL_ATTACHMENT_COLOR_CHANNEL4 = 4,
-	RL_ATTACHMENT_COLOR_CHANNEL5 = 5,
-	RL_ATTACHMENT_COLOR_CHANNEL6 = 6,
-	RL_ATTACHMENT_COLOR_CHANNEL7 = 7,
-	RL_ATTACHMENT_DEPTH = 100,
-	RL_ATTACHMENT_STENCIL = 200
-
-
-cdef enum rlFramebufferAttachTextureType:
-	RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0,
-	RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1,
-	RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2,
-	RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y = 3,
-	RL_ATTACHMENT_CUBEMAP_POSITIVE_Z = 4,
-	RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5,
-	RL_ATTACHMENT_TEXTURE2D = 100,
-	RL_ATTACHMENT_RENDERBUFFER = 200
-
-
-#  Trace log level
-cdef enum rlTraceLogLevel:
-	RL_LOG_ALL = 0,  #  Display all logs
-	RL_LOG_TRACE = 1,  #  Trace logging, intended for internal use only
-	RL_LOG_DEBUG = 2,  #  Debug logging, used for internal debugging, it should be disabled on release builds
-	RL_LOG_INFO = 3,  #  Info logging, used for program execution info
-	RL_LOG_WARNING = 4,  #  Warning logging, used on recoverable failures
-	RL_LOG_ERROR = 5,  #  Error logging, used on unrecoverable failures
-	RL_LOG_FATAL = 6,  #  Fatal logging, used to abort program: exit(EXIT_FAILURE)
-	RL_LOG_NONE = 7  #  Disable logging
-
-
-#  Texture formats (support depends on OpenGL version)
-cdef enum rlPixelFormat:
-	RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1,  #  8 bit per pixel (no alpha)
-	RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2,  #  8*2 bpp (2 channels)
-	RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3,  #  16 bpp
-	RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8 = 4,  #  24 bpp
-	RL_PIXELFORMAT_UNCOMPRESSED_R5G5B5A1 = 5,  #  16 bpp (1 bit alpha)
-	RL_PIXELFORMAT_UNCOMPRESSED_R4G4B4A4 = 6,  #  16 bpp (4 bit alpha)
-	RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = 7,  #  32 bpp
-	RL_PIXELFORMAT_UNCOMPRESSED_R32 = 8,  #  32 bpp (1 channel - float)
-	RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9,  #  32*3 bpp (3 channels - float)
-	RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10,  #  32*4 bpp (4 channels - float)
-	RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11,  #  4 bpp (no alpha)
-	RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12,  #  4 bpp (1 bit alpha)
-	RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13,  #  8 bpp
-	RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14,  #  8 bpp
-	RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15,  #  4 bpp
-	RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16,  #  4 bpp
-	RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17,  #  8 bpp
-	RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18,  #  4 bpp
-	RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19,  #  4 bpp
-	RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20,  #  8 bpp
-	RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21  #  2 bpp
-
-
-#  Texture parameters: filter mode
-cdef enum rlTextureFilter:
-	RL_TEXTURE_FILTER_POINT = 0,  #  No filter, just pixel approximation
-	RL_TEXTURE_FILTER_BILINEAR = 1,  #  Linear filtering
-	RL_TEXTURE_FILTER_TRILINEAR = 2,  #  Trilinear filtering (linear with mipmaps)
-	RL_TEXTURE_FILTER_ANISOTROPIC_4X = 3,  #  Anisotropic filtering 4x
-	RL_TEXTURE_FILTER_ANISOTROPIC_8X = 4,  #  Anisotropic filtering 8x
-	RL_TEXTURE_FILTER_ANISOTROPIC_16X = 5  #  Anisotropic filtering 16x
-
-
-#  Color blending modes (pre-defined)
-cdef enum rlBlendMode:
-	RL_BLEND_ALPHA = 0,  #  Blend textures considering alpha (default)
-	RL_BLEND_ADDITIVE = 1,  #  Blend textures adding colors
-	RL_BLEND_MULTIPLIED = 2,  #  Blend textures multiplying colors
-	RL_BLEND_ADD_COLORS = 3,  #  Blend textures adding colors (alternative)
-	RL_BLEND_SUBTRACT_COLORS = 4,  #  Blend textures subtracting colors (alternative)
-	RL_BLEND_ALPHA_PREMULTIPLY = 5,  #  Blend premultiplied textures considering alpha
-	RL_BLEND_CUSTOM = 6  #  Blend textures using custom src/dst factors (use rlSetBlendFactors())
-
-
-#  Shader location point type
-cdef enum rlShaderLocationIndex:
-	RL_SHADER_LOC_VERTEX_POSITION = 0,  #  Shader location: vertex attribute: position
-	RL_SHADER_LOC_VERTEX_TEXCOORD01 = 1,  #  Shader location: vertex attribute: texcoord01
-	RL_SHADER_LOC_VERTEX_TEXCOORD02 = 2,  #  Shader location: vertex attribute: texcoord02
-	RL_SHADER_LOC_VERTEX_NORMAL = 3,  #  Shader location: vertex attribute: normal
-	RL_SHADER_LOC_VERTEX_TANGENT = 4,  #  Shader location: vertex attribute: tangent
-	RL_SHADER_LOC_VERTEX_COLOR = 5,  #  Shader location: vertex attribute: color
-	RL_SHADER_LOC_MATRIX_MVP = 6,  #  Shader location: matrix uniform: model-view-projection
-	RL_SHADER_LOC_MATRIX_VIEW = 7,  #  Shader location: matrix uniform: view (camera transform)
-	RL_SHADER_LOC_MATRIX_PROJECTION = 8,  #  Shader location: matrix uniform: projection
-	RL_SHADER_LOC_MATRIX_MODEL = 9,  #  Shader location: matrix uniform: model (transform)
-	RL_SHADER_LOC_MATRIX_NORMAL = 10,  #  Shader location: matrix uniform: normal
-	RL_SHADER_LOC_VECTOR_VIEW = 11,  #  Shader location: vector uniform: view
-	RL_SHADER_LOC_COLOR_DIFFUSE = 12,  #  Shader location: vector uniform: diffuse color
-	RL_SHADER_LOC_COLOR_SPECULAR = 13,  #  Shader location: vector uniform: specular color
-	RL_SHADER_LOC_COLOR_AMBIENT = 14,  #  Shader location: vector uniform: ambient color
-	RL_SHADER_LOC_MAP_ALBEDO = 15,  #  Shader location: sampler2d texture: albedo (same as: RL_SHADER_LOC_MAP_DIFFUSE)
-	RL_SHADER_LOC_MAP_METALNESS = 16,  #  Shader location: sampler2d texture: metalness (same as: RL_SHADER_LOC_MAP_SPECULAR)
-	RL_SHADER_LOC_MAP_NORMAL = 17,  #  Shader location: sampler2d texture: normal
-	RL_SHADER_LOC_MAP_ROUGHNESS = 18,  #  Shader location: sampler2d texture: roughness
-	RL_SHADER_LOC_MAP_OCCLUSION = 19,  #  Shader location: sampler2d texture: occlusion
-	RL_SHADER_LOC_MAP_EMISSION = 20,  #  Shader location: sampler2d texture: emission
-	RL_SHADER_LOC_MAP_HEIGHT = 21,  #  Shader location: sampler2d texture: height
-	RL_SHADER_LOC_MAP_CUBEMAP = 22,  #  Shader location: samplerCube texture: cubemap
-	RL_SHADER_LOC_MAP_IRRADIANCE = 23,  #  Shader location: samplerCube texture: irradiance
-	RL_SHADER_LOC_MAP_PREFILTER = 24,  #  Shader location: samplerCube texture: prefilter
-	RL_SHADER_LOC_MAP_BRDF = 25  #  Shader location: sampler2d texture: brdf
-
-
-#  Shader uniform data type
-cdef enum rlShaderUniformDataType:
-	RL_SHADER_UNIFORM_FLOAT = 0,  #  Shader uniform type: float
-	RL_SHADER_UNIFORM_VEC2 = 1,  #  Shader uniform type: vec2 (2 float)
-	RL_SHADER_UNIFORM_VEC3 = 2,  #  Shader uniform type: vec3 (3 float)
-	RL_SHADER_UNIFORM_VEC4 = 3,  #  Shader uniform type: vec4 (4 float)
-	RL_SHADER_UNIFORM_INT = 4,  #  Shader uniform type: int
-	RL_SHADER_UNIFORM_IVEC2 = 5,  #  Shader uniform type: ivec2 (2 int)
-	RL_SHADER_UNIFORM_IVEC3 = 6,  #  Shader uniform type: ivec3 (3 int)
-	RL_SHADER_UNIFORM_IVEC4 = 7,  #  Shader uniform type: ivec4 (4 int)
-	RL_SHADER_UNIFORM_SAMPLER2D = 8  #  Shader uniform type: sampler2d
-
-
-#  Shader attribute data types
-cdef enum rlShaderAttributeDataType:
-	RL_SHADER_ATTRIB_FLOAT = 0,  #  Shader attribute type: float
-	RL_SHADER_ATTRIB_VEC2 = 1,  #  Shader attribute type: vec2 (2 float)
-	RL_SHADER_ATTRIB_VEC3 = 2,  #  Shader attribute type: vec3 (3 float)
-	RL_SHADER_ATTRIB_VEC4 = 3  #  Shader attribute type: vec4 (4 float)
-
-
-#  System/Window config flags
-cdef enum ConfigFlags:
-	FLAG_VSYNC_HINT = 64,  #  Set to try enabling V-Sync on GPU
-	FLAG_FULLSCREEN_MODE = 2,  #  Set to run program in fullscreen
-	FLAG_WINDOW_RESIZABLE = 4,  #  Set to allow resizable window
-	FLAG_WINDOW_UNDECORATED = 8,  #  Set to disable window decoration (frame and buttons)
-	FLAG_WINDOW_HIDDEN = 128,  #  Set to hide window
-	FLAG_WINDOW_MINIMIZED = 512,  #  Set to minimize window (iconify)
-	FLAG_WINDOW_MAXIMIZED = 1024,  #  Set to maximize window (expanded to monitor)
-	FLAG_WINDOW_UNFOCUSED = 2048,  #  Set to window non focused
-	FLAG_WINDOW_TOPMOST = 4096,  #  Set to window always on top
-	FLAG_WINDOW_ALWAYS_RUN = 256,  #  Set to allow windows running while minimized
-	FLAG_WINDOW_TRANSPARENT = 16,  #  Set to allow transparent framebuffer
-	FLAG_WINDOW_HIGHDPI = 8192,  #  Set to support HighDPI
-	FLAG_WINDOW_MOUSE_PASSTHROUGH = 16384,  #  Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED
-	FLAG_MSAA_4X_HINT = 32,  #  Set to try enabling MSAA 4X
-	FLAG_INTERLACED_HINT = 65536  #  Set to try enabling interlaced video format (for V3D)
-
-
-#  Trace log level
-cdef enum TraceLogLevel:
-	LOG_ALL = 0,  #  Display all logs
-	LOG_TRACE = 1,  #  Trace logging, intended for internal use only
-	LOG_DEBUG = 2,  #  Debug logging, used for internal debugging, it should be disabled on release builds
-	LOG_INFO = 3,  #  Info logging, used for program execution info
-	LOG_WARNING = 4,  #  Warning logging, used on recoverable failures
-	LOG_ERROR = 5,  #  Error logging, used on unrecoverable failures
-	LOG_FATAL = 6,  #  Fatal logging, used to abort program: exit(EXIT_FAILURE)
-	LOG_NONE = 7  #  Disable logging
-
-
-#  Keyboard keys (US keyboard layout)
-cdef enum KeyboardKey:
-	KEY_NULL = 0,  #  Key: NULL, used for no key pressed
-	KEY_APOSTROPHE = 39,  #  Key: '
-	KEY_COMMA = 44,  #  Key: ,
-	KEY_MINUS = 45,  #  Key: -
-	KEY_PERIOD = 46,  #  Key: .
-	KEY_SLASH = 47,  #  Key: /
-	KEY_ZERO = 48,  #  Key: 0
-	KEY_ONE = 49,  #  Key: 1
-	KEY_TWO = 50,  #  Key: 2
-	KEY_THREE = 51,  #  Key: 3
-	KEY_FOUR = 52,  #  Key: 4
-	KEY_FIVE = 53,  #  Key: 5
-	KEY_SIX = 54,  #  Key: 6
-	KEY_SEVEN = 55,  #  Key: 7
-	KEY_EIGHT = 56,  #  Key: 8
-	KEY_NINE = 57,  #  Key: 9
-	KEY_SEMICOLON = 59,  #  Key: ;
-	KEY_EQUAL = 61,  #  Key: =
-	KEY_A = 65,  #  Key: A | a
-	KEY_B = 66,  #  Key: B | b
-	KEY_C = 67,  #  Key: C | c
-	KEY_D = 68,  #  Key: D | d
-	KEY_E = 69,  #  Key: E | e
-	KEY_F = 70,  #  Key: F | f
-	KEY_G = 71,  #  Key: G | g
-	KEY_H = 72,  #  Key: H | h
-	KEY_I = 73,  #  Key: I | i
-	KEY_J = 74,  #  Key: J | j
-	KEY_K = 75,  #  Key: K | k
-	KEY_L = 76,  #  Key: L | l
-	KEY_M = 77,  #  Key: M | m
-	KEY_N = 78,  #  Key: N | n
-	KEY_O = 79,  #  Key: O | o
-	KEY_P = 80,  #  Key: P | p
-	KEY_Q = 81,  #  Key: Q | q
-	KEY_R = 82,  #  Key: R | r
-	KEY_S = 83,  #  Key: S | s
-	KEY_T = 84,  #  Key: T | t
-	KEY_U = 85,  #  Key: U | u
-	KEY_V = 86,  #  Key: V | v
-	KEY_W = 87,  #  Key: W | w
-	KEY_X = 88,  #  Key: X | x
-	KEY_Y = 89,  #  Key: Y | y
-	KEY_Z = 90,  #  Key: Z | z
-	KEY_LEFT_BRACKET = 91,  #  Key: [
-	KEY_BACKSLASH = 92,  #  Key: '\'
-	KEY_RIGHT_BRACKET = 93,  #  Key: ]
-	KEY_GRAVE = 96,  #  Key: `
-	KEY_SPACE = 32,  #  Key: Space
-	KEY_ESCAPE = 256,  #  Key: Esc
-	KEY_ENTER = 257,  #  Key: Enter
-	KEY_TAB = 258,  #  Key: Tab
-	KEY_BACKSPACE = 259,  #  Key: Backspace
-	KEY_INSERT = 260,  #  Key: Ins
-	KEY_DELETE = 261,  #  Key: Del
-	KEY_RIGHT = 262,  #  Key: Cursor right
-	KEY_LEFT = 263,  #  Key: Cursor left
-	KEY_DOWN = 264,  #  Key: Cursor down
-	KEY_UP = 265,  #  Key: Cursor up
-	KEY_PAGE_UP = 266,  #  Key: Page up
-	KEY_PAGE_DOWN = 267,  #  Key: Page down
-	KEY_HOME = 268,  #  Key: Home
-	KEY_END = 269,  #  Key: End
-	KEY_CAPS_LOCK = 280,  #  Key: Caps lock
-	KEY_SCROLL_LOCK = 281,  #  Key: Scroll down
-	KEY_NUM_LOCK = 282,  #  Key: Num lock
-	KEY_PRINT_SCREEN = 283,  #  Key: Print screen
-	KEY_PAUSE = 284,  #  Key: Pause
-	KEY_F1 = 290,  #  Key: F1
-	KEY_F2 = 291,  #  Key: F2
-	KEY_F3 = 292,  #  Key: F3
-	KEY_F4 = 293,  #  Key: F4
-	KEY_F5 = 294,  #  Key: F5
-	KEY_F6 = 295,  #  Key: F6
-	KEY_F7 = 296,  #  Key: F7
-	KEY_F8 = 297,  #  Key: F8
-	KEY_F9 = 298,  #  Key: F9
-	KEY_F10 = 299,  #  Key: F10
-	KEY_F11 = 300,  #  Key: F11
-	KEY_F12 = 301,  #  Key: F12
-	KEY_LEFT_SHIFT = 340,  #  Key: Shift left
-	KEY_LEFT_CONTROL = 341,  #  Key: Control left
-	KEY_LEFT_ALT = 342,  #  Key: Alt left
-	KEY_LEFT_SUPER = 343,  #  Key: Super left
-	KEY_RIGHT_SHIFT = 344,  #  Key: Shift right
-	KEY_RIGHT_CONTROL = 345,  #  Key: Control right
-	KEY_RIGHT_ALT = 346,  #  Key: Alt right
-	KEY_RIGHT_SUPER = 347,  #  Key: Super right
-	KEY_KB_MENU = 348,  #  Key: KB menu
-	KEY_KP_0 = 320,  #  Key: Keypad 0
-	KEY_KP_1 = 321,  #  Key: Keypad 1
-	KEY_KP_2 = 322,  #  Key: Keypad 2
-	KEY_KP_3 = 323,  #  Key: Keypad 3
-	KEY_KP_4 = 324,  #  Key: Keypad 4
-	KEY_KP_5 = 325,  #  Key: Keypad 5
-	KEY_KP_6 = 326,  #  Key: Keypad 6
-	KEY_KP_7 = 327,  #  Key: Keypad 7
-	KEY_KP_8 = 328,  #  Key: Keypad 8
-	KEY_KP_9 = 329,  #  Key: Keypad 9
-	KEY_KP_DECIMAL = 330,  #  Key: Keypad .
-	KEY_KP_DIVIDE = 331,  #  Key: Keypad /
-	KEY_KP_MULTIPLY = 332,  #  Key: Keypad *
-	KEY_KP_SUBTRACT = 333,  #  Key: Keypad -
-	KEY_KP_ADD = 334,  #  Key: Keypad +
-	KEY_KP_ENTER = 335,  #  Key: Keypad Enter
-	KEY_KP_EQUAL = 336,  #  Key: Keypad =
-	KEY_BACK = 4,  #  Key: Android back button
-	KEY_MENU = 82,  #  Key: Android menu button
-	KEY_VOLUME_UP = 24,  #  Key: Android volume up button
-	KEY_VOLUME_DOWN = 25  #  Key: Android volume down button
-
-
-#  Mouse buttons
-cdef enum MouseButton:
-	MOUSE_BUTTON_LEFT = 0,  #  Mouse button left
-	MOUSE_BUTTON_RIGHT = 1,  #  Mouse button right
-	MOUSE_BUTTON_MIDDLE = 2,  #  Mouse button middle (pressed wheel)
-	MOUSE_BUTTON_SIDE = 3,  #  Mouse button side (advanced mouse device)
-	MOUSE_BUTTON_EXTRA = 4,  #  Mouse button extra (advanced mouse device)
-	MOUSE_BUTTON_FORWARD = 5,  #  Mouse button fordward (advanced mouse device)
-	MOUSE_BUTTON_BACK = 6  #  Mouse button back (advanced mouse device)
-
-
-#  Mouse cursor
-cdef enum MouseCursor:
-	MOUSE_CURSOR_DEFAULT = 0,  #  Default pointer shape
-	MOUSE_CURSOR_ARROW = 1,  #  Arrow shape
-	MOUSE_CURSOR_IBEAM = 2,  #  Text writing cursor shape
-	MOUSE_CURSOR_CROSSHAIR = 3,  #  Cross shape
-	MOUSE_CURSOR_POINTING_HAND = 4,  #  Pointing hand cursor
-	MOUSE_CURSOR_RESIZE_EW = 5,  #  Horizontal resize/move arrow shape
-	MOUSE_CURSOR_RESIZE_NS = 6,  #  Vertical resize/move arrow shape
-	MOUSE_CURSOR_RESIZE_NWSE = 7,  #  Top-left to bottom-right diagonal resize/move arrow shape
-	MOUSE_CURSOR_RESIZE_NESW = 8,  #  The top-right to bottom-left diagonal resize/move arrow shape
-	MOUSE_CURSOR_RESIZE_ALL = 9,  #  The omni-directional resize/move cursor shape
-	MOUSE_CURSOR_NOT_ALLOWED = 10  #  The operation-not-allowed shape
-
-
-#  Gamepad buttons
-cdef enum GamepadButton:
-	GAMEPAD_BUTTON_UNKNOWN = 0,  #  Unknown button, just for error checking
-	GAMEPAD_BUTTON_LEFT_FACE_UP = 1,  #  Gamepad left DPAD up button
-	GAMEPAD_BUTTON_LEFT_FACE_RIGHT = 2,  #  Gamepad left DPAD right button
-	GAMEPAD_BUTTON_LEFT_FACE_DOWN = 3,  #  Gamepad left DPAD down button
-	GAMEPAD_BUTTON_LEFT_FACE_LEFT = 4,  #  Gamepad left DPAD left button
-	GAMEPAD_BUTTON_RIGHT_FACE_UP = 5,  #  Gamepad right button up (i.e. PS3: Triangle, Xbox: Y)
-	GAMEPAD_BUTTON_RIGHT_FACE_RIGHT = 6,  #  Gamepad right button right (i.e. PS3: Square, Xbox: X)
-	GAMEPAD_BUTTON_RIGHT_FACE_DOWN = 7,  #  Gamepad right button down (i.e. PS3: Cross, Xbox: A)
-	GAMEPAD_BUTTON_RIGHT_FACE_LEFT = 8,  #  Gamepad right button left (i.e. PS3: Circle, Xbox: B)
-	GAMEPAD_BUTTON_LEFT_TRIGGER_1 = 9,  #  Gamepad top/back trigger left (first), it could be a trailing button
-	GAMEPAD_BUTTON_LEFT_TRIGGER_2 = 10,  #  Gamepad top/back trigger left (second), it could be a trailing button
-	GAMEPAD_BUTTON_RIGHT_TRIGGER_1 = 11,  #  Gamepad top/back trigger right (one), it could be a trailing button
-	GAMEPAD_BUTTON_RIGHT_TRIGGER_2 = 12,  #  Gamepad top/back trigger right (second), it could be a trailing button
-	GAMEPAD_BUTTON_MIDDLE_LEFT = 13,  #  Gamepad center buttons, left one (i.e. PS3: Select)
-	GAMEPAD_BUTTON_MIDDLE = 14,  #  Gamepad center buttons, middle one (i.e. PS3: PS, Xbox: XBOX)
-	GAMEPAD_BUTTON_MIDDLE_RIGHT = 15,  #  Gamepad center buttons, right one (i.e. PS3: Start)
-	GAMEPAD_BUTTON_LEFT_THUMB = 16,  #  Gamepad joystick pressed button left
-	GAMEPAD_BUTTON_RIGHT_THUMB = 17  #  Gamepad joystick pressed button right
-
-
-#  Gamepad axis
-cdef enum GamepadAxis:
-	GAMEPAD_AXIS_LEFT_X = 0,  #  Gamepad left stick X axis
-	GAMEPAD_AXIS_LEFT_Y = 1,  #  Gamepad left stick Y axis
-	GAMEPAD_AXIS_RIGHT_X = 2,  #  Gamepad right stick X axis
-	GAMEPAD_AXIS_RIGHT_Y = 3,  #  Gamepad right stick Y axis
-	GAMEPAD_AXIS_LEFT_TRIGGER = 4,  #  Gamepad back trigger left, pressure level: [1..-1]
-	GAMEPAD_AXIS_RIGHT_TRIGGER = 5  #  Gamepad back trigger right, pressure level: [1..-1]
-
-
-#  Material map index
-cdef enum MaterialMapIndex:
-	MATERIAL_MAP_ALBEDO = 0,  #  Albedo material (same as: MATERIAL_MAP_DIFFUSE)
-	MATERIAL_MAP_METALNESS = 1,  #  Metalness material (same as: MATERIAL_MAP_SPECULAR)
-	MATERIAL_MAP_NORMAL = 2,  #  Normal material
-	MATERIAL_MAP_ROUGHNESS = 3,  #  Roughness material
-	MATERIAL_MAP_OCCLUSION = 4,  #  Ambient occlusion material
-	MATERIAL_MAP_EMISSION = 5,  #  Emission material
-	MATERIAL_MAP_HEIGHT = 6,  #  Heightmap material
-	MATERIAL_MAP_CUBEMAP = 7,  #  Cubemap material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
-	MATERIAL_MAP_IRRADIANCE = 8,  #  Irradiance material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
-	MATERIAL_MAP_PREFILTER = 9,  #  Prefilter material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
-	MATERIAL_MAP_BRDF = 10  #  Brdf material
-
-
-#  Shader location index
-cdef enum ShaderLocationIndex:
-	SHADER_LOC_VERTEX_POSITION = 0,  #  Shader location: vertex attribute: position
-	SHADER_LOC_VERTEX_TEXCOORD01 = 1,  #  Shader location: vertex attribute: texcoord01
-	SHADER_LOC_VERTEX_TEXCOORD02 = 2,  #  Shader location: vertex attribute: texcoord02
-	SHADER_LOC_VERTEX_NORMAL = 3,  #  Shader location: vertex attribute: normal
-	SHADER_LOC_VERTEX_TANGENT = 4,  #  Shader location: vertex attribute: tangent
-	SHADER_LOC_VERTEX_COLOR = 5,  #  Shader location: vertex attribute: color
-	SHADER_LOC_MATRIX_MVP = 6,  #  Shader location: matrix uniform: model-view-projection
-	SHADER_LOC_MATRIX_VIEW = 7,  #  Shader location: matrix uniform: view (camera transform)
-	SHADER_LOC_MATRIX_PROJECTION = 8,  #  Shader location: matrix uniform: projection
-	SHADER_LOC_MATRIX_MODEL = 9,  #  Shader location: matrix uniform: model (transform)
-	SHADER_LOC_MATRIX_NORMAL = 10,  #  Shader location: matrix uniform: normal
-	SHADER_LOC_VECTOR_VIEW = 11,  #  Shader location: vector uniform: view
-	SHADER_LOC_COLOR_DIFFUSE = 12,  #  Shader location: vector uniform: diffuse color
-	SHADER_LOC_COLOR_SPECULAR = 13,  #  Shader location: vector uniform: specular color
-	SHADER_LOC_COLOR_AMBIENT = 14,  #  Shader location: vector uniform: ambient color
-	SHADER_LOC_MAP_ALBEDO = 15,  #  Shader location: sampler2d texture: albedo (same as: SHADER_LOC_MAP_DIFFUSE)
-	SHADER_LOC_MAP_METALNESS = 16,  #  Shader location: sampler2d texture: metalness (same as: SHADER_LOC_MAP_SPECULAR)
-	SHADER_LOC_MAP_NORMAL = 17,  #  Shader location: sampler2d texture: normal
-	SHADER_LOC_MAP_ROUGHNESS = 18,  #  Shader location: sampler2d texture: roughness
-	SHADER_LOC_MAP_OCCLUSION = 19,  #  Shader location: sampler2d texture: occlusion
-	SHADER_LOC_MAP_EMISSION = 20,  #  Shader location: sampler2d texture: emission
-	SHADER_LOC_MAP_HEIGHT = 21,  #  Shader location: sampler2d texture: height
-	SHADER_LOC_MAP_CUBEMAP = 22,  #  Shader location: samplerCube texture: cubemap
-	SHADER_LOC_MAP_IRRADIANCE = 23,  #  Shader location: samplerCube texture: irradiance
-	SHADER_LOC_MAP_PREFILTER = 24,  #  Shader location: samplerCube texture: prefilter
-	SHADER_LOC_MAP_BRDF = 25  #  Shader location: sampler2d texture: brdf
-
-
-#  Shader uniform data type
-cdef enum ShaderUniformDataType:
-	SHADER_UNIFORM_FLOAT = 0,  #  Shader uniform type: float
-	SHADER_UNIFORM_VEC2 = 1,  #  Shader uniform type: vec2 (2 float)
-	SHADER_UNIFORM_VEC3 = 2,  #  Shader uniform type: vec3 (3 float)
-	SHADER_UNIFORM_VEC4 = 3,  #  Shader uniform type: vec4 (4 float)
-	SHADER_UNIFORM_INT = 4,  #  Shader uniform type: int
-	SHADER_UNIFORM_IVEC2 = 5,  #  Shader uniform type: ivec2 (2 int)
-	SHADER_UNIFORM_IVEC3 = 6,  #  Shader uniform type: ivec3 (3 int)
-	SHADER_UNIFORM_IVEC4 = 7,  #  Shader uniform type: ivec4 (4 int)
-	SHADER_UNIFORM_SAMPLER2D = 8  #  Shader uniform type: sampler2d
-
-
-#  Shader attribute data types
-cdef enum ShaderAttributeDataType:
-	SHADER_ATTRIB_FLOAT = 0,  #  Shader attribute type: float
-	SHADER_ATTRIB_VEC2 = 1,  #  Shader attribute type: vec2 (2 float)
-	SHADER_ATTRIB_VEC3 = 2,  #  Shader attribute type: vec3 (3 float)
-	SHADER_ATTRIB_VEC4 = 3  #  Shader attribute type: vec4 (4 float)
-
-
-#  Pixel formats
-cdef enum PixelFormat:
-	PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1,  #  8 bit per pixel (no alpha)
-	PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2,  #  8*2 bpp (2 channels)
-	PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3,  #  16 bpp
-	PIXELFORMAT_UNCOMPRESSED_R8G8B8 = 4,  #  24 bpp
-	PIXELFORMAT_UNCOMPRESSED_R5G5B5A1 = 5,  #  16 bpp (1 bit alpha)
-	PIXELFORMAT_UNCOMPRESSED_R4G4B4A4 = 6,  #  16 bpp (4 bit alpha)
-	PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = 7,  #  32 bpp
-	PIXELFORMAT_UNCOMPRESSED_R32 = 8,  #  32 bpp (1 channel - float)
-	PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9,  #  32*3 bpp (3 channels - float)
-	PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10,  #  32*4 bpp (4 channels - float)
-	PIXELFORMAT_COMPRESSED_DXT1_RGB = 11,  #  4 bpp (no alpha)
-	PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12,  #  4 bpp (1 bit alpha)
-	PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13,  #  8 bpp
-	PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14,  #  8 bpp
-	PIXELFORMAT_COMPRESSED_ETC1_RGB = 15,  #  4 bpp
-	PIXELFORMAT_COMPRESSED_ETC2_RGB = 16,  #  4 bpp
-	PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17,  #  8 bpp
-	PIXELFORMAT_COMPRESSED_PVRT_RGB = 18,  #  4 bpp
-	PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19,  #  4 bpp
-	PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20,  #  8 bpp
-	PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21  #  2 bpp
-
-
-#  Texture parameters: filter mode
-cdef enum TextureFilter:
-	TEXTURE_FILTER_POINT = 0,  #  No filter, just pixel approximation
-	TEXTURE_FILTER_BILINEAR = 1,  #  Linear filtering
-	TEXTURE_FILTER_TRILINEAR = 2,  #  Trilinear filtering (linear with mipmaps)
-	TEXTURE_FILTER_ANISOTROPIC_4X = 3,  #  Anisotropic filtering 4x
-	TEXTURE_FILTER_ANISOTROPIC_8X = 4,  #  Anisotropic filtering 8x
-	TEXTURE_FILTER_ANISOTROPIC_16X = 5  #  Anisotropic filtering 16x
-
-
-#  Texture parameters: wrap mode
-cdef enum TextureWrap:
-	TEXTURE_WRAP_REPEAT = 0,  #  Repeats texture in tiled mode
-	TEXTURE_WRAP_CLAMP = 1,  #  Clamps texture to edge pixel in tiled mode
-	TEXTURE_WRAP_MIRROR_REPEAT = 2,  #  Mirrors and repeats the texture in tiled mode
-	TEXTURE_WRAP_MIRROR_CLAMP = 3  #  Mirrors and clamps to border the texture in tiled mode
-
-
-#  Cubemap layouts
-cdef enum CubemapLayout:
-	CUBEMAP_LAYOUT_AUTO_DETECT = 0,  #  Automatically detect layout type
-	CUBEMAP_LAYOUT_LINE_VERTICAL = 1,  #  Layout is defined by a vertical line with faces
-	CUBEMAP_LAYOUT_LINE_HORIZONTAL = 2,  #  Layout is defined by an horizontal line with faces
-	CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR = 3,  #  Layout is defined by a 3x4 cross with cubemap faces
-	CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE = 4,  #  Layout is defined by a 4x3 cross with cubemap faces
-	CUBEMAP_LAYOUT_PANORAMA = 5  #  Layout is defined by a panorama image (equirectangular map)
-
-
-#  Font type, defines generation method
-cdef enum FontType:
-	FONT_DEFAULT = 0,  #  Default font generation, anti-aliased
-	FONT_BITMAP = 1,  #  Bitmap font generation, no anti-aliasing
-	FONT_SDF = 2  #  SDF font generation, requires external shader
-
-
-#  Color blending modes (pre-defined)
-cdef enum BlendMode:
-	BLEND_ALPHA = 0,  #  Blend textures considering alpha (default)
-	BLEND_ADDITIVE = 1,  #  Blend textures adding colors
-	BLEND_MULTIPLIED = 2,  #  Blend textures multiplying colors
-	BLEND_ADD_COLORS = 3,  #  Blend textures adding colors (alternative)
-	BLEND_SUBTRACT_COLORS = 4,  #  Blend textures subtracting colors (alternative)
-	BLEND_ALPHA_PREMULTIPLY = 5,  #  Blend premultiplied textures considering alpha
-	BLEND_CUSTOM = 6  #  Blend textures using custom src/dst factors (use rlSetBlendMode())
-
-
-#  Gesture
-cdef enum Gesture:
-	GESTURE_NONE = 0,  #  No gesture
-	GESTURE_TAP = 1,  #  Tap gesture
-	GESTURE_DOUBLETAP = 2,  #  Double tap gesture
-	GESTURE_HOLD = 4,  #  Hold gesture
-	GESTURE_DRAG = 8,  #  Drag gesture
-	GESTURE_SWIPE_RIGHT = 16,  #  Swipe right gesture
-	GESTURE_SWIPE_LEFT = 32,  #  Swipe left gesture
-	GESTURE_SWIPE_UP = 64,  #  Swipe up gesture
-	GESTURE_SWIPE_DOWN = 128,  #  Swipe down gesture
-	GESTURE_PINCH_IN = 256,  #  Pinch in gesture
-	GESTURE_PINCH_OUT = 512  #  Pinch out gesture
-
-
-#  Camera system modes
-cdef enum CameraMode:
-	CAMERA_CUSTOM = 0,  #  Custom camera
-	CAMERA_FREE = 1,  #  Free camera
-	CAMERA_ORBITAL = 2,  #  Orbital camera
-	CAMERA_FIRST_PERSON = 3,  #  First person camera
-	CAMERA_THIRD_PERSON = 4  #  Third person camera
-
-
-#  Camera projection
-cdef enum CameraProjection:
-	CAMERA_PERSPECTIVE = 0,  #  Perspective projection
-	CAMERA_ORTHOGRAPHIC = 1  #  Orthographic projection
-
-
-#  N-patch layout
-cdef enum NPatchLayout:
-	NPATCH_NINE_PATCH = 0,  #  Npatch layout: 3x3 tiles
-	NPATCH_THREE_PATCH_VERTICAL = 1,  #  Npatch layout: 1x3 tiles
-	NPATCH_THREE_PATCH_HORIZONTAL = 2  #  Npatch layout: 3x1 tiles
-
-
-#  Gui control state
-cdef enum GuiState:
-	STATE_NORMAL = 0,
-	STATE_FOCUSED = 1,
-	STATE_PRESSED = 2,
-	STATE_DISABLED = 3
-
-
-#  Gui control text alignment
-cdef enum GuiTextAlignment:
-	TEXT_ALIGN_LEFT = 0,
-	TEXT_ALIGN_CENTER = 1,
-	TEXT_ALIGN_RIGHT = 2
-
-
-#  Gui controls
-cdef enum GuiControl:
-	DEFAULT = 0,
-	LABEL = 1,  #  Used also for: LABELBUTTON
-	BUTTON = 2,
-	TOGGLE = 3,  #  Used also for: TOGGLEGROUP
-	SLIDER = 4,  #  Used also for: SLIDERBAR
-	PROGRESSBAR = 5,
-	CHECKBOX = 6,
-	COMBOBOX = 7,
-	DROPDOWNBOX = 8,
-	TEXTBOX = 9,  #  Used also for: TEXTBOXMULTI
-	VALUEBOX = 10,
-	SPINNER = 11,  #  Uses: BUTTON, VALUEBOX
-	LISTVIEW = 12,
-	COLORPICKER = 13,
-	SCROLLBAR = 14,
-	STATUSBAR = 15
-
-
-#  Gui base properties for every control
-cdef enum GuiControlProperty:
-	BORDER_COLOR_NORMAL = 0,
-	BASE_COLOR_NORMAL = 1,
-	TEXT_COLOR_NORMAL = 2,
-	BORDER_COLOR_FOCUSED = 3,
-	BASE_COLOR_FOCUSED = 4,
-	TEXT_COLOR_FOCUSED = 5,
-	BORDER_COLOR_PRESSED = 6,
-	BASE_COLOR_PRESSED = 7,
-	TEXT_COLOR_PRESSED = 8,
-	BORDER_COLOR_DISABLED = 9,
-	BASE_COLOR_DISABLED = 10,
-	TEXT_COLOR_DISABLED = 11,
-	BORDER_WIDTH = 12,
-	TEXT_PADDING = 13,
-	TEXT_ALIGNMENT = 14,
-	RESERVED = 15
-
-
-#  DEFAULT extended properties
-cdef enum GuiDefaultProperty:
-	TEXT_SIZE = 16,  #  Text size (glyphs max height)
-	TEXT_SPACING = 17,  #  Text spacing between glyphs
-	LINE_COLOR = 18,  #  Line control color
-	BACKGROUND_COLOR = 19  #  Background color
-
-
-#  Toggle/ToggleGroup
-cdef enum GuiToggleProperty:
-	GROUP_PADDING = 16  #  ToggleGroup separation between toggles
-
-
-#  Slider/SliderBar
-cdef enum GuiSliderProperty:
-	SLIDER_WIDTH = 16,  #  Slider size of internal bar
-	SLIDER_PADDING = 17  #  Slider/SliderBar internal bar padding
-
-
-#  ProgressBar
-cdef enum GuiProgressBarProperty:
-	PROGRESS_PADDING = 16  #  ProgressBar internal padding
-
-
-#  ScrollBar
-cdef enum GuiScrollBarProperty:
-	ARROWS_SIZE = 16,
-	ARROWS_VISIBLE = 17,
-	SCROLL_SLIDER_PADDING = 18,  #  (SLIDERBAR, SLIDER_PADDING)
-	SCROLL_SLIDER_SIZE = 19,
-	SCROLL_PADDING = 20,
-	SCROLL_SPEED = 21
-
-
-#  CheckBox
-cdef enum GuiCheckBoxProperty:
-	CHECK_PADDING = 16  #  CheckBox internal check padding
-
-
-#  ComboBox
-cdef enum GuiComboBoxProperty:
-	COMBO_BUTTON_WIDTH = 16,  #  ComboBox right button width
-	COMBO_BUTTON_SPACING = 17  #  ComboBox button separation
-
-
-#  DropdownBox
-cdef enum GuiDropdownBoxProperty:
-	ARROW_PADDING = 16,  #  DropdownBox arrow separation from border and items
-	DROPDOWN_ITEMS_SPACING = 17  #  DropdownBox items separation
-
-
-#  TextBox/TextBoxMulti/ValueBox/Spinner
-cdef enum GuiTextBoxProperty:
-	TEXT_INNER_PADDING = 16,  #  TextBox/TextBoxMulti/ValueBox/Spinner inner text padding
-	TEXT_LINES_SPACING = 17  #  TextBoxMulti lines separation
-
-
-#  Spinner
-cdef enum GuiSpinnerProperty:
-	SPIN_BUTTON_WIDTH = 16,  #  Spinner left/right buttons width
-	SPIN_BUTTON_SPACING = 17  #  Spinner buttons separation
-
-
-#  ListView
-cdef enum GuiListViewProperty:
-	LIST_ITEMS_HEIGHT = 16,  #  ListView items height
-	LIST_ITEMS_SPACING = 17,  #  ListView items separation
-	SCROLLBAR_WIDTH = 18,  #  ListView scrollbar size (usually width)
-	SCROLLBAR_SIDE = 19  #  ListView scrollbar side (0-left, 1-right)
-
-
-#  ColorPicker
-cdef enum GuiColorPickerProperty:
-	COLOR_SELECTOR_SIZE = 16,
-	HUEBAR_WIDTH = 17,  #  ColorPicker right hue bar width
-	HUEBAR_PADDING = 18,  #  ColorPicker right hue bar separation from panel
-	HUEBAR_SELECTOR_HEIGHT = 19,  #  ColorPicker right hue bar selector height
-	HUEBAR_SELECTOR_OVERFLOW = 20  #  ColorPicker right hue bar selector overflow
-
-
-cdef enum GuiIconName:
-	ICON_NONE = 0,
-	ICON_FOLDER_FILE_OPEN = 1,
-	ICON_FILE_SAVE_CLASSIC = 2,
-	ICON_FOLDER_OPEN = 3,
-	ICON_FOLDER_SAVE = 4,
-	ICON_FILE_OPEN = 5,
-	ICON_FILE_SAVE = 6,
-	ICON_FILE_EXPORT = 7,
-	ICON_FILE_ADD = 8,
-	ICON_FILE_DELETE = 9,
-	ICON_FILETYPE_TEXT = 10,
-	ICON_FILETYPE_AUDIO = 11,
-	ICON_FILETYPE_IMAGE = 12,
-	ICON_FILETYPE_PLAY = 13,
-	ICON_FILETYPE_VIDEO = 14,
-	ICON_FILETYPE_INFO = 15,
-	ICON_FILE_COPY = 16,
-	ICON_FILE_CUT = 17,
-	ICON_FILE_PASTE = 18,
-	ICON_CURSOR_HAND = 19,
-	ICON_CURSOR_POINTER = 20,
-	ICON_CURSOR_CLASSIC = 21,
-	ICON_PENCIL = 22,
-	ICON_PENCIL_BIG = 23,
-	ICON_BRUSH_CLASSIC = 24,
-	ICON_BRUSH_PAINTER = 25,
-	ICON_WATER_DROP = 26,
-	ICON_COLOR_PICKER = 27,
-	ICON_RUBBER = 28,
-	ICON_COLOR_BUCKET = 29,
-	ICON_TEXT_T = 30,
-	ICON_TEXT_A = 31,
-	ICON_SCALE = 32,
-	ICON_RESIZE = 33,
-	ICON_FILTER_POINT = 34,
-	ICON_FILTER_BILINEAR = 35,
-	ICON_CROP = 36,
-	ICON_CROP_ALPHA = 37,
-	ICON_SQUARE_TOGGLE = 38,
-	ICON_SYMMETRY = 39,
-	ICON_SYMMETRY_HORIZONTAL = 40,
-	ICON_SYMMETRY_VERTICAL = 41,
-	ICON_LENS = 42,
-	ICON_LENS_BIG = 43,
-	ICON_EYE_ON = 44,
-	ICON_EYE_OFF = 45,
-	ICON_FILTER_TOP = 46,
-	ICON_FILTER = 47,
-	ICON_TARGET_POINT = 48,
-	ICON_TARGET_SMALL = 49,
-	ICON_TARGET_BIG = 50,
-	ICON_TARGET_MOVE = 51,
-	ICON_CURSOR_MOVE = 52,
-	ICON_CURSOR_SCALE = 53,
-	ICON_CURSOR_SCALE_RIGHT = 54,
-	ICON_CURSOR_SCALE_LEFT = 55,
-	ICON_UNDO = 56,
-	ICON_REDO = 57,
-	ICON_REREDO = 58,
-	ICON_MUTATE = 59,
-	ICON_ROTATE = 60,
-	ICON_REPEAT = 61,
-	ICON_SHUFFLE = 62,
-	ICON_EMPTYBOX = 63,
-	ICON_TARGET = 64,
-	ICON_TARGET_SMALL_FILL = 65,
-	ICON_TARGET_BIG_FILL = 66,
-	ICON_TARGET_MOVE_FILL = 67,
-	ICON_CURSOR_MOVE_FILL = 68,
-	ICON_CURSOR_SCALE_FILL = 69,
-	ICON_CURSOR_SCALE_RIGHT_FILL = 70,
-	ICON_CURSOR_SCALE_LEFT_FILL = 71,
-	ICON_UNDO_FILL = 72,
-	ICON_REDO_FILL = 73,
-	ICON_REREDO_FILL = 74,
-	ICON_MUTATE_FILL = 75,
-	ICON_ROTATE_FILL = 76,
-	ICON_REPEAT_FILL = 77,
-	ICON_SHUFFLE_FILL = 78,
-	ICON_EMPTYBOX_SMALL = 79,
-	ICON_BOX = 80,
-	ICON_BOX_TOP = 81,
-	ICON_BOX_TOP_RIGHT = 82,
-	ICON_BOX_RIGHT = 83,
-	ICON_BOX_BOTTOM_RIGHT = 84,
-	ICON_BOX_BOTTOM = 85,
-	ICON_BOX_BOTTOM_LEFT = 86,
-	ICON_BOX_LEFT = 87,
-	ICON_BOX_TOP_LEFT = 88,
-	ICON_BOX_CENTER = 89,
-	ICON_BOX_CIRCLE_MASK = 90,
-	ICON_POT = 91,
-	ICON_ALPHA_MULTIPLY = 92,
-	ICON_ALPHA_CLEAR = 93,
-	ICON_DITHERING = 94,
-	ICON_MIPMAPS = 95,
-	ICON_BOX_GRID = 96,
-	ICON_GRID = 97,
-	ICON_BOX_CORNERS_SMALL = 98,
-	ICON_BOX_CORNERS_BIG = 99,
-	ICON_FOUR_BOXES = 100,
-	ICON_GRID_FILL = 101,
-	ICON_BOX_MULTISIZE = 102,
-	ICON_ZOOM_SMALL = 103,
-	ICON_ZOOM_MEDIUM = 104,
-	ICON_ZOOM_BIG = 105,
-	ICON_ZOOM_ALL = 106,
-	ICON_ZOOM_CENTER = 107,
-	ICON_BOX_DOTS_SMALL = 108,
-	ICON_BOX_DOTS_BIG = 109,
-	ICON_BOX_CONCENTRIC = 110,
-	ICON_BOX_GRID_BIG = 111,
-	ICON_OK_TICK = 112,
-	ICON_CROSS = 113,
-	ICON_ARROW_LEFT = 114,
-	ICON_ARROW_RIGHT = 115,
-	ICON_ARROW_DOWN = 116,
-	ICON_ARROW_UP = 117,
-	ICON_ARROW_LEFT_FILL = 118,
-	ICON_ARROW_RIGHT_FILL = 119,
-	ICON_ARROW_DOWN_FILL = 120,
-	ICON_ARROW_UP_FILL = 121,
-	ICON_AUDIO = 122,
-	ICON_FX = 123,
-	ICON_WAVE = 124,
-	ICON_WAVE_SINUS = 125,
-	ICON_WAVE_SQUARE = 126,
-	ICON_WAVE_TRIANGULAR = 127,
-	ICON_CROSS_SMALL = 128,
-	ICON_PLAYER_PREVIOUS = 129,
-	ICON_PLAYER_PLAY_BACK = 130,
-	ICON_PLAYER_PLAY = 131,
-	ICON_PLAYER_PAUSE = 132,
-	ICON_PLAYER_STOP = 133,
-	ICON_PLAYER_NEXT = 134,
-	ICON_PLAYER_RECORD = 135,
-	ICON_MAGNET = 136,
-	ICON_LOCK_CLOSE = 137,
-	ICON_LOCK_OPEN = 138,
-	ICON_CLOCK = 139,
-	ICON_TOOLS = 140,
-	ICON_GEAR = 141,
-	ICON_GEAR_BIG = 142,
-	ICON_BIN = 143,
-	ICON_HAND_POINTER = 144,
-	ICON_LASER = 145,
-	ICON_COIN = 146,
-	ICON_EXPLOSION = 147,
-	ICON_1UP = 148,
-	ICON_PLAYER = 149,
-	ICON_PLAYER_JUMP = 150,
-	ICON_KEY = 151,
-	ICON_DEMON = 152,
-	ICON_TEXT_POPUP = 153,
-	ICON_GEAR_EX = 154,
-	ICON_CRACK = 155,
-	ICON_CRACK_POINTS = 156,
-	ICON_STAR = 157,
-	ICON_DOOR = 158,
-	ICON_EXIT = 159,
-	ICON_MODE_2D = 160,
-	ICON_MODE_3D = 161,
-	ICON_CUBE = 162,
-	ICON_CUBE_FACE_TOP = 163,
-	ICON_CUBE_FACE_LEFT = 164,
-	ICON_CUBE_FACE_FRONT = 165,
-	ICON_CUBE_FACE_BOTTOM = 166,
-	ICON_CUBE_FACE_RIGHT = 167,
-	ICON_CUBE_FACE_BACK = 168,
-	ICON_CAMERA = 169,
-	ICON_SPECIAL = 170,
-	ICON_LINK_NET = 171,
-	ICON_LINK_BOXES = 172,
-	ICON_LINK_MULTI = 173,
-	ICON_LINK = 174,
-	ICON_LINK_BROKE = 175,
-	ICON_TEXT_NOTES = 176,
-	ICON_NOTEBOOK = 177,
-	ICON_SUITCASE = 178,
-	ICON_SUITCASE_ZIP = 179,
-	ICON_MAILBOX = 180,
-	ICON_MONITOR = 181,
-	ICON_PRINTER = 182,
-	ICON_PHOTO_CAMERA = 183,
-	ICON_PHOTO_CAMERA_FLASH = 184,
-	ICON_HOUSE = 185,
-	ICON_HEART = 186,
-	ICON_CORNER = 187,
-	ICON_VERTICAL_BARS = 188,
-	ICON_VERTICAL_BARS_FILL = 189,
-	ICON_LIFE_BARS = 190,
-	ICON_INFO = 191,
-	ICON_CROSSLINE = 192,
-	ICON_HELP = 193,
-	ICON_FILETYPE_ALPHA = 194,
-	ICON_FILETYPE_HOME = 195,
-	ICON_LAYERS_VISIBLE = 196,
-	ICON_LAYERS = 197,
-	ICON_WINDOW = 198,
-	ICON_HIDPI = 199,
-	ICON_FILETYPE_BINARY = 200,
-	ICON_HEX = 201,
-	ICON_SHIELD = 202,
-	ICON_FILE_NEW = 203,
-	ICON_FOLDER_ADD = 204,
-	ICON_ALARM = 205,
-	ICON_206 = 206,
-	ICON_207 = 207,
-	ICON_208 = 208,
-	ICON_209 = 209,
-	ICON_210 = 210,
-	ICON_211 = 211,
-	ICON_212 = 212,
-	ICON_213 = 213,
-	ICON_214 = 214,
-	ICON_215 = 215,
-	ICON_216 = 216,
-	ICON_217 = 217,
-	ICON_218 = 218,
-	ICON_219 = 219,
-	ICON_220 = 220,
-	ICON_221 = 221,
-	ICON_222 = 222,
-	ICON_223 = 223,
-	ICON_224 = 224,
-	ICON_225 = 225,
-	ICON_226 = 226,
-	ICON_227 = 227,
-	ICON_228 = 228,
-	ICON_229 = 229,
-	ICON_230 = 230,
-	ICON_231 = 231,
-	ICON_232 = 232,
-	ICON_233 = 233,
-	ICON_234 = 234,
-	ICON_235 = 235,
-	ICON_236 = 236,
-	ICON_237 = 237,
-	ICON_238 = 238,
-	ICON_239 = 239,
-	ICON_240 = 240,
-	ICON_241 = 241,
-	ICON_242 = 242,
-	ICON_243 = 243,
-	ICON_244 = 244,
-	ICON_245 = 245,
-	ICON_246 = 246,
-	ICON_247 = 247,
-	ICON_248 = 248,
-	ICON_249 = 249,
-	ICON_250 = 250,
-	ICON_251 = 251,
-	ICON_252 = 252,
-	ICON_253 = 253,
-	ICON_254 = 254,
-	ICON_255 = 255
-
-
 cdef extern from "config.h":
+	DEF SUPPORT_MODULE_RSHAPES = 1
+	DEF SUPPORT_MODULE_RTEXTURES = 1
+	DEF SUPPORT_MODULE_RTEXT = 1  # WARNING: It requires SUPPORT_MODULE_RTEXTURES to load sprite font textures
+	DEF SUPPORT_MODULE_RMODELS = 1
+	DEF SUPPORT_MODULE_RAUDIO = 1
+	DEF SUPPORT_CAMERA_SYSTEM = 1
+	DEF SUPPORT_GESTURES_SYSTEM = 1
+	DEF SUPPORT_MOUSE_GESTURES = 1
+	DEF SUPPORT_SSH_KEYBOARD_RPI = 1
+	DEF SUPPORT_WINMM_HIGHRES_TIMER = 1
+	DEF SUPPORT_SCREEN_CAPTURE = 1
+	DEF SUPPORT_GIF_RECORDING = 1
+	DEF SUPPORT_COMPRESSION_API = 1
+	DEF MAX_FILEPATH_CAPACITY = 8192  # Maximum file paths capacity
+	DEF MAX_FILEPATH_LENGTH = 4096  # Maximum length for filepaths (Linux PATH_MAX default value)
+	DEF MAX_KEYBOARD_KEYS = 512  # Maximum number of keyboard keys supported
+	DEF MAX_MOUSE_BUTTONS = 8  # Maximum number of mouse buttons supported
+	DEF MAX_GAMEPADS = 4  # Maximum number of gamepads supported
+	DEF MAX_GAMEPAD_AXIS = 8  # Maximum number of axis supported (per gamepad)
+	DEF MAX_GAMEPAD_BUTTONS = 32  # Maximum number of buttons supported (per gamepad)
+	DEF MAX_TOUCH_POINTS = 8  # Maximum number of touch points supported
+	DEF MAX_KEY_PRESSED_QUEUE = 16  # Maximum number of keys in the key input queue
+	DEF MAX_CHAR_PRESSED_QUEUE = 16  # Maximum number of characters in the char input queue
+	DEF MAX_DECOMPRESSION_SIZE = 64  # Max size allocated for decompression in MB
+	DEF RL_DEFAULT_BATCH_BUFFERS = 1  # Default number of batch buffers (multi-buffering)
+	DEF RL_DEFAULT_BATCH_DRAWCALLS = 256  # Default number of batch draw calls (by state changes: mode, texture)
+	DEF RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS = 4  # Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
+	DEF RL_MAX_MATRIX_STACK_SIZE = 32  # Maximum size of internal Matrix stack
+	DEF RL_MAX_SHADER_LOCATIONS = 32  # Maximum number of shader locations supported
+	DEF RL_CULL_DISTANCE_NEAR = 0.01  # Default projection matrix near cull distance
+	DEF RL_CULL_DISTANCE_FAR = 1000.0  # Default projection matrix far cull distance
+	DEF RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION = "vertexPosition"  # Binded by default to shader location: 0
+	DEF RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD = "vertexTexCoord"  # Binded by default to shader location: 1
+	DEF RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL = "vertexNormal"  # Binded by default to shader location: 2
+	DEF RL_DEFAULT_SHADER_ATTRIB_NAME_COLOR = "vertexColor"  # Binded by default to shader location: 3
+	DEF RL_DEFAULT_SHADER_ATTRIB_NAME_TANGENT = "vertexTangent"  # Binded by default to shader location: 4
+	DEF RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD2 = "vertexTexCoord2"  # Binded by default to shader location: 5
+	DEF RL_DEFAULT_SHADER_UNIFORM_NAME_MVP = "mvp"  # model-view-projection matrix
+	DEF RL_DEFAULT_SHADER_UNIFORM_NAME_VIEW = "matView"  # view matrix
+	DEF RL_DEFAULT_SHADER_UNIFORM_NAME_PROJECTION = "matProjection"  # projection matrix
+	DEF RL_DEFAULT_SHADER_UNIFORM_NAME_MODEL = "matModel"  # model matrix
+	DEF RL_DEFAULT_SHADER_UNIFORM_NAME_NORMAL = "matNormal"  # normal matrix (transpose(inverse(matModelView))
+	DEF RL_DEFAULT_SHADER_UNIFORM_NAME_COLOR = "colDiffuse"  # color diffuse (base tint color, multiplied by texture color)
+	DEF RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE0 = "texture0"  # texture0 (texture slot active 0)
+	DEF RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE1 = "texture1"  # texture1 (texture slot active 1)
+	DEF RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE2 = "texture2"  # texture2 (texture slot active 2)
+	DEF SUPPORT_QUADS_DRAW_MODE = 1
+	DEF SUPPORT_FILEFORMAT_PNG = 1
+	DEF SUPPORT_FILEFORMAT_GIF = 1
+	DEF SUPPORT_FILEFORMAT_QOI = 1
+	DEF SUPPORT_FILEFORMAT_DDS = 1
+	DEF SUPPORT_FILEFORMAT_HDR = 1
+	DEF SUPPORT_IMAGE_EXPORT = 1
+	DEF SUPPORT_IMAGE_GENERATION = 1
+	DEF SUPPORT_IMAGE_MANIPULATION = 1
+	DEF SUPPORT_DEFAULT_FONT = 1
+	DEF SUPPORT_FILEFORMAT_FNT = 1
+	DEF SUPPORT_FILEFORMAT_TTF = 1
+	DEF SUPPORT_TEXT_MANIPULATION = 1
+	DEF MAX_TEXT_BUFFER_LENGTH = 1024  # Size of internal static buffers used on some functions:
+	DEF MAX_TEXTSPLIT_COUNT = 128  # Maximum number of substrings to split: TextSplit()
+	DEF SUPPORT_FILEFORMAT_OBJ = 1
+	DEF SUPPORT_FILEFORMAT_MTL = 1
+	DEF SUPPORT_FILEFORMAT_IQM = 1
+	DEF SUPPORT_FILEFORMAT_GLTF = 1
+	DEF SUPPORT_FILEFORMAT_VOX = 1
+	DEF SUPPORT_MESH_GENERATION = 1
+	DEF MAX_MATERIAL_MAPS = 12  # Maximum number of shader maps supported
+	DEF MAX_MESH_VERTEX_BUFFERS = 7  # Maximum vertex buffers (VBO) per mesh
+	DEF SUPPORT_FILEFORMAT_WAV = 1
+	DEF SUPPORT_FILEFORMAT_OGG = 1
+	DEF SUPPORT_FILEFORMAT_XM = 1
+	DEF SUPPORT_FILEFORMAT_MOD = 1
+	DEF SUPPORT_FILEFORMAT_MP3 = 1
+	DEF AUDIO_DEVICE_CHANNELS = 2  # Device output channels: stereo
+	DEF AUDIO_DEVICE_SAMPLE_RATE = 0  # Device sample rate (device default)
+	DEF MAX_AUDIO_BUFFER_POOL_CHANNELS = 16  # Maximum number of audio pool channels
+	DEF SUPPORT_TRACELOG = 1
+	DEF MAX_TRACELOG_MSG_LENGTH = 128  # Max length of one trace-log message
+	
+	
 	#  dummy structure
 	ctypedef struct rAudioBuffer:
 		signed char[392] data;
@@ -1099,6 +94,208 @@ cdef extern from "config.h":
 	
 	
 cdef extern from "rlgl.h":
+	DEF RLGL_VERSION = "4.0"
+	DEF RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
+	DEF RL_TEXTURE_WRAP_S = 10242  # GL_TEXTURE_WRAP_S
+	DEF RL_TEXTURE_WRAP_T = 10243  # GL_TEXTURE_WRAP_T
+	DEF RL_TEXTURE_MAG_FILTER = 10240  # GL_TEXTURE_MAG_FILTER
+	DEF RL_TEXTURE_MIN_FILTER = 10241  # GL_TEXTURE_MIN_FILTER
+	DEF RL_TEXTURE_FILTER_NEAREST = 9728  # GL_NEAREST
+	DEF RL_TEXTURE_FILTER_LINEAR = 9729  # GL_LINEAR
+	DEF RL_TEXTURE_FILTER_MIP_NEAREST = 9984  # GL_NEAREST_MIPMAP_NEAREST
+	DEF RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR = 9986  # GL_NEAREST_MIPMAP_LINEAR
+	DEF RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST = 9985  # GL_LINEAR_MIPMAP_NEAREST
+	DEF RL_TEXTURE_FILTER_MIP_LINEAR = 9987  # GL_LINEAR_MIPMAP_LINEAR
+	DEF RL_TEXTURE_FILTER_ANISOTROPIC = 12288  # Anisotropic filter (custom identifier)
+	DEF RL_TEXTURE_WRAP_REPEAT = 10497  # GL_REPEAT
+	DEF RL_TEXTURE_WRAP_CLAMP = 33071  # GL_CLAMP_TO_EDGE
+	DEF RL_TEXTURE_WRAP_MIRROR_REPEAT = 33648  # GL_MIRRORED_REPEAT
+	DEF RL_TEXTURE_WRAP_MIRROR_CLAMP = 34626  # GL_MIRROR_CLAMP_EXT
+	DEF RL_MODELVIEW = 5888  # GL_MODELVIEW
+	DEF RL_PROJECTION = 5889  # GL_PROJECTION
+	DEF RL_TEXTURE = 5890  # GL_TEXTURE
+	DEF RL_LINES = 1  # GL_LINES
+	DEF RL_TRIANGLES = 4  # GL_TRIANGLES
+	DEF RL_QUADS = 7  # GL_QUADS
+	DEF RL_UNSIGNED_BYTE = 5121  # GL_UNSIGNED_BYTE
+	DEF RL_FLOAT = 5126  # GL_FLOAT
+	DEF RL_STREAM_DRAW = 35040  # GL_STREAM_DRAW
+	DEF RL_STREAM_READ = 35041  # GL_STREAM_READ
+	DEF RL_STREAM_COPY = 35042  # GL_STREAM_COPY
+	DEF RL_STATIC_DRAW = 35044  # GL_STATIC_DRAW
+	DEF RL_STATIC_READ = 35045  # GL_STATIC_READ
+	DEF RL_STATIC_COPY = 35046  # GL_STATIC_COPY
+	DEF RL_DYNAMIC_DRAW = 35048  # GL_DYNAMIC_DRAW
+	DEF RL_DYNAMIC_READ = 35049  # GL_DYNAMIC_READ
+	DEF RL_DYNAMIC_COPY = 35050  # GL_DYNAMIC_COPY
+	DEF RL_FRAGMENT_SHADER = 35632  # GL_FRAGMENT_SHADER
+	DEF RL_VERTEX_SHADER = 35633  # GL_VERTEX_SHADER
+	DEF RL_COMPUTE_SHADER = 37305  # GL_COMPUTE_SHADER
+	DEF PI = 3.141592653589793
+	DEF DEG2RAD = (PI/180.0)
+	DEF RAD2DEG = (180.0/PI)
+	DEF GL_SHADING_LANGUAGE_VERSION = 35724
+	DEF GL_COMPRESSED_RGB_S3TC_DXT1_EXT = 33776
+	DEF GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = 33777
+	DEF GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = 33778
+	DEF GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = 33779
+	DEF GL_ETC1_RGB8_OES = 36196
+	DEF GL_COMPRESSED_RGB8_ETC2 = 37492
+	DEF GL_COMPRESSED_RGBA8_ETC2_EAC = 37496
+	DEF GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG = 35840
+	DEF GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG = 35842
+	DEF GL_COMPRESSED_RGBA_ASTC_4x4_KHR = 37808
+	DEF GL_COMPRESSED_RGBA_ASTC_8x8_KHR = 37815
+	DEF GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = 34047
+	DEF GL_TEXTURE_MAX_ANISOTROPY_EXT = 34046
+	DEF GL_UNSIGNED_SHORT_5_6_5 = 33635
+	DEF GL_UNSIGNED_SHORT_5_5_5_1 = 32820
+	DEF GL_UNSIGNED_SHORT_4_4_4_4 = 32819
+	DEF GL_LUMINANCE = 6409
+	DEF GL_LUMINANCE_ALPHA = 6410
+	
+	ctypedef enum rlGlVersion:
+		OPENGL_11 = 1,
+		OPENGL_21 = 2,
+		OPENGL_33 = 3,
+		OPENGL_43 = 4,
+		OPENGL_ES_20 = 5
+	
+	
+	ctypedef enum rlFramebufferAttachType:
+		RL_ATTACHMENT_COLOR_CHANNEL0 = 0,
+		RL_ATTACHMENT_COLOR_CHANNEL1 = 1,
+		RL_ATTACHMENT_COLOR_CHANNEL2 = 2,
+		RL_ATTACHMENT_COLOR_CHANNEL3 = 3,
+		RL_ATTACHMENT_COLOR_CHANNEL4 = 4,
+		RL_ATTACHMENT_COLOR_CHANNEL5 = 5,
+		RL_ATTACHMENT_COLOR_CHANNEL6 = 6,
+		RL_ATTACHMENT_COLOR_CHANNEL7 = 7,
+		RL_ATTACHMENT_DEPTH = 100,
+		RL_ATTACHMENT_STENCIL = 200
+	
+	
+	ctypedef enum rlFramebufferAttachTextureType:
+		RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0,
+		RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1,
+		RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2,
+		RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y = 3,
+		RL_ATTACHMENT_CUBEMAP_POSITIVE_Z = 4,
+		RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5,
+		RL_ATTACHMENT_TEXTURE2D = 100,
+		RL_ATTACHMENT_RENDERBUFFER = 200
+	
+	
+	#  Trace log level
+	ctypedef enum rlTraceLogLevel:
+		RL_LOG_ALL = 0,  #  Display all logs
+		RL_LOG_TRACE = 1,  #  Trace logging, intended for internal use only
+		RL_LOG_DEBUG = 2,  #  Debug logging, used for internal debugging, it should be disabled on release builds
+		RL_LOG_INFO = 3,  #  Info logging, used for program execution info
+		RL_LOG_WARNING = 4,  #  Warning logging, used on recoverable failures
+		RL_LOG_ERROR = 5,  #  Error logging, used on unrecoverable failures
+		RL_LOG_FATAL = 6,  #  Fatal logging, used to abort program: exit(EXIT_FAILURE)
+		RL_LOG_NONE = 7  #  Disable logging
+	
+	
+	#  Texture formats (support depends on OpenGL version)
+	ctypedef enum rlPixelFormat:
+		RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1,  #  8 bit per pixel (no alpha)
+		RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2,  #  8*2 bpp (2 channels)
+		RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3,  #  16 bpp
+		RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8 = 4,  #  24 bpp
+		RL_PIXELFORMAT_UNCOMPRESSED_R5G5B5A1 = 5,  #  16 bpp (1 bit alpha)
+		RL_PIXELFORMAT_UNCOMPRESSED_R4G4B4A4 = 6,  #  16 bpp (4 bit alpha)
+		RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = 7,  #  32 bpp
+		RL_PIXELFORMAT_UNCOMPRESSED_R32 = 8,  #  32 bpp (1 channel - float)
+		RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9,  #  32*3 bpp (3 channels - float)
+		RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10,  #  32*4 bpp (4 channels - float)
+		RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11,  #  4 bpp (no alpha)
+		RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12,  #  4 bpp (1 bit alpha)
+		RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13,  #  8 bpp
+		RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14,  #  8 bpp
+		RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15,  #  4 bpp
+		RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16,  #  4 bpp
+		RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17,  #  8 bpp
+		RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18,  #  4 bpp
+		RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19,  #  4 bpp
+		RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20,  #  8 bpp
+		RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21  #  2 bpp
+	
+	
+	#  Texture parameters: filter mode
+	ctypedef enum rlTextureFilter:
+		RL_TEXTURE_FILTER_POINT = 0,  #  No filter, just pixel approximation
+		RL_TEXTURE_FILTER_BILINEAR = 1,  #  Linear filtering
+		RL_TEXTURE_FILTER_TRILINEAR = 2,  #  Trilinear filtering (linear with mipmaps)
+		RL_TEXTURE_FILTER_ANISOTROPIC_4X = 3,  #  Anisotropic filtering 4x
+		RL_TEXTURE_FILTER_ANISOTROPIC_8X = 4,  #  Anisotropic filtering 8x
+		RL_TEXTURE_FILTER_ANISOTROPIC_16X = 5  #  Anisotropic filtering 16x
+	
+	
+	#  Color blending modes (pre-defined)
+	ctypedef enum rlBlendMode:
+		RL_BLEND_ALPHA = 0,  #  Blend textures considering alpha (default)
+		RL_BLEND_ADDITIVE = 1,  #  Blend textures adding colors
+		RL_BLEND_MULTIPLIED = 2,  #  Blend textures multiplying colors
+		RL_BLEND_ADD_COLORS = 3,  #  Blend textures adding colors (alternative)
+		RL_BLEND_SUBTRACT_COLORS = 4,  #  Blend textures subtracting colors (alternative)
+		RL_BLEND_ALPHA_PREMULTIPLY = 5,  #  Blend premultiplied textures considering alpha
+		RL_BLEND_CUSTOM = 6  #  Blend textures using custom src/dst factors (use rlSetBlendFactors())
+	
+	
+	#  Shader location point type
+	ctypedef enum rlShaderLocationIndex:
+		RL_SHADER_LOC_VERTEX_POSITION = 0,  #  Shader location: vertex attribute: position
+		RL_SHADER_LOC_VERTEX_TEXCOORD01 = 1,  #  Shader location: vertex attribute: texcoord01
+		RL_SHADER_LOC_VERTEX_TEXCOORD02 = 2,  #  Shader location: vertex attribute: texcoord02
+		RL_SHADER_LOC_VERTEX_NORMAL = 3,  #  Shader location: vertex attribute: normal
+		RL_SHADER_LOC_VERTEX_TANGENT = 4,  #  Shader location: vertex attribute: tangent
+		RL_SHADER_LOC_VERTEX_COLOR = 5,  #  Shader location: vertex attribute: color
+		RL_SHADER_LOC_MATRIX_MVP = 6,  #  Shader location: matrix uniform: model-view-projection
+		RL_SHADER_LOC_MATRIX_VIEW = 7,  #  Shader location: matrix uniform: view (camera transform)
+		RL_SHADER_LOC_MATRIX_PROJECTION = 8,  #  Shader location: matrix uniform: projection
+		RL_SHADER_LOC_MATRIX_MODEL = 9,  #  Shader location: matrix uniform: model (transform)
+		RL_SHADER_LOC_MATRIX_NORMAL = 10,  #  Shader location: matrix uniform: normal
+		RL_SHADER_LOC_VECTOR_VIEW = 11,  #  Shader location: vector uniform: view
+		RL_SHADER_LOC_COLOR_DIFFUSE = 12,  #  Shader location: vector uniform: diffuse color
+		RL_SHADER_LOC_COLOR_SPECULAR = 13,  #  Shader location: vector uniform: specular color
+		RL_SHADER_LOC_COLOR_AMBIENT = 14,  #  Shader location: vector uniform: ambient color
+		RL_SHADER_LOC_MAP_ALBEDO = 15,  #  Shader location: sampler2d texture: albedo (same as: RL_SHADER_LOC_MAP_DIFFUSE)
+		RL_SHADER_LOC_MAP_METALNESS = 16,  #  Shader location: sampler2d texture: metalness (same as: RL_SHADER_LOC_MAP_SPECULAR)
+		RL_SHADER_LOC_MAP_NORMAL = 17,  #  Shader location: sampler2d texture: normal
+		RL_SHADER_LOC_MAP_ROUGHNESS = 18,  #  Shader location: sampler2d texture: roughness
+		RL_SHADER_LOC_MAP_OCCLUSION = 19,  #  Shader location: sampler2d texture: occlusion
+		RL_SHADER_LOC_MAP_EMISSION = 20,  #  Shader location: sampler2d texture: emission
+		RL_SHADER_LOC_MAP_HEIGHT = 21,  #  Shader location: sampler2d texture: height
+		RL_SHADER_LOC_MAP_CUBEMAP = 22,  #  Shader location: samplerCube texture: cubemap
+		RL_SHADER_LOC_MAP_IRRADIANCE = 23,  #  Shader location: samplerCube texture: irradiance
+		RL_SHADER_LOC_MAP_PREFILTER = 24,  #  Shader location: samplerCube texture: prefilter
+		RL_SHADER_LOC_MAP_BRDF = 25  #  Shader location: sampler2d texture: brdf
+	
+	
+	#  Shader uniform data type
+	ctypedef enum rlShaderUniformDataType:
+		RL_SHADER_UNIFORM_FLOAT = 0,  #  Shader uniform type: float
+		RL_SHADER_UNIFORM_VEC2 = 1,  #  Shader uniform type: vec2 (2 float)
+		RL_SHADER_UNIFORM_VEC3 = 2,  #  Shader uniform type: vec3 (3 float)
+		RL_SHADER_UNIFORM_VEC4 = 3,  #  Shader uniform type: vec4 (4 float)
+		RL_SHADER_UNIFORM_INT = 4,  #  Shader uniform type: int
+		RL_SHADER_UNIFORM_IVEC2 = 5,  #  Shader uniform type: ivec2 (2 int)
+		RL_SHADER_UNIFORM_IVEC3 = 6,  #  Shader uniform type: ivec3 (3 int)
+		RL_SHADER_UNIFORM_IVEC4 = 7,  #  Shader uniform type: ivec4 (4 int)
+		RL_SHADER_UNIFORM_SAMPLER2D = 8  #  Shader uniform type: sampler2d
+	
+	
+	#  Shader attribute data types
+	ctypedef enum rlShaderAttributeDataType:
+		RL_SHADER_ATTRIB_FLOAT = 0,  #  Shader attribute type: float
+		RL_SHADER_ATTRIB_VEC2 = 1,  #  Shader attribute type: vec2 (2 float)
+		RL_SHADER_ATTRIB_VEC3 = 2,  #  Shader attribute type: vec3 (3 float)
+		RL_SHADER_ATTRIB_VEC4 = 3  #  Shader attribute type: vec4 (4 float)
+	
+	
+	
 	#  Dynamic vertex buffers (position + texcoords + colors + indices arrays)
 	ctypedef struct rlVertexBuffer:
 		int elementCount;  # Number of elements in the buffer (QUADS)
@@ -1329,6 +526,386 @@ cdef extern from "rlgl.h":
 	void rlLoadDrawQuad();  # Load and draw a quad
 	
 cdef extern from "raylib.h":
+	DEF RAYLIB_VERSION = "4.2"
+	
+	#  System/Window config flags
+	ctypedef enum ConfigFlags:
+		FLAG_VSYNC_HINT = 64,  #  Set to try enabling V-Sync on GPU
+		FLAG_FULLSCREEN_MODE = 2,  #  Set to run program in fullscreen
+		FLAG_WINDOW_RESIZABLE = 4,  #  Set to allow resizable window
+		FLAG_WINDOW_UNDECORATED = 8,  #  Set to disable window decoration (frame and buttons)
+		FLAG_WINDOW_HIDDEN = 128,  #  Set to hide window
+		FLAG_WINDOW_MINIMIZED = 512,  #  Set to minimize window (iconify)
+		FLAG_WINDOW_MAXIMIZED = 1024,  #  Set to maximize window (expanded to monitor)
+		FLAG_WINDOW_UNFOCUSED = 2048,  #  Set to window non focused
+		FLAG_WINDOW_TOPMOST = 4096,  #  Set to window always on top
+		FLAG_WINDOW_ALWAYS_RUN = 256,  #  Set to allow windows running while minimized
+		FLAG_WINDOW_TRANSPARENT = 16,  #  Set to allow transparent framebuffer
+		FLAG_WINDOW_HIGHDPI = 8192,  #  Set to support HighDPI
+		FLAG_WINDOW_MOUSE_PASSTHROUGH = 16384,  #  Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED
+		FLAG_MSAA_4X_HINT = 32,  #  Set to try enabling MSAA 4X
+		FLAG_INTERLACED_HINT = 65536  #  Set to try enabling interlaced video format (for V3D)
+	
+	
+	#  Trace log level
+	ctypedef enum TraceLogLevel:
+		LOG_ALL = 0,  #  Display all logs
+		LOG_TRACE = 1,  #  Trace logging, intended for internal use only
+		LOG_DEBUG = 2,  #  Debug logging, used for internal debugging, it should be disabled on release builds
+		LOG_INFO = 3,  #  Info logging, used for program execution info
+		LOG_WARNING = 4,  #  Warning logging, used on recoverable failures
+		LOG_ERROR = 5,  #  Error logging, used on unrecoverable failures
+		LOG_FATAL = 6,  #  Fatal logging, used to abort program: exit(EXIT_FAILURE)
+		LOG_NONE = 7  #  Disable logging
+	
+	
+	#  Keyboard keys (US keyboard layout)
+	ctypedef enum KeyboardKey:
+		KEY_NULL = 0,  #  Key: NULL, used for no key pressed
+		KEY_APOSTROPHE = 39,  #  Key: '
+		KEY_COMMA = 44,  #  Key: ,
+		KEY_MINUS = 45,  #  Key: -
+		KEY_PERIOD = 46,  #  Key: .
+		KEY_SLASH = 47,  #  Key: /
+		KEY_ZERO = 48,  #  Key: 0
+		KEY_ONE = 49,  #  Key: 1
+		KEY_TWO = 50,  #  Key: 2
+		KEY_THREE = 51,  #  Key: 3
+		KEY_FOUR = 52,  #  Key: 4
+		KEY_FIVE = 53,  #  Key: 5
+		KEY_SIX = 54,  #  Key: 6
+		KEY_SEVEN = 55,  #  Key: 7
+		KEY_EIGHT = 56,  #  Key: 8
+		KEY_NINE = 57,  #  Key: 9
+		KEY_SEMICOLON = 59,  #  Key: ;
+		KEY_EQUAL = 61,  #  Key: =
+		KEY_A = 65,  #  Key: A | a
+		KEY_B = 66,  #  Key: B | b
+		KEY_C = 67,  #  Key: C | c
+		KEY_D = 68,  #  Key: D | d
+		KEY_E = 69,  #  Key: E | e
+		KEY_F = 70,  #  Key: F | f
+		KEY_G = 71,  #  Key: G | g
+		KEY_H = 72,  #  Key: H | h
+		KEY_I = 73,  #  Key: I | i
+		KEY_J = 74,  #  Key: J | j
+		KEY_K = 75,  #  Key: K | k
+		KEY_L = 76,  #  Key: L | l
+		KEY_M = 77,  #  Key: M | m
+		KEY_N = 78,  #  Key: N | n
+		KEY_O = 79,  #  Key: O | o
+		KEY_P = 80,  #  Key: P | p
+		KEY_Q = 81,  #  Key: Q | q
+		KEY_R = 82,  #  Key: R | r
+		KEY_S = 83,  #  Key: S | s
+		KEY_T = 84,  #  Key: T | t
+		KEY_U = 85,  #  Key: U | u
+		KEY_V = 86,  #  Key: V | v
+		KEY_W = 87,  #  Key: W | w
+		KEY_X = 88,  #  Key: X | x
+		KEY_Y = 89,  #  Key: Y | y
+		KEY_Z = 90,  #  Key: Z | z
+		KEY_LEFT_BRACKET = 91,  #  Key: [
+		KEY_BACKSLASH = 92,  #  Key: '\'
+		KEY_RIGHT_BRACKET = 93,  #  Key: ]
+		KEY_GRAVE = 96,  #  Key: `
+		KEY_SPACE = 32,  #  Key: Space
+		KEY_ESCAPE = 256,  #  Key: Esc
+		KEY_ENTER = 257,  #  Key: Enter
+		KEY_TAB = 258,  #  Key: Tab
+		KEY_BACKSPACE = 259,  #  Key: Backspace
+		KEY_INSERT = 260,  #  Key: Ins
+		KEY_DELETE = 261,  #  Key: Del
+		KEY_RIGHT = 262,  #  Key: Cursor right
+		KEY_LEFT = 263,  #  Key: Cursor left
+		KEY_DOWN = 264,  #  Key: Cursor down
+		KEY_UP = 265,  #  Key: Cursor up
+		KEY_PAGE_UP = 266,  #  Key: Page up
+		KEY_PAGE_DOWN = 267,  #  Key: Page down
+		KEY_HOME = 268,  #  Key: Home
+		KEY_END = 269,  #  Key: End
+		KEY_CAPS_LOCK = 280,  #  Key: Caps lock
+		KEY_SCROLL_LOCK = 281,  #  Key: Scroll down
+		KEY_NUM_LOCK = 282,  #  Key: Num lock
+		KEY_PRINT_SCREEN = 283,  #  Key: Print screen
+		KEY_PAUSE = 284,  #  Key: Pause
+		KEY_F1 = 290,  #  Key: F1
+		KEY_F2 = 291,  #  Key: F2
+		KEY_F3 = 292,  #  Key: F3
+		KEY_F4 = 293,  #  Key: F4
+		KEY_F5 = 294,  #  Key: F5
+		KEY_F6 = 295,  #  Key: F6
+		KEY_F7 = 296,  #  Key: F7
+		KEY_F8 = 297,  #  Key: F8
+		KEY_F9 = 298,  #  Key: F9
+		KEY_F10 = 299,  #  Key: F10
+		KEY_F11 = 300,  #  Key: F11
+		KEY_F12 = 301,  #  Key: F12
+		KEY_LEFT_SHIFT = 340,  #  Key: Shift left
+		KEY_LEFT_CONTROL = 341,  #  Key: Control left
+		KEY_LEFT_ALT = 342,  #  Key: Alt left
+		KEY_LEFT_SUPER = 343,  #  Key: Super left
+		KEY_RIGHT_SHIFT = 344,  #  Key: Shift right
+		KEY_RIGHT_CONTROL = 345,  #  Key: Control right
+		KEY_RIGHT_ALT = 346,  #  Key: Alt right
+		KEY_RIGHT_SUPER = 347,  #  Key: Super right
+		KEY_KB_MENU = 348,  #  Key: KB menu
+		KEY_KP_0 = 320,  #  Key: Keypad 0
+		KEY_KP_1 = 321,  #  Key: Keypad 1
+		KEY_KP_2 = 322,  #  Key: Keypad 2
+		KEY_KP_3 = 323,  #  Key: Keypad 3
+		KEY_KP_4 = 324,  #  Key: Keypad 4
+		KEY_KP_5 = 325,  #  Key: Keypad 5
+		KEY_KP_6 = 326,  #  Key: Keypad 6
+		KEY_KP_7 = 327,  #  Key: Keypad 7
+		KEY_KP_8 = 328,  #  Key: Keypad 8
+		KEY_KP_9 = 329,  #  Key: Keypad 9
+		KEY_KP_DECIMAL = 330,  #  Key: Keypad .
+		KEY_KP_DIVIDE = 331,  #  Key: Keypad /
+		KEY_KP_MULTIPLY = 332,  #  Key: Keypad *
+		KEY_KP_SUBTRACT = 333,  #  Key: Keypad -
+		KEY_KP_ADD = 334,  #  Key: Keypad +
+		KEY_KP_ENTER = 335,  #  Key: Keypad Enter
+		KEY_KP_EQUAL = 336,  #  Key: Keypad =
+		KEY_BACK = 4,  #  Key: Android back button
+		KEY_MENU = 82,  #  Key: Android menu button
+		KEY_VOLUME_UP = 24,  #  Key: Android volume up button
+		KEY_VOLUME_DOWN = 25  #  Key: Android volume down button
+	
+	
+	#  Mouse buttons
+	ctypedef enum MouseButton:
+		MOUSE_BUTTON_LEFT = 0,  #  Mouse button left
+		MOUSE_BUTTON_RIGHT = 1,  #  Mouse button right
+		MOUSE_BUTTON_MIDDLE = 2,  #  Mouse button middle (pressed wheel)
+		MOUSE_BUTTON_SIDE = 3,  #  Mouse button side (advanced mouse device)
+		MOUSE_BUTTON_EXTRA = 4,  #  Mouse button extra (advanced mouse device)
+		MOUSE_BUTTON_FORWARD = 5,  #  Mouse button fordward (advanced mouse device)
+		MOUSE_BUTTON_BACK = 6  #  Mouse button back (advanced mouse device)
+	
+	
+	#  Mouse cursor
+	ctypedef enum MouseCursor:
+		MOUSE_CURSOR_DEFAULT = 0,  #  Default pointer shape
+		MOUSE_CURSOR_ARROW = 1,  #  Arrow shape
+		MOUSE_CURSOR_IBEAM = 2,  #  Text writing cursor shape
+		MOUSE_CURSOR_CROSSHAIR = 3,  #  Cross shape
+		MOUSE_CURSOR_POINTING_HAND = 4,  #  Pointing hand cursor
+		MOUSE_CURSOR_RESIZE_EW = 5,  #  Horizontal resize/move arrow shape
+		MOUSE_CURSOR_RESIZE_NS = 6,  #  Vertical resize/move arrow shape
+		MOUSE_CURSOR_RESIZE_NWSE = 7,  #  Top-left to bottom-right diagonal resize/move arrow shape
+		MOUSE_CURSOR_RESIZE_NESW = 8,  #  The top-right to bottom-left diagonal resize/move arrow shape
+		MOUSE_CURSOR_RESIZE_ALL = 9,  #  The omni-directional resize/move cursor shape
+		MOUSE_CURSOR_NOT_ALLOWED = 10  #  The operation-not-allowed shape
+	
+	
+	#  Gamepad buttons
+	ctypedef enum GamepadButton:
+		GAMEPAD_BUTTON_UNKNOWN = 0,  #  Unknown button, just for error checking
+		GAMEPAD_BUTTON_LEFT_FACE_UP = 1,  #  Gamepad left DPAD up button
+		GAMEPAD_BUTTON_LEFT_FACE_RIGHT = 2,  #  Gamepad left DPAD right button
+		GAMEPAD_BUTTON_LEFT_FACE_DOWN = 3,  #  Gamepad left DPAD down button
+		GAMEPAD_BUTTON_LEFT_FACE_LEFT = 4,  #  Gamepad left DPAD left button
+		GAMEPAD_BUTTON_RIGHT_FACE_UP = 5,  #  Gamepad right button up (i.e. PS3: Triangle, Xbox: Y)
+		GAMEPAD_BUTTON_RIGHT_FACE_RIGHT = 6,  #  Gamepad right button right (i.e. PS3: Square, Xbox: X)
+		GAMEPAD_BUTTON_RIGHT_FACE_DOWN = 7,  #  Gamepad right button down (i.e. PS3: Cross, Xbox: A)
+		GAMEPAD_BUTTON_RIGHT_FACE_LEFT = 8,  #  Gamepad right button left (i.e. PS3: Circle, Xbox: B)
+		GAMEPAD_BUTTON_LEFT_TRIGGER_1 = 9,  #  Gamepad top/back trigger left (first), it could be a trailing button
+		GAMEPAD_BUTTON_LEFT_TRIGGER_2 = 10,  #  Gamepad top/back trigger left (second), it could be a trailing button
+		GAMEPAD_BUTTON_RIGHT_TRIGGER_1 = 11,  #  Gamepad top/back trigger right (one), it could be a trailing button
+		GAMEPAD_BUTTON_RIGHT_TRIGGER_2 = 12,  #  Gamepad top/back trigger right (second), it could be a trailing button
+		GAMEPAD_BUTTON_MIDDLE_LEFT = 13,  #  Gamepad center buttons, left one (i.e. PS3: Select)
+		GAMEPAD_BUTTON_MIDDLE = 14,  #  Gamepad center buttons, middle one (i.e. PS3: PS, Xbox: XBOX)
+		GAMEPAD_BUTTON_MIDDLE_RIGHT = 15,  #  Gamepad center buttons, right one (i.e. PS3: Start)
+		GAMEPAD_BUTTON_LEFT_THUMB = 16,  #  Gamepad joystick pressed button left
+		GAMEPAD_BUTTON_RIGHT_THUMB = 17  #  Gamepad joystick pressed button right
+	
+	
+	#  Gamepad axis
+	ctypedef enum GamepadAxis:
+		GAMEPAD_AXIS_LEFT_X = 0,  #  Gamepad left stick X axis
+		GAMEPAD_AXIS_LEFT_Y = 1,  #  Gamepad left stick Y axis
+		GAMEPAD_AXIS_RIGHT_X = 2,  #  Gamepad right stick X axis
+		GAMEPAD_AXIS_RIGHT_Y = 3,  #  Gamepad right stick Y axis
+		GAMEPAD_AXIS_LEFT_TRIGGER = 4,  #  Gamepad back trigger left, pressure level: [1..-1]
+		GAMEPAD_AXIS_RIGHT_TRIGGER = 5  #  Gamepad back trigger right, pressure level: [1..-1]
+	
+	
+	#  Material map index
+	ctypedef enum MaterialMapIndex:
+		MATERIAL_MAP_ALBEDO = 0,  #  Albedo material (same as: MATERIAL_MAP_DIFFUSE)
+		MATERIAL_MAP_METALNESS = 1,  #  Metalness material (same as: MATERIAL_MAP_SPECULAR)
+		MATERIAL_MAP_NORMAL = 2,  #  Normal material
+		MATERIAL_MAP_ROUGHNESS = 3,  #  Roughness material
+		MATERIAL_MAP_OCCLUSION = 4,  #  Ambient occlusion material
+		MATERIAL_MAP_EMISSION = 5,  #  Emission material
+		MATERIAL_MAP_HEIGHT = 6,  #  Heightmap material
+		MATERIAL_MAP_CUBEMAP = 7,  #  Cubemap material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
+		MATERIAL_MAP_IRRADIANCE = 8,  #  Irradiance material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
+		MATERIAL_MAP_PREFILTER = 9,  #  Prefilter material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
+		MATERIAL_MAP_BRDF = 10  #  Brdf material
+	
+	
+	#  Shader location index
+	ctypedef enum ShaderLocationIndex:
+		SHADER_LOC_VERTEX_POSITION = 0,  #  Shader location: vertex attribute: position
+		SHADER_LOC_VERTEX_TEXCOORD01 = 1,  #  Shader location: vertex attribute: texcoord01
+		SHADER_LOC_VERTEX_TEXCOORD02 = 2,  #  Shader location: vertex attribute: texcoord02
+		SHADER_LOC_VERTEX_NORMAL = 3,  #  Shader location: vertex attribute: normal
+		SHADER_LOC_VERTEX_TANGENT = 4,  #  Shader location: vertex attribute: tangent
+		SHADER_LOC_VERTEX_COLOR = 5,  #  Shader location: vertex attribute: color
+		SHADER_LOC_MATRIX_MVP = 6,  #  Shader location: matrix uniform: model-view-projection
+		SHADER_LOC_MATRIX_VIEW = 7,  #  Shader location: matrix uniform: view (camera transform)
+		SHADER_LOC_MATRIX_PROJECTION = 8,  #  Shader location: matrix uniform: projection
+		SHADER_LOC_MATRIX_MODEL = 9,  #  Shader location: matrix uniform: model (transform)
+		SHADER_LOC_MATRIX_NORMAL = 10,  #  Shader location: matrix uniform: normal
+		SHADER_LOC_VECTOR_VIEW = 11,  #  Shader location: vector uniform: view
+		SHADER_LOC_COLOR_DIFFUSE = 12,  #  Shader location: vector uniform: diffuse color
+		SHADER_LOC_COLOR_SPECULAR = 13,  #  Shader location: vector uniform: specular color
+		SHADER_LOC_COLOR_AMBIENT = 14,  #  Shader location: vector uniform: ambient color
+		SHADER_LOC_MAP_ALBEDO = 15,  #  Shader location: sampler2d texture: albedo (same as: SHADER_LOC_MAP_DIFFUSE)
+		SHADER_LOC_MAP_METALNESS = 16,  #  Shader location: sampler2d texture: metalness (same as: SHADER_LOC_MAP_SPECULAR)
+		SHADER_LOC_MAP_NORMAL = 17,  #  Shader location: sampler2d texture: normal
+		SHADER_LOC_MAP_ROUGHNESS = 18,  #  Shader location: sampler2d texture: roughness
+		SHADER_LOC_MAP_OCCLUSION = 19,  #  Shader location: sampler2d texture: occlusion
+		SHADER_LOC_MAP_EMISSION = 20,  #  Shader location: sampler2d texture: emission
+		SHADER_LOC_MAP_HEIGHT = 21,  #  Shader location: sampler2d texture: height
+		SHADER_LOC_MAP_CUBEMAP = 22,  #  Shader location: samplerCube texture: cubemap
+		SHADER_LOC_MAP_IRRADIANCE = 23,  #  Shader location: samplerCube texture: irradiance
+		SHADER_LOC_MAP_PREFILTER = 24,  #  Shader location: samplerCube texture: prefilter
+		SHADER_LOC_MAP_BRDF = 25  #  Shader location: sampler2d texture: brdf
+	
+	
+	#  Shader uniform data type
+	ctypedef enum ShaderUniformDataType:
+		SHADER_UNIFORM_FLOAT = 0,  #  Shader uniform type: float
+		SHADER_UNIFORM_VEC2 = 1,  #  Shader uniform type: vec2 (2 float)
+		SHADER_UNIFORM_VEC3 = 2,  #  Shader uniform type: vec3 (3 float)
+		SHADER_UNIFORM_VEC4 = 3,  #  Shader uniform type: vec4 (4 float)
+		SHADER_UNIFORM_INT = 4,  #  Shader uniform type: int
+		SHADER_UNIFORM_IVEC2 = 5,  #  Shader uniform type: ivec2 (2 int)
+		SHADER_UNIFORM_IVEC3 = 6,  #  Shader uniform type: ivec3 (3 int)
+		SHADER_UNIFORM_IVEC4 = 7,  #  Shader uniform type: ivec4 (4 int)
+		SHADER_UNIFORM_SAMPLER2D = 8  #  Shader uniform type: sampler2d
+	
+	
+	#  Shader attribute data types
+	ctypedef enum ShaderAttributeDataType:
+		SHADER_ATTRIB_FLOAT = 0,  #  Shader attribute type: float
+		SHADER_ATTRIB_VEC2 = 1,  #  Shader attribute type: vec2 (2 float)
+		SHADER_ATTRIB_VEC3 = 2,  #  Shader attribute type: vec3 (3 float)
+		SHADER_ATTRIB_VEC4 = 3  #  Shader attribute type: vec4 (4 float)
+	
+	
+	#  Pixel formats
+	ctypedef enum PixelFormat:
+		PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1,  #  8 bit per pixel (no alpha)
+		PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2,  #  8*2 bpp (2 channels)
+		PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3,  #  16 bpp
+		PIXELFORMAT_UNCOMPRESSED_R8G8B8 = 4,  #  24 bpp
+		PIXELFORMAT_UNCOMPRESSED_R5G5B5A1 = 5,  #  16 bpp (1 bit alpha)
+		PIXELFORMAT_UNCOMPRESSED_R4G4B4A4 = 6,  #  16 bpp (4 bit alpha)
+		PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = 7,  #  32 bpp
+		PIXELFORMAT_UNCOMPRESSED_R32 = 8,  #  32 bpp (1 channel - float)
+		PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9,  #  32*3 bpp (3 channels - float)
+		PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10,  #  32*4 bpp (4 channels - float)
+		PIXELFORMAT_COMPRESSED_DXT1_RGB = 11,  #  4 bpp (no alpha)
+		PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12,  #  4 bpp (1 bit alpha)
+		PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13,  #  8 bpp
+		PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14,  #  8 bpp
+		PIXELFORMAT_COMPRESSED_ETC1_RGB = 15,  #  4 bpp
+		PIXELFORMAT_COMPRESSED_ETC2_RGB = 16,  #  4 bpp
+		PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17,  #  8 bpp
+		PIXELFORMAT_COMPRESSED_PVRT_RGB = 18,  #  4 bpp
+		PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19,  #  4 bpp
+		PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20,  #  8 bpp
+		PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21  #  2 bpp
+	
+	
+	#  Texture parameters: filter mode
+	ctypedef enum TextureFilter:
+		TEXTURE_FILTER_POINT = 0,  #  No filter, just pixel approximation
+		TEXTURE_FILTER_BILINEAR = 1,  #  Linear filtering
+		TEXTURE_FILTER_TRILINEAR = 2,  #  Trilinear filtering (linear with mipmaps)
+		TEXTURE_FILTER_ANISOTROPIC_4X = 3,  #  Anisotropic filtering 4x
+		TEXTURE_FILTER_ANISOTROPIC_8X = 4,  #  Anisotropic filtering 8x
+		TEXTURE_FILTER_ANISOTROPIC_16X = 5  #  Anisotropic filtering 16x
+	
+	
+	#  Texture parameters: wrap mode
+	ctypedef enum TextureWrap:
+		TEXTURE_WRAP_REPEAT = 0,  #  Repeats texture in tiled mode
+		TEXTURE_WRAP_CLAMP = 1,  #  Clamps texture to edge pixel in tiled mode
+		TEXTURE_WRAP_MIRROR_REPEAT = 2,  #  Mirrors and repeats the texture in tiled mode
+		TEXTURE_WRAP_MIRROR_CLAMP = 3  #  Mirrors and clamps to border the texture in tiled mode
+	
+	
+	#  Cubemap layouts
+	ctypedef enum CubemapLayout:
+		CUBEMAP_LAYOUT_AUTO_DETECT = 0,  #  Automatically detect layout type
+		CUBEMAP_LAYOUT_LINE_VERTICAL = 1,  #  Layout is defined by a vertical line with faces
+		CUBEMAP_LAYOUT_LINE_HORIZONTAL = 2,  #  Layout is defined by an horizontal line with faces
+		CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR = 3,  #  Layout is defined by a 3x4 cross with cubemap faces
+		CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE = 4,  #  Layout is defined by a 4x3 cross with cubemap faces
+		CUBEMAP_LAYOUT_PANORAMA = 5  #  Layout is defined by a panorama image (equirectangular map)
+	
+	
+	#  Font type, defines generation method
+	ctypedef enum FontType:
+		FONT_DEFAULT = 0,  #  Default font generation, anti-aliased
+		FONT_BITMAP = 1,  #  Bitmap font generation, no anti-aliasing
+		FONT_SDF = 2  #  SDF font generation, requires external shader
+	
+	
+	#  Color blending modes (pre-defined)
+	ctypedef enum BlendMode:
+		BLEND_ALPHA = 0,  #  Blend textures considering alpha (default)
+		BLEND_ADDITIVE = 1,  #  Blend textures adding colors
+		BLEND_MULTIPLIED = 2,  #  Blend textures multiplying colors
+		BLEND_ADD_COLORS = 3,  #  Blend textures adding colors (alternative)
+		BLEND_SUBTRACT_COLORS = 4,  #  Blend textures subtracting colors (alternative)
+		BLEND_ALPHA_PREMULTIPLY = 5,  #  Blend premultiplied textures considering alpha
+		BLEND_CUSTOM = 6  #  Blend textures using custom src/dst factors (use rlSetBlendMode())
+	
+	
+	#  Gesture
+	ctypedef enum Gesture:
+		GESTURE_NONE = 0,  #  No gesture
+		GESTURE_TAP = 1,  #  Tap gesture
+		GESTURE_DOUBLETAP = 2,  #  Double tap gesture
+		GESTURE_HOLD = 4,  #  Hold gesture
+		GESTURE_DRAG = 8,  #  Drag gesture
+		GESTURE_SWIPE_RIGHT = 16,  #  Swipe right gesture
+		GESTURE_SWIPE_LEFT = 32,  #  Swipe left gesture
+		GESTURE_SWIPE_UP = 64,  #  Swipe up gesture
+		GESTURE_SWIPE_DOWN = 128,  #  Swipe down gesture
+		GESTURE_PINCH_IN = 256,  #  Pinch in gesture
+		GESTURE_PINCH_OUT = 512  #  Pinch out gesture
+	
+	
+	#  Camera system modes
+	ctypedef enum CameraMode:
+		CAMERA_CUSTOM = 0,  #  Custom camera
+		CAMERA_FREE = 1,  #  Free camera
+		CAMERA_ORBITAL = 2,  #  Orbital camera
+		CAMERA_FIRST_PERSON = 3,  #  First person camera
+		CAMERA_THIRD_PERSON = 4  #  Third person camera
+	
+	
+	#  Camera projection
+	ctypedef enum CameraProjection:
+		CAMERA_PERSPECTIVE = 0,  #  Perspective projection
+		CAMERA_ORTHOGRAPHIC = 1  #  Orthographic projection
+	
+	
+	#  N-patch layout
+	ctypedef enum NPatchLayout:
+		NPATCH_NINE_PATCH = 0,  #  Npatch layout: 3x3 tiles
+		NPATCH_THREE_PATCH_VERTICAL = 1,  #  Npatch layout: 1x3 tiles
+		NPATCH_THREE_PATCH_HORIZONTAL = 2  #  Npatch layout: 3x1 tiles
+	
+	
+	
 	#  Vector2, 2 components
 	ctypedef struct Vector2:
 		float x;  # Vector x component
@@ -2075,6 +1652,9 @@ cdef extern from "raylib.h":
 	void SetAudioStreamBufferSizeDefault(int size);  # Default size for new audio streams
 	
 cdef extern from "raymath.h":
+	DEF EPSILON = 1e-06
+	
+	
 	#  NOTE: Helper types to be used instead of array return types for *ToFloat functions
 	ctypedef struct float3:
 		float[3] v;
@@ -2197,6 +1777,436 @@ cdef extern from "raymath.h":
 	int QuaternionEquals(Quaternion p, Quaternion q);
 	
 cdef extern from "raygui.h":
+	DEF RAYGUI_VERSION = "3.2"
+	DEF SCROLLBAR_LEFT_SIDE = 0
+	DEF SCROLLBAR_RIGHT_SIDE = 1
+	DEF RAYGUI_ICON_SIZE = 16  # Size of icons in pixels (squared)
+	DEF RAYGUI_ICON_MAX_ICONS = 256  # Maximum number of icons
+	DEF RAYGUI_ICON_MAX_NAME_LENGTH = 32  # Maximum length of icon name id
+	DEF RAYGUI_MAX_CONTROLS = 16  # Maximum number of standard controls
+	DEF RAYGUI_MAX_PROPS_BASE = 16  # Maximum number of standard properties
+	DEF RAYGUI_MAX_PROPS_EXTENDED = 8  # Maximum number of extended properties
+	DEF KEY_RIGHT = 262
+	DEF KEY_LEFT = 263
+	DEF KEY_DOWN = 264
+	DEF KEY_UP = 265
+	DEF KEY_BACKSPACE = 259
+	DEF KEY_ENTER = 257
+	DEF RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT = 24
+	DEF RAYGUI_GROUPBOX_LINE_THICK = 1
+	DEF RAYGUI_LINE_MARGIN_TEXT = 12
+	DEF RAYGUI_LINE_TEXT_PADDING = 4
+	DEF RAYGUI_PANEL_BORDER_WIDTH = 1
+	DEF RAYGUI_TOGGLEGROUP_MAX_ITEMS = 32
+	DEF RAYGUI_VALUEBOX_MAX_CHARS = 32
+	DEF RAYGUI_COLORBARALPHA_CHECKED_SIZE = 10
+	DEF RAYGUI_MESSAGEBOX_BUTTON_HEIGHT = 24
+	DEF RAYGUI_MESSAGEBOX_BUTTON_PADDING = 12
+	DEF RAYGUI_TEXTINPUTBOX_BUTTON_HEIGHT = 28
+	DEF RAYGUI_TEXTINPUTBOX_BUTTON_PADDING = 12
+	DEF RAYGUI_TEXTINPUTBOX_HEIGHT = 28
+	DEF RAYGUI_GRID_ALPHA = 0.15
+	DEF MAX_LINE_BUFFER_SIZE = 256
+	DEF ICON_TEXT_PADDING = 4
+	DEF RAYGUI_TEXTSPLIT_MAX_ITEMS = 128
+	DEF RAYGUI_TEXTSPLIT_MAX_TEXT_SIZE = 1024
+	DEF RAYGUI_TEXTFORMAT_MAX_SIZE = 256
+	
+	#  Gui control state
+	ctypedef enum GuiState:
+		STATE_NORMAL = 0,
+		STATE_FOCUSED = 1,
+		STATE_PRESSED = 2,
+		STATE_DISABLED = 3
+	
+	
+	#  Gui control text alignment
+	ctypedef enum GuiTextAlignment:
+		TEXT_ALIGN_LEFT = 0,
+		TEXT_ALIGN_CENTER = 1,
+		TEXT_ALIGN_RIGHT = 2
+	
+	
+	#  Gui controls
+	ctypedef enum GuiControl:
+		DEFAULT = 0,
+		LABEL = 1,  #  Used also for: LABELBUTTON
+		BUTTON = 2,
+		TOGGLE = 3,  #  Used also for: TOGGLEGROUP
+		SLIDER = 4,  #  Used also for: SLIDERBAR
+		PROGRESSBAR = 5,
+		CHECKBOX = 6,
+		COMBOBOX = 7,
+		DROPDOWNBOX = 8,
+		TEXTBOX = 9,  #  Used also for: TEXTBOXMULTI
+		VALUEBOX = 10,
+		SPINNER = 11,  #  Uses: BUTTON, VALUEBOX
+		LISTVIEW = 12,
+		COLORPICKER = 13,
+		SCROLLBAR = 14,
+		STATUSBAR = 15
+	
+	
+	#  Gui base properties for every control
+	ctypedef enum GuiControlProperty:
+		BORDER_COLOR_NORMAL = 0,
+		BASE_COLOR_NORMAL = 1,
+		TEXT_COLOR_NORMAL = 2,
+		BORDER_COLOR_FOCUSED = 3,
+		BASE_COLOR_FOCUSED = 4,
+		TEXT_COLOR_FOCUSED = 5,
+		BORDER_COLOR_PRESSED = 6,
+		BASE_COLOR_PRESSED = 7,
+		TEXT_COLOR_PRESSED = 8,
+		BORDER_COLOR_DISABLED = 9,
+		BASE_COLOR_DISABLED = 10,
+		TEXT_COLOR_DISABLED = 11,
+		BORDER_WIDTH = 12,
+		TEXT_PADDING = 13,
+		TEXT_ALIGNMENT = 14,
+		RESERVED = 15
+	
+	
+	#  DEFAULT extended properties
+	ctypedef enum GuiDefaultProperty:
+		TEXT_SIZE = 16,  #  Text size (glyphs max height)
+		TEXT_SPACING = 17,  #  Text spacing between glyphs
+		LINE_COLOR = 18,  #  Line control color
+		BACKGROUND_COLOR = 19  #  Background color
+	
+	
+	#  Toggle/ToggleGroup
+	ctypedef enum GuiToggleProperty:
+		GROUP_PADDING = 16  #  ToggleGroup separation between toggles
+	
+	
+	#  Slider/SliderBar
+	ctypedef enum GuiSliderProperty:
+		SLIDER_WIDTH = 16,  #  Slider size of internal bar
+		SLIDER_PADDING = 17  #  Slider/SliderBar internal bar padding
+	
+	
+	#  ProgressBar
+	ctypedef enum GuiProgressBarProperty:
+		PROGRESS_PADDING = 16  #  ProgressBar internal padding
+	
+	
+	#  ScrollBar
+	ctypedef enum GuiScrollBarProperty:
+		ARROWS_SIZE = 16,
+		ARROWS_VISIBLE = 17,
+		SCROLL_SLIDER_PADDING = 18,  #  (SLIDERBAR, SLIDER_PADDING)
+		SCROLL_SLIDER_SIZE = 19,
+		SCROLL_PADDING = 20,
+		SCROLL_SPEED = 21
+	
+	
+	#  CheckBox
+	ctypedef enum GuiCheckBoxProperty:
+		CHECK_PADDING = 16  #  CheckBox internal check padding
+	
+	
+	#  ComboBox
+	ctypedef enum GuiComboBoxProperty:
+		COMBO_BUTTON_WIDTH = 16,  #  ComboBox right button width
+		COMBO_BUTTON_SPACING = 17  #  ComboBox button separation
+	
+	
+	#  DropdownBox
+	ctypedef enum GuiDropdownBoxProperty:
+		ARROW_PADDING = 16,  #  DropdownBox arrow separation from border and items
+		DROPDOWN_ITEMS_SPACING = 17  #  DropdownBox items separation
+	
+	
+	#  TextBox/TextBoxMulti/ValueBox/Spinner
+	ctypedef enum GuiTextBoxProperty:
+		TEXT_INNER_PADDING = 16,  #  TextBox/TextBoxMulti/ValueBox/Spinner inner text padding
+		TEXT_LINES_SPACING = 17  #  TextBoxMulti lines separation
+	
+	
+	#  Spinner
+	ctypedef enum GuiSpinnerProperty:
+		SPIN_BUTTON_WIDTH = 16,  #  Spinner left/right buttons width
+		SPIN_BUTTON_SPACING = 17  #  Spinner buttons separation
+	
+	
+	#  ListView
+	ctypedef enum GuiListViewProperty:
+		LIST_ITEMS_HEIGHT = 16,  #  ListView items height
+		LIST_ITEMS_SPACING = 17,  #  ListView items separation
+		SCROLLBAR_WIDTH = 18,  #  ListView scrollbar size (usually width)
+		SCROLLBAR_SIDE = 19  #  ListView scrollbar side (0-left, 1-right)
+	
+	
+	#  ColorPicker
+	ctypedef enum GuiColorPickerProperty:
+		COLOR_SELECTOR_SIZE = 16,
+		HUEBAR_WIDTH = 17,  #  ColorPicker right hue bar width
+		HUEBAR_PADDING = 18,  #  ColorPicker right hue bar separation from panel
+		HUEBAR_SELECTOR_HEIGHT = 19,  #  ColorPicker right hue bar selector height
+		HUEBAR_SELECTOR_OVERFLOW = 20  #  ColorPicker right hue bar selector overflow
+	
+	
+	ctypedef enum GuiIconName:
+		ICON_NONE = 0,
+		ICON_FOLDER_FILE_OPEN = 1,
+		ICON_FILE_SAVE_CLASSIC = 2,
+		ICON_FOLDER_OPEN = 3,
+		ICON_FOLDER_SAVE = 4,
+		ICON_FILE_OPEN = 5,
+		ICON_FILE_SAVE = 6,
+		ICON_FILE_EXPORT = 7,
+		ICON_FILE_ADD = 8,
+		ICON_FILE_DELETE = 9,
+		ICON_FILETYPE_TEXT = 10,
+		ICON_FILETYPE_AUDIO = 11,
+		ICON_FILETYPE_IMAGE = 12,
+		ICON_FILETYPE_PLAY = 13,
+		ICON_FILETYPE_VIDEO = 14,
+		ICON_FILETYPE_INFO = 15,
+		ICON_FILE_COPY = 16,
+		ICON_FILE_CUT = 17,
+		ICON_FILE_PASTE = 18,
+		ICON_CURSOR_HAND = 19,
+		ICON_CURSOR_POINTER = 20,
+		ICON_CURSOR_CLASSIC = 21,
+		ICON_PENCIL = 22,
+		ICON_PENCIL_BIG = 23,
+		ICON_BRUSH_CLASSIC = 24,
+		ICON_BRUSH_PAINTER = 25,
+		ICON_WATER_DROP = 26,
+		ICON_COLOR_PICKER = 27,
+		ICON_RUBBER = 28,
+		ICON_COLOR_BUCKET = 29,
+		ICON_TEXT_T = 30,
+		ICON_TEXT_A = 31,
+		ICON_SCALE = 32,
+		ICON_RESIZE = 33,
+		ICON_FILTER_POINT = 34,
+		ICON_FILTER_BILINEAR = 35,
+		ICON_CROP = 36,
+		ICON_CROP_ALPHA = 37,
+		ICON_SQUARE_TOGGLE = 38,
+		ICON_SYMMETRY = 39,
+		ICON_SYMMETRY_HORIZONTAL = 40,
+		ICON_SYMMETRY_VERTICAL = 41,
+		ICON_LENS = 42,
+		ICON_LENS_BIG = 43,
+		ICON_EYE_ON = 44,
+		ICON_EYE_OFF = 45,
+		ICON_FILTER_TOP = 46,
+		ICON_FILTER = 47,
+		ICON_TARGET_POINT = 48,
+		ICON_TARGET_SMALL = 49,
+		ICON_TARGET_BIG = 50,
+		ICON_TARGET_MOVE = 51,
+		ICON_CURSOR_MOVE = 52,
+		ICON_CURSOR_SCALE = 53,
+		ICON_CURSOR_SCALE_RIGHT = 54,
+		ICON_CURSOR_SCALE_LEFT = 55,
+		ICON_UNDO = 56,
+		ICON_REDO = 57,
+		ICON_REREDO = 58,
+		ICON_MUTATE = 59,
+		ICON_ROTATE = 60,
+		ICON_REPEAT = 61,
+		ICON_SHUFFLE = 62,
+		ICON_EMPTYBOX = 63,
+		ICON_TARGET = 64,
+		ICON_TARGET_SMALL_FILL = 65,
+		ICON_TARGET_BIG_FILL = 66,
+		ICON_TARGET_MOVE_FILL = 67,
+		ICON_CURSOR_MOVE_FILL = 68,
+		ICON_CURSOR_SCALE_FILL = 69,
+		ICON_CURSOR_SCALE_RIGHT_FILL = 70,
+		ICON_CURSOR_SCALE_LEFT_FILL = 71,
+		ICON_UNDO_FILL = 72,
+		ICON_REDO_FILL = 73,
+		ICON_REREDO_FILL = 74,
+		ICON_MUTATE_FILL = 75,
+		ICON_ROTATE_FILL = 76,
+		ICON_REPEAT_FILL = 77,
+		ICON_SHUFFLE_FILL = 78,
+		ICON_EMPTYBOX_SMALL = 79,
+		ICON_BOX = 80,
+		ICON_BOX_TOP = 81,
+		ICON_BOX_TOP_RIGHT = 82,
+		ICON_BOX_RIGHT = 83,
+		ICON_BOX_BOTTOM_RIGHT = 84,
+		ICON_BOX_BOTTOM = 85,
+		ICON_BOX_BOTTOM_LEFT = 86,
+		ICON_BOX_LEFT = 87,
+		ICON_BOX_TOP_LEFT = 88,
+		ICON_BOX_CENTER = 89,
+		ICON_BOX_CIRCLE_MASK = 90,
+		ICON_POT = 91,
+		ICON_ALPHA_MULTIPLY = 92,
+		ICON_ALPHA_CLEAR = 93,
+		ICON_DITHERING = 94,
+		ICON_MIPMAPS = 95,
+		ICON_BOX_GRID = 96,
+		ICON_GRID = 97,
+		ICON_BOX_CORNERS_SMALL = 98,
+		ICON_BOX_CORNERS_BIG = 99,
+		ICON_FOUR_BOXES = 100,
+		ICON_GRID_FILL = 101,
+		ICON_BOX_MULTISIZE = 102,
+		ICON_ZOOM_SMALL = 103,
+		ICON_ZOOM_MEDIUM = 104,
+		ICON_ZOOM_BIG = 105,
+		ICON_ZOOM_ALL = 106,
+		ICON_ZOOM_CENTER = 107,
+		ICON_BOX_DOTS_SMALL = 108,
+		ICON_BOX_DOTS_BIG = 109,
+		ICON_BOX_CONCENTRIC = 110,
+		ICON_BOX_GRID_BIG = 111,
+		ICON_OK_TICK = 112,
+		ICON_CROSS = 113,
+		ICON_ARROW_LEFT = 114,
+		ICON_ARROW_RIGHT = 115,
+		ICON_ARROW_DOWN = 116,
+		ICON_ARROW_UP = 117,
+		ICON_ARROW_LEFT_FILL = 118,
+		ICON_ARROW_RIGHT_FILL = 119,
+		ICON_ARROW_DOWN_FILL = 120,
+		ICON_ARROW_UP_FILL = 121,
+		ICON_AUDIO = 122,
+		ICON_FX = 123,
+		ICON_WAVE = 124,
+		ICON_WAVE_SINUS = 125,
+		ICON_WAVE_SQUARE = 126,
+		ICON_WAVE_TRIANGULAR = 127,
+		ICON_CROSS_SMALL = 128,
+		ICON_PLAYER_PREVIOUS = 129,
+		ICON_PLAYER_PLAY_BACK = 130,
+		ICON_PLAYER_PLAY = 131,
+		ICON_PLAYER_PAUSE = 132,
+		ICON_PLAYER_STOP = 133,
+		ICON_PLAYER_NEXT = 134,
+		ICON_PLAYER_RECORD = 135,
+		ICON_MAGNET = 136,
+		ICON_LOCK_CLOSE = 137,
+		ICON_LOCK_OPEN = 138,
+		ICON_CLOCK = 139,
+		ICON_TOOLS = 140,
+		ICON_GEAR = 141,
+		ICON_GEAR_BIG = 142,
+		ICON_BIN = 143,
+		ICON_HAND_POINTER = 144,
+		ICON_LASER = 145,
+		ICON_COIN = 146,
+		ICON_EXPLOSION = 147,
+		ICON_1UP = 148,
+		ICON_PLAYER = 149,
+		ICON_PLAYER_JUMP = 150,
+		ICON_KEY = 151,
+		ICON_DEMON = 152,
+		ICON_TEXT_POPUP = 153,
+		ICON_GEAR_EX = 154,
+		ICON_CRACK = 155,
+		ICON_CRACK_POINTS = 156,
+		ICON_STAR = 157,
+		ICON_DOOR = 158,
+		ICON_EXIT = 159,
+		ICON_MODE_2D = 160,
+		ICON_MODE_3D = 161,
+		ICON_CUBE = 162,
+		ICON_CUBE_FACE_TOP = 163,
+		ICON_CUBE_FACE_LEFT = 164,
+		ICON_CUBE_FACE_FRONT = 165,
+		ICON_CUBE_FACE_BOTTOM = 166,
+		ICON_CUBE_FACE_RIGHT = 167,
+		ICON_CUBE_FACE_BACK = 168,
+		ICON_CAMERA = 169,
+		ICON_SPECIAL = 170,
+		ICON_LINK_NET = 171,
+		ICON_LINK_BOXES = 172,
+		ICON_LINK_MULTI = 173,
+		ICON_LINK = 174,
+		ICON_LINK_BROKE = 175,
+		ICON_TEXT_NOTES = 176,
+		ICON_NOTEBOOK = 177,
+		ICON_SUITCASE = 178,
+		ICON_SUITCASE_ZIP = 179,
+		ICON_MAILBOX = 180,
+		ICON_MONITOR = 181,
+		ICON_PRINTER = 182,
+		ICON_PHOTO_CAMERA = 183,
+		ICON_PHOTO_CAMERA_FLASH = 184,
+		ICON_HOUSE = 185,
+		ICON_HEART = 186,
+		ICON_CORNER = 187,
+		ICON_VERTICAL_BARS = 188,
+		ICON_VERTICAL_BARS_FILL = 189,
+		ICON_LIFE_BARS = 190,
+		ICON_INFO = 191,
+		ICON_CROSSLINE = 192,
+		ICON_HELP = 193,
+		ICON_FILETYPE_ALPHA = 194,
+		ICON_FILETYPE_HOME = 195,
+		ICON_LAYERS_VISIBLE = 196,
+		ICON_LAYERS = 197,
+		ICON_WINDOW = 198,
+		ICON_HIDPI = 199,
+		ICON_FILETYPE_BINARY = 200,
+		ICON_HEX = 201,
+		ICON_SHIELD = 202,
+		ICON_FILE_NEW = 203,
+		ICON_FOLDER_ADD = 204,
+		ICON_ALARM = 205,
+		ICON_206 = 206,
+		ICON_207 = 207,
+		ICON_208 = 208,
+		ICON_209 = 209,
+		ICON_210 = 210,
+		ICON_211 = 211,
+		ICON_212 = 212,
+		ICON_213 = 213,
+		ICON_214 = 214,
+		ICON_215 = 215,
+		ICON_216 = 216,
+		ICON_217 = 217,
+		ICON_218 = 218,
+		ICON_219 = 219,
+		ICON_220 = 220,
+		ICON_221 = 221,
+		ICON_222 = 222,
+		ICON_223 = 223,
+		ICON_224 = 224,
+		ICON_225 = 225,
+		ICON_226 = 226,
+		ICON_227 = 227,
+		ICON_228 = 228,
+		ICON_229 = 229,
+		ICON_230 = 230,
+		ICON_231 = 231,
+		ICON_232 = 232,
+		ICON_233 = 233,
+		ICON_234 = 234,
+		ICON_235 = 235,
+		ICON_236 = 236,
+		ICON_237 = 237,
+		ICON_238 = 238,
+		ICON_239 = 239,
+		ICON_240 = 240,
+		ICON_241 = 241,
+		ICON_242 = 242,
+		ICON_243 = 243,
+		ICON_244 = 244,
+		ICON_245 = 245,
+		ICON_246 = 246,
+		ICON_247 = 247,
+		ICON_248 = 248,
+		ICON_249 = 249,
+		ICON_250 = 250,
+		ICON_251 = 251,
+		ICON_252 = 252,
+		ICON_253 = 253,
+		ICON_254 = 254,
+		ICON_255 = 255
+	
+	
+	
 	#  Style property
 	ctypedef struct GuiStyleProp:
 		unsigned short controlId;
