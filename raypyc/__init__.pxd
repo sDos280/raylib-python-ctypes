@@ -172,7 +172,7 @@ DEF ICON_TEXT_PADDING = 4
 DEF RAYGUI_TEXTSPLIT_MAX_ITEMS = 128
 DEF RAYGUI_TEXTSPLIT_MAX_TEXT_SIZE = 1024
 DEF RAYGUI_TEXTFORMAT_MAX_SIZE = 256
-ctypedef enum rlGlVersion:
+cdef enum rlGlVersion:
 	OPENGL_11 = 1,
 	OPENGL_21 = 2,
 	OPENGL_33 = 3,
@@ -180,7 +180,7 @@ ctypedef enum rlGlVersion:
 	OPENGL_ES_20 = 5
 
 
-ctypedef enum rlFramebufferAttachType:
+cdef enum rlFramebufferAttachType:
 	RL_ATTACHMENT_COLOR_CHANNEL0 = 0,
 	RL_ATTACHMENT_COLOR_CHANNEL1 = 1,
 	RL_ATTACHMENT_COLOR_CHANNEL2 = 2,
@@ -193,7 +193,7 @@ ctypedef enum rlFramebufferAttachType:
 	RL_ATTACHMENT_STENCIL = 200
 
 
-ctypedef enum rlFramebufferAttachTextureType:
+cdef enum rlFramebufferAttachTextureType:
 	RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0,
 	RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1,
 	RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2,
@@ -205,7 +205,7 @@ ctypedef enum rlFramebufferAttachTextureType:
 
 
 #  Trace log level
-ctypedef enum rlTraceLogLevel:
+cdef enum rlTraceLogLevel:
 	RL_LOG_ALL = 0,  #  Display all logs
 	RL_LOG_TRACE = 1,  #  Trace logging, intended for internal use only
 	RL_LOG_DEBUG = 2,  #  Debug logging, used for internal debugging, it should be disabled on release builds
@@ -217,7 +217,7 @@ ctypedef enum rlTraceLogLevel:
 
 
 #  Texture formats (support depends on OpenGL version)
-ctypedef enum rlPixelFormat:
+cdef enum rlPixelFormat:
 	RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1,  #  8 bit per pixel (no alpha)
 	RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2,  #  8*2 bpp (2 channels)
 	RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3,  #  16 bpp
@@ -242,7 +242,7 @@ ctypedef enum rlPixelFormat:
 
 
 #  Texture parameters: filter mode
-ctypedef enum rlTextureFilter:
+cdef enum rlTextureFilter:
 	RL_TEXTURE_FILTER_POINT = 0,  #  No filter, just pixel approximation
 	RL_TEXTURE_FILTER_BILINEAR = 1,  #  Linear filtering
 	RL_TEXTURE_FILTER_TRILINEAR = 2,  #  Trilinear filtering (linear with mipmaps)
@@ -252,7 +252,7 @@ ctypedef enum rlTextureFilter:
 
 
 #  Color blending modes (pre-defined)
-ctypedef enum rlBlendMode:
+cdef enum rlBlendMode:
 	RL_BLEND_ALPHA = 0,  #  Blend textures considering alpha (default)
 	RL_BLEND_ADDITIVE = 1,  #  Blend textures adding colors
 	RL_BLEND_MULTIPLIED = 2,  #  Blend textures multiplying colors
@@ -263,7 +263,7 @@ ctypedef enum rlBlendMode:
 
 
 #  Shader location point type
-ctypedef enum rlShaderLocationIndex:
+cdef enum rlShaderLocationIndex:
 	RL_SHADER_LOC_VERTEX_POSITION = 0,  #  Shader location: vertex attribute: position
 	RL_SHADER_LOC_VERTEX_TEXCOORD01 = 1,  #  Shader location: vertex attribute: texcoord01
 	RL_SHADER_LOC_VERTEX_TEXCOORD02 = 2,  #  Shader location: vertex attribute: texcoord02
@@ -293,7 +293,7 @@ ctypedef enum rlShaderLocationIndex:
 
 
 #  Shader uniform data type
-ctypedef enum rlShaderUniformDataType:
+cdef enum rlShaderUniformDataType:
 	RL_SHADER_UNIFORM_FLOAT = 0,  #  Shader uniform type: float
 	RL_SHADER_UNIFORM_VEC2 = 1,  #  Shader uniform type: vec2 (2 float)
 	RL_SHADER_UNIFORM_VEC3 = 2,  #  Shader uniform type: vec3 (3 float)
@@ -306,7 +306,7 @@ ctypedef enum rlShaderUniformDataType:
 
 
 #  Shader attribute data types
-ctypedef enum rlShaderAttributeDataType:
+cdef enum rlShaderAttributeDataType:
 	RL_SHADER_ATTRIB_FLOAT = 0,  #  Shader attribute type: float
 	RL_SHADER_ATTRIB_VEC2 = 1,  #  Shader attribute type: vec2 (2 float)
 	RL_SHADER_ATTRIB_VEC3 = 2,  #  Shader attribute type: vec3 (3 float)
@@ -314,7 +314,7 @@ ctypedef enum rlShaderAttributeDataType:
 
 
 #  System/Window config flags
-ctypedef enum ConfigFlags:
+cdef enum ConfigFlags:
 	FLAG_VSYNC_HINT = 64,  #  Set to try enabling V-Sync on GPU
 	FLAG_FULLSCREEN_MODE = 2,  #  Set to run program in fullscreen
 	FLAG_WINDOW_RESIZABLE = 4,  #  Set to allow resizable window
@@ -333,7 +333,7 @@ ctypedef enum ConfigFlags:
 
 
 #  Trace log level
-ctypedef enum TraceLogLevel:
+cdef enum TraceLogLevel:
 	LOG_ALL = 0,  #  Display all logs
 	LOG_TRACE = 1,  #  Trace logging, intended for internal use only
 	LOG_DEBUG = 2,  #  Debug logging, used for internal debugging, it should be disabled on release builds
@@ -345,7 +345,7 @@ ctypedef enum TraceLogLevel:
 
 
 #  Keyboard keys (US keyboard layout)
-ctypedef enum KeyboardKey:
+cdef enum KeyboardKey:
 	KEY_NULL = 0,  #  Key: NULL, used for no key pressed
 	KEY_APOSTROPHE = 39,  #  Key: '
 	KEY_COMMA = 44,  #  Key: ,
@@ -459,7 +459,7 @@ ctypedef enum KeyboardKey:
 
 
 #  Mouse buttons
-ctypedef enum MouseButton:
+cdef enum MouseButton:
 	MOUSE_BUTTON_LEFT = 0,  #  Mouse button left
 	MOUSE_BUTTON_RIGHT = 1,  #  Mouse button right
 	MOUSE_BUTTON_MIDDLE = 2,  #  Mouse button middle (pressed wheel)
@@ -470,7 +470,7 @@ ctypedef enum MouseButton:
 
 
 #  Mouse cursor
-ctypedef enum MouseCursor:
+cdef enum MouseCursor:
 	MOUSE_CURSOR_DEFAULT = 0,  #  Default pointer shape
 	MOUSE_CURSOR_ARROW = 1,  #  Arrow shape
 	MOUSE_CURSOR_IBEAM = 2,  #  Text writing cursor shape
@@ -485,7 +485,7 @@ ctypedef enum MouseCursor:
 
 
 #  Gamepad buttons
-ctypedef enum GamepadButton:
+cdef enum GamepadButton:
 	GAMEPAD_BUTTON_UNKNOWN = 0,  #  Unknown button, just for error checking
 	GAMEPAD_BUTTON_LEFT_FACE_UP = 1,  #  Gamepad left DPAD up button
 	GAMEPAD_BUTTON_LEFT_FACE_RIGHT = 2,  #  Gamepad left DPAD right button
@@ -507,7 +507,7 @@ ctypedef enum GamepadButton:
 
 
 #  Gamepad axis
-ctypedef enum GamepadAxis:
+cdef enum GamepadAxis:
 	GAMEPAD_AXIS_LEFT_X = 0,  #  Gamepad left stick X axis
 	GAMEPAD_AXIS_LEFT_Y = 1,  #  Gamepad left stick Y axis
 	GAMEPAD_AXIS_RIGHT_X = 2,  #  Gamepad right stick X axis
@@ -517,7 +517,7 @@ ctypedef enum GamepadAxis:
 
 
 #  Material map index
-ctypedef enum MaterialMapIndex:
+cdef enum MaterialMapIndex:
 	MATERIAL_MAP_ALBEDO = 0,  #  Albedo material (same as: MATERIAL_MAP_DIFFUSE)
 	MATERIAL_MAP_METALNESS = 1,  #  Metalness material (same as: MATERIAL_MAP_SPECULAR)
 	MATERIAL_MAP_NORMAL = 2,  #  Normal material
@@ -532,7 +532,7 @@ ctypedef enum MaterialMapIndex:
 
 
 #  Shader location index
-ctypedef enum ShaderLocationIndex:
+cdef enum ShaderLocationIndex:
 	SHADER_LOC_VERTEX_POSITION = 0,  #  Shader location: vertex attribute: position
 	SHADER_LOC_VERTEX_TEXCOORD01 = 1,  #  Shader location: vertex attribute: texcoord01
 	SHADER_LOC_VERTEX_TEXCOORD02 = 2,  #  Shader location: vertex attribute: texcoord02
@@ -562,7 +562,7 @@ ctypedef enum ShaderLocationIndex:
 
 
 #  Shader uniform data type
-ctypedef enum ShaderUniformDataType:
+cdef enum ShaderUniformDataType:
 	SHADER_UNIFORM_FLOAT = 0,  #  Shader uniform type: float
 	SHADER_UNIFORM_VEC2 = 1,  #  Shader uniform type: vec2 (2 float)
 	SHADER_UNIFORM_VEC3 = 2,  #  Shader uniform type: vec3 (3 float)
@@ -575,7 +575,7 @@ ctypedef enum ShaderUniformDataType:
 
 
 #  Shader attribute data types
-ctypedef enum ShaderAttributeDataType:
+cdef enum ShaderAttributeDataType:
 	SHADER_ATTRIB_FLOAT = 0,  #  Shader attribute type: float
 	SHADER_ATTRIB_VEC2 = 1,  #  Shader attribute type: vec2 (2 float)
 	SHADER_ATTRIB_VEC3 = 2,  #  Shader attribute type: vec3 (3 float)
@@ -583,7 +583,7 @@ ctypedef enum ShaderAttributeDataType:
 
 
 #  Pixel formats
-ctypedef enum PixelFormat:
+cdef enum PixelFormat:
 	PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1,  #  8 bit per pixel (no alpha)
 	PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2,  #  8*2 bpp (2 channels)
 	PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3,  #  16 bpp
@@ -608,7 +608,7 @@ ctypedef enum PixelFormat:
 
 
 #  Texture parameters: filter mode
-ctypedef enum TextureFilter:
+cdef enum TextureFilter:
 	TEXTURE_FILTER_POINT = 0,  #  No filter, just pixel approximation
 	TEXTURE_FILTER_BILINEAR = 1,  #  Linear filtering
 	TEXTURE_FILTER_TRILINEAR = 2,  #  Trilinear filtering (linear with mipmaps)
@@ -618,7 +618,7 @@ ctypedef enum TextureFilter:
 
 
 #  Texture parameters: wrap mode
-ctypedef enum TextureWrap:
+cdef enum TextureWrap:
 	TEXTURE_WRAP_REPEAT = 0,  #  Repeats texture in tiled mode
 	TEXTURE_WRAP_CLAMP = 1,  #  Clamps texture to edge pixel in tiled mode
 	TEXTURE_WRAP_MIRROR_REPEAT = 2,  #  Mirrors and repeats the texture in tiled mode
@@ -626,7 +626,7 @@ ctypedef enum TextureWrap:
 
 
 #  Cubemap layouts
-ctypedef enum CubemapLayout:
+cdef enum CubemapLayout:
 	CUBEMAP_LAYOUT_AUTO_DETECT = 0,  #  Automatically detect layout type
 	CUBEMAP_LAYOUT_LINE_VERTICAL = 1,  #  Layout is defined by a vertical line with faces
 	CUBEMAP_LAYOUT_LINE_HORIZONTAL = 2,  #  Layout is defined by an horizontal line with faces
@@ -636,14 +636,14 @@ ctypedef enum CubemapLayout:
 
 
 #  Font type, defines generation method
-ctypedef enum FontType:
+cdef enum FontType:
 	FONT_DEFAULT = 0,  #  Default font generation, anti-aliased
 	FONT_BITMAP = 1,  #  Bitmap font generation, no anti-aliasing
 	FONT_SDF = 2  #  SDF font generation, requires external shader
 
 
 #  Color blending modes (pre-defined)
-ctypedef enum BlendMode:
+cdef enum BlendMode:
 	BLEND_ALPHA = 0,  #  Blend textures considering alpha (default)
 	BLEND_ADDITIVE = 1,  #  Blend textures adding colors
 	BLEND_MULTIPLIED = 2,  #  Blend textures multiplying colors
@@ -654,7 +654,7 @@ ctypedef enum BlendMode:
 
 
 #  Gesture
-ctypedef enum Gesture:
+cdef enum Gesture:
 	GESTURE_NONE = 0,  #  No gesture
 	GESTURE_TAP = 1,  #  Tap gesture
 	GESTURE_DOUBLETAP = 2,  #  Double tap gesture
@@ -669,7 +669,7 @@ ctypedef enum Gesture:
 
 
 #  Camera system modes
-ctypedef enum CameraMode:
+cdef enum CameraMode:
 	CAMERA_CUSTOM = 0,  #  Custom camera
 	CAMERA_FREE = 1,  #  Free camera
 	CAMERA_ORBITAL = 2,  #  Orbital camera
@@ -678,20 +678,20 @@ ctypedef enum CameraMode:
 
 
 #  Camera projection
-ctypedef enum CameraProjection:
+cdef enum CameraProjection:
 	CAMERA_PERSPECTIVE = 0,  #  Perspective projection
 	CAMERA_ORTHOGRAPHIC = 1  #  Orthographic projection
 
 
 #  N-patch layout
-ctypedef enum NPatchLayout:
+cdef enum NPatchLayout:
 	NPATCH_NINE_PATCH = 0,  #  Npatch layout: 3x3 tiles
 	NPATCH_THREE_PATCH_VERTICAL = 1,  #  Npatch layout: 1x3 tiles
 	NPATCH_THREE_PATCH_HORIZONTAL = 2  #  Npatch layout: 3x1 tiles
 
 
 #  Gui control state
-ctypedef enum GuiState:
+cdef enum GuiState:
 	STATE_NORMAL = 0,
 	STATE_FOCUSED = 1,
 	STATE_PRESSED = 2,
@@ -699,14 +699,14 @@ ctypedef enum GuiState:
 
 
 #  Gui control text alignment
-ctypedef enum GuiTextAlignment:
+cdef enum GuiTextAlignment:
 	TEXT_ALIGN_LEFT = 0,
 	TEXT_ALIGN_CENTER = 1,
 	TEXT_ALIGN_RIGHT = 2
 
 
 #  Gui controls
-ctypedef enum GuiControl:
+cdef enum GuiControl:
 	DEFAULT = 0,
 	LABEL = 1,  #  Used also for: LABELBUTTON
 	BUTTON = 2,
@@ -726,7 +726,7 @@ ctypedef enum GuiControl:
 
 
 #  Gui base properties for every control
-ctypedef enum GuiControlProperty:
+cdef enum GuiControlProperty:
 	BORDER_COLOR_NORMAL = 0,
 	BASE_COLOR_NORMAL = 1,
 	TEXT_COLOR_NORMAL = 2,
@@ -746,7 +746,7 @@ ctypedef enum GuiControlProperty:
 
 
 #  DEFAULT extended properties
-ctypedef enum GuiDefaultProperty:
+cdef enum GuiDefaultProperty:
 	TEXT_SIZE = 16,  #  Text size (glyphs max height)
 	TEXT_SPACING = 17,  #  Text spacing between glyphs
 	LINE_COLOR = 18,  #  Line control color
@@ -754,23 +754,23 @@ ctypedef enum GuiDefaultProperty:
 
 
 #  Toggle/ToggleGroup
-ctypedef enum GuiToggleProperty:
+cdef enum GuiToggleProperty:
 	GROUP_PADDING = 16  #  ToggleGroup separation between toggles
 
 
 #  Slider/SliderBar
-ctypedef enum GuiSliderProperty:
+cdef enum GuiSliderProperty:
 	SLIDER_WIDTH = 16,  #  Slider size of internal bar
 	SLIDER_PADDING = 17  #  Slider/SliderBar internal bar padding
 
 
 #  ProgressBar
-ctypedef enum GuiProgressBarProperty:
+cdef enum GuiProgressBarProperty:
 	PROGRESS_PADDING = 16  #  ProgressBar internal padding
 
 
 #  ScrollBar
-ctypedef enum GuiScrollBarProperty:
+cdef enum GuiScrollBarProperty:
 	ARROWS_SIZE = 16,
 	ARROWS_VISIBLE = 17,
 	SCROLL_SLIDER_PADDING = 18,  #  (SLIDERBAR, SLIDER_PADDING)
@@ -780,36 +780,36 @@ ctypedef enum GuiScrollBarProperty:
 
 
 #  CheckBox
-ctypedef enum GuiCheckBoxProperty:
+cdef enum GuiCheckBoxProperty:
 	CHECK_PADDING = 16  #  CheckBox internal check padding
 
 
 #  ComboBox
-ctypedef enum GuiComboBoxProperty:
+cdef enum GuiComboBoxProperty:
 	COMBO_BUTTON_WIDTH = 16,  #  ComboBox right button width
 	COMBO_BUTTON_SPACING = 17  #  ComboBox button separation
 
 
 #  DropdownBox
-ctypedef enum GuiDropdownBoxProperty:
+cdef enum GuiDropdownBoxProperty:
 	ARROW_PADDING = 16,  #  DropdownBox arrow separation from border and items
 	DROPDOWN_ITEMS_SPACING = 17  #  DropdownBox items separation
 
 
 #  TextBox/TextBoxMulti/ValueBox/Spinner
-ctypedef enum GuiTextBoxProperty:
+cdef enum GuiTextBoxProperty:
 	TEXT_INNER_PADDING = 16,  #  TextBox/TextBoxMulti/ValueBox/Spinner inner text padding
 	TEXT_LINES_SPACING = 17  #  TextBoxMulti lines separation
 
 
 #  Spinner
-ctypedef enum GuiSpinnerProperty:
+cdef enum GuiSpinnerProperty:
 	SPIN_BUTTON_WIDTH = 16,  #  Spinner left/right buttons width
 	SPIN_BUTTON_SPACING = 17  #  Spinner buttons separation
 
 
 #  ListView
-ctypedef enum GuiListViewProperty:
+cdef enum GuiListViewProperty:
 	LIST_ITEMS_HEIGHT = 16,  #  ListView items height
 	LIST_ITEMS_SPACING = 17,  #  ListView items separation
 	SCROLLBAR_WIDTH = 18,  #  ListView scrollbar size (usually width)
@@ -817,7 +817,7 @@ ctypedef enum GuiListViewProperty:
 
 
 #  ColorPicker
-ctypedef enum GuiColorPickerProperty:
+cdef enum GuiColorPickerProperty:
 	COLOR_SELECTOR_SIZE = 16,
 	HUEBAR_WIDTH = 17,  #  ColorPicker right hue bar width
 	HUEBAR_PADDING = 18,  #  ColorPicker right hue bar separation from panel
@@ -825,7 +825,7 @@ ctypedef enum GuiColorPickerProperty:
 	HUEBAR_SELECTOR_OVERFLOW = 20  #  ColorPicker right hue bar selector overflow
 
 
-ctypedef enum GuiIconName:
+cdef enum GuiIconName:
 	ICON_NONE = 0,
 	ICON_FOLDER_FILE_OPEN = 1,
 	ICON_FILE_SAVE_CLASSIC = 2,
@@ -1084,367 +1084,107 @@ ctypedef enum GuiIconName:
 	ICON_255 = 255
 
 
-#  dummy structure
-ctypedef struct rAudioBuffer:
-	signed char[392] data;
-
-
-#  dummy structure
-ctypedef struct rAudioProcessor:
-	signed char[24] data;
-
-
-#  Dynamic vertex buffers (position + texcoords + colors + indices arrays)
-ctypedef struct rlVertexBuffer:
-	int elementCount;  # Number of elements in the buffer (QUADS)
-	float * vertices;  # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
-	float * texcoords;  # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
-	unsigned char * colors;  # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
-	unsigned int * indices;  # Vertex indices (in case vertex data comes indexed) (6 indices per quad)
-	unsigned int vaoId;  # OpenGL Vertex Array Object id
-	unsigned int[4] vboId;  # OpenGL Vertex Buffer Objects id (4 types of vertex data)
-
-#  of those state-change happens (this is done in core module)
-ctypedef struct rlDrawCall:
-	int mode;  # Drawing mode: LINES, TRIANGLES, QUADS
-	int vertexCount;  # Number of vertex of the draw
-	int vertexAlignment;  # Number of vertex required for index alignment (LINES, TRIANGLES)
-	unsigned int textureId;  # Texture id to be used on the draw -> Use to create new draw call if changes
-
-#  rlRenderBatch type
-ctypedef struct rlRenderBatch:
-	int bufferCount;  # Number of vertex buffers (multi-buffering support)
-	int currentBuffer;  # Current buffer tracking in case of multi-buffering
-	rlVertexBuffer * vertexBuffer;  # Dynamic buffer(s) for vertex data
-	rlDrawCall * draws;  # Draw calls array, depends on textureId
-	int drawCounter;  # Draw calls counter
-	float currentDepth;  # Current depth value for next draw
-
-#  Matrix, 4x4 components, column major, OpenGL style, right handed
-ctypedef struct Matrix:
-	float m0;  # Matrix first row (4 components)
-	float m4;  # Matrix first row (4 components)
-	float m8;  # Matrix first row (4 components)
-	float m12;  # Matrix first row (4 components)
-	float m1;  # Matrix second row (4 components)
-	float m5;  # Matrix second row (4 components)
-	float m9;  # Matrix second row (4 components)
-	float m13;  # Matrix second row (4 components)
-	float m2;  # Matrix third row (4 components)
-	float m6;  # Matrix third row (4 components)
-	float m10;  # Matrix third row (4 components)
-	float m14;  # Matrix third row (4 components)
-	float m3;  # Matrix fourth row (4 components)
-	float m7;  # Matrix fourth row (4 components)
-	float m11;  # Matrix fourth row (4 components)
-	float m15;  # Matrix fourth row (4 components)
-
-#  
-ctypedef struct rlglData:
-	rlRenderBatch * currentBatch;  # Current render batch
-	rlRenderBatch defaultBatch;  # Default internal render batch
-	int vertexCounter;  # Current active render batch vertex counter (generic, used for all batches)
-	float texcoordx;  # Current active texture coordinate (added on glVertex*())
-	float texcoordy;  # Current active texture coordinate (added on glVertex*())
-	float normalx;  # Current active normal (added on glVertex*())
-	float normaly;  # Current active normal (added on glVertex*())
-	float normalz;  # Current active normal (added on glVertex*())
-	unsigned char colorr;  # Current active color (added on glVertex*())
-	unsigned char colorg;  # Current active color (added on glVertex*())
-	unsigned char colorb;  # Current active color (added on glVertex*())
-	unsigned char colora;  # Current active color (added on glVertex*())
-	int currentMatrixMode;  # Current matrix mode
-	Matrix * currentMatrix;  # Current matrix pointer
-	Matrix modelview;  # Default modelview matrix
-	Matrix projection;  # Default projection matrix
-	Matrix transform;  # Transform matrix to be used with rlTranslate, rlRotate, rlScale
-	bint transformRequired;  # Require transform matrix application to current draw-call vertex (if required)
-	Matrix[RL_MAX_MATRIX_STACK_SIZE] stack;  # Matrix stack for push/pop
-	int stackCounter;  # Matrix stack counter
-	unsigned int defaultTextureId;  # Default texture used on shapes/poly drawing (required by shader)
-	unsigned int[RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS] activeTextureId;  # Active texture ids to be enabled on batch drawing (0 active by default)
-	unsigned int defaultVShaderId;  # Default vertex shader id (used by default shader program)
-	unsigned int defaultFShaderId;  # Default fragment shader id (used by default shader program)
-	unsigned int defaultShaderId;  # Default shader program id, supports vertex color and diffuse texture
-	int * defaultShaderLocs;  # Default shader locations pointer to be used on rendering
-	unsigned int currentShaderId;  # Current shader id to be used on rendering (by default, defaultShaderId)
-	int * currentShaderLocs;  # Current shader locations pointer to be used on rendering (by default, defaultShaderLocs)
-	bint stereoRender;  # Stereo rendering flag
-	Matrix[2] projectionStereo;  # VR stereo rendering eyes projection matrices
-	Matrix[2] viewOffsetStereo;  # VR stereo rendering eyes view offset matrices
-	int currentBlendMode;  # Blending mode active
-	int glBlendSrcFactor;  # Blending source factor
-	int glBlendDstFactor;  # Blending destination factor
-	int glBlendEquation;  # Blending equation
-	int framebufferWidth;  # Current framebuffer width
-	int framebufferHeight;  # Current framebuffer height
-
-#  Vector2, 2 components
-ctypedef struct Vector2:
-	float x;  # Vector x component
-	float y;  # Vector y component
-
-#  Vector3, 3 components
-ctypedef struct Vector3:
-	float x;  # Vector x component
-	float y;  # Vector y component
-	float z;  # Vector z component
-
-#  Vector4, 4 components
-ctypedef struct Vector4:
-	float x;  # Vector x component
-	float y;  # Vector y component
-	float z;  # Vector z component
-	float w;  # Vector w component
-
-#  Quaternion, 4 components (Vector4 alias)
-ctypedef Vector4 Quaternion;
-
-#  Color, 4 components, R8G8B8A8 (32bit)
-ctypedef struct Color:
-	unsigned char r;  # Color red value
-	unsigned char g;  # Color green value
-	unsigned char b;  # Color blue value
-	unsigned char a;  # Color alpha value
-
-#  Rectangle, 4 components
-ctypedef struct Rectangle:
-	float x;  # Rectangle top-left corner position x
-	float y;  # Rectangle top-left corner position y
-	float width;  # Rectangle width
-	float height;  # Rectangle height
-
-#  Image, pixel data stored in CPU memory (RAM)
-ctypedef struct Image:
-	void * data;  # Image raw data
-	int width;  # Image base width
-	int height;  # Image base height
-	int mipmaps;  # Mipmap levels, 1 by default
-	int format;  # Data format (PixelFormat type)
-
-#  Texture, tex data stored in GPU memory (VRAM)
-ctypedef struct Texture:
-	unsigned int id;  # OpenGL texture id
-	int width;  # Texture base width
-	int height;  # Texture base height
-	int mipmaps;  # Mipmap levels, 1 by default
-	int format;  # Data format (PixelFormat type)
-
-#  Texture2D, same as Texture
-ctypedef Texture Texture2D;
-
-#  TextureCubemap, same as Texture
-ctypedef Texture TextureCubemap;
-
-#  RenderTexture, fbo for texture rendering
-ctypedef struct RenderTexture:
-	unsigned int id;  # OpenGL framebuffer object id
-	Texture texture;  # Color buffer attachment texture
-	Texture depth;  # Depth buffer attachment texture
-
-#  RenderTexture2D, same as RenderTexture
-ctypedef RenderTexture RenderTexture2D;
-
-#  NPatchInfo, n-patch layout info
-ctypedef struct NPatchInfo:
-	Rectangle source;  # Texture source rectangle
-	int left;  # Left border offset
-	int top;  # Top border offset
-	int right;  # Right border offset
-	int bottom;  # Bottom border offset
-	int layout;  # Layout of the n-patch: 3x3, 1x3 or 3x1
-
-#  GlyphInfo, font characters glyphs info
-ctypedef struct GlyphInfo:
-	int value;  # Character value (Unicode)
-	int offsetX;  # Character offset X when drawing
-	int offsetY;  # Character offset Y when drawing
-	int advanceX;  # Character advance position X
-	Image image;  # Character image data
-
-#  Font, font texture and GlyphInfo array data
-ctypedef struct Font:
-	int baseSize;  # Base size (default chars height)
-	int glyphCount;  # Number of glyph characters
-	int glyphPadding;  # Padding around the glyph characters
-	Texture2D texture;  # Texture atlas containing the glyphs
-	Rectangle * recs;  # Rectangles in texture for the glyphs
-	GlyphInfo * glyphs;  # Glyphs info data
-
-#  Camera, defines position/orientation in 3d space
-ctypedef struct Camera3D:
-	Vector3 position;  # Camera position
-	Vector3 target;  # Camera target it looks-at
-	Vector3 up;  # Camera up vector (rotation over its axis)
-	float fovy;  # Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic
-	int projection;  # Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
-
-#  Camera type fallback, defaults to Camera3D
-ctypedef Camera3D Camera;
-
-#  Camera2D, defines position/orientation in 2d space
-ctypedef struct Camera2D:
-	Vector2 offset;  # Camera offset (displacement from target)
-	Vector2 target;  # Camera target (rotation and zoom origin)
-	float rotation;  # Camera rotation in degrees
-	float zoom;  # Camera zoom (scaling), should be 1.0f by default
-
-#  Mesh, vertex data and vao/vbo
-ctypedef struct Mesh:
-	int vertexCount;  # Number of vertices stored in arrays
-	int triangleCount;  # Number of triangles stored (indexed or not)
-	float * vertices;  # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
-	float * texcoords;  # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
-	float * texcoords2;  # Vertex texture second coordinates (UV - 2 components per vertex) (shader-location = 5)
-	float * normals;  # Vertex normals (XYZ - 3 components per vertex) (shader-location = 2)
-	float * tangents;  # Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4)
-	unsigned char * colors;  # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
-	unsigned short * indices;  # Vertex indices (in case vertex data comes indexed)
-	float * animVertices;  # Animated vertex positions (after bones transformations)
-	float * animNormals;  # Animated normals (after bones transformations)
-	unsigned char * boneIds;  # Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning)
-	float * boneWeights;  # Vertex bone weight, up to 4 bones influence by vertex (skinning)
-	unsigned int vaoId;  # OpenGL Vertex Array Object id
-	unsigned int * vboId;  # OpenGL Vertex Buffer Objects id (default vertex data)
-
-#  Shader
-ctypedef struct Shader:
-	unsigned int id;  # Shader program id
-	int * locs;  # Shader locations array (RL_MAX_SHADER_LOCATIONS)
-
-#  MaterialMap
-ctypedef struct MaterialMap:
-	Texture2D texture;  # Material map texture
-	Color color;  # Material map color
-	float value;  # Material map value
-
-#  Material, includes shader and maps
-ctypedef struct Material:
-	Shader shader;  # Material shader
-	MaterialMap * maps;  # Material maps array (MAX_MATERIAL_MAPS)
-	float[4] params;  # Material generic parameters (if required)
-
-#  Transform, vectex transformation data
-ctypedef struct Transform:
-	Vector3 translation;  # Translation
-	Quaternion rotation;  # Rotation
-	Vector3 scale;  # Scale
-
-#  Bone, skeletal animation bone
-ctypedef struct BoneInfo:
-	char[32] name;  # Bone name
-	int parent;  # Bone parent
-
-#  Model, meshes, materials and animation data
-ctypedef struct Model:
-	Matrix transform;  # Local transform matrix
-	int meshCount;  # Number of meshes
-	int materialCount;  # Number of materials
-	Mesh * meshes;  # Meshes array
-	Material * materials;  # Materials array
-	int * meshMaterial;  # Mesh material number
-	int boneCount;  # Number of bones
-	BoneInfo * bones;  # Bones information (skeleton)
-	Transform * bindPose;  # Bones base transformation (pose)
-
-#  ModelAnimation
-ctypedef struct ModelAnimation:
-	int boneCount;  # Number of bones
-	int frameCount;  # Number of animation frames
-	BoneInfo * bones;  # Bones information (skeleton)
-	Transform ** framePoses;  # Poses array by frame
-
-#  Ray, ray for raycasting
-ctypedef struct Ray:
-	Vector3 position;  # Ray position (origin)
-	Vector3 direction;  # Ray direction
-
-#  RayCollision, ray hit information
-ctypedef struct RayCollision:
-	bint hit;  # Did the ray hit something?
-	float distance;  # Distance to nearest hit
-	Vector3 point;  # Point of nearest hit
-	Vector3 normal;  # Surface normal of hit
-
-#  BoundingBox
-ctypedef struct BoundingBox:
-	Vector3 min;  # Minimum vertex box-corner
-	Vector3 max;  # Maximum vertex box-corner
-
-#  Wave, audio wave data
-ctypedef struct Wave:
-	unsigned int frameCount;  # Total number of frames (considering channels)
-	unsigned int sampleRate;  # Frequency (samples per second)
-	unsigned int sampleSize;  # Bit depth (bits per sample): 8, 16, 32 (24 not supported)
-	unsigned int channels;  # Number of channels (1-mono, 2-stereo, ...)
-	void * data;  # Buffer data pointer
-
-#  AudioStream, custom audio stream
-ctypedef struct AudioStream:
-	rAudioBuffer * buffer;  # Pointer to internal data used by the audio system
-	rAudioProcessor * processor;  # Pointer to internal data processor, useful for audio effects
-	unsigned int sampleRate;  # Frequency (samples per second)
-	unsigned int sampleSize;  # Bit depth (bits per sample): 8, 16, 32 (24 not supported)
-	unsigned int channels;  # Number of channels (1-mono, 2-stereo, ...)
-
-#  Sound
-ctypedef struct Sound:
-	AudioStream stream;  # Audio stream
-	unsigned int frameCount;  # Total number of frames (considering channels)
-
-#  Music, audio stream, anything longer than ~10 seconds should be streamed
-ctypedef struct Music:
-	AudioStream stream;  # Audio stream
-	unsigned int frameCount;  # Total number of frames (considering channels)
-	bint looping;  # Music looping enable
-	int ctxType;  # Type of music context (audio filetype)
-	void * ctxData;  # Audio context data, depends on type
-
-#  VrDeviceInfo, Head-Mounted-Display device parameters
-ctypedef struct VrDeviceInfo:
-	int hResolution;  # Horizontal resolution in pixels
-	int vResolution;  # Vertical resolution in pixels
-	float hScreenSize;  # Horizontal size in meters
-	float vScreenSize;  # Vertical size in meters
-	float vScreenCenter;  # Screen center in meters
-	float eyeToScreenDistance;  # Distance between eye and display in meters
-	float lensSeparationDistance;  # Lens separation distance in meters
-	float interpupillaryDistance;  # IPD (distance between pupils) in meters
-	float[4] lensDistortionValues;  # Lens distortion constant parameters
-	float[4] chromaAbCorrection;  # Chromatic aberration correction parameters
-
-#  VrStereoConfig, VR stereo rendering configuration for simulator
-ctypedef struct VrStereoConfig:
-	Matrix[2] projection;  # VR projection matrices (per eye)
-	Matrix[2] viewOffset;  # VR view offset matrices (per eye)
-	float[2] leftLensCenter;  # VR left lens center
-	float[2] rightLensCenter;  # VR right lens center
-	float[2] leftScreenCenter;  # VR left screen center
-	float[2] rightScreenCenter;  # VR right screen center
-	float[2] scale;  # VR distortion scale
-	float[2] scaleIn;  # VR distortion scale in
-
-#  File path list
-ctypedef struct FilePathList:
-	unsigned int capacity;  # Filepaths max entries
-	unsigned int count;  # Filepaths entries count
-	char ** paths;  # Filepaths entries
-
-#  NOTE: Helper types to be used instead of array return types for *ToFloat functions
-ctypedef struct float3:
-	float[3] v;
-
-#  
-ctypedef struct float16:
-	float[16] v;
-
-#  Style property
-ctypedef struct GuiStyleProp:
-	unsigned short controlId;
-	unsigned short propertyId;
-	unsigned int propertyValue;
-
+cdef extern from "config.h":
+	#  dummy structure
+	ctypedef struct rAudioBuffer:
+		signed char[392] data;
+	
+	
+	#  dummy structure
+	ctypedef struct rAudioProcessor:
+		signed char[24] data;
+	
+	
+	
+	
+	
 cdef extern from "rlgl.h":
+	#  Dynamic vertex buffers (position + texcoords + colors + indices arrays)
+	ctypedef struct rlVertexBuffer:
+		int elementCount;  # Number of elements in the buffer (QUADS)
+		float * vertices;  # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
+		float * texcoords;  # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
+		unsigned char * colors;  # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
+		unsigned int * indices;  # Vertex indices (in case vertex data comes indexed) (6 indices per quad)
+		unsigned int vaoId;  # OpenGL Vertex Array Object id
+		unsigned int[4] vboId;  # OpenGL Vertex Buffer Objects id (4 types of vertex data)
+	
+	#  of those state-change happens (this is done in core module)
+	ctypedef struct rlDrawCall:
+		int mode;  # Drawing mode: LINES, TRIANGLES, QUADS
+		int vertexCount;  # Number of vertex of the draw
+		int vertexAlignment;  # Number of vertex required for index alignment (LINES, TRIANGLES)
+		unsigned int textureId;  # Texture id to be used on the draw -> Use to create new draw call if changes
+	
+	#  rlRenderBatch type
+	ctypedef struct rlRenderBatch:
+		int bufferCount;  # Number of vertex buffers (multi-buffering support)
+		int currentBuffer;  # Current buffer tracking in case of multi-buffering
+		rlVertexBuffer * vertexBuffer;  # Dynamic buffer(s) for vertex data
+		rlDrawCall * draws;  # Draw calls array, depends on textureId
+		int drawCounter;  # Draw calls counter
+		float currentDepth;  # Current depth value for next draw
+	
+	#  Matrix, 4x4 components, column major, OpenGL style, right handed
+	ctypedef struct Matrix:
+		float m0;  # Matrix first row (4 components)
+		float m4;  # Matrix first row (4 components)
+		float m8;  # Matrix first row (4 components)
+		float m12;  # Matrix first row (4 components)
+		float m1;  # Matrix second row (4 components)
+		float m5;  # Matrix second row (4 components)
+		float m9;  # Matrix second row (4 components)
+		float m13;  # Matrix second row (4 components)
+		float m2;  # Matrix third row (4 components)
+		float m6;  # Matrix third row (4 components)
+		float m10;  # Matrix third row (4 components)
+		float m14;  # Matrix third row (4 components)
+		float m3;  # Matrix fourth row (4 components)
+		float m7;  # Matrix fourth row (4 components)
+		float m11;  # Matrix fourth row (4 components)
+		float m15;  # Matrix fourth row (4 components)
+	
+	#  
+	ctypedef struct rlglData:
+		rlRenderBatch * currentBatch;  # Current render batch
+		rlRenderBatch defaultBatch;  # Default internal render batch
+		int vertexCounter;  # Current active render batch vertex counter (generic, used for all batches)
+		float texcoordx;  # Current active texture coordinate (added on glVertex*())
+		float texcoordy;  # Current active texture coordinate (added on glVertex*())
+		float normalx;  # Current active normal (added on glVertex*())
+		float normaly;  # Current active normal (added on glVertex*())
+		float normalz;  # Current active normal (added on glVertex*())
+		unsigned char colorr;  # Current active color (added on glVertex*())
+		unsigned char colorg;  # Current active color (added on glVertex*())
+		unsigned char colorb;  # Current active color (added on glVertex*())
+		unsigned char colora;  # Current active color (added on glVertex*())
+		int currentMatrixMode;  # Current matrix mode
+		Matrix * currentMatrix;  # Current matrix pointer
+		Matrix modelview;  # Default modelview matrix
+		Matrix projection;  # Default projection matrix
+		Matrix transform;  # Transform matrix to be used with rlTranslate, rlRotate, rlScale
+		bint transformRequired;  # Require transform matrix application to current draw-call vertex (if required)
+		Matrix[RL_MAX_MATRIX_STACK_SIZE] stack;  # Matrix stack for push/pop
+		int stackCounter;  # Matrix stack counter
+		unsigned int defaultTextureId;  # Default texture used on shapes/poly drawing (required by shader)
+		unsigned int[RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS] activeTextureId;  # Active texture ids to be enabled on batch drawing (0 active by default)
+		unsigned int defaultVShaderId;  # Default vertex shader id (used by default shader program)
+		unsigned int defaultFShaderId;  # Default fragment shader id (used by default shader program)
+		unsigned int defaultShaderId;  # Default shader program id, supports vertex color and diffuse texture
+		int * defaultShaderLocs;  # Default shader locations pointer to be used on rendering
+		unsigned int currentShaderId;  # Current shader id to be used on rendering (by default, defaultShaderId)
+		int * currentShaderLocs;  # Current shader locations pointer to be used on rendering (by default, defaultShaderLocs)
+		bint stereoRender;  # Stereo rendering flag
+		Matrix[2] projectionStereo;  # VR stereo rendering eyes projection matrices
+		Matrix[2] viewOffsetStereo;  # VR stereo rendering eyes view offset matrices
+		int currentBlendMode;  # Blending mode active
+		int glBlendSrcFactor;  # Blending source factor
+		int glBlendDstFactor;  # Blending destination factor
+		int glBlendEquation;  # Blending equation
+		int framebufferWidth;  # Current framebuffer width
+		int framebufferHeight;  # Current framebuffer height
+	
+	
 	void rlMatrixMode(int mode);  # Choose the current matrix to be transformed
 	void rlPushMatrix();  # Push the current matrix to stack
 	void rlPopMatrix();  # Pop lattest inserted matrix from stack
@@ -1589,6 +1329,258 @@ cdef extern from "rlgl.h":
 	void rlLoadDrawQuad();  # Load and draw a quad
 	
 cdef extern from "raylib.h":
+	#  Vector2, 2 components
+	ctypedef struct Vector2:
+		float x;  # Vector x component
+		float y;  # Vector y component
+	
+	#  Vector3, 3 components
+	ctypedef struct Vector3:
+		float x;  # Vector x component
+		float y;  # Vector y component
+		float z;  # Vector z component
+	
+	#  Vector4, 4 components
+	ctypedef struct Vector4:
+		float x;  # Vector x component
+		float y;  # Vector y component
+		float z;  # Vector z component
+		float w;  # Vector w component
+	
+	#  Quaternion, 4 components (Vector4 alias)
+	ctypedef Vector4 Quaternion
+	
+	#  Color, 4 components, R8G8B8A8 (32bit)
+	ctypedef struct Color:
+		unsigned char r;  # Color red value
+		unsigned char g;  # Color green value
+		unsigned char b;  # Color blue value
+		unsigned char a;  # Color alpha value
+	
+	#  Rectangle, 4 components
+	ctypedef struct Rectangle:
+		float x;  # Rectangle top-left corner position x
+		float y;  # Rectangle top-left corner position y
+		float width;  # Rectangle width
+		float height;  # Rectangle height
+	
+	#  Image, pixel data stored in CPU memory (RAM)
+	ctypedef struct Image:
+		void * data;  # Image raw data
+		int width;  # Image base width
+		int height;  # Image base height
+		int mipmaps;  # Mipmap levels, 1 by default
+		int format;  # Data format (PixelFormat type)
+	
+	#  Texture, tex data stored in GPU memory (VRAM)
+	ctypedef struct Texture:
+		unsigned int id;  # OpenGL texture id
+		int width;  # Texture base width
+		int height;  # Texture base height
+		int mipmaps;  # Mipmap levels, 1 by default
+		int format;  # Data format (PixelFormat type)
+	
+	#  Texture2D, same as Texture
+	ctypedef Texture Texture2D
+	
+	#  TextureCubemap, same as Texture
+	ctypedef Texture TextureCubemap
+	
+	#  RenderTexture, fbo for texture rendering
+	ctypedef struct RenderTexture:
+		unsigned int id;  # OpenGL framebuffer object id
+		Texture texture;  # Color buffer attachment texture
+		Texture depth;  # Depth buffer attachment texture
+	
+	#  RenderTexture2D, same as RenderTexture
+	ctypedef RenderTexture RenderTexture2D
+	
+	#  NPatchInfo, n-patch layout info
+	ctypedef struct NPatchInfo:
+		Rectangle source;  # Texture source rectangle
+		int left;  # Left border offset
+		int top;  # Top border offset
+		int right;  # Right border offset
+		int bottom;  # Bottom border offset
+		int layout;  # Layout of the n-patch: 3x3, 1x3 or 3x1
+	
+	#  GlyphInfo, font characters glyphs info
+	ctypedef struct GlyphInfo:
+		int value;  # Character value (Unicode)
+		int offsetX;  # Character offset X when drawing
+		int offsetY;  # Character offset Y when drawing
+		int advanceX;  # Character advance position X
+		Image image;  # Character image data
+	
+	#  Font, font texture and GlyphInfo array data
+	ctypedef struct Font:
+		int baseSize;  # Base size (default chars height)
+		int glyphCount;  # Number of glyph characters
+		int glyphPadding;  # Padding around the glyph characters
+		Texture2D texture;  # Texture atlas containing the glyphs
+		Rectangle * recs;  # Rectangles in texture for the glyphs
+		GlyphInfo * glyphs;  # Glyphs info data
+	
+	#  Camera, defines position/orientation in 3d space
+	ctypedef struct Camera3D:
+		Vector3 position;  # Camera position
+		Vector3 target;  # Camera target it looks-at
+		Vector3 up;  # Camera up vector (rotation over its axis)
+		float fovy;  # Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic
+		int projection;  # Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
+	
+	#  Camera type fallback, defaults to Camera3D
+	ctypedef Camera3D Camera
+	
+	#  Camera2D, defines position/orientation in 2d space
+	ctypedef struct Camera2D:
+		Vector2 offset;  # Camera offset (displacement from target)
+		Vector2 target;  # Camera target (rotation and zoom origin)
+		float rotation;  # Camera rotation in degrees
+		float zoom;  # Camera zoom (scaling), should be 1.0f by default
+	
+	#  Mesh, vertex data and vao/vbo
+	ctypedef struct Mesh:
+		int vertexCount;  # Number of vertices stored in arrays
+		int triangleCount;  # Number of triangles stored (indexed or not)
+		float * vertices;  # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
+		float * texcoords;  # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
+		float * texcoords2;  # Vertex texture second coordinates (UV - 2 components per vertex) (shader-location = 5)
+		float * normals;  # Vertex normals (XYZ - 3 components per vertex) (shader-location = 2)
+		float * tangents;  # Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4)
+		unsigned char * colors;  # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
+		unsigned short * indices;  # Vertex indices (in case vertex data comes indexed)
+		float * animVertices;  # Animated vertex positions (after bones transformations)
+		float * animNormals;  # Animated normals (after bones transformations)
+		unsigned char * boneIds;  # Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning)
+		float * boneWeights;  # Vertex bone weight, up to 4 bones influence by vertex (skinning)
+		unsigned int vaoId;  # OpenGL Vertex Array Object id
+		unsigned int * vboId;  # OpenGL Vertex Buffer Objects id (default vertex data)
+	
+	#  Shader
+	ctypedef struct Shader:
+		unsigned int id;  # Shader program id
+		int * locs;  # Shader locations array (RL_MAX_SHADER_LOCATIONS)
+	
+	#  MaterialMap
+	ctypedef struct MaterialMap:
+		Texture2D texture;  # Material map texture
+		Color color;  # Material map color
+		float value;  # Material map value
+	
+	#  Material, includes shader and maps
+	ctypedef struct Material:
+		Shader shader;  # Material shader
+		MaterialMap * maps;  # Material maps array (MAX_MATERIAL_MAPS)
+		float[4] params;  # Material generic parameters (if required)
+	
+	#  Transform, vectex transformation data
+	ctypedef struct Transform:
+		Vector3 translation;  # Translation
+		Quaternion rotation;  # Rotation
+		Vector3 scale;  # Scale
+	
+	#  Bone, skeletal animation bone
+	ctypedef struct BoneInfo:
+		char[32] name;  # Bone name
+		int parent;  # Bone parent
+	
+	#  Model, meshes, materials and animation data
+	ctypedef struct Model:
+		Matrix transform;  # Local transform matrix
+		int meshCount;  # Number of meshes
+		int materialCount;  # Number of materials
+		Mesh * meshes;  # Meshes array
+		Material * materials;  # Materials array
+		int * meshMaterial;  # Mesh material number
+		int boneCount;  # Number of bones
+		BoneInfo * bones;  # Bones information (skeleton)
+		Transform * bindPose;  # Bones base transformation (pose)
+	
+	#  ModelAnimation
+	ctypedef struct ModelAnimation:
+		int boneCount;  # Number of bones
+		int frameCount;  # Number of animation frames
+		BoneInfo * bones;  # Bones information (skeleton)
+		Transform ** framePoses;  # Poses array by frame
+	
+	#  Ray, ray for raycasting
+	ctypedef struct Ray:
+		Vector3 position;  # Ray position (origin)
+		Vector3 direction;  # Ray direction
+	
+	#  RayCollision, ray hit information
+	ctypedef struct RayCollision:
+		bint hit;  # Did the ray hit something?
+		float distance;  # Distance to nearest hit
+		Vector3 point;  # Point of nearest hit
+		Vector3 normal;  # Surface normal of hit
+	
+	#  BoundingBox
+	ctypedef struct BoundingBox:
+		Vector3 min;  # Minimum vertex box-corner
+		Vector3 max;  # Maximum vertex box-corner
+	
+	#  Wave, audio wave data
+	ctypedef struct Wave:
+		unsigned int frameCount;  # Total number of frames (considering channels)
+		unsigned int sampleRate;  # Frequency (samples per second)
+		unsigned int sampleSize;  # Bit depth (bits per sample): 8, 16, 32 (24 not supported)
+		unsigned int channels;  # Number of channels (1-mono, 2-stereo, ...)
+		void * data;  # Buffer data pointer
+	
+	#  AudioStream, custom audio stream
+	ctypedef struct AudioStream:
+		rAudioBuffer * buffer;  # Pointer to internal data used by the audio system
+		rAudioProcessor * processor;  # Pointer to internal data processor, useful for audio effects
+		unsigned int sampleRate;  # Frequency (samples per second)
+		unsigned int sampleSize;  # Bit depth (bits per sample): 8, 16, 32 (24 not supported)
+		unsigned int channels;  # Number of channels (1-mono, 2-stereo, ...)
+	
+	#  Sound
+	ctypedef struct Sound:
+		AudioStream stream;  # Audio stream
+		unsigned int frameCount;  # Total number of frames (considering channels)
+	
+	#  Music, audio stream, anything longer than ~10 seconds should be streamed
+	ctypedef struct Music:
+		AudioStream stream;  # Audio stream
+		unsigned int frameCount;  # Total number of frames (considering channels)
+		bint looping;  # Music looping enable
+		int ctxType;  # Type of music context (audio filetype)
+		void * ctxData;  # Audio context data, depends on type
+	
+	#  VrDeviceInfo, Head-Mounted-Display device parameters
+	ctypedef struct VrDeviceInfo:
+		int hResolution;  # Horizontal resolution in pixels
+		int vResolution;  # Vertical resolution in pixels
+		float hScreenSize;  # Horizontal size in meters
+		float vScreenSize;  # Vertical size in meters
+		float vScreenCenter;  # Screen center in meters
+		float eyeToScreenDistance;  # Distance between eye and display in meters
+		float lensSeparationDistance;  # Lens separation distance in meters
+		float interpupillaryDistance;  # IPD (distance between pupils) in meters
+		float[4] lensDistortionValues;  # Lens distortion constant parameters
+		float[4] chromaAbCorrection;  # Chromatic aberration correction parameters
+	
+	#  VrStereoConfig, VR stereo rendering configuration for simulator
+	ctypedef struct VrStereoConfig:
+		Matrix[2] projection;  # VR projection matrices (per eye)
+		Matrix[2] viewOffset;  # VR view offset matrices (per eye)
+		float[2] leftLensCenter;  # VR left lens center
+		float[2] rightLensCenter;  # VR right lens center
+		float[2] leftScreenCenter;  # VR left screen center
+		float[2] rightScreenCenter;  # VR right screen center
+		float[2] scale;  # VR distortion scale
+		float[2] scaleIn;  # VR distortion scale in
+	
+	#  File path list
+	ctypedef struct FilePathList:
+		unsigned int capacity;  # Filepaths max entries
+		unsigned int count;  # Filepaths entries count
+		char ** paths;  # Filepaths entries
+	
+	
 	void InitWindow(int width, int height, const char * title);  # Initialize window and OpenGL context
 	bint WindowShouldClose();  # Check if KEY_ESCAPE pressed or Close icon pressed
 	void CloseWindow();  # Close window and unload OpenGL context
@@ -2083,6 +2075,15 @@ cdef extern from "raylib.h":
 	void SetAudioStreamBufferSizeDefault(int size);  # Default size for new audio streams
 	
 cdef extern from "raymath.h":
+	#  NOTE: Helper types to be used instead of array return types for *ToFloat functions
+	ctypedef struct float3:
+		float[3] v;
+	
+	#  
+	ctypedef struct float16:
+		float[16] v;
+	
+	
 	float Clamp(float value, float min, float max);
 	float Lerp(float start, float end, float amount);
 	float Normalize(float value, float start, float end);
@@ -2196,6 +2197,13 @@ cdef extern from "raymath.h":
 	int QuaternionEquals(Quaternion p, Quaternion q);
 	
 cdef extern from "raygui.h":
+	#  Style property
+	ctypedef struct GuiStyleProp:
+		unsigned short controlId;
+		unsigned short propertyId;
+		unsigned int propertyValue;
+	
+	
 	void GuiEnable();  # Enable gui controls (global state)
 	void GuiDisable();  # Disable gui controls (global state)
 	void GuiLock();  # Lock gui controls (global state)
