@@ -311,3 +311,7 @@ add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raygui_defines_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raygui_enums_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raygui_structs_code)
 add_text_to_file(LIBRARY_FOLDER_PATH / '__init__.pxd', raygui_functions_code)
+
+emscripten = """
+
+"""
