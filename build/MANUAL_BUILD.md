@@ -58,7 +58,7 @@ So what exactly did we build here:
 
 * `raypyc_extra_functions.dll` (in the "build" folder) used to help raypyc with some external stuff.
 * `raylib.dll` (in the "build\raylib\src" folder) used to call raylib functions from python.
-* `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` (in the "build\raylib\parser" folder)
+* `config_api.json`, `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` (in the "build\raylib\parser" folder)
   used to tell raypyc some data about raylib stuff.
 
 Some notes before used the generated files:
@@ -70,8 +70,8 @@ Some notes before used the generated files:
 
 what do we do with the generated files:
 
-* replace all the `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "raypyc"
-  folder with the `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "
+* replace all the `config_api.json`, `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "raypyc"
+  folder with the `config_api.json`, `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "
   build\raylib\parser".
 * replace the `raylib.dll` in the "raypyc/libs" folder with the `raylib.dll` in the "build\raylib\src" folder.
 * replace the `raypyc_extra_functions.dll` in the "raypyc/libs" folder with the `raypyc_extra_functions.dll` in the "
@@ -149,7 +149,7 @@ So what exactly did we build here:
 
 * `raypyc_extra_functions.so` (in the "build" folder) used to help raypyc with some external stuff.
 * `libraylib.so.a.b.c` (in the "build\raylib\src" folder) used to call raylib functions from python ("a.b.c" is the raylib api version).
-* `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` (in the "build\raylib\parser" folder)
+* `config_api.json`, `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` (in the "build\raylib\parser" folder)
   used to tell raypyc some data about raylib stuff.
 
 Some notes before used the generated files:
@@ -161,9 +161,8 @@ Some notes before used the generated files:
 
 what do we do with the generated files:
 
-* replace all the `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "raypyc"
-  folder with the `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "
-  build\raylib\parser".
+* replace all the `config_api.json`, `rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "raypyc"
+  folder with the `config_api.json`,`rlgl_api.json`, `raymath_api.json`, `raylib_api.json` and `raygui_api.json` files in the "build\raylib\parser".
 * replace the `libraylib.so` in the "raypyc/libs" folder with the `libraylib.so.a.b.c` in the "build\raylib\src" folder, only then rename the `libraylib.so.a.b.c` in the "raypyc/libs" folder to `libraylib.so`
 * replace the `raypyc_extra_functions.so` in the "raypyc/libs" folder with the `raypyc_extra_functions.so` in the "
   build" folder.
