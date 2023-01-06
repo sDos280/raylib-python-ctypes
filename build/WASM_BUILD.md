@@ -119,3 +119,8 @@ Here is what we changed:
 - Using `asyncio.run(main())` instead of `if __name__ == '__main__': main()`
 
 ## Step 3 - Running our project in the web
+run this command:
+```
+py -m pygbag --ume_block 0  --template raylib.tmpl --cdn https://pygame-web.github.io/showroom/dev/ 'your_file_name.py'
+```
+and open [http://localhost:8000/](http://localhost:8000/), wait a bit, and we are done!!

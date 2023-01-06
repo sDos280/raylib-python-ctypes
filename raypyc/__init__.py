@@ -242,9 +242,11 @@ raygui_api_functions = raygui_api['functions']
 rlgl_functions_to_wrapped = check_for_functions_that_can_wrap(rlgl_api_functions)
 raylib_functions_to_wrapped = check_for_functions_that_can_wrap(raylib_api_functions)
 raymath_functions_to_wrapped = check_for_functions_that_can_wrap(raymath_api_functions)
-raygui_functions_to_wrapped = check_for_functions_that_can_wrap(raygui_api_functions)
+if sys.platform != 'emscripten':
+    raygui_functions_to_wrapped = check_for_functions_that_can_wrap(raygui_api_functions)
 
 wrap_functions_to_ctypes_functions_add_function_to_this_module(rlgl_functions_to_wrapped, current_module)
 wrap_functions_to_ctypes_functions_add_function_to_this_module(raylib_functions_to_wrapped, current_module)
 wrap_functions_to_ctypes_functions_add_function_to_this_module(raymath_functions_to_wrapped, current_module)
-wrap_functions_to_ctypes_functions_add_function_to_this_module(raygui_functions_to_wrapped, current_module)
+if sys.platform != 'emscripten':
+    wrap_functions_to_ctypes_functions_add_function_to_this_module(raygui_functions_to_wrapped, current_module)
