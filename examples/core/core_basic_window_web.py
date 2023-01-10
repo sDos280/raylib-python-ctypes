@@ -1,4 +1,5 @@
 import asyncio
+
 from raypyc import *
 
 
@@ -35,5 +36,6 @@ async def main():
         end_drawing()
         # ----------------------------------------------------------------------------------
         await asyncio.sleep(0)
+
 
 asyncio.run(main())

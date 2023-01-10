@@ -1,23 +1,32 @@
 # raypyc on the web
+
 In this little guide you will learn how to use raypyc with pygbag to compile your game for the web.
 
 ## Step 1 - Getting pygbag
+
 To get pygbag, use pip, to do so use this command:
-```py
+
+```cmd
 pip install pygbag
 ```
 
 ## Step 2 - Setting up your environment
 
 ### 2.1 - Setting up raypyc
-First you need to get the **raypyc** folder from the raypyc repo. To do so, let's begin by cloning it using the following command:
-```
+
+First you need to get the **raypyc** folder from the raypyc repo. To do so, let's begin by cloning it using the
+following command:
+
+```cmd
 git clone https://github.com/sDos280/raylib-python-ctypes.git
 ```
+
 After cloning, copy the **raypyc** folder from the repo into your environment.
 
 ### 2.2 - Setting up your python code
+
 This is a basic example:
+
 ```py
 from raypyc import *
 
@@ -70,6 +79,7 @@ if __name__ == '__main__':
 ```
 
 And this is a basic example for the web:
+
 ```py
 import asyncio
 from raypyc import *
@@ -109,18 +119,42 @@ async def main():
         # ----------------------------------------------------------------------------------
         await asyncio.sleep(0)
 
+
 asyncio.run(main())
 ```
 
 Here is what we changed:
+
 - We are now using `asyncio`
 - Using a `while True` instead of `while not window_should_close`
 - Not calling `close_window`, using `await asyncio.sleep(0)` instead (the 0 is required)
 - Using `asyncio.run(main())` instead of `if __name__ == '__main__': main()`
 
-## Step 3 - Running our project in the web
+## Step 3 - Getting the raypyc package
+
+after we set up the main file we need to get our self a clone of the raypyc package.
+run this command to get the raypyc package:
+
+```cmd
+cp -r "raylib-python-ctypes/raypyc" "."
+```
+
+in the end your project tree should look like this
+
+```
+your_folder_name/
+ | your_file_name.py
+ | raypyc /
+ | raylib-python-ctypes /
+```
+
+## Step 4 - Running our project in the web
+
 run this command:
+
+```cmd
+py -m pygbag --ume_block 0 --template noctx.tmpl ../your_folder_name/your_file_name.py
 ```
-py -m pygbag --ume_block 0  --template raylib.tmpl --cdn https://pygame-web.github.io/showroom/dev/ 'your_file_name.py'
-```
+
 and open [http://localhost:8000/](http://localhost:8000/), wait a bit, and we are done!!
+feel free to ask any question / open issue on gethub!!
