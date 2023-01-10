@@ -18,7 +18,7 @@ First you need to get the **raypyc** folder from the raypyc repo. To do so, let'
 following command:
 
 ```cmd
-git clone https://github.com/sDos280/raylib-python-ctypes.git
+git clone --depth 1 https://github.com/sDos280/raylib-python-ctypes.git
 ```
 
 After cloning, copy the **raypyc** folder from the repo into your environment.
