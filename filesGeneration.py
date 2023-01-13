@@ -304,6 +304,23 @@ def generate_structs_aliases_code(structs_api, aliases_api, for_stub=False):
 	return _string
 
 
+def generate_structures_dictionary_code(wrapped_structures, for_stub=False):
+	if not for_stub:
+		dictionary_sting = "__structs = {\n"
+		for struct in wrapped_structures:
+			dictionary_sting += f"\t\"{struct}\": {struct},\n"
+		dictionary_sting = dictionary_sting[:-2]
+		dictionary_sting += "\n}\n"
+		return dictionary_sting
+	else:
+		dictionary_sting = "__structs: dict[str, Type["
+		for struct in wrapped_structures:
+			dictionary_sting += f"{struct} | "
+		dictionary_sting = dictionary_sting[:-3]
+		dictionary_sting += "]] = {\n\t...\n}\n"
+		return dictionary_sting
+
+
 # -----------------------------------------
 
 # load config data
@@ -399,7 +416,7 @@ add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi', generate_defines_c
 generate_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py')
 add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', 'import ctypes\nfrom raypyc.defines import *\n\n\n')
 generate_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi')
-add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', 'import ctypes\nfrom raypyc.defines import *\n\n\n')
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', 'import ctypes\nfrom raypyc.defines import *\nfrom typing import Type\n\n\n')
 
 # generate dummy structures code add dummy structures code to files
 add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', generate_dummy_structs_code(['rAudioBuffer', 'rAudioProcessor'], for_stub=False))
@@ -416,4 +433,8 @@ add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_struct
 add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_structs_aliases_code(raylib_api_structs, raylib_api_aliases, for_stub=True))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_structs_aliases_code(raymath_api_structs, raymath_api_aliases, for_stub=True))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_structs_aliases_code(raygui_api_structs, raygui_api_aliases, for_stub=True))
+
+# generate structures-dictionary code and add structures-dictionary to files
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', generate_structures_dictionary_code(wrapped_structures_names, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_structures_dictionary_code(wrapped_structures_names_stub, for_stub=True))
 # -----------------------------------------

@@ -1,5 +1,6 @@
 import ctypes
 from raypyc.defines import *
+from typing import Type
 
 
 class rAudioBuffer(ctypes.Structure):
@@ -1900,3 +1901,6 @@ class GuiStyleProp(ctypes.Structure):
 		...
 
 
+__structs: dict[str, Type[rlVertexBuffer | rlDrawCall | rlRenderBatch | Matrix | rlglData | Vector2 | Vector3 | Vector4 | Quaternion | Color | Rectangle | Image | Texture | Texture2D | TextureCubemap | RenderTexture | RenderTexture2D | NPatchInfo | GlyphInfo | Font | Camera3D | Camera | Camera2D | Mesh | Shader | MaterialMap | Material | Transform | BoneInfo | Model | ModelAnimation | Ray | RayCollision | BoundingBox | Wave | AudioStream | Sound | Music | VrDeviceInfo | VrStereoConfig | FilePathList | float3 | float16 | GuiStyleProp]] = {
+	...
+}
