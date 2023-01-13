@@ -14,6 +14,7 @@ wrapped_colors_names = []
 wrapped_enums_names = []
 
 wrapped_structures_names = []
+wrapped_structures_names_stub = []
 
 wrapped_aliases_names = []
 
@@ -37,6 +38,11 @@ _raypyc_extra_functions = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / _
 
 
 # -----------------------------------------
+def find_char_in_str(string, char):
+	"""get the indexes of a char in a string"""
+	return [i for i, ltr in enumerate(string) if ltr == char]
+
+
 def generate_file(file_path):
 	if Path(file_path).exists():
 		with open(Path(file_path), "w"):  # if the file exists we clean it
@@ -179,6 +185,54 @@ def generate_define_code(define_data, for_stub=False):
 		return ""
 
 
+def generate_dummy_struct_code(struct_name, bytes_size, for_stub=False):
+	_string = f"class {struct_name}(ctypes.Structure):\n\t\"\"\"dummy structure\"\"\"\n"
+	if not for_stub:
+		_string += f"\t_fields_ = [\n\t\t(\"buffer\", ctypes.c_byte * {bytes_size})\n\t]\n\n"
+	else:
+		_string += f"\t@property\n\tdef buffer(self) -> ctypes.c_byte * {bytes_size}:\n"
+		_string += f"\t\t...\n\n"
+		_string += f"\t@buffer.setter\n\tdef buffer(self, i: ctypes.c_byte * {bytes_size}) -> None:\n"
+		_string += f"\t\t...\n\n"
+
+	return _string
+
+
+def generate_struct_code(struct_data, for_stub=False):
+	_string = ""
+	struct_fields = ""
+	struct_setters_getters_string = ""
+	_string += f"class {struct_data['name']}(ctypes.Structure):\n\t\"\"\"{struct_data['description']}\"\"\"\n"
+
+	if not for_stub:
+		struct_fields = "\t_fields_ = [\n"
+		for struct_data_field in struct_data['fields']:
+			struct_fields += f"\t\t('{struct_data_field['name']}', {convert_c_type_string_to_ctypes_type_sting(struct_data_field['type'])}),"
+			if struct_data_field['description'] != "":
+				struct_fields += f"  # {struct_data_field['description']}"
+			struct_fields += '\n'
+		temp = find_char_in_str(struct_fields, ',')
+		if len(temp) != 0:
+			struct_fields = struct_fields[: temp[-1]] + struct_fields[temp[-1] + 1:]
+		struct_fields += '\t]\n\n'
+	_string += struct_fields
+
+	if for_stub:
+		for struct_data_field in struct_data['fields']:
+			use_type = convert_c_type_string_to_ctypes_type_sting(struct_data_field['type'])
+			struct_setters_getters_string += f"\t@property\n\tdef {struct_data_field['name']}(self) -> {use_type}:\n"
+			struct_setters_getters_string += f"\t\t...\n\n"
+			struct_setters_getters_string += f"\t@{struct_data_field['name']}.setter\n\tdef {struct_data_field['name']}(self, i: {use_type}) -> None:\n"
+			struct_setters_getters_string += f"\t\t...\n\n"
+	_string += struct_setters_getters_string
+
+	return _string
+
+
+def generate_alias_code(alias_name, object_name):
+	return f"{alias_name} = {object_name}\n"
+
+
 # -----------------------------------------
 def generate_colors_code(defines_api, for_stub=False):
 	_string = ""
@@ -203,6 +257,50 @@ def generate_defines_code(defines_api, for_stub=False):
 				define_string_logic += "\n"
 
 			_string += define_string_logic
+	return _string
+
+
+def generate_dummy_structs_code(names, for_stub=False):
+	_string = ""
+	for name in names:
+		function_of_size = _raypyc_extra_functions.__getattr__(f"Get{name}Size")
+		function_of_size.argtypes = None
+		function_of_size.restype = ctypes.c_int
+
+		dummy_struct_code = generate_dummy_struct_code(name, int(function_of_size()), for_stub)
+		if dummy_struct_code != "":
+			dummy_struct_code += "\n"
+
+		_string += dummy_struct_code
+	return _string
+
+
+def generate_structs_aliases_code(structs_api, aliases_api, for_stub=False):
+	_string = ""
+	if not for_stub:
+		_wrapped_structures_names = wrapped_structures_names
+	else:
+		_wrapped_structures_names = wrapped_structures_names_stub
+	for struct in structs_api:
+		if struct['name'] not in _wrapped_structures_names:
+			struct_string_logic = generate_struct_code(struct, for_stub)
+			if struct_string_logic != "":
+				_wrapped_structures_names.append(struct['name'])
+				struct_string_logic += "\n"
+
+			_string += struct_string_logic
+
+			for alias in aliases_api:
+				if struct['name'] == alias['type']:
+					if alias['name'] not in _wrapped_structures_names:
+						alias_string_logic = ""
+						alias_string_logic += generate_alias_code(alias['name'], struct['name'])
+						if alias_string_logic != "":
+							_wrapped_structures_names.append(alias['name'])
+						alias_string_logic += "\n\n"
+
+						_string += alias_string_logic
+
 	return _string
 
 
@@ -280,11 +378,11 @@ add_text_to_file(RAYPYC_FOLDER_PATH / 'colors/__init__.pyi', generate_colors_cod
 add_text_to_file(RAYPYC_FOLDER_PATH / 'colors/__init__.pyi', generate_colors_code(raygui_api_defines, for_stub=True))
 # -----------------------------------------
 
-# generate colors files and add import stuff
+# generate defines files
 generate_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py')
 generate_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi')
 
-# generate colors code add colors code to files
+# generate defines code add defines code to files
 add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py', generate_defines_code(config_api_defines, for_stub=False))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py', generate_defines_code(rlgl_api_defines, for_stub=False))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py', generate_defines_code(raylib_api_defines, for_stub=False))
@@ -295,4 +393,27 @@ add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi', generate_defines_c
 add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi', generate_defines_code(raylib_api_defines, for_stub=True))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi', generate_defines_code(raymath_api_defines, for_stub=True))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi', generate_defines_code(raygui_api_defines, for_stub=True))
+# -----------------------------------------
+
+# generate structures files and add import stuff
+generate_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py')
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', 'import ctypes\nfrom raypyc.defines import *\n\n\n')
+generate_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi')
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', 'import ctypes\nfrom raypyc.defines import *\n\n\n')
+
+# generate dummy structures code add dummy structures code to files
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', generate_dummy_structs_code(['rAudioBuffer', 'rAudioProcessor'], for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_dummy_structs_code(['rAudioBuffer', 'rAudioProcessor'], for_stub=True))
+
+# generate structures code add structures code to files
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', generate_structs_aliases_code(config_api_structs, config_api_aliases, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', generate_structs_aliases_code(rlgl_api_structs, rlgl_api_aliases, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', generate_structs_aliases_code(raylib_api_structs, raylib_api_aliases, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', generate_structs_aliases_code(raymath_api_structs, raymath_api_aliases, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', generate_structs_aliases_code(raygui_api_structs, raygui_api_aliases, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_structs_aliases_code(config_api_structs, config_api_aliases, for_stub=True))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_structs_aliases_code(rlgl_api_structs, rlgl_api_aliases, for_stub=True))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_structs_aliases_code(raylib_api_structs, raylib_api_aliases, for_stub=True))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_structs_aliases_code(raymath_api_structs, raymath_api_aliases, for_stub=True))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_structs_aliases_code(raygui_api_structs, raygui_api_aliases, for_stub=True))
 # -----------------------------------------
