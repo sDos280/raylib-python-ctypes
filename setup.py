@@ -26,7 +26,7 @@ setup(
     author_email=config.get('metadata', 'author_email'),
     classifiers=config.get('metadata', 'classifiers'),
     packages=find_packages(),
-    install_requires= ["setuptools>=42", "wheel", "inflection"],
+    install_requires= ["setuptools>=42", "wheel"],
     package_data={
         'raylib':  ['raypyc/defines/*', 'raypyc/colors/*', 'raypyc/enums/*', 'raypyc/structures/*', 'raypyc/reasings.py', 'raypyc/__init__.py', 'raypyc/__init__.pyi', 'raypyc/*.json', 'raypyc/*.dll']
     }

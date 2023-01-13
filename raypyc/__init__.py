@@ -29,8 +29,8 @@ _raylib_dynamic_library = ctypes.cdll.LoadLibrary(str(pathlib.Path(__file__).par
 
 # -----------------------------------------
 
-def evaluate_c_type_string_to_ctype_type(c_type_string):
-    cStringToCtypesString = {
+def evaluate_c_type_string_to_ctypes_type(c_type_string):
+    c_string_to_ctypes_string = {
         'bool': ctypes.c_bool,  # C type: _Bool  Python type: bool (1)
         'char': ctypes.c_char,  # C type: char  Python type: 1-character bytes object
         'wchar_t': ctypes.c_wchar,  # C type: wchar_t  Python type: 1-character string
@@ -68,11 +68,11 @@ def evaluate_c_type_string_to_ctype_type(c_type_string):
         array_size = int(c_type_string.split('[')[1][:-1])
         type_of_array_without_pointers_string = type_of_array_string.replace('*', '')
 
-        if type_of_array_string in cStringToCtypesString:  # basic type pointer (int*, char*, float*, ...)
-            return cStringToCtypesString[type_of_array_string] * array_size
+        if type_of_array_string in c_string_to_ctypes_string:  # basic type pointer (int*, char*, float*, ...)
+            return c_string_to_ctypes_string[type_of_array_string] * array_size
 
-        if type_of_array_without_pointers_string in cStringToCtypesString:  # basic type pointer(probably double+ pointer level) (int**, char**, float**, ...)
-            type_of_array_end = cStringToCtypesString[type_of_array_without_pointers_string]
+        if type_of_array_without_pointers_string in c_string_to_ctypes_string:  # basic type pointer(probably double+ pointer level) (int**, char**, float**, ...)
+            type_of_array_end = c_string_to_ctypes_string[type_of_array_without_pointers_string]
             for i in range(pointer_level):
                 type_of_array_end = ctypes.POINTER(type_of_array_end)
             return type_of_array_end * array_size
@@ -89,8 +89,8 @@ def evaluate_c_type_string_to_ctype_type(c_type_string):
         type_of_array_string = c_type_string.split('[')[0]
         array_size = int(c_type_string.split('[')[1][:-1])
 
-        if type_of_array_string in cStringToCtypesString:  # basic type array (int, char, float, ...)
-            return cStringToCtypesString[type_of_array_string] * array_size
+        if type_of_array_string in c_string_to_ctypes_string:  # basic type array (int, char, float, ...)
+            return c_string_to_ctypes_string[type_of_array_string] * array_size
 
         if type_of_array_string in raypyc.structures.__structs:  # a struct array
             return raypyc.structures.__structs[type_of_array_string] * array_size
@@ -98,13 +98,13 @@ def evaluate_c_type_string_to_ctype_type(c_type_string):
         raise TypeError(f"can wrapped this string, the string: {c_type_string}")
 
     elif pointer_level > 0:
-        if c_type_string in cStringToCtypesString:  # basic type pointer (int**, char*, float*, ...)
-            return cStringToCtypesString[c_type_string]
+        if c_type_string in c_string_to_ctypes_string:  # basic type pointer (int**, char*, float*, ...)
+            return c_string_to_ctypes_string[c_type_string]
 
         type_without_pointers_string = c_type_string.replace('*', '')
 
-        if type_without_pointers_string in cStringToCtypesString:  # basic type pointer(probably double+ pointer level) (int**, char**, float**, ...)
-            type_of_pointer_end = cStringToCtypesString[type_without_pointers_string]
+        if type_without_pointers_string in c_string_to_ctypes_string:  # basic type pointer(probably double+ pointer level) (int**, char**, float**, ...)
+            type_of_pointer_end = c_string_to_ctypes_string[type_without_pointers_string]
             for i in range(pointer_level):
                 type_of_pointer_end = ctypes.POINTER(type_of_pointer_end)
             return type_of_pointer_end
@@ -117,8 +117,8 @@ def evaluate_c_type_string_to_ctype_type(c_type_string):
 
         raise TypeError(f"can wrapped this string, the string: {c_type_string}")
 
-    if c_type_string in cStringToCtypesString:  # "regular" value not a pointer or an array
-        return cStringToCtypesString[c_type_string]
+    if c_type_string in c_string_to_ctypes_string:  # "regular" value not a pointer or an array
+        return c_string_to_ctypes_string[c_type_string]
 
     if c_type_string in raypyc.structures.__structs:  # a struct
         return raypyc.structures.__structs[c_type_string]
@@ -168,7 +168,7 @@ def check_for_functions_that_can_wrap(functions_set):
                     function_param_processed = function_param_processed.split('[')[0]
 
                 try:
-                    evaluate_c_type_string_to_ctype_type(function_param["type"])
+                    evaluate_c_type_string_to_ctypes_type(function_param["type"])
                 except:
                     do_wrapper_this_function = False
 
@@ -182,7 +182,7 @@ def check_for_functions_that_can_wrap(functions_set):
                 function_returnType_processed = function_returnType_processed.split('[')[0]
 
             try:
-                evaluate_c_type_string_to_ctype_type(function["returnType"])
+                evaluate_c_type_string_to_ctypes_type(function["returnType"])
             except:
                 do_wrapper_this_function = False
 
@@ -208,8 +208,8 @@ def wrap_functions_to_ctypes_functions_add_function_to_this_module(functions_to_
             if 'params' in function_to_wrap.keys():
                 for function_param in function_to_wrap['params']:
                     if function_param['type'] != "...":
-                        function_to_wrap_ctype['parametersTypes'].append(evaluate_c_type_string_to_ctype_type(function_param['type']))
-            function_to_wrap_ctype['returnType'] = evaluate_c_type_string_to_ctype_type(function_to_wrap['returnType'])
+                        function_to_wrap_ctype['parametersTypes'].append(evaluate_c_type_string_to_ctypes_type(function_param['type']))
+            function_to_wrap_ctype['returnType'] = evaluate_c_type_string_to_ctypes_type(function_to_wrap['returnType'])
 
             f = wrap_function(function_to_wrap_ctype['name'], function_to_wrap_ctype['parametersTypes'], function_to_wrap_ctype['returnType'])
             add_function_to_module(current_module, name_of_function, f)
