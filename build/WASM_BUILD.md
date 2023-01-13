@@ -156,5 +156,5 @@ run this command:
 py -m pygbag --ume_block 0 --template noctx.tmpl ../your_folder_name/your_file_name.py
 ```
 
-and open [http://localhost:8000/](http://localhost:8000/), wait a bit, and we are done!!
+and open [http://localhost:8000/](http://localhost:8000/), wait a bit, and we are done!!!
 feel free to ask any question / open issue on gethub!!
