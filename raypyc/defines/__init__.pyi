@@ -79,6 +79,13 @@ SUPPORT_TRACELOG: int
 MAX_TRACELOG_MSG_LENGTH: int  # Max length of one trace-log message
 RLGL_VERSION: str
 RL_DEFAULT_BATCH_BUFFER_ELEMENTS: int
+RL_DEFAULT_BATCH_BUFFERS: int  # Default number of batch buffers (multi-buffering)
+RL_DEFAULT_BATCH_DRAWCALLS: int  # Default number of batch draw calls (by state changes: mode, texture)
+RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS: int  # Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
+RL_MAX_MATRIX_STACK_SIZE: int  # Maximum size of Matrix stack
+RL_MAX_SHADER_LOCATIONS: int  # Maximum number of shader locations supported
+RL_CULL_DISTANCE_NEAR: float  # Default near cull distance
+RL_CULL_DISTANCE_FAR: float  # Default far cull distance
 RL_TEXTURE_WRAP_S: int  # GL_TEXTURE_WRAP_S
 RL_TEXTURE_WRAP_T: int  # GL_TEXTURE_WRAP_T
 RL_TEXTURE_MAG_FILTER: int  # GL_TEXTURE_MAG_FILTER
@@ -136,8 +143,29 @@ GL_UNSIGNED_SHORT_5_5_5_1: int
 GL_UNSIGNED_SHORT_4_4_4_4: int
 GL_LUMINANCE: int
 GL_LUMINANCE_ALPHA: int
+RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION: str  # Binded by default to shader location: 0
+RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD: str  # Binded by default to shader location: 1
+RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL: str  # Binded by default to shader location: 2
+RL_DEFAULT_SHADER_ATTRIB_NAME_COLOR: str  # Binded by default to shader location: 3
+RL_DEFAULT_SHADER_ATTRIB_NAME_TANGENT: str  # Binded by default to shader location: 4
+RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD2: str  # Binded by default to shader location: 5
+RL_DEFAULT_SHADER_UNIFORM_NAME_MVP: str  # model-view-projection matrix
+RL_DEFAULT_SHADER_UNIFORM_NAME_VIEW: str  # view matrix
+RL_DEFAULT_SHADER_UNIFORM_NAME_PROJECTION: str  # projection matrix
+RL_DEFAULT_SHADER_UNIFORM_NAME_MODEL: str  # model matrix
+RL_DEFAULT_SHADER_UNIFORM_NAME_NORMAL: str  # normal matrix (transpose(inverse(matModelView))
+RL_DEFAULT_SHADER_UNIFORM_NAME_COLOR: str  # color diffuse (base tint color, multiplied by texture color)
+RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE0: str  # texture0 (texture slot active 0)
+RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE1: str  # texture1 (texture slot active 1)
+RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE2: str  # texture2 (texture slot active 2)
 RAYLIB_VERSION: str
+PI: float
+DEG2RAD: float
+RAD2DEG: float
+PI: float
 EPSILON: float
+DEG2RAD: float
+RAD2DEG: float
 RAYGUI_VERSION: str
 SCROLLBAR_LEFT_SIDE: int
 SCROLLBAR_RIGHT_SIDE: int
@@ -153,6 +181,7 @@ KEY_DOWN: int
 KEY_UP: int
 KEY_BACKSPACE: int
 KEY_ENTER: int
+MOUSE_LEFT_BUTTON: int
 RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT: int
 RAYGUI_GROUPBOX_LINE_THICK: int
 RAYGUI_LINE_MARGIN_TEXT: int

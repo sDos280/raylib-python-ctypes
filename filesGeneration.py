@@ -37,11 +37,6 @@ _raypyc_extra_functions = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / _
 
 
 # -----------------------------------------
-def indent_string(string: str, indent_by: int) -> str:
-	"""return a string that indented in the start of the string and in every \\n of the string"""
-	return '\t' * indent_by + string.replace('\n', '\n\t' * indent_by)
-
-
 def generate_file(file_path):
 	if Path(file_path).exists():
 		with open(Path(file_path), "w"):  # if the file exists we clean it
@@ -149,14 +144,62 @@ def generate_color_code(define_data, for_stub=False):
 		return ""
 
 
+def generate_define_code(define_data, for_stub=False):
+	if not define_data['type'] in ["FLOAT_MATH", "FLOAT", "DOUBLE", "STRING", "INT"]:
+		return ""
+
+	elif define_data['type'] == "FLOAT_MATH":
+		temp = f"{define_data['name']}: float"
+		if not for_stub:
+			temp += f" = {define_data['value'].replace('f', '')}"
+		temp += f"{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+		return temp
+
+	elif define_data['type'] == "INT":
+		temp = f"{define_data['name']}: int"
+		if not for_stub:
+			temp += f" = {define_data['value']}"
+		temp += f"{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+		return temp
+
+	elif define_data['type'] in ["DOUBLE", "FLOAT"]:
+		temp = f"{define_data['name']}: float"
+		if not for_stub:
+			temp += f" = {define_data['value']}"
+		temp += f"{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+		return temp
+
+	elif define_data['type'] == "STRING":
+		temp = f"{define_data['name']}: str"
+		if not for_stub:
+			temp += f" = \"{define_data['value']}\""
+		temp += f"{('  # ' + define_data['description']) if define_data['description'] != '' else ''}"
+		return temp
+	else:
+		return ""
+
+
 # -----------------------------------------
 def generate_colors_code(defines_api, for_stub=False):
 	_string = ""
 	for define in defines_api:
 		if for_stub or define['name'] not in wrapped_defines_names:
-			wrapped_defines_names.append(define['name'])
-			define_string_logic = generate_color_code(define, for_stub)
+			color_string_logic = generate_color_code(define, for_stub)
+			if color_string_logic != "":
+				wrapped_defines_names.append(define['name'])
+				color_string_logic += "\n"
+
+			_string += color_string_logic
+	return _string
+
+
+def generate_defines_code(defines_api, for_stub=False):
+	_string = ""
+	for define in defines_api:
+		if for_stub or define['name'] not in wrapped_defines_names:
+			define_string_logic = generate_define_code(define, for_stub)
 			if define_string_logic != "":
+				wrapped_defines_names.append(define['name'])
 				define_string_logic += "\n"
 
 			_string += define_string_logic
@@ -215,6 +258,8 @@ raygui_api_aliases = raygui_api['aliases']
 raygui_api_enums = raygui_api['enums']
 raygui_api_functions = raygui_api['functions']
 # -----------------------------------------
+# note that we have to generate the none stub-code first, because we need all the wrapped_*_names lists to be updated first
+# -----------------------------------------
 
 # generate colors files and add import stuff
 generate_file(RAYPYC_FOLDER_PATH / 'colors/__init__.py')
@@ -233,4 +278,21 @@ add_text_to_file(RAYPYC_FOLDER_PATH / 'colors/__init__.pyi', generate_colors_cod
 add_text_to_file(RAYPYC_FOLDER_PATH / 'colors/__init__.pyi', generate_colors_code(raylib_api_defines, for_stub=True))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'colors/__init__.pyi', generate_colors_code(raymath_api_defines, for_stub=True))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'colors/__init__.pyi', generate_colors_code(raygui_api_defines, for_stub=True))
+# -----------------------------------------
+
+# generate colors files and add import stuff
+generate_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py')
+generate_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi')
+
+# generate colors code add colors code to files
+add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py', generate_defines_code(config_api_defines, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py', generate_defines_code(rlgl_api_defines, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py', generate_defines_code(raylib_api_defines, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py', generate_defines_code(raymath_api_defines, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py', generate_defines_code(raygui_api_defines, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi', generate_defines_code(config_api_defines, for_stub=True))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi', generate_defines_code(rlgl_api_defines, for_stub=True))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi', generate_defines_code(raylib_api_defines, for_stub=True))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi', generate_defines_code(raymath_api_defines, for_stub=True))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi', generate_defines_code(raygui_api_defines, for_stub=True))
 # -----------------------------------------
