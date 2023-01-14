@@ -2,11 +2,12 @@ import ctypes
 import json
 import re
 import sys
-from pathlib import Path
+from pathlib import WindowsPath, Path
+from typing import Any, Dict, List, Union
 
 # -----------------------------------------
 RAYPYC_FOLDER_PATH = Path(__file__).parent / 'raypyc'
-DYNAMIC_LIBRARIES_PATH = Path(__file__).parent / 'raypyc/libs'
+DYNAMIC_LIBRARIES_PATH = RAYPYC_FOLDER_PATH / 'libs'
 
 wrapped_defines_names = []
 
@@ -39,26 +40,26 @@ _raypyc_extra_functions = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / _
 
 
 # -----------------------------------------
-def find_char_in_str(string, char):
+def find_char_in_str(string: str, char: str) -> List[int]:
 	"""get the indexes of a char in a string"""
 	return [i for i, ltr in enumerate(string) if ltr == char]
 
 
-def underscore(_string):
+def underscore(_string: str) -> str:
 	_string = re.sub(r"([A-Z]+)([A-Z][a-z])", r'\1_\2', _string)
 	_string = re.sub(r"([a-z\d])([A-Z])", r'\1_\2', _string)
 	_string = _string.replace("-", "_")
 	return _string.lower()
 
 
-def is_string_contained_in_list(_string, _list):
+def is_string_contained_in_list(_string: str, _list: List[str]) -> bool:
 	for _item in _list:
 		if _item in _string:
 			return True
 	return False
 
 
-def generate_file(file_path):
+def generate_file(file_path: WindowsPath) -> None:
 	if Path(file_path).exists():
 		with open(Path(file_path), "w"):  # if the file exists we clean it
 			pass
@@ -68,12 +69,12 @@ def generate_file(file_path):
 			pass
 
 
-def add_text_to_file(file_path, _string):
+def add_text_to_file(file_path: WindowsPath, _string: str) -> None:
 	with open(Path(file_path), "a") as file:
 		file.write(_string)
 
 
-def convert_c_type_to_python_type(c_type_string):
+def convert_c_type_to_python_type(c_type_string: str) -> str:
 	"""convert c type string to ctype type sting"""
 	c_string_to_ctypes_string = {
 		'bool': 'c_bool',  # C type: _Bool  Python type: bool (1)
@@ -153,7 +154,7 @@ def convert_c_type_to_python_type(c_type_string):
 
 
 # -----------------------------------------
-def generate_color_code(define_data, for_stub=False):
+def generate_color_code(define_data: Dict[str, Union[str, float, int]], for_stub: bool = False) -> str:
 	if define_data['type'] == "COLOR":
 		ints_array_string = define_data['value'].split('{')[1].split('}')[0].replace(' ', '').split(',')
 		temp = f"{define_data['name']}: raypyc.structures.Color"
@@ -165,7 +166,7 @@ def generate_color_code(define_data, for_stub=False):
 		return ""
 
 
-def generate_define_code(define_data, for_stub=False):
+def generate_define_code(define_data: Dict[str, Union[str, float, int]], for_stub: bool = False) -> str:
 	if not define_data['type'] in ["FLOAT_MATH", "FLOAT", "DOUBLE", "STRING", "INT"]:
 		return ""
 
@@ -200,7 +201,7 @@ def generate_define_code(define_data, for_stub=False):
 		return ""
 
 
-def generate_dummy_struct_code(struct_name, bytes_size, for_stub=False):
+def generate_dummy_struct_code(struct_name: str, bytes_size: int, for_stub: bool = False) -> str:
 	_string = f"class {struct_name}(ctypes.Structure):\n\t\"\"\"dummy structure\"\"\"\n"
 	if not for_stub:
 		_string += f"\t_fields_ = [\n\t\t(\"buffer\", ctypes.c_byte * {bytes_size})\n\t]\n\n"
@@ -213,7 +214,7 @@ def generate_dummy_struct_code(struct_name, bytes_size, for_stub=False):
 	return _string
 
 
-def generate_struct_code(struct_data, for_stub=False):
+def generate_struct_code(struct_data: Dict[str, Union[str, List[Dict[str, str]]]], for_stub: bool = False) -> str:
 	_string = ""
 	struct_fields = ""
 	struct_setters_getters_string = ""
@@ -244,11 +245,11 @@ def generate_struct_code(struct_data, for_stub=False):
 	return _string
 
 
-def generate_alias_code(alias_name, object_name):
+def generate_alias_code(alias_name: str, object_name: str) -> str:
 	return f"{alias_name} = {object_name}\n"
 
 
-def generate_function_signature_code(function_data):
+def generate_function_signature_code(function_data: Dict[str, Union[str, List[Dict[str, str]]]]) -> str:
 	function_string = f"def {function_data['name']}("
 	if 'params' in function_data.keys():  # only return stuff
 		for param in function_data['params']:
@@ -263,7 +264,7 @@ def generate_function_signature_code(function_data):
 
 
 # -----------------------------------------
-def generate_colors_code(defines_api, for_stub=False):
+def generate_colors_code(defines_api: List[Dict[str, Union[str, float, int]]], for_stub: bool = False) -> str:
 	_string = ""
 	for define in defines_api:
 		if for_stub or define['name'] not in wrapped_defines_names:
@@ -276,7 +277,7 @@ def generate_colors_code(defines_api, for_stub=False):
 	return _string
 
 
-def generate_defines_code(defines_api, for_stub=False):
+def generate_defines_code(defines_api: List[Dict[str, Union[str, float, int]]], for_stub: bool = False) -> str:
 	_string = ""
 	for define in defines_api:
 		if for_stub or define['name'] not in wrapped_defines_names:
@@ -289,7 +290,7 @@ def generate_defines_code(defines_api, for_stub=False):
 	return _string
 
 
-def generate_dummy_structs_code(names, for_stub=False):
+def generate_dummy_structs_code(names: List[str], for_stub: bool = False) -> str:
 	_string = ""
 	for name in names:
 		function_of_size = _raypyc_extra_functions.__getattr__(f"Get{name}Size")
@@ -304,7 +305,7 @@ def generate_dummy_structs_code(names, for_stub=False):
 	return _string
 
 
-def generate_structs_aliases_code(structs_api, aliases_api, for_stub=False):
+def generate_structs_aliases_code(structs_api: List[Union[Dict[str, Union[str, List[Dict[str, str]]]], Any]], aliases_api: List[Union[Dict[str, str], Any]], for_stub: bool = False) -> str:
 	_string = ""
 	if not for_stub:
 		_wrapped_structures_names = wrapped_structures_names
@@ -333,7 +334,7 @@ def generate_structs_aliases_code(structs_api, aliases_api, for_stub=False):
 	return _string
 
 
-def generate_structures_dictionary_code(wrapped_structures, for_stub=False):
+def generate_structures_dictionary_code(wrapped_structures: List[str], for_stub: bool = False) -> str:
 	if not for_stub:
 		dictionary_sting = "__structs = {\n"
 		for struct in wrapped_structures:
@@ -350,7 +351,7 @@ def generate_structures_dictionary_code(wrapped_structures, for_stub=False):
 		return dictionary_sting
 
 
-def check_for_functions_that_can_wrap(functions_api):
+def check_for_functions_that_can_wrap(functions_api: List[Union[Any, Dict[str, Union[str, List[Dict[str, str]]]], Dict[str, str]]]) -> List[Union[Any, Dict[str, Union[str, List[Dict[str, str]]]], Dict[str, str]]]:
 	functions_that_can_be_wrap = []
 	functions_that_cant_be_wrap = []
 
@@ -374,7 +375,7 @@ def check_for_functions_that_can_wrap(functions_api):
 	return functions_that_can_be_wrap
 
 
-def generate_functions_code(functions_set):
+def generate_functions_code(functions_set: List[Union[Any, Dict[str, Union[str, List[Dict[str, str]]]], Dict[str, str]]]) -> str:
 	_string = ""
 	for function in functions_set:
 		if function['name'] not in wrapped_functions_names_stub:
@@ -437,6 +438,7 @@ raygui_api_structs = raygui_api['structs']
 raygui_api_aliases = raygui_api['aliases']
 raygui_api_enums = raygui_api['enums']
 raygui_api_functions = raygui_api['functions']
+
 # -----------------------------------------
 # note that we have to generate the none stub-code first, because we need all the wrapped_*_names lists to be updated first
 # -----------------------------------------
