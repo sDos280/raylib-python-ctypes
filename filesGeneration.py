@@ -58,7 +58,7 @@ def add_text_to_file(file_path, _string):
 		file.write(_string)
 
 
-def convert_c_type_string_to_ctypes_type_sting(c_type_string):
+def convert_c_type_to_python_type(c_type_string):
 	"""convert c type string to ctype type sting"""
 	c_string_to_ctypes_string = {
 		'bool': 'c_bool',  # C type: _Bool  Python type: bool (1)
@@ -207,7 +207,7 @@ def generate_struct_code(struct_data, for_stub=False):
 	if not for_stub:
 		struct_fields = "\t_fields_ = [\n"
 		for struct_data_field in struct_data['fields']:
-			struct_fields += f"\t\t('{struct_data_field['name']}', {convert_c_type_string_to_ctypes_type_sting(struct_data_field['type'])}),"
+			struct_fields += f"\t\t('{struct_data_field['name']}', {convert_c_type_to_python_type(struct_data_field['type'])}),"
 			if struct_data_field['description'] != "":
 				struct_fields += f"  # {struct_data_field['description']}"
 			struct_fields += '\n'
@@ -219,7 +219,7 @@ def generate_struct_code(struct_data, for_stub=False):
 
 	if for_stub:
 		for struct_data_field in struct_data['fields']:
-			use_type = convert_c_type_string_to_ctypes_type_sting(struct_data_field['type'])
+			use_type = convert_c_type_to_python_type(struct_data_field['type'])
 			struct_setters_getters_string += f"\t@property\n\tdef {struct_data_field['name']}(self) -> {use_type}:\n"
 			struct_setters_getters_string += f"\t\t...\n\n"
 			struct_setters_getters_string += f"\t@{struct_data_field['name']}.setter\n\tdef {struct_data_field['name']}(self, i: {use_type}) -> None:\n"

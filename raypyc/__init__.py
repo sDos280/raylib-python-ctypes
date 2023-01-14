@@ -29,7 +29,7 @@ _raylib_dynamic_library = ctypes.cdll.LoadLibrary(str(pathlib.Path(__file__).par
 
 # -----------------------------------------
 
-def evaluate_c_type_string_to_ctypes_type(c_type_string):
+def evaluate_c_type_string_to_python_type(c_type_string):
     c_string_to_ctypes_string = {
         'bool': ctypes.c_bool,  # C type: _Bool  Python type: bool (1)
         'char': ctypes.c_char,  # C type: char  Python type: 1-character bytes object
@@ -168,7 +168,7 @@ def check_for_functions_that_can_wrap(functions_set):
                     function_param_processed = function_param_processed.split('[')[0]
 
                 try:
-                    evaluate_c_type_string_to_ctypes_type(function_param["type"])
+                    evaluate_c_type_string_to_python_type(function_param["type"])
                 except:
                     do_wrapper_this_function = False
 
@@ -182,7 +182,7 @@ def check_for_functions_that_can_wrap(functions_set):
                 function_returnType_processed = function_returnType_processed.split('[')[0]
 
             try:
-                evaluate_c_type_string_to_ctypes_type(function["returnType"])
+                evaluate_c_type_string_to_python_type(function["returnType"])
             except:
                 do_wrapper_this_function = False
 
@@ -208,8 +208,8 @@ def wrap_functions_to_ctypes_functions_add_function_to_this_module(functions_to_
             if 'params' in function_to_wrap.keys():
                 for function_param in function_to_wrap['params']:
                     if function_param['type'] != "...":
-                        function_to_wrap_ctype['parametersTypes'].append(evaluate_c_type_string_to_ctypes_type(function_param['type']))
-            function_to_wrap_ctype['returnType'] = evaluate_c_type_string_to_ctypes_type(function_to_wrap['returnType'])
+                        function_to_wrap_ctype['parametersTypes'].append(evaluate_c_type_string_to_python_type(function_param['type']))
+            function_to_wrap_ctype['returnType'] = evaluate_c_type_string_to_python_type(function_to_wrap['returnType'])
 
             f = wrap_function(function_to_wrap_ctype['name'], function_to_wrap_ctype['parametersTypes'], function_to_wrap_ctype['returnType'])
             add_function_to_module(current_module, name_of_function, f)
