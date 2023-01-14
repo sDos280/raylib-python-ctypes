@@ -1,5 +1,6 @@
 import ctypes
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -18,7 +19,7 @@ wrapped_structures_names_stub = []
 
 wrapped_aliases_names = []
 
-wrapped_functions_names_pyi = []
+wrapped_functions_names_stub = []
 
 if sys.platform == 'linux':
 	_raylib_dynamic_library_name = 'libraylib.so'
@@ -41,6 +42,20 @@ _raypyc_extra_functions = ctypes.cdll.LoadLibrary(str(DYNAMIC_LIBRARIES_PATH / _
 def find_char_in_str(string, char):
 	"""get the indexes of a char in a string"""
 	return [i for i, ltr in enumerate(string) if ltr == char]
+
+
+def underscore(_string):
+	_string = re.sub(r"([A-Z]+)([A-Z][a-z])", r'\1_\2', _string)
+	_string = re.sub(r"([a-z\d])([A-Z])", r'\1_\2', _string)
+	_string = _string.replace("-", "_")
+	return _string.lower()
+
+
+def is_string_contained_in_list(_string, _list):
+	for _item in _list:
+		if _item in _string:
+			return True
+	return False
 
 
 def generate_file(file_path):
@@ -233,6 +248,20 @@ def generate_alias_code(alias_name, object_name):
 	return f"{alias_name} = {object_name}\n"
 
 
+def generate_function_signature_code(function_data):
+	function_string = f"def {function_data['name']}("
+	if 'params' in function_data.keys():  # only return stuff
+		for param in function_data['params']:
+			function_string += f"{param['name']}: {convert_c_type_string_to_ctypes_type_sting(param['type'])}, "
+
+		function_string = function_string[:-2]
+
+	function_string += ") -> "
+	function_string += f"{convert_c_type_string_to_ctypes_type_sting(function_data['returnType'])}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
+
+	return function_string
+
+
 # -----------------------------------------
 def generate_colors_code(defines_api, for_stub=False):
 	_string = ""
@@ -319,6 +348,42 @@ def generate_structures_dictionary_code(wrapped_structures, for_stub=False):
 		dictionary_sting = dictionary_sting[:-3]
 		dictionary_sting += "]] = {\n\t...\n}\n"
 		return dictionary_sting
+
+
+def check_for_functions_that_can_wrap(functions_api):
+	functions_that_can_be_wrap = []
+	functions_that_cant_be_wrap = []
+
+	for function in functions_api:
+		do_wrapper_this_function = True
+		if 'params' in function.keys():
+			for function_param in function['params']:
+				if is_string_contained_in_list(function_param['type'], ['Sound', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']):
+					do_wrapper_this_function = False
+					break
+
+		if do_wrapper_this_function:
+			if is_string_contained_in_list(function['returnType'], ['Sound', 'AudioCallback', 'SaveFileTextCallback', 'LoadFileTextCallback', 'TraceLogCallback', 'LoadFileDataCallback', 'SaveFileDataCallback']):
+				do_wrapper_this_function = False
+
+		if do_wrapper_this_function:
+			functions_that_can_be_wrap.append(function)
+		else:
+			functions_that_cant_be_wrap.append(function)
+
+	return functions_that_can_be_wrap
+
+
+def generate_functions_code(functions_set):
+	_string = ""
+	for function in functions_set:
+		if function['name'] not in wrapped_functions_names_stub:
+			wrapped_functions_names_stub.append(function['name'])
+			function_copy = function.copy()
+			name_of_function = underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d').replace('vector_2', 'vector_2').replace('vector_3', 'vector3_')
+			function_copy['name'] = name_of_function
+			_string += generate_function_signature_code(function_copy)
+	return _string
 
 
 # -----------------------------------------
@@ -438,3 +503,20 @@ add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_struct
 add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', generate_structures_dictionary_code(wrapped_structures_names, for_stub=False))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_structures_dictionary_code(wrapped_structures_names_stub, for_stub=True))
 # -----------------------------------------
+
+generate_file(RAYPYC_FOLDER_PATH / '__init__.pyi')
+add_text_to_file(RAYPYC_FOLDER_PATH / '__init__.pyi', 'import ctypes\nfrom raypyc.defines import *\nfrom raypyc.defines import *\nfrom raypyc.colors import *\nfrom raypyc.enums import *\nfrom raypyc.structures import *\n\n\n')
+
+# check what function can be wrapped
+config_functions_to_wrapped = check_for_functions_that_can_wrap(config_api_functions)
+rlgl_functions_to_wrapped = check_for_functions_that_can_wrap(rlgl_api_functions)
+raylib_functions_to_wrapped = check_for_functions_that_can_wrap(raylib_api_functions)
+raymath_functions_to_wrapped = check_for_functions_that_can_wrap(raymath_api_functions)
+raygui_functions_to_wrapped = check_for_functions_that_can_wrap(raygui_api_functions)
+
+# add the functions signature strings files
+add_text_to_file(RAYPYC_FOLDER_PATH / '__init__.pyi', generate_functions_code(config_functions_to_wrapped))
+add_text_to_file(RAYPYC_FOLDER_PATH / '__init__.pyi', generate_functions_code(rlgl_functions_to_wrapped))
+add_text_to_file(RAYPYC_FOLDER_PATH / '__init__.pyi', generate_functions_code(raylib_functions_to_wrapped))
+add_text_to_file(RAYPYC_FOLDER_PATH / '__init__.pyi', generate_functions_code(raymath_functions_to_wrapped))
+add_text_to_file(RAYPYC_FOLDER_PATH / '__init__.pyi', generate_functions_code(raygui_functions_to_wrapped))
