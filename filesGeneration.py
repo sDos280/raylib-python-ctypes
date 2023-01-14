@@ -252,12 +252,12 @@ def generate_function_signature_code(function_data):
 	function_string = f"def {function_data['name']}("
 	if 'params' in function_data.keys():  # only return stuff
 		for param in function_data['params']:
-			function_string += f"{param['name']}: {convert_c_type_string_to_ctypes_type_sting(param['type'])}, "
+			function_string += f"{param['name']}: {convert_c_type_to_python_type(param['type'])}, "
 
 		function_string = function_string[:-2]
 
 	function_string += ") -> "
-	function_string += f"{convert_c_type_string_to_ctypes_type_sting(function_data['returnType'])}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
+	function_string += f"{convert_c_type_to_python_type(function_data['returnType'])}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
 
 	return function_string
 
