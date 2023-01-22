@@ -20,10 +20,10 @@ DYNAMIC_LIBRARIES_PATH = pathlib.Path(__file__).parent / 'libs'
 
 if sys.platform == 'emscripten':
 	dllname = 'wasmraylib.so'
-elif sys.platform == 'linux':
-	dllname = 'libraylib.so'
 elif 'ANDROID_BOOTLOGO' in environ:
 	dllname = 'androidraylib.so'
+elif sys.platform == 'linux':
+	dllname = 'libraylib.so'
 else:  # windows
 	dllname = 'raylib.dll'
 
