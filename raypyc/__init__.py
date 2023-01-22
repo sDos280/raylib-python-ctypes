@@ -23,7 +23,7 @@ if sys.platform == 'emscripten':
 elif sys.platform == 'linux':
 	dllname = 'libraylib.so'
 elif 'ANDROID_BOOTLOGO' in environ:
-	dllname = 'libraylib.so'
+	dllname = 'androidraylib.so'
 else:  # windows
 	dllname = 'raylib.dll'
 
