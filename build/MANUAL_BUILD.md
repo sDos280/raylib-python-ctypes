@@ -42,7 +42,7 @@ cd ../..
 * compile raylib parser and API(s).
 
 ```cmd
-copy raygui/src/raygui.h raylib/src
+copy raygui/src/raygui.h raylib
 copy raylib/src/config.h raylib/parser
 cd raylib/parser
 make raylib_parser
