@@ -44,13 +44,6 @@ cd ../..
 ```cmd
 copy raygui/src/raygui.h raylib/src
 copy raylib/src/config.h raylib/parser
-
-cd raylib/src
-gcc raylib.h -CC -DRLAPI=RLAPI -E => raylib.h.modified
-gcc raymath.h -CC -DRLAPI=RMAPI -E => raymath.h.modified
-gcc rlgl.h -CC -DRLAPI=RLAPI -E => rlgl.h.modified
-cd ../..
-
 cd raylib/parser
 make raylib_parser
 make raylib_api.json FORMAT=JSON EXTENSION=json
