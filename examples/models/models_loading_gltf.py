@@ -4,15 +4,11 @@ raylib [models] example - loading gltf with animations
 
 """
 
+import ctypes
+
 from raypyc import *
 from ctypes import *
 
-# Definitions
-# ------------------------------------------------------------------------------------
-MAX_BUILDINGS = 100
-
-
-# ------------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------------
 # Program main entry point
@@ -34,12 +30,12 @@ def main():
 
     # Load gltf model
     model = load_model(b"resources/models/gltf/robot.glb")
-    animsCount = c_uint()
-    animIndex = int(0)
-    animCurrentFrame = int(0)
-    array = POINTER()
-    modelAnimations = load_model_animations(b"resources/models/gltf/robot.glb", array)
-    print(array)
+    animsCount = c_uint(0)
+    animIndex = 0
+    animCurrentFrame = 0
+
+    modelAnimations = load_model_animations(b"resources/models/gltf/robot.glb", ctypes.pointer(animsCount))
+
     position = Vector3(0.0, 0.0, 0.0)  # Set model position
     set_camera_mode(camera, CameraMode.CAMERA_FREE)  # Set free camera mode
 
@@ -55,7 +51,7 @@ def main():
         if is_key_pressed(KeyboardKey.KEY_DOWN): animIndex = (animIndex + animsCount - 1) % animsCount
 
         # Update model animation
-        anim = modelAnimations[int(gg)]
+        anim = modelAnimations[animIndex]
         animCurrentFrame = (animCurrentFrame + 1) % anim.frameCount
         update_model_animation(model, anim, animCurrentFrame)
 
@@ -69,7 +65,7 @@ def main():
 
         clear_background(RAYWHITE)
 
-        begin_mode_3d()
+        begin_mode_3d(camera)
 
         draw_model(model, position, 1.0, WHITE)  # Draw animated model
         draw_grid(10, 1.0)
