@@ -6,3 +6,8 @@ __pycache__/
 
 # Mypy
 .mypy_cache/
+
+# setup.py
+build/bdist.*/
+build/lib/
+raypyc.egg-info/

@@ -104,9 +104,9 @@ firstly, Contributions of any kind welcome!.
 secondly, here are some of the things that contributing on will help this wrapper the most:
 
 * porting examples from c to python(if you can, please follow along with
-  the [conventions](https://github.com/sDos280/raylib-python-ctypes/blob/main/CONVENTIONS.md) when porting). ([_
-  C_ examples](https://github.com/raysan5/raylib/tree/master/examples), [_
-  Python_ examples](https://github.com/sDos280/raylib-python-ctypes))
+  the [conventions](https://github.com/sDos280/raylib-python-ctypes/blob/main/CONVENTIONS.md) when porting). ([
+  C examples](https://github.com/raysan5/raylib/tree/master/examples), [
+  Python examples](https://github.com/sDos280/raylib-python-ctypes))
 * fixing(refactoring) my [fileGeneration](https://github.com/sDos280/raylib-python-ctypes/blob/main/filesGeneration.py),
   so it will look neater...
 * making the wrapper able to port to more operating systems
@@ -124,4 +124,5 @@ and [pyray](https://github.com/sDos280/raylib-python-cffi) for their good work, 
 code ;) ) from them, so thanks you guys very much.
 also a big thanks for the people that helped to test and reviewing the library :)!!!
 
-also a special thanks to [Peter0x44](https://github.com/Peter0x44), [Its-Kenta](https://github.com/Its-Kenta), [sol-vin](https://github.com/sol-vin) and [pmp-p](https://github.com/pmp-p).
+also a special thanks to [Peter0x44](https://github.com/Peter0x44), [Its-Kenta](https://github.com/Its-Kenta)
+, [sol-vin](https://github.com/sol-vin) and [pmp-p](https://github.com/pmp-p).

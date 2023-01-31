@@ -3,31 +3,25 @@ import tomllib
 
 from setuptools import setup, find_packages
 
-with open("pyproject.toml", "rb") as f:
-    data_toml = tomllib.load(f)
+with open("README.md", "r") as long_description_reader:
+    _long_description = long_description_reader.read()
 
-config = configparser.ConfigParser()
-config.read("setup.cfg")
-
-with open("MANIFEST.in", "r") as r:
-    MANIFEST_in = r.read().replace('include', '').replace(' ', '').split('\n')
-
-print(MANIFEST_in)
 
 setup(
     name='raypyc',
-    version=config.get('metadata', 'version'),
-    python_requires=config.get('options', 'python_requires'),
-    description=config.get('metadata', 'description'),
-    long_description=config.get('metadata', 'long_description'),
-    long_description_content_type=config.get('metadata', 'long_description_content_type'),
-    url=config.get('metadata', 'url'),
-    author=config.get('metadata', 'author'),
-    author_email=config.get('metadata', 'author_email'),
-    classifiers=config.get('metadata', 'classifiers'),
-    packages=find_packages(),
-    install_requires= ["setuptools>=42", "wheel"],
+    version='0.1.8',
+    description='A python wrapper for raylib using ctypes',
+    long_description=_long_description,
+    long_description_content_type='text/markdown',
+    author='Dor Shapira',
+    license='MIT License',
+    author_email='sdor2803@gmail.com',
+    packages=['raypyc'],
+    url='https://github.com/sDos280/raylib-python-ctypes',
+    classifiers=['Programming Language :: Python :: 3', 'License :: OSI Approved :: MIT License'],
+    install_requires=['setuptools>=42', 'wheel'],
     package_data={
-        'raylib':  ['raypyc/defines/*', 'raypyc/colors/*', 'raypyc/enums/*', 'raypyc/structures/*', 'raypyc/reasings.py', 'raypyc/__init__.py', 'raypyc/__init__.pyi', 'raypyc/*.json', 'raypyc/*.dll']
-    }
+        'raypyc': ['defines/*', 'colors/*', 'enums/*', 'structures/*', 'reasings.py', '__init__.pyi', '*.json', 'libs/*']
+    },
+    include_package_data=True
 )
