@@ -16,6 +16,8 @@ raypyc.egg-info/
 build/raylib/
 build/raygui/
 build/raudio/
-build/all/
 !build/all/.gitkeep
+build/all/*.json
+build/all/*.dll
+build/all/*.so*
 build/tmp
