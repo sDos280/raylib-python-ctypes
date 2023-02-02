@@ -11,3 +11,10 @@ __pycache__/
 build/bdist.*/
 build/lib/
 raypyc.egg-info/
+
+# manual build
+build/raylib/
+build/raygui/
+build/raudio/
+build/all/
+build/tmp
