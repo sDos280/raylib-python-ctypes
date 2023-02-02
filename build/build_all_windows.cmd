@@ -1,7 +1,7 @@
 :: clone raylibs repositories
-::git clone --depth 1 https://github.com/raysan5/raylib
-::git clone --depth 1 https://github.com/raysan5/raudio
-::git clone --depth 1 https://github.com/raysan5/raygui
+git clone --depth 1 https://github.com/raysan5/raylib
+git clone --depth 1 https://github.com/raysan5/raudio
+git clone --depth 1 https://github.com/raysan5/raygui
 
 :: compile raudio
 gcc -c raylib/src/raudio.c -std=c99 -Iraudio/src
@@ -17,9 +17,7 @@ rm *.a *.o
 cd "./raylib/src"
 windres raylib.dll.rc -o raylib.dll.rc.data
 make RAYLIB_LIBTYPE=SHARED RAYLIB_MODULE_RAYGUI=TRUE GRAPHICS=GRAPHICS_API_OPENGL_43
-cd ../..
-cp raylib/src/raylib.dll all
-cd "./raylib/src"
+cp raylib.dll ../../all
 make clean
 cd ../..
 
