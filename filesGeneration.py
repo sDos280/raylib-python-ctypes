@@ -249,6 +249,25 @@ def generate_alias_code(alias_name: str, object_name: str) -> str:
 	return f"{alias_name} = {object_name}\n"
 
 
+def generate_enum_code(enum_data, for_stub=False):
+	_string = ""
+	_string += f"class {enum_data['name']}(enum.IntEnum):\n"
+	if enum_data['description'] != '':
+		_string += f"\t\"\"\"{enum_data['description']}\"\"\"\n"
+
+	for value in enum_data['values']:
+		_string += f"\t{value['name']}: int"
+		if not for_stub:
+			_string += f" = {value['value']}"
+		if value['description'] != '':
+			_string += f"  # {value['description']}"
+		_string += "\n"
+
+	_string += "\n"
+
+	return _string
+
+
 def generate_function_signature_code(function_data: Dict[str, Union[str, List[Dict[str, str]]]]) -> str:
 	function_string = f"def {function_data['name']}("
 	if 'params' in function_data.keys():  # only return stuff
@@ -351,6 +370,19 @@ def generate_structures_dictionary_code(wrapped_structures: List[str], for_stub:
 		return dictionary_sting
 
 
+def generate_enums_code(enums_api, for_stub=False):
+	_string = ""
+	for enum in enums_api:
+		if for_stub or enum['name'] not in wrapped_enums_names:
+			enum_string_logic = generate_enum_code(enum, for_stub)
+			if enum_string_logic != "":
+				wrapped_enums_names.append(enum['name'])
+				enum_string_logic += "\n"
+
+			_string += enum_string_logic
+	return _string
+
+
 def check_for_functions_that_can_wrap(functions_api: List[Union[Any, Dict[str, Union[str, List[Dict[str, str]]]], Dict[str, str]]]) -> List[Union[Any, Dict[str, Union[str, List[Dict[str, str]]]], Dict[str, str]]]:
 	functions_that_can_be_wrap = []
 	functions_that_cant_be_wrap = []
@@ -449,7 +481,7 @@ add_text_to_file(RAYPYC_FOLDER_PATH / 'colors/__init__.py', 'import raypyc\n\n\n
 generate_file(RAYPYC_FOLDER_PATH / 'colors/__init__.pyi')
 add_text_to_file(RAYPYC_FOLDER_PATH / 'colors/__init__.pyi', 'import raypyc\n\n\n')
 
-# generate colors code add colors code to files
+# generate colors code and add colors code to files
 add_text_to_file(RAYPYC_FOLDER_PATH / 'colors/__init__.py', generate_colors_code(config_api_defines, for_stub=False))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'colors/__init__.py', generate_colors_code(rlgl_api_defines, for_stub=False))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'colors/__init__.py', generate_colors_code(raylib_api_defines, for_stub=False))
@@ -466,7 +498,7 @@ add_text_to_file(RAYPYC_FOLDER_PATH / 'colors/__init__.pyi', generate_colors_cod
 generate_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py')
 generate_file(RAYPYC_FOLDER_PATH / 'defines/__init__.pyi')
 
-# generate defines code add defines code to files
+# generate defines code ans add defines code to files
 add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py', generate_defines_code(config_api_defines, for_stub=False))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py', generate_defines_code(rlgl_api_defines, for_stub=False))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'defines/__init__.py', generate_defines_code(raylib_api_defines, for_stub=False))
@@ -485,7 +517,7 @@ add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', 'import ctypes\n
 generate_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi')
 add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', 'import ctypes\nfrom raypyc.defines import *\nfrom typing import Type\n\n\n')
 
-# generate dummy structures code add dummy structures code to files
+# generate dummy structures code and add dummy structures code to files
 add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', generate_dummy_structs_code(['rAudioBuffer', 'rAudioProcessor'], for_stub=False))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_dummy_structs_code(['rAudioBuffer', 'rAudioProcessor'], for_stub=True))
 
@@ -504,6 +536,26 @@ add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_struct
 # generate structures-dictionary code and add structures-dictionary to files
 add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.py', generate_structures_dictionary_code(wrapped_structures_names, for_stub=False))
 add_text_to_file(RAYPYC_FOLDER_PATH / 'structures/__init__.pyi', generate_structures_dictionary_code(wrapped_structures_names_stub, for_stub=True))
+# -----------------------------------------
+
+# generate enums files and add import stuff
+generate_file(RAYPYC_FOLDER_PATH / 'enums/__init__.py')
+add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.py', 'import enum\n\n\n')
+generate_file(RAYPYC_FOLDER_PATH / 'enums/__init__.pyi')
+add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.pyi', 'import enum\n\n\n')
+
+# generate enums code and add enums code to files
+add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.py', generate_enums_code(config_api_enums, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.py', generate_enums_code(rlgl_api_enums, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.py', generate_enums_code(raylib_api_enums, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.py', generate_enums_code(raymath_api_enums, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.py', generate_enums_code(raygui_api_enums, for_stub=False))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.pyi', generate_enums_code(config_api_enums, for_stub=True))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.pyi', generate_enums_code(rlgl_api_enums, for_stub=True))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.pyi', generate_enums_code(raylib_api_enums, for_stub=True))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.pyi', generate_enums_code(raymath_api_enums, for_stub=True))
+add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.pyi', generate_enums_code(raygui_api_enums, for_stub=True))
+
 # -----------------------------------------
 
 generate_file(RAYPYC_FOLDER_PATH / '__init__.pyi')
