@@ -125,4 +125,4 @@ code ;) ) from them, so thanks you guys very much.
 also a big thanks for the people that helped to test and reviewing the library :)!!!
 
 also a special thanks to [Peter0x44](https://github.com/Peter0x44), [Its-Kenta](https://github.com/Its-Kenta)
-, [sol-vin](https://github.com/sol-vin) and [pmp-p](https://github.com/pmp-p).
+, [sol-vin](https://github.com/sol-vin), [pmp-p](https://github.com/pmp-p) and [stucotso](https://gist.github.com/stucotso).
