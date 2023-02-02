@@ -17,4 +17,5 @@ build/raylib/
 build/raygui/
 build/raudio/
 build/all/
+!build/all/.gitkeep
 build/tmp
