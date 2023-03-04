@@ -32,7 +32,7 @@ to convert string object to bytes object use or b"..." or "...".encode('uft-8')
 Some other conventions to follow:
 
 - **ALWAYS** initialize all defined variables.
-- **Ues Tabs**.
+- **Use Tabs**.
 - Avoid trailing spaces, please, avoid them
 - Avoid using **semicolon** as you can
 - Control flow statements always are followed **by a space**:
