@@ -1,6 +1,12 @@
 {
   "defines": [
     {
+      "name": "CONFIG_H",
+      "type": "GUARD",
+      "value": "",
+      "description": ""
+    },
+    {
       "name": "SUPPORT_MODULE_RSHAPES",
       "type": "INT",
       "value": 1,
@@ -196,37 +202,37 @@
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION",
       "type": "STRING",
       "value": "vertexPosition",
-      "description": "Binded by default to shader location: 0"
+      "description": "Bound by default to shader location: 0"
     },
     {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD",
       "type": "STRING",
       "value": "vertexTexCoord",
-      "description": "Binded by default to shader location: 1"
+      "description": "Bound by default to shader location: 1"
     },
     {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL",
       "type": "STRING",
       "value": "vertexNormal",
-      "description": "Binded by default to shader location: 2"
+      "description": "Bound by default to shader location: 2"
     },
     {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_COLOR",
       "type": "STRING",
       "value": "vertexColor",
-      "description": "Binded by default to shader location: 3"
+      "description": "Bound by default to shader location: 3"
     },
     {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_TANGENT",
       "type": "STRING",
       "value": "vertexTangent",
-      "description": "Binded by default to shader location: 4"
+      "description": "Bound by default to shader location: 4"
     },
     {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD2",
       "type": "STRING",
       "value": "vertexTexCoord2",
-      "description": "Binded by default to shader location: 5"
+      "description": "Bound by default to shader location: 5"
     },
     {
       "name": "RL_DEFAULT_SHADER_UNIFORM_NAME_MVP",
@@ -403,6 +409,12 @@
       "description": ""
     },
     {
+      "name": "SUPPORT_FILEFORMAT_M3D",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
       "name": "SUPPORT_MESH_GENERATION",
       "type": "INT",
       "value": 1,
@@ -433,6 +445,18 @@
       "description": ""
     },
     {
+      "name": "SUPPORT_FILEFORMAT_MP3",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
+      "name": "SUPPORT_FILEFORMAT_QOA",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
       "name": "SUPPORT_FILEFORMAT_XM",
       "type": "INT",
       "value": 1,
@@ -440,12 +464,6 @@
     },
     {
       "name": "SUPPORT_FILEFORMAT_MOD",
-      "type": "INT",
-      "value": 1,
-      "description": ""
-    },
-    {
-      "name": "SUPPORT_FILEFORMAT_MP3",
       "type": "INT",
       "value": 1,
       "description": ""
@@ -476,8 +494,8 @@
     },
     {
       "name": "SUPPORT_STANDARD_FILEIO",
-      "type": "GUARD",
-      "value": "",
+      "type": "INT",
+      "value": 1,
       "description": ""
     },
     {
@@ -489,7 +507,7 @@
     {
       "name": "MAX_TRACELOG_MSG_LENGTH",
       "type": "INT",
-      "value": 128,
+      "value": 256,
       "description": "Max length of one trace-log message"
     }
   ],
