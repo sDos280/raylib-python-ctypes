@@ -23,7 +23,6 @@ class rlVertexBuffer(ctypes.Structure):
 		('vertices', ctypes.POINTER(ctypes.c_float)),  # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
 		('texcoords', ctypes.POINTER(ctypes.c_float)),  # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
 		('colors', ctypes.POINTER(ctypes.c_ubyte)),  # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
-		('indices', ctypes.POINTER(ctypes.c_uint)),  # Vertex indices (in case vertex data comes indexed) (6 indices per quad)
 		('vaoId', ctypes.c_uint),  # OpenGL Vertex Array Object id
 		('vboId', ctypes.c_uint * 4)  # OpenGL Vertex Buffer Objects id (4 types of vertex data)
 	]
@@ -48,71 +47,6 @@ class rlRenderBatch(ctypes.Structure):
 		('draws', ctypes.POINTER(rlDrawCall)),  # Draw calls array, depends on textureId
 		('drawCounter', ctypes.c_int),  # Draw calls counter
 		('currentDepth', ctypes.c_float)  # Current depth value for next draw
-	]
-
-
-class Matrix(ctypes.Structure):
-	"""Matrix, 4x4 components, column major, OpenGL style, right handed"""
-	_fields_ = [
-		('m0', ctypes.c_float),  # Matrix first row (4 components)
-		('m4', ctypes.c_float),  # Matrix first row (4 components)
-		('m8', ctypes.c_float),  # Matrix first row (4 components)
-		('m12', ctypes.c_float),  # Matrix first row (4 components)
-		('m1', ctypes.c_float),  # Matrix second row (4 components)
-		('m5', ctypes.c_float),  # Matrix second row (4 components)
-		('m9', ctypes.c_float),  # Matrix second row (4 components)
-		('m13', ctypes.c_float),  # Matrix second row (4 components)
-		('m2', ctypes.c_float),  # Matrix third row (4 components)
-		('m6', ctypes.c_float),  # Matrix third row (4 components)
-		('m10', ctypes.c_float),  # Matrix third row (4 components)
-		('m14', ctypes.c_float),  # Matrix third row (4 components)
-		('m3', ctypes.c_float),  # Matrix fourth row (4 components)
-		('m7', ctypes.c_float),  # Matrix fourth row (4 components)
-		('m11', ctypes.c_float),  # Matrix fourth row (4 components)
-		('m15', ctypes.c_float)  # Matrix fourth row (4 components)
-	]
-
-
-class rlglData(ctypes.Structure):
-	""""""
-	_fields_ = [
-		('currentBatch', ctypes.POINTER(rlRenderBatch)),  # Current render batch
-		('defaultBatch', rlRenderBatch),  # Default internal render batch
-		('vertexCounter', ctypes.c_int),  # Current active render batch vertex counter (generic, used for all batches)
-		('texcoordx', ctypes.c_float),  # Current active texture coordinate (added on glVertex*())
-		('texcoordy', ctypes.c_float),  # Current active texture coordinate (added on glVertex*())
-		('normalx', ctypes.c_float),  # Current active normal (added on glVertex*())
-		('normaly', ctypes.c_float),  # Current active normal (added on glVertex*())
-		('normalz', ctypes.c_float),  # Current active normal (added on glVertex*())
-		('colorr', ctypes.c_ubyte),  # Current active color (added on glVertex*())
-		('colorg', ctypes.c_ubyte),  # Current active color (added on glVertex*())
-		('colorb', ctypes.c_ubyte),  # Current active color (added on glVertex*())
-		('colora', ctypes.c_ubyte),  # Current active color (added on glVertex*())
-		('currentMatrixMode', ctypes.c_int),  # Current matrix mode
-		('currentMatrix', ctypes.POINTER(Matrix)),  # Current matrix pointer
-		('modelview', Matrix),  # Default modelview matrix
-		('projection', Matrix),  # Default projection matrix
-		('transform', Matrix),  # Transform matrix to be used with rlTranslate, rlRotate, rlScale
-		('transformRequired', ctypes.c_bool),  # Require transform matrix application to current draw-call vertex (if required)
-		('stack', Matrix * RL_MAX_MATRIX_STACK_SIZE),  # Matrix stack for push/pop
-		('stackCounter', ctypes.c_int),  # Matrix stack counter
-		('defaultTextureId', ctypes.c_uint),  # Default texture used on shapes/poly drawing (required by shader)
-		('activeTextureId', ctypes.c_uint * RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS),  # Active texture ids to be enabled on batch drawing (0 active by default)
-		('defaultVShaderId', ctypes.c_uint),  # Default vertex shader id (used by default shader program)
-		('defaultFShaderId', ctypes.c_uint),  # Default fragment shader id (used by default shader program)
-		('defaultShaderId', ctypes.c_uint),  # Default shader program id, supports vertex color and diffuse texture
-		('defaultShaderLocs', ctypes.POINTER(ctypes.c_int)),  # Default shader locations pointer to be used on rendering
-		('currentShaderId', ctypes.c_uint),  # Current shader id to be used on rendering (by default, defaultShaderId)
-		('currentShaderLocs', ctypes.POINTER(ctypes.c_int)),  # Current shader locations pointer to be used on rendering (by default, defaultShaderLocs)
-		('stereoRender', ctypes.c_bool),  # Stereo rendering flag
-		('projectionStereo', Matrix * 2),  # VR stereo rendering eyes projection matrices
-		('viewOffsetStereo', Matrix * 2),  # VR stereo rendering eyes view offset matrices
-		('currentBlendMode', ctypes.c_int),  # Blending mode active
-		('glBlendSrcFactor', ctypes.c_int),  # Blending source factor
-		('glBlendDstFactor', ctypes.c_int),  # Blending destination factor
-		('glBlendEquation', ctypes.c_int),  # Blending equation
-		('framebufferWidth', ctypes.c_int),  # Current framebuffer width
-		('framebufferHeight', ctypes.c_int)  # Current framebuffer height
 	]
 
 
@@ -144,6 +78,28 @@ class Vector4(ctypes.Structure):
 
 
 Quaternion = Vector4
+
+
+class Matrix(ctypes.Structure):
+	"""Matrix, 4x4 components, column major, OpenGL style, right-handed"""
+	_fields_ = [
+		('m0', ctypes.c_float),  # Matrix first row (4 components)
+		('m4', ctypes.c_float),  # Matrix first row (4 components)
+		('m8', ctypes.c_float),  # Matrix first row (4 components)
+		('m12', ctypes.c_float),  # Matrix first row (4 components)
+		('m1', ctypes.c_float),  # Matrix second row (4 components)
+		('m5', ctypes.c_float),  # Matrix second row (4 components)
+		('m9', ctypes.c_float),  # Matrix second row (4 components)
+		('m13', ctypes.c_float),  # Matrix second row (4 components)
+		('m2', ctypes.c_float),  # Matrix third row (4 components)
+		('m6', ctypes.c_float),  # Matrix third row (4 components)
+		('m10', ctypes.c_float),  # Matrix third row (4 components)
+		('m14', ctypes.c_float),  # Matrix third row (4 components)
+		('m3', ctypes.c_float),  # Matrix fourth row (4 components)
+		('m7', ctypes.c_float),  # Matrix fourth row (4 components)
+		('m11', ctypes.c_float),  # Matrix fourth row (4 components)
+		('m15', ctypes.c_float)  # Matrix fourth row (4 components)
+	]
 
 
 class Color(ctypes.Structure):
@@ -247,7 +203,7 @@ class Camera3D(ctypes.Structure):
 		('position', Vector3),  # Camera position
 		('target', Vector3),  # Camera target it looks-at
 		('up', Vector3),  # Camera up vector (rotation over its axis)
-		('fovy', ctypes.c_float),  # Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic
+		('fovy', ctypes.c_float),  # Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic
 		('projection', ctypes.c_int)  # Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
 	]
 
@@ -313,7 +269,7 @@ class Material(ctypes.Structure):
 
 
 class Transform(ctypes.Structure):
-	"""Transform, vectex transformation data"""
+	"""Transform, vertex transformation data"""
 	_fields_ = [
 		('translation', Vector3),  # Translation
 		('rotation', Quaternion),  # Rotation
@@ -366,8 +322,8 @@ class RayCollision(ctypes.Structure):
 	"""RayCollision, ray hit information"""
 	_fields_ = [
 		('hit', ctypes.c_bool),  # Did the ray hit something?
-		('distance', ctypes.c_float),  # Distance to nearest hit
-		('point', Vector3),  # Point of nearest hit
+		('distance', ctypes.c_float),  # Distance to the nearest hit
+		('point', Vector3),  # Point of the nearest hit
 		('normal', Vector3)  # Surface normal of hit
 	]
 
@@ -487,12 +443,11 @@ __structs = {
 	"rlVertexBuffer": rlVertexBuffer,
 	"rlDrawCall": rlDrawCall,
 	"rlRenderBatch": rlRenderBatch,
-	"Matrix": Matrix,
-	"rlglData": rlglData,
 	"Vector2": Vector2,
 	"Vector3": Vector3,
 	"Vector4": Vector4,
 	"Quaternion": Quaternion,
+	"Matrix": Matrix,
 	"Color": Color,
 	"Rectangle": Rectangle,
 	"Image": Image,

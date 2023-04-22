@@ -2,35 +2,12 @@ import enum
 
 
 class rlGlVersion(enum.IntEnum):
-	OPENGL_11: int
-	OPENGL_21: int
-	OPENGL_33: int
-	OPENGL_43: int
-	OPENGL_ES_20: int
-
-
-class rlFramebufferAttachType(enum.IntEnum):
-	RL_ATTACHMENT_COLOR_CHANNEL0: int
-	RL_ATTACHMENT_COLOR_CHANNEL1: int
-	RL_ATTACHMENT_COLOR_CHANNEL2: int
-	RL_ATTACHMENT_COLOR_CHANNEL3: int
-	RL_ATTACHMENT_COLOR_CHANNEL4: int
-	RL_ATTACHMENT_COLOR_CHANNEL5: int
-	RL_ATTACHMENT_COLOR_CHANNEL6: int
-	RL_ATTACHMENT_COLOR_CHANNEL7: int
-	RL_ATTACHMENT_DEPTH: int
-	RL_ATTACHMENT_STENCIL: int
-
-
-class rlFramebufferAttachTextureType(enum.IntEnum):
-	RL_ATTACHMENT_CUBEMAP_POSITIVE_X: int
-	RL_ATTACHMENT_CUBEMAP_NEGATIVE_X: int
-	RL_ATTACHMENT_CUBEMAP_POSITIVE_Y: int
-	RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y: int
-	RL_ATTACHMENT_CUBEMAP_POSITIVE_Z: int
-	RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z: int
-	RL_ATTACHMENT_TEXTURE2D: int
-	RL_ATTACHMENT_RENDERBUFFER: int
+	"""OpenGL version"""
+	RL_OPENGL_11: int  # OpenGL 1.1
+	RL_OPENGL_21: int  # OpenGL 2.1 (GLSL 120)
+	RL_OPENGL_33: int  # OpenGL 3.3 (GLSL 330)
+	RL_OPENGL_43: int  # OpenGL 4.3 (using GLSL 330)
+	RL_OPENGL_ES_20: int  # OpenGL ES 2.0 (GLSL 100)
 
 
 class rlTraceLogLevel(enum.IntEnum):
@@ -46,7 +23,7 @@ class rlTraceLogLevel(enum.IntEnum):
 
 
 class rlPixelFormat(enum.IntEnum):
-	"""Texture formats (support depends on OpenGL version)"""
+	"""Texture pixel formats"""
 	RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE: int  # 8 bit per pixel (no alpha)
 	RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA: int  # 8*2 bpp (2 channels)
 	RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5: int  # 16 bpp
@@ -89,6 +66,7 @@ class rlBlendMode(enum.IntEnum):
 	RL_BLEND_SUBTRACT_COLORS: int  # Blend textures subtracting colors (alternative)
 	RL_BLEND_ALPHA_PREMULTIPLY: int  # Blend premultiplied textures considering alpha
 	RL_BLEND_CUSTOM: int  # Blend textures using custom src/dst factors (use rlSetBlendFactors())
+	RL_BLEND_CUSTOM_SEPARATE: int  # Blend textures using custom src/dst factors (use rlSetBlendFactorsSeparate())
 
 
 class rlShaderLocationIndex(enum.IntEnum):
@@ -140,6 +118,38 @@ class rlShaderAttributeDataType(enum.IntEnum):
 	RL_SHADER_ATTRIB_VEC2: int  # Shader attribute type: vec2 (2 float)
 	RL_SHADER_ATTRIB_VEC3: int  # Shader attribute type: vec3 (3 float)
 	RL_SHADER_ATTRIB_VEC4: int  # Shader attribute type: vec4 (4 float)
+
+
+class rlFramebufferAttachType(enum.IntEnum):
+	"""Framebuffer attachment type"""
+	RL_ATTACHMENT_COLOR_CHANNEL0: int  # Framebuffer attachment type: color 0
+	RL_ATTACHMENT_COLOR_CHANNEL1: int  # Framebuffer attachment type: color 1
+	RL_ATTACHMENT_COLOR_CHANNEL2: int  # Framebuffer attachment type: color 2
+	RL_ATTACHMENT_COLOR_CHANNEL3: int  # Framebuffer attachment type: color 3
+	RL_ATTACHMENT_COLOR_CHANNEL4: int  # Framebuffer attachment type: color 4
+	RL_ATTACHMENT_COLOR_CHANNEL5: int  # Framebuffer attachment type: color 5
+	RL_ATTACHMENT_COLOR_CHANNEL6: int  # Framebuffer attachment type: color 6
+	RL_ATTACHMENT_COLOR_CHANNEL7: int  # Framebuffer attachment type: color 7
+	RL_ATTACHMENT_DEPTH: int  # Framebuffer attachment type: depth
+	RL_ATTACHMENT_STENCIL: int  # Framebuffer attachment type: stencil
+
+
+class rlFramebufferAttachTextureType(enum.IntEnum):
+	"""Framebuffer texture attachment type"""
+	RL_ATTACHMENT_CUBEMAP_POSITIVE_X: int  # Framebuffer texture attachment type: cubemap, +X side
+	RL_ATTACHMENT_CUBEMAP_NEGATIVE_X: int  # Framebuffer texture attachment type: cubemap, -X side
+	RL_ATTACHMENT_CUBEMAP_POSITIVE_Y: int  # Framebuffer texture attachment type: cubemap, +Y side
+	RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y: int  # Framebuffer texture attachment type: cubemap, -Y side
+	RL_ATTACHMENT_CUBEMAP_POSITIVE_Z: int  # Framebuffer texture attachment type: cubemap, +Z side
+	RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z: int  # Framebuffer texture attachment type: cubemap, -Z side
+	RL_ATTACHMENT_TEXTURE2D: int  # Framebuffer texture attachment type: texture2d
+	RL_ATTACHMENT_RENDERBUFFER: int  # Framebuffer texture attachment type: renderbuffer
+
+
+class rlCullMode(enum.IntEnum):
+	"""Face culling mode"""
+	RL_CULL_FACE_FRONT: int
+	RL_CULL_FACE_BACK: int
 
 
 class ConfigFlags(enum.IntEnum):
@@ -294,7 +304,7 @@ class MouseButton(enum.IntEnum):
 	MOUSE_BUTTON_MIDDLE: int  # Mouse button middle (pressed wheel)
 	MOUSE_BUTTON_SIDE: int  # Mouse button side (advanced mouse device)
 	MOUSE_BUTTON_EXTRA: int  # Mouse button extra (advanced mouse device)
-	MOUSE_BUTTON_FORWARD: int  # Mouse button fordward (advanced mouse device)
+	MOUSE_BUTTON_FORWARD: int  # Mouse button forward (advanced mouse device)
 	MOUSE_BUTTON_BACK: int  # Mouse button back (advanced mouse device)
 
 
@@ -309,7 +319,7 @@ class MouseCursor(enum.IntEnum):
 	MOUSE_CURSOR_RESIZE_NS: int  # Vertical resize/move arrow shape
 	MOUSE_CURSOR_RESIZE_NWSE: int  # Top-left to bottom-right diagonal resize/move arrow shape
 	MOUSE_CURSOR_RESIZE_NESW: int  # The top-right to bottom-left diagonal resize/move arrow shape
-	MOUSE_CURSOR_RESIZE_ALL: int  # The omni-directional resize/move cursor shape
+	MOUSE_CURSOR_RESIZE_ALL: int  # The omnidirectional resize/move cursor shape
 	MOUSE_CURSOR_NOT_ALLOWED: int  # The operation-not-allowed shape
 
 
@@ -458,10 +468,10 @@ class CubemapLayout(enum.IntEnum):
 	"""Cubemap layouts"""
 	CUBEMAP_LAYOUT_AUTO_DETECT: int  # Automatically detect layout type
 	CUBEMAP_LAYOUT_LINE_VERTICAL: int  # Layout is defined by a vertical line with faces
-	CUBEMAP_LAYOUT_LINE_HORIZONTAL: int  # Layout is defined by an horizontal line with faces
+	CUBEMAP_LAYOUT_LINE_HORIZONTAL: int  # Layout is defined by a horizontal line with faces
 	CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR: int  # Layout is defined by a 3x4 cross with cubemap faces
 	CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE: int  # Layout is defined by a 4x3 cross with cubemap faces
-	CUBEMAP_LAYOUT_PANORAMA: int  # Layout is defined by a panorama image (equirectangular map)
+	CUBEMAP_LAYOUT_PANORAMA: int  # Layout is defined by a panorama image (equirrectangular map)
 
 
 class FontType(enum.IntEnum):
@@ -479,7 +489,8 @@ class BlendMode(enum.IntEnum):
 	BLEND_ADD_COLORS: int  # Blend textures adding colors (alternative)
 	BLEND_SUBTRACT_COLORS: int  # Blend textures subtracting colors (alternative)
 	BLEND_ALPHA_PREMULTIPLY: int  # Blend premultiplied textures considering alpha
-	BLEND_CUSTOM: int  # Blend textures using custom src/dst factors (use rlSetBlendMode())
+	BLEND_CUSTOM: int  # Blend textures using custom src/dst factors (use rlSetBlendFactors())
+	BLEND_CUSTOM_SEPARATE: int  # Blend textures using custom rgb/alpha separate src/dst factors (use rlSetBlendFactorsSeparate())
 
 
 class Gesture(enum.IntEnum):
@@ -629,6 +640,9 @@ class GuiTextBoxProperty(enum.IntEnum):
 	"""TextBox/TextBoxMulti/ValueBox/Spinner"""
 	TEXT_INNER_PADDING: int  # TextBox/TextBoxMulti/ValueBox/Spinner inner text padding
 	TEXT_LINES_SPACING: int  # TextBoxMulti lines separation
+	TEXT_ALIGNMENT_VERTICAL: int  # TextBoxMulti vertical alignment: 0-CENTERED, 1-UP, 2-DOWN
+	TEXT_MULTILINE: int  # TextBox supports multiple lines
+	TEXT_WRAP_MODE: int  # TextBox wrap mode for multiline: 0-NO_WRAP, 1-CHAR_WRAP, 2-WORD_WRAP
 
 
 class GuiSpinnerProperty(enum.IntEnum):
@@ -652,264 +666,5 @@ class GuiColorPickerProperty(enum.IntEnum):
 	HUEBAR_PADDING: int  # ColorPicker right hue bar separation from panel
 	HUEBAR_SELECTOR_HEIGHT: int  # ColorPicker right hue bar selector height
 	HUEBAR_SELECTOR_OVERFLOW: int  # ColorPicker right hue bar selector overflow
-
-
-class GuiIconName(enum.IntEnum):
-	ICON_NONE: int
-	ICON_FOLDER_FILE_OPEN: int
-	ICON_FILE_SAVE_CLASSIC: int
-	ICON_FOLDER_OPEN: int
-	ICON_FOLDER_SAVE: int
-	ICON_FILE_OPEN: int
-	ICON_FILE_SAVE: int
-	ICON_FILE_EXPORT: int
-	ICON_FILE_ADD: int
-	ICON_FILE_DELETE: int
-	ICON_FILETYPE_TEXT: int
-	ICON_FILETYPE_AUDIO: int
-	ICON_FILETYPE_IMAGE: int
-	ICON_FILETYPE_PLAY: int
-	ICON_FILETYPE_VIDEO: int
-	ICON_FILETYPE_INFO: int
-	ICON_FILE_COPY: int
-	ICON_FILE_CUT: int
-	ICON_FILE_PASTE: int
-	ICON_CURSOR_HAND: int
-	ICON_CURSOR_POINTER: int
-	ICON_CURSOR_CLASSIC: int
-	ICON_PENCIL: int
-	ICON_PENCIL_BIG: int
-	ICON_BRUSH_CLASSIC: int
-	ICON_BRUSH_PAINTER: int
-	ICON_WATER_DROP: int
-	ICON_COLOR_PICKER: int
-	ICON_RUBBER: int
-	ICON_COLOR_BUCKET: int
-	ICON_TEXT_T: int
-	ICON_TEXT_A: int
-	ICON_SCALE: int
-	ICON_RESIZE: int
-	ICON_FILTER_POINT: int
-	ICON_FILTER_BILINEAR: int
-	ICON_CROP: int
-	ICON_CROP_ALPHA: int
-	ICON_SQUARE_TOGGLE: int
-	ICON_SYMMETRY: int
-	ICON_SYMMETRY_HORIZONTAL: int
-	ICON_SYMMETRY_VERTICAL: int
-	ICON_LENS: int
-	ICON_LENS_BIG: int
-	ICON_EYE_ON: int
-	ICON_EYE_OFF: int
-	ICON_FILTER_TOP: int
-	ICON_FILTER: int
-	ICON_TARGET_POINT: int
-	ICON_TARGET_SMALL: int
-	ICON_TARGET_BIG: int
-	ICON_TARGET_MOVE: int
-	ICON_CURSOR_MOVE: int
-	ICON_CURSOR_SCALE: int
-	ICON_CURSOR_SCALE_RIGHT: int
-	ICON_CURSOR_SCALE_LEFT: int
-	ICON_UNDO: int
-	ICON_REDO: int
-	ICON_REREDO: int
-	ICON_MUTATE: int
-	ICON_ROTATE: int
-	ICON_REPEAT: int
-	ICON_SHUFFLE: int
-	ICON_EMPTYBOX: int
-	ICON_TARGET: int
-	ICON_TARGET_SMALL_FILL: int
-	ICON_TARGET_BIG_FILL: int
-	ICON_TARGET_MOVE_FILL: int
-	ICON_CURSOR_MOVE_FILL: int
-	ICON_CURSOR_SCALE_FILL: int
-	ICON_CURSOR_SCALE_RIGHT_FILL: int
-	ICON_CURSOR_SCALE_LEFT_FILL: int
-	ICON_UNDO_FILL: int
-	ICON_REDO_FILL: int
-	ICON_REREDO_FILL: int
-	ICON_MUTATE_FILL: int
-	ICON_ROTATE_FILL: int
-	ICON_REPEAT_FILL: int
-	ICON_SHUFFLE_FILL: int
-	ICON_EMPTYBOX_SMALL: int
-	ICON_BOX: int
-	ICON_BOX_TOP: int
-	ICON_BOX_TOP_RIGHT: int
-	ICON_BOX_RIGHT: int
-	ICON_BOX_BOTTOM_RIGHT: int
-	ICON_BOX_BOTTOM: int
-	ICON_BOX_BOTTOM_LEFT: int
-	ICON_BOX_LEFT: int
-	ICON_BOX_TOP_LEFT: int
-	ICON_BOX_CENTER: int
-	ICON_BOX_CIRCLE_MASK: int
-	ICON_POT: int
-	ICON_ALPHA_MULTIPLY: int
-	ICON_ALPHA_CLEAR: int
-	ICON_DITHERING: int
-	ICON_MIPMAPS: int
-	ICON_BOX_GRID: int
-	ICON_GRID: int
-	ICON_BOX_CORNERS_SMALL: int
-	ICON_BOX_CORNERS_BIG: int
-	ICON_FOUR_BOXES: int
-	ICON_GRID_FILL: int
-	ICON_BOX_MULTISIZE: int
-	ICON_ZOOM_SMALL: int
-	ICON_ZOOM_MEDIUM: int
-	ICON_ZOOM_BIG: int
-	ICON_ZOOM_ALL: int
-	ICON_ZOOM_CENTER: int
-	ICON_BOX_DOTS_SMALL: int
-	ICON_BOX_DOTS_BIG: int
-	ICON_BOX_CONCENTRIC: int
-	ICON_BOX_GRID_BIG: int
-	ICON_OK_TICK: int
-	ICON_CROSS: int
-	ICON_ARROW_LEFT: int
-	ICON_ARROW_RIGHT: int
-	ICON_ARROW_DOWN: int
-	ICON_ARROW_UP: int
-	ICON_ARROW_LEFT_FILL: int
-	ICON_ARROW_RIGHT_FILL: int
-	ICON_ARROW_DOWN_FILL: int
-	ICON_ARROW_UP_FILL: int
-	ICON_AUDIO: int
-	ICON_FX: int
-	ICON_WAVE: int
-	ICON_WAVE_SINUS: int
-	ICON_WAVE_SQUARE: int
-	ICON_WAVE_TRIANGULAR: int
-	ICON_CROSS_SMALL: int
-	ICON_PLAYER_PREVIOUS: int
-	ICON_PLAYER_PLAY_BACK: int
-	ICON_PLAYER_PLAY: int
-	ICON_PLAYER_PAUSE: int
-	ICON_PLAYER_STOP: int
-	ICON_PLAYER_NEXT: int
-	ICON_PLAYER_RECORD: int
-	ICON_MAGNET: int
-	ICON_LOCK_CLOSE: int
-	ICON_LOCK_OPEN: int
-	ICON_CLOCK: int
-	ICON_TOOLS: int
-	ICON_GEAR: int
-	ICON_GEAR_BIG: int
-	ICON_BIN: int
-	ICON_HAND_POINTER: int
-	ICON_LASER: int
-	ICON_COIN: int
-	ICON_EXPLOSION: int
-	ICON_1UP: int
-	ICON_PLAYER: int
-	ICON_PLAYER_JUMP: int
-	ICON_KEY: int
-	ICON_DEMON: int
-	ICON_TEXT_POPUP: int
-	ICON_GEAR_EX: int
-	ICON_CRACK: int
-	ICON_CRACK_POINTS: int
-	ICON_STAR: int
-	ICON_DOOR: int
-	ICON_EXIT: int
-	ICON_MODE_2D: int
-	ICON_MODE_3D: int
-	ICON_CUBE: int
-	ICON_CUBE_FACE_TOP: int
-	ICON_CUBE_FACE_LEFT: int
-	ICON_CUBE_FACE_FRONT: int
-	ICON_CUBE_FACE_BOTTOM: int
-	ICON_CUBE_FACE_RIGHT: int
-	ICON_CUBE_FACE_BACK: int
-	ICON_CAMERA: int
-	ICON_SPECIAL: int
-	ICON_LINK_NET: int
-	ICON_LINK_BOXES: int
-	ICON_LINK_MULTI: int
-	ICON_LINK: int
-	ICON_LINK_BROKE: int
-	ICON_TEXT_NOTES: int
-	ICON_NOTEBOOK: int
-	ICON_SUITCASE: int
-	ICON_SUITCASE_ZIP: int
-	ICON_MAILBOX: int
-	ICON_MONITOR: int
-	ICON_PRINTER: int
-	ICON_PHOTO_CAMERA: int
-	ICON_PHOTO_CAMERA_FLASH: int
-	ICON_HOUSE: int
-	ICON_HEART: int
-	ICON_CORNER: int
-	ICON_VERTICAL_BARS: int
-	ICON_VERTICAL_BARS_FILL: int
-	ICON_LIFE_BARS: int
-	ICON_INFO: int
-	ICON_CROSSLINE: int
-	ICON_HELP: int
-	ICON_FILETYPE_ALPHA: int
-	ICON_FILETYPE_HOME: int
-	ICON_LAYERS_VISIBLE: int
-	ICON_LAYERS: int
-	ICON_WINDOW: int
-	ICON_HIDPI: int
-	ICON_FILETYPE_BINARY: int
-	ICON_HEX: int
-	ICON_SHIELD: int
-	ICON_FILE_NEW: int
-	ICON_FOLDER_ADD: int
-	ICON_ALARM: int
-	ICON_206: int
-	ICON_207: int
-	ICON_208: int
-	ICON_209: int
-	ICON_210: int
-	ICON_211: int
-	ICON_212: int
-	ICON_213: int
-	ICON_214: int
-	ICON_215: int
-	ICON_216: int
-	ICON_217: int
-	ICON_218: int
-	ICON_219: int
-	ICON_220: int
-	ICON_221: int
-	ICON_222: int
-	ICON_223: int
-	ICON_224: int
-	ICON_225: int
-	ICON_226: int
-	ICON_227: int
-	ICON_228: int
-	ICON_229: int
-	ICON_230: int
-	ICON_231: int
-	ICON_232: int
-	ICON_233: int
-	ICON_234: int
-	ICON_235: int
-	ICON_236: int
-	ICON_237: int
-	ICON_238: int
-	ICON_239: int
-	ICON_240: int
-	ICON_241: int
-	ICON_242: int
-	ICON_243: int
-	ICON_244: int
-	ICON_245: int
-	ICON_246: int
-	ICON_247: int
-	ICON_248: int
-	ICON_249: int
-	ICON_250: int
-	ICON_251: int
-	ICON_252: int
-	ICON_253: int
-	ICON_254: int
-	ICON_255: int
 
 

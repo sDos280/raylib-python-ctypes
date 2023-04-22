@@ -60,14 +60,6 @@ class rlVertexBuffer(ctypes.Structure):
 		...
 
 	@property
-	def indices(self) -> ctypes.POINTER(ctypes.c_uint):
-		...
-
-	@indices.setter
-	def indices(self, i: ctypes.POINTER(ctypes.c_uint)) -> None:
-		...
-
-	@property
 	def vaoId(self) -> ctypes.c_uint:
 		...
 
@@ -170,8 +162,92 @@ class rlRenderBatch(ctypes.Structure):
 		...
 
 
+class Vector2(ctypes.Structure):
+	"""Vector2, 2 components"""
+	@property
+	def x(self) -> ctypes.c_float:
+		...
+
+	@x.setter
+	def x(self, i: ctypes.c_float) -> None:
+		...
+
+	@property
+	def y(self) -> ctypes.c_float:
+		...
+
+	@y.setter
+	def y(self, i: ctypes.c_float) -> None:
+		...
+
+
+class Vector3(ctypes.Structure):
+	"""Vector3, 3 components"""
+	@property
+	def x(self) -> ctypes.c_float:
+		...
+
+	@x.setter
+	def x(self, i: ctypes.c_float) -> None:
+		...
+
+	@property
+	def y(self) -> ctypes.c_float:
+		...
+
+	@y.setter
+	def y(self, i: ctypes.c_float) -> None:
+		...
+
+	@property
+	def z(self) -> ctypes.c_float:
+		...
+
+	@z.setter
+	def z(self, i: ctypes.c_float) -> None:
+		...
+
+
+class Vector4(ctypes.Structure):
+	"""Vector4, 4 components"""
+	@property
+	def x(self) -> ctypes.c_float:
+		...
+
+	@x.setter
+	def x(self, i: ctypes.c_float) -> None:
+		...
+
+	@property
+	def y(self) -> ctypes.c_float:
+		...
+
+	@y.setter
+	def y(self, i: ctypes.c_float) -> None:
+		...
+
+	@property
+	def z(self) -> ctypes.c_float:
+		...
+
+	@z.setter
+	def z(self, i: ctypes.c_float) -> None:
+		...
+
+	@property
+	def w(self) -> ctypes.c_float:
+		...
+
+	@w.setter
+	def w(self, i: ctypes.c_float) -> None:
+		...
+
+
+Quaternion = Vector4
+
+
 class Matrix(ctypes.Structure):
-	"""Matrix, 4x4 components, column major, OpenGL style, right handed"""
+	"""Matrix, 4x4 components, column major, OpenGL style, right-handed"""
 	@property
 	def m0(self) -> ctypes.c_float:
 		...
@@ -299,389 +375,6 @@ class Matrix(ctypes.Structure):
 	@m15.setter
 	def m15(self, i: ctypes.c_float) -> None:
 		...
-
-
-class rlglData(ctypes.Structure):
-	""""""
-	@property
-	def currentBatch(self) -> ctypes.POINTER(rlRenderBatch):
-		...
-
-	@currentBatch.setter
-	def currentBatch(self, i: ctypes.POINTER(rlRenderBatch)) -> None:
-		...
-
-	@property
-	def defaultBatch(self) -> rlRenderBatch:
-		...
-
-	@defaultBatch.setter
-	def defaultBatch(self, i: rlRenderBatch) -> None:
-		...
-
-	@property
-	def vertexCounter(self) -> ctypes.c_int:
-		...
-
-	@vertexCounter.setter
-	def vertexCounter(self, i: ctypes.c_int) -> None:
-		...
-
-	@property
-	def texcoordx(self) -> ctypes.c_float:
-		...
-
-	@texcoordx.setter
-	def texcoordx(self, i: ctypes.c_float) -> None:
-		...
-
-	@property
-	def texcoordy(self) -> ctypes.c_float:
-		...
-
-	@texcoordy.setter
-	def texcoordy(self, i: ctypes.c_float) -> None:
-		...
-
-	@property
-	def normalx(self) -> ctypes.c_float:
-		...
-
-	@normalx.setter
-	def normalx(self, i: ctypes.c_float) -> None:
-		...
-
-	@property
-	def normaly(self) -> ctypes.c_float:
-		...
-
-	@normaly.setter
-	def normaly(self, i: ctypes.c_float) -> None:
-		...
-
-	@property
-	def normalz(self) -> ctypes.c_float:
-		...
-
-	@normalz.setter
-	def normalz(self, i: ctypes.c_float) -> None:
-		...
-
-	@property
-	def colorr(self) -> ctypes.c_ubyte:
-		...
-
-	@colorr.setter
-	def colorr(self, i: ctypes.c_ubyte) -> None:
-		...
-
-	@property
-	def colorg(self) -> ctypes.c_ubyte:
-		...
-
-	@colorg.setter
-	def colorg(self, i: ctypes.c_ubyte) -> None:
-		...
-
-	@property
-	def colorb(self) -> ctypes.c_ubyte:
-		...
-
-	@colorb.setter
-	def colorb(self, i: ctypes.c_ubyte) -> None:
-		...
-
-	@property
-	def colora(self) -> ctypes.c_ubyte:
-		...
-
-	@colora.setter
-	def colora(self, i: ctypes.c_ubyte) -> None:
-		...
-
-	@property
-	def currentMatrixMode(self) -> ctypes.c_int:
-		...
-
-	@currentMatrixMode.setter
-	def currentMatrixMode(self, i: ctypes.c_int) -> None:
-		...
-
-	@property
-	def currentMatrix(self) -> ctypes.POINTER(Matrix):
-		...
-
-	@currentMatrix.setter
-	def currentMatrix(self, i: ctypes.POINTER(Matrix)) -> None:
-		...
-
-	@property
-	def modelview(self) -> Matrix:
-		...
-
-	@modelview.setter
-	def modelview(self, i: Matrix) -> None:
-		...
-
-	@property
-	def projection(self) -> Matrix:
-		...
-
-	@projection.setter
-	def projection(self, i: Matrix) -> None:
-		...
-
-	@property
-	def transform(self) -> Matrix:
-		...
-
-	@transform.setter
-	def transform(self, i: Matrix) -> None:
-		...
-
-	@property
-	def transformRequired(self) -> ctypes.c_bool:
-		...
-
-	@transformRequired.setter
-	def transformRequired(self, i: ctypes.c_bool) -> None:
-		...
-
-	@property
-	def stack(self) -> Matrix * RL_MAX_MATRIX_STACK_SIZE:
-		...
-
-	@stack.setter
-	def stack(self, i: Matrix * RL_MAX_MATRIX_STACK_SIZE) -> None:
-		...
-
-	@property
-	def stackCounter(self) -> ctypes.c_int:
-		...
-
-	@stackCounter.setter
-	def stackCounter(self, i: ctypes.c_int) -> None:
-		...
-
-	@property
-	def defaultTextureId(self) -> ctypes.c_uint:
-		...
-
-	@defaultTextureId.setter
-	def defaultTextureId(self, i: ctypes.c_uint) -> None:
-		...
-
-	@property
-	def activeTextureId(self) -> ctypes.c_uint * RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS:
-		...
-
-	@activeTextureId.setter
-	def activeTextureId(self, i: ctypes.c_uint * RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS) -> None:
-		...
-
-	@property
-	def defaultVShaderId(self) -> ctypes.c_uint:
-		...
-
-	@defaultVShaderId.setter
-	def defaultVShaderId(self, i: ctypes.c_uint) -> None:
-		...
-
-	@property
-	def defaultFShaderId(self) -> ctypes.c_uint:
-		...
-
-	@defaultFShaderId.setter
-	def defaultFShaderId(self, i: ctypes.c_uint) -> None:
-		...
-
-	@property
-	def defaultShaderId(self) -> ctypes.c_uint:
-		...
-
-	@defaultShaderId.setter
-	def defaultShaderId(self, i: ctypes.c_uint) -> None:
-		...
-
-	@property
-	def defaultShaderLocs(self) -> ctypes.POINTER(ctypes.c_int):
-		...
-
-	@defaultShaderLocs.setter
-	def defaultShaderLocs(self, i: ctypes.POINTER(ctypes.c_int)) -> None:
-		...
-
-	@property
-	def currentShaderId(self) -> ctypes.c_uint:
-		...
-
-	@currentShaderId.setter
-	def currentShaderId(self, i: ctypes.c_uint) -> None:
-		...
-
-	@property
-	def currentShaderLocs(self) -> ctypes.POINTER(ctypes.c_int):
-		...
-
-	@currentShaderLocs.setter
-	def currentShaderLocs(self, i: ctypes.POINTER(ctypes.c_int)) -> None:
-		...
-
-	@property
-	def stereoRender(self) -> ctypes.c_bool:
-		...
-
-	@stereoRender.setter
-	def stereoRender(self, i: ctypes.c_bool) -> None:
-		...
-
-	@property
-	def projectionStereo(self) -> Matrix * 2:
-		...
-
-	@projectionStereo.setter
-	def projectionStereo(self, i: Matrix * 2) -> None:
-		...
-
-	@property
-	def viewOffsetStereo(self) -> Matrix * 2:
-		...
-
-	@viewOffsetStereo.setter
-	def viewOffsetStereo(self, i: Matrix * 2) -> None:
-		...
-
-	@property
-	def currentBlendMode(self) -> ctypes.c_int:
-		...
-
-	@currentBlendMode.setter
-	def currentBlendMode(self, i: ctypes.c_int) -> None:
-		...
-
-	@property
-	def glBlendSrcFactor(self) -> ctypes.c_int:
-		...
-
-	@glBlendSrcFactor.setter
-	def glBlendSrcFactor(self, i: ctypes.c_int) -> None:
-		...
-
-	@property
-	def glBlendDstFactor(self) -> ctypes.c_int:
-		...
-
-	@glBlendDstFactor.setter
-	def glBlendDstFactor(self, i: ctypes.c_int) -> None:
-		...
-
-	@property
-	def glBlendEquation(self) -> ctypes.c_int:
-		...
-
-	@glBlendEquation.setter
-	def glBlendEquation(self, i: ctypes.c_int) -> None:
-		...
-
-	@property
-	def framebufferWidth(self) -> ctypes.c_int:
-		...
-
-	@framebufferWidth.setter
-	def framebufferWidth(self, i: ctypes.c_int) -> None:
-		...
-
-	@property
-	def framebufferHeight(self) -> ctypes.c_int:
-		...
-
-	@framebufferHeight.setter
-	def framebufferHeight(self, i: ctypes.c_int) -> None:
-		...
-
-
-class Vector2(ctypes.Structure):
-	"""Vector2, 2 components"""
-	@property
-	def x(self) -> ctypes.c_float:
-		...
-
-	@x.setter
-	def x(self, i: ctypes.c_float) -> None:
-		...
-
-	@property
-	def y(self) -> ctypes.c_float:
-		...
-
-	@y.setter
-	def y(self, i: ctypes.c_float) -> None:
-		...
-
-
-class Vector3(ctypes.Structure):
-	"""Vector3, 3 components"""
-	@property
-	def x(self) -> ctypes.c_float:
-		...
-
-	@x.setter
-	def x(self, i: ctypes.c_float) -> None:
-		...
-
-	@property
-	def y(self) -> ctypes.c_float:
-		...
-
-	@y.setter
-	def y(self, i: ctypes.c_float) -> None:
-		...
-
-	@property
-	def z(self) -> ctypes.c_float:
-		...
-
-	@z.setter
-	def z(self, i: ctypes.c_float) -> None:
-		...
-
-
-class Vector4(ctypes.Structure):
-	"""Vector4, 4 components"""
-	@property
-	def x(self) -> ctypes.c_float:
-		...
-
-	@x.setter
-	def x(self, i: ctypes.c_float) -> None:
-		...
-
-	@property
-	def y(self) -> ctypes.c_float:
-		...
-
-	@y.setter
-	def y(self, i: ctypes.c_float) -> None:
-		...
-
-	@property
-	def z(self) -> ctypes.c_float:
-		...
-
-	@z.setter
-	def z(self, i: ctypes.c_float) -> None:
-		...
-
-	@property
-	def w(self) -> ctypes.c_float:
-		...
-
-	@w.setter
-	def w(self, i: ctypes.c_float) -> None:
-		...
-
-
-Quaternion = Vector4
 
 
 class Color(ctypes.Structure):
@@ -1299,7 +992,7 @@ class Material(ctypes.Structure):
 
 
 class Transform(ctypes.Structure):
-	"""Transform, vectex transformation data"""
+	"""Transform, vertex transformation data"""
 	@property
 	def translation(self) -> Vector3:
 		...
@@ -1901,6 +1594,6 @@ class GuiStyleProp(ctypes.Structure):
 		...
 
 
-__structs: dict[str, Type[rlVertexBuffer | rlDrawCall | rlRenderBatch | Matrix | rlglData | Vector2 | Vector3 | Vector4 | Quaternion | Color | Rectangle | Image | Texture | Texture2D | TextureCubemap | RenderTexture | RenderTexture2D | NPatchInfo | GlyphInfo | Font | Camera3D | Camera | Camera2D | Mesh | Shader | MaterialMap | Material | Transform | BoneInfo | Model | ModelAnimation | Ray | RayCollision | BoundingBox | Wave | AudioStream | Sound | Music | VrDeviceInfo | VrStereoConfig | FilePathList | float3 | float16 | GuiStyleProp]] = {
+__structs: dict[str, Type[rlVertexBuffer | rlDrawCall | rlRenderBatch | Vector2 | Vector3 | Vector4 | Quaternion | Matrix | Color | Rectangle | Image | Texture | Texture2D | TextureCubemap | RenderTexture | RenderTexture2D | NPatchInfo | GlyphInfo | Font | Camera3D | Camera | Camera2D | Mesh | Shader | MaterialMap | Material | Transform | BoneInfo | Model | ModelAnimation | Ray | RayCollision | BoundingBox | Wave | AudioStream | Sound | Music | VrDeviceInfo | VrStereoConfig | FilePathList | float3 | float16 | GuiStyleProp]] = {
 	...
 }
