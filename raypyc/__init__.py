@@ -3,6 +3,7 @@ import json
 import pathlib
 import re
 import sys
+from os import environ
 
 import raypyc.structures
 from raypyc.colors import *
@@ -19,6 +20,8 @@ DYNAMIC_LIBRARIES_PATH = pathlib.Path(__file__).parent / 'libs'
 
 if sys.platform == 'emscripten':
 	dllname = 'wasmraylib.so'
+elif 'ANDROID_BOOTLOGO' in environ:
+	dllname = 'androidraylib.so'
 elif sys.platform == 'linux':
 	dllname = 'libraylib.so'
 else:  # windows
