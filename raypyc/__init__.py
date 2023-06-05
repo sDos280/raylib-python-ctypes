@@ -21,9 +21,10 @@ DYNAMIC_LIBRARIES_PATH = pathlib.Path(__file__).parent / 'libs'
 if sys.platform == 'emscripten':
 	dllname = 'wasmraylib.so'
 elif sys.platform == 'linux':
-	dllname = 'libraylib.so'
-elif platform.machine() == 'aarch64': # pydroid
-	dllname = 'libraylibandroid.so'
+	if platform.machine() == 'aarch64': # pydroid
+		dllname = 'libraylibandroid.so'
+	else:
+		dllname = 'libraylib.so'
 else:  # windows
 	dllname = 'raylib.dll'
 
