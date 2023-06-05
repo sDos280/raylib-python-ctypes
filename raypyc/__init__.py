@@ -3,6 +3,7 @@ import json
 import pathlib
 import re
 import sys
+import platform
 
 import raypyc.structures
 from raypyc.colors import *
@@ -21,6 +22,8 @@ if sys.platform == 'emscripten':
 	dllname = 'wasmraylib.so'
 elif sys.platform == 'linux':
 	dllname = 'libraylib.so'
+elif platform.machine() == 'aarch64': # pydroid
+	dllname = 'libraylibandroid.so'
 else:  # windows
 	dllname = 'raylib.dll'
 
