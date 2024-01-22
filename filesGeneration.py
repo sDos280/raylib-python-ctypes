@@ -413,7 +413,7 @@ def generate_functions_code(functions_set: List[Union[Any, Dict[str, Union[str, 
 		if function['name'] not in wrapped_functions_names_stub:
 			wrapped_functions_names_stub.append(function['name'])
 			function_copy = function.copy()
-			name_of_function = underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d').replace('vector_2', 'vector_2').replace('vector_3', 'vector3_')
+			name_of_function = underscore(function['name']).replace('3_d', '_3d').replace('2_d', '_2d').replace('vector_2', 'vector2_').replace('vector_3', 'vector3_')
 			function_copy['name'] = name_of_function
 			_string += generate_function_signature_code(function_copy)
 	return _string
