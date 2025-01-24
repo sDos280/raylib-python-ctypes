@@ -5,12 +5,19 @@ SUPPORT_MODULE_RMODELS: int
 SUPPORT_MODULE_RAUDIO: int
 SUPPORT_CAMERA_SYSTEM: int
 SUPPORT_GESTURES_SYSTEM: int
+SUPPORT_RPRAND_GENERATOR: int
 SUPPORT_MOUSE_GESTURES: int
 SUPPORT_SSH_KEYBOARD_RPI: int
 SUPPORT_WINMM_HIGHRES_TIMER: int
+SUPPORT_PARTIALBUSY_WAIT_LOOP: int
 SUPPORT_SCREEN_CAPTURE: int
 SUPPORT_GIF_RECORDING: int
 SUPPORT_COMPRESSION_API: int
+SUPPORT_AUTOMATION_EVENTS: int
+SUPPORT_CLIPBOARD_IMAGE: int
+SUPPORT_FILEFORMAT_BMP: int
+SUPPORT_FILEFORMAT_PNG: int
+SUPPORT_FILEFORMAT_JPG: int
 MAX_FILEPATH_CAPACITY: int  # Maximum file paths capacity
 MAX_FILEPATH_LENGTH: int  # Maximum length for filepaths (Linux PATH_MAX default value)
 MAX_KEYBOARD_KEYS: int  # Maximum number of keyboard keys supported
@@ -18,10 +25,13 @@ MAX_MOUSE_BUTTONS: int  # Maximum number of mouse buttons supported
 MAX_GAMEPADS: int  # Maximum number of gamepads supported
 MAX_GAMEPAD_AXIS: int  # Maximum number of axis supported (per gamepad)
 MAX_GAMEPAD_BUTTONS: int  # Maximum number of buttons supported (per gamepad)
+MAX_GAMEPAD_VIBRATION_TIME: float  # Maximum vibration time in seconds
 MAX_TOUCH_POINTS: int  # Maximum number of touch points supported
 MAX_KEY_PRESSED_QUEUE: int  # Maximum number of keys in the key input queue
 MAX_CHAR_PRESSED_QUEUE: int  # Maximum number of characters in the char input queue
 MAX_DECOMPRESSION_SIZE: int  # Max size allocated for decompression in MB
+MAX_AUTOMATION_EVENTS: int  # Maximum number of automation events to record
+RL_SUPPORT_MESH_GPU_SKINNING: int  # GPU skinning, comment if your GPU does not support more than 8 VBOs
 RL_DEFAULT_BATCH_BUFFERS: int  # Default number of batch buffers (multi-buffering)
 RL_DEFAULT_BATCH_DRAWCALLS: int  # Default number of batch draw calls (by state changes: mode, texture)
 RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS: int  # Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
@@ -29,12 +39,22 @@ RL_MAX_MATRIX_STACK_SIZE: int  # Maximum size of internal Matrix stack
 RL_MAX_SHADER_LOCATIONS: int  # Maximum number of shader locations supported
 RL_CULL_DISTANCE_NEAR: float  # Default projection matrix near cull distance
 RL_CULL_DISTANCE_FAR: float  # Default projection matrix far cull distance
-RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION: str  # Bound by default to shader location: 0
-RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD: str  # Bound by default to shader location: 1
-RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL: str  # Bound by default to shader location: 2
-RL_DEFAULT_SHADER_ATTRIB_NAME_COLOR: str  # Bound by default to shader location: 3
-RL_DEFAULT_SHADER_ATTRIB_NAME_TANGENT: str  # Bound by default to shader location: 4
-RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD2: str  # Bound by default to shader location: 5
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_POSITION: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_NORMAL: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_COLOR: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_TANGENT: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD2: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_INDICES: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEIDS: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEWEIGHTS: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCE_TX: int
+RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION: str  # Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_POSITION
+RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD: str  # Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD
+RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL: str  # Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_NORMAL
+RL_DEFAULT_SHADER_ATTRIB_NAME_COLOR: str  # Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_COLOR
+RL_DEFAULT_SHADER_ATTRIB_NAME_TANGENT: str  # Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_TANGENT
+RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD2: str  # Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD2
 RL_DEFAULT_SHADER_UNIFORM_NAME_MVP: str  # model-view-projection matrix
 RL_DEFAULT_SHADER_UNIFORM_NAME_VIEW: str  # view matrix
 RL_DEFAULT_SHADER_UNIFORM_NAME_PROJECTION: str  # projection matrix
@@ -45,18 +65,18 @@ RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE0: str  # texture0 (texture slot active 
 RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE1: str  # texture1 (texture slot active 1)
 RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE2: str  # texture2 (texture slot active 2)
 SUPPORT_QUADS_DRAW_MODE: int
-SUPPORT_FILEFORMAT_PNG: int
+SPLINE_SEGMENT_DIVISIONS: int  # Spline segments subdivisions
 SUPPORT_FILEFORMAT_GIF: int
 SUPPORT_FILEFORMAT_QOI: int
 SUPPORT_FILEFORMAT_DDS: int
-SUPPORT_FILEFORMAT_HDR: int
 SUPPORT_IMAGE_EXPORT: int
 SUPPORT_IMAGE_GENERATION: int
 SUPPORT_IMAGE_MANIPULATION: int
 SUPPORT_DEFAULT_FONT: int
-SUPPORT_FILEFORMAT_FNT: int
 SUPPORT_FILEFORMAT_TTF: int
+SUPPORT_FILEFORMAT_FNT: int
 SUPPORT_TEXT_MANIPULATION: int
+SUPPORT_FONT_ATLAS_WHITE_REC: int
 MAX_TEXT_BUFFER_LENGTH: int  # Size of internal static buffers used on some functions:
 MAX_TEXTSPLIT_COUNT: int  # Maximum number of substrings to split: TextSplit()
 SUPPORT_FILEFORMAT_OBJ: int
@@ -152,6 +172,16 @@ RL_BLEND_SRC_RGB: int  # GL_BLEND_SRC_RGB
 RL_BLEND_DST_ALPHA: int  # GL_BLEND_DST_ALPHA
 RL_BLEND_SRC_ALPHA: int  # GL_BLEND_SRC_ALPHA
 RL_BLEND_COLOR: int  # GL_BLEND_COLOR
+RL_READ_FRAMEBUFFER: int  # GL_READ_FRAMEBUFFER
+RL_DRAW_FRAMEBUFFER: int  # GL_DRAW_FRAMEBUFFER
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_POSITION: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_NORMAL: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_COLOR: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_TANGENT: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD2: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_INDICES: int
+RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCE_TX: int
 RAYLIB_VERSION_MAJOR: int
 RAYLIB_VERSION_MINOR: int
 RAYLIB_VERSION_PATCH: int

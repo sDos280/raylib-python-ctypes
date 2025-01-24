@@ -8,6 +8,7 @@ class rlGlVersion(enum.IntEnum):
 	RL_OPENGL_33: int  # OpenGL 3.3 (GLSL 330)
 	RL_OPENGL_43: int  # OpenGL 4.3 (using GLSL 330)
 	RL_OPENGL_ES_20: int  # OpenGL ES 2.0 (GLSL 100)
+	RL_OPENGL_ES_30: int  # OpenGL ES 3.0 (GLSL 300 es)
 
 
 class rlTraceLogLevel(enum.IntEnum):
@@ -34,6 +35,9 @@ class rlPixelFormat(enum.IntEnum):
 	RL_PIXELFORMAT_UNCOMPRESSED_R32: int  # 32 bpp (1 channel - float)
 	RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32: int  # 32*3 bpp (3 channels - float)
 	RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32: int  # 32*4 bpp (4 channels - float)
+	RL_PIXELFORMAT_UNCOMPRESSED_R16: int  # 16 bpp (1 channel - half float)
+	RL_PIXELFORMAT_UNCOMPRESSED_R16G16B16: int  # 16*3 bpp (3 channels - half float)
+	RL_PIXELFORMAT_UNCOMPRESSED_R16G16B16A16: int  # 16*4 bpp (4 channels - half float)
 	RL_PIXELFORMAT_COMPRESSED_DXT1_RGB: int  # 4 bpp (no alpha)
 	RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA: int  # 4 bpp (1 bit alpha)
 	RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA: int  # 8 bpp
@@ -109,6 +113,10 @@ class rlShaderUniformDataType(enum.IntEnum):
 	RL_SHADER_UNIFORM_IVEC2: int  # Shader uniform type: ivec2 (2 int)
 	RL_SHADER_UNIFORM_IVEC3: int  # Shader uniform type: ivec3 (3 int)
 	RL_SHADER_UNIFORM_IVEC4: int  # Shader uniform type: ivec4 (4 int)
+	RL_SHADER_UNIFORM_UINT: int  # Shader uniform type: unsigned int
+	RL_SHADER_UNIFORM_UIVEC2: int  # Shader uniform type: uivec2 (2 unsigned int)
+	RL_SHADER_UNIFORM_UIVEC3: int  # Shader uniform type: uivec3 (3 unsigned int)
+	RL_SHADER_UNIFORM_UIVEC4: int  # Shader uniform type: uivec4 (4 unsigned int)
 	RL_SHADER_UNIFORM_SAMPLER2D: int  # Shader uniform type: sampler2d
 
 
@@ -167,6 +175,7 @@ class ConfigFlags(enum.IntEnum):
 	FLAG_WINDOW_TRANSPARENT: int  # Set to allow transparent framebuffer
 	FLAG_WINDOW_HIGHDPI: int  # Set to support HighDPI
 	FLAG_WINDOW_MOUSE_PASSTHROUGH: int  # Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED
+	FLAG_BORDERLESS_WINDOWED_MODE: int  # Set to run program in borderless windowed mode
 	FLAG_MSAA_4X_HINT: int  # Set to try enabling MSAA 4X
 	FLAG_INTERLACED_HINT: int  # Set to try enabling interlaced video format (for V3D)
 
@@ -331,12 +340,12 @@ class GamepadButton(enum.IntEnum):
 	GAMEPAD_BUTTON_LEFT_FACE_DOWN: int  # Gamepad left DPAD down button
 	GAMEPAD_BUTTON_LEFT_FACE_LEFT: int  # Gamepad left DPAD left button
 	GAMEPAD_BUTTON_RIGHT_FACE_UP: int  # Gamepad right button up (i.e. PS3: Triangle, Xbox: Y)
-	GAMEPAD_BUTTON_RIGHT_FACE_RIGHT: int  # Gamepad right button right (i.e. PS3: Square, Xbox: X)
+	GAMEPAD_BUTTON_RIGHT_FACE_RIGHT: int  # Gamepad right button right (i.e. PS3: Circle, Xbox: B)
 	GAMEPAD_BUTTON_RIGHT_FACE_DOWN: int  # Gamepad right button down (i.e. PS3: Cross, Xbox: A)
-	GAMEPAD_BUTTON_RIGHT_FACE_LEFT: int  # Gamepad right button left (i.e. PS3: Circle, Xbox: B)
+	GAMEPAD_BUTTON_RIGHT_FACE_LEFT: int  # Gamepad right button left (i.e. PS3: Square, Xbox: X)
 	GAMEPAD_BUTTON_LEFT_TRIGGER_1: int  # Gamepad top/back trigger left (first), it could be a trailing button
 	GAMEPAD_BUTTON_LEFT_TRIGGER_2: int  # Gamepad top/back trigger left (second), it could be a trailing button
-	GAMEPAD_BUTTON_RIGHT_TRIGGER_1: int  # Gamepad top/back trigger right (one), it could be a trailing button
+	GAMEPAD_BUTTON_RIGHT_TRIGGER_1: int  # Gamepad top/back trigger right (first), it could be a trailing button
 	GAMEPAD_BUTTON_RIGHT_TRIGGER_2: int  # Gamepad top/back trigger right (second), it could be a trailing button
 	GAMEPAD_BUTTON_MIDDLE_LEFT: int  # Gamepad center buttons, left one (i.e. PS3: Select)
 	GAMEPAD_BUTTON_MIDDLE: int  # Gamepad center buttons, middle one (i.e. PS3: PS, Xbox: XBOX)
@@ -398,6 +407,10 @@ class ShaderLocationIndex(enum.IntEnum):
 	SHADER_LOC_MAP_IRRADIANCE: int  # Shader location: samplerCube texture: irradiance
 	SHADER_LOC_MAP_PREFILTER: int  # Shader location: samplerCube texture: prefilter
 	SHADER_LOC_MAP_BRDF: int  # Shader location: sampler2d texture: brdf
+	SHADER_LOC_VERTEX_BONEIDS: int  # Shader location: vertex attribute: boneIds
+	SHADER_LOC_VERTEX_BONEWEIGHTS: int  # Shader location: vertex attribute: boneWeights
+	SHADER_LOC_BONE_MATRICES: int  # Shader location: array of matrices uniform: boneMatrices
+	SHADER_LOC_VERTEX_INSTANCE_TX: int  # Shader location: vertex attribute: instanceTransform
 
 
 class ShaderUniformDataType(enum.IntEnum):
@@ -410,6 +423,10 @@ class ShaderUniformDataType(enum.IntEnum):
 	SHADER_UNIFORM_IVEC2: int  # Shader uniform type: ivec2 (2 int)
 	SHADER_UNIFORM_IVEC3: int  # Shader uniform type: ivec3 (3 int)
 	SHADER_UNIFORM_IVEC4: int  # Shader uniform type: ivec4 (4 int)
+	SHADER_UNIFORM_UINT: int  # Shader uniform type: unsigned int
+	SHADER_UNIFORM_UIVEC2: int  # Shader uniform type: uivec2 (2 unsigned int)
+	SHADER_UNIFORM_UIVEC3: int  # Shader uniform type: uivec3 (3 unsigned int)
+	SHADER_UNIFORM_UIVEC4: int  # Shader uniform type: uivec4 (4 unsigned int)
 	SHADER_UNIFORM_SAMPLER2D: int  # Shader uniform type: sampler2d
 
 
@@ -433,6 +450,9 @@ class PixelFormat(enum.IntEnum):
 	PIXELFORMAT_UNCOMPRESSED_R32: int  # 32 bpp (1 channel - float)
 	PIXELFORMAT_UNCOMPRESSED_R32G32B32: int  # 32*3 bpp (3 channels - float)
 	PIXELFORMAT_UNCOMPRESSED_R32G32B32A32: int  # 32*4 bpp (4 channels - float)
+	PIXELFORMAT_UNCOMPRESSED_R16: int  # 16 bpp (1 channel - half float)
+	PIXELFORMAT_UNCOMPRESSED_R16G16B16: int  # 16*3 bpp (3 channels - half float)
+	PIXELFORMAT_UNCOMPRESSED_R16G16B16A16: int  # 16*4 bpp (4 channels - half float)
 	PIXELFORMAT_COMPRESSED_DXT1_RGB: int  # 4 bpp (no alpha)
 	PIXELFORMAT_COMPRESSED_DXT1_RGBA: int  # 4 bpp (1 bit alpha)
 	PIXELFORMAT_COMPRESSED_DXT3_RGBA: int  # 8 bpp
@@ -471,7 +491,6 @@ class CubemapLayout(enum.IntEnum):
 	CUBEMAP_LAYOUT_LINE_HORIZONTAL: int  # Layout is defined by a horizontal line with faces
 	CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR: int  # Layout is defined by a 3x4 cross with cubemap faces
 	CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE: int  # Layout is defined by a 4x3 cross with cubemap faces
-	CUBEMAP_LAYOUT_PANORAMA: int  # Layout is defined by a panorama image (equirrectangular map)
 
 
 class FontType(enum.IntEnum):
@@ -510,11 +529,11 @@ class Gesture(enum.IntEnum):
 
 class CameraMode(enum.IntEnum):
 	"""Camera system modes"""
-	CAMERA_CUSTOM: int  # Custom camera
-	CAMERA_FREE: int  # Free camera
-	CAMERA_ORBITAL: int  # Orbital camera
-	CAMERA_FIRST_PERSON: int  # First person camera
-	CAMERA_THIRD_PERSON: int  # Third person camera
+	CAMERA_CUSTOM: int  # Camera custom, controlled by user (UpdateCamera() does nothing)
+	CAMERA_FREE: int  # Camera free mode
+	CAMERA_ORBITAL: int  # Camera orbital, around target, zoom supported
+	CAMERA_FIRST_PERSON: int  # Camera first person
+	CAMERA_THIRD_PERSON: int  # Camera third person
 
 
 class CameraProjection(enum.IntEnum):
@@ -545,13 +564,27 @@ class GuiTextAlignment(enum.IntEnum):
 	TEXT_ALIGN_RIGHT: int
 
 
+class GuiTextAlignmentVertical(enum.IntEnum):
+	"""Gui control text alignment vertical"""
+	TEXT_ALIGN_TOP: int
+	TEXT_ALIGN_MIDDLE: int
+	TEXT_ALIGN_BOTTOM: int
+
+
+class GuiTextWrapMode(enum.IntEnum):
+	"""Gui control text wrap mode"""
+	TEXT_WRAP_NONE: int
+	TEXT_WRAP_CHAR: int
+	TEXT_WRAP_WORD: int
+
+
 class GuiControl(enum.IntEnum):
 	"""Gui controls"""
 	DEFAULT: int
 	LABEL: int  # Used also for: LABELBUTTON
 	BUTTON: int
 	TOGGLE: int  # Used also for: TOGGLEGROUP
-	SLIDER: int  # Used also for: SLIDERBAR
+	SLIDER: int  # Used also for: SLIDERBAR, TOGGLESLIDER
 	PROGRESSBAR: int
 	CHECKBOX: int
 	COMBOBOX: int
@@ -567,22 +600,21 @@ class GuiControl(enum.IntEnum):
 
 class GuiControlProperty(enum.IntEnum):
 	"""Gui base properties for every control"""
-	BORDER_COLOR_NORMAL: int
-	BASE_COLOR_NORMAL: int
-	TEXT_COLOR_NORMAL: int
-	BORDER_COLOR_FOCUSED: int
-	BASE_COLOR_FOCUSED: int
-	TEXT_COLOR_FOCUSED: int
-	BORDER_COLOR_PRESSED: int
-	BASE_COLOR_PRESSED: int
-	TEXT_COLOR_PRESSED: int
-	BORDER_COLOR_DISABLED: int
-	BASE_COLOR_DISABLED: int
-	TEXT_COLOR_DISABLED: int
-	BORDER_WIDTH: int
-	TEXT_PADDING: int
-	TEXT_ALIGNMENT: int
-	RESERVED: int
+	BORDER_COLOR_NORMAL: int  # Control border color in STATE_NORMAL
+	BASE_COLOR_NORMAL: int  # Control base color in STATE_NORMAL
+	TEXT_COLOR_NORMAL: int  # Control text color in STATE_NORMAL
+	BORDER_COLOR_FOCUSED: int  # Control border color in STATE_FOCUSED
+	BASE_COLOR_FOCUSED: int  # Control base color in STATE_FOCUSED
+	TEXT_COLOR_FOCUSED: int  # Control text color in STATE_FOCUSED
+	BORDER_COLOR_PRESSED: int  # Control border color in STATE_PRESSED
+	BASE_COLOR_PRESSED: int  # Control base color in STATE_PRESSED
+	TEXT_COLOR_PRESSED: int  # Control text color in STATE_PRESSED
+	BORDER_COLOR_DISABLED: int  # Control border color in STATE_DISABLED
+	BASE_COLOR_DISABLED: int  # Control base color in STATE_DISABLED
+	TEXT_COLOR_DISABLED: int  # Control text color in STATE_DISABLED
+	BORDER_WIDTH: int  # Control border size, 0 for no border
+	TEXT_PADDING: int  # Control text padding, not considering border
+	TEXT_ALIGNMENT: int  # Control text horizontal alignment inside control text bound (after border and padding)
 
 
 class GuiDefaultProperty(enum.IntEnum):
@@ -591,6 +623,9 @@ class GuiDefaultProperty(enum.IntEnum):
 	TEXT_SPACING: int  # Text spacing between glyphs
 	LINE_COLOR: int  # Line control color
 	BACKGROUND_COLOR: int  # Background color
+	TEXT_LINE_SPACING: int  # Text spacing between lines
+	TEXT_ALIGNMENT_VERTICAL: int  # Text vertical alignment inside text bounds (after border and padding)
+	TEXT_WRAP_MODE: int  # Text wrap-mode inside text bounds
 
 
 class GuiToggleProperty(enum.IntEnum):
@@ -611,12 +646,12 @@ class GuiProgressBarProperty(enum.IntEnum):
 
 class GuiScrollBarProperty(enum.IntEnum):
 	"""ScrollBar"""
-	ARROWS_SIZE: int
-	ARROWS_VISIBLE: int
-	SCROLL_SLIDER_PADDING: int  # (SLIDERBAR, SLIDER_PADDING)
-	SCROLL_SLIDER_SIZE: int
-	SCROLL_PADDING: int
-	SCROLL_SPEED: int
+	ARROWS_SIZE: int  # ScrollBar arrows size
+	ARROWS_VISIBLE: int  # ScrollBar arrows visible
+	SCROLL_SLIDER_PADDING: int  # ScrollBar slider internal padding
+	SCROLL_SLIDER_SIZE: int  # ScrollBar slider size
+	SCROLL_PADDING: int  # ScrollBar scroll padding from arrows
+	SCROLL_SPEED: int  # ScrollBar scrolling speed
 
 
 class GuiCheckBoxProperty(enum.IntEnum):
@@ -634,15 +669,13 @@ class GuiDropdownBoxProperty(enum.IntEnum):
 	"""DropdownBox"""
 	ARROW_PADDING: int  # DropdownBox arrow separation from border and items
 	DROPDOWN_ITEMS_SPACING: int  # DropdownBox items separation
+	DROPDOWN_ARROW_HIDDEN: int  # DropdownBox arrow hidden
+	DROPDOWN_ROLL_UP: int  # DropdownBox roll up flag (default rolls down)
 
 
 class GuiTextBoxProperty(enum.IntEnum):
 	"""TextBox/TextBoxMulti/ValueBox/Spinner"""
-	TEXT_INNER_PADDING: int  # TextBox/TextBoxMulti/ValueBox/Spinner inner text padding
-	TEXT_LINES_SPACING: int  # TextBoxMulti lines separation
-	TEXT_ALIGNMENT_VERTICAL: int  # TextBoxMulti vertical alignment: 0-CENTERED, 1-UP, 2-DOWN
-	TEXT_MULTILINE: int  # TextBox supports multiple lines
-	TEXT_WRAP_MODE: int  # TextBox wrap mode for multiline: 0-NO_WRAP, 1-CHAR_WRAP, 2-WORD_WRAP
+	TEXT_READONLY: int  # TextBox in read-only mode: 0-text editable, 1-text no-editable
 
 
 class GuiSpinnerProperty(enum.IntEnum):
@@ -656,7 +689,8 @@ class GuiListViewProperty(enum.IntEnum):
 	LIST_ITEMS_HEIGHT: int  # ListView items height
 	LIST_ITEMS_SPACING: int  # ListView items separation
 	SCROLLBAR_WIDTH: int  # ListView scrollbar size (usually width)
-	SCROLLBAR_SIDE: int  # ListView scrollbar side (0-left, 1-right)
+	SCROLLBAR_SIDE: int  # ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)
+	LIST_ITEMS_BORDER_WIDTH: int  # ListView items border width
 
 
 class GuiColorPickerProperty(enum.IntEnum):

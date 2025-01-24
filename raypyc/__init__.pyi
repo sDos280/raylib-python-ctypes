@@ -50,6 +50,18 @@ def rl_viewport(x: ctypes.c_int, y: ctypes.c_int, width: ctypes.c_int, height: c
 	"""Set the viewport area"""
 	...
 
+def rl_set_clip_planes(nearPlane: ctypes.c_double, farPlane: ctypes.c_double) -> None:
+	"""Set clip planes distances"""
+	...
+
+def rl_get_cull_distance_near() -> ctypes.c_double:
+	"""Get cull plane distance near"""
+	...
+
+def rl_get_cull_distance_far() -> ctypes.c_double:
+	"""Get cull plane distance far"""
+	...
+
 def rl_begin(mode: ctypes.c_int) -> None:
 	"""Initialize drawing mode (how to organize vertex)"""
 	...
@@ -166,8 +178,20 @@ def rl_disable_framebuffer() -> None:
 	"""Disable render texture (fbo), return to default framebuffer"""
 	...
 
+def rl_get_active_framebuffer() -> ctypes.c_uint:
+	"""Get the currently active render texture (fbo), 0 for default framebuffer"""
+	...
+
 def rl_active_draw_buffers(count: ctypes.c_int) -> None:
 	"""Activate multiple draw color buffers"""
+	...
+
+def rl_blit_framebuffer(srcX: ctypes.c_int, srcY: ctypes.c_int, srcWidth: ctypes.c_int, srcHeight: ctypes.c_int, dstX: ctypes.c_int, dstY: ctypes.c_int, dstWidth: ctypes.c_int, dstHeight: ctypes.c_int, bufferMask: ctypes.c_int) -> None:
+	"""Blit active framebuffer to main framebuffer"""
+	...
+
+def rl_bind_framebuffer(target: ctypes.c_uint, framebuffer: ctypes.c_uint) -> None:
+	"""Bind framebuffer (FBO)"""
 	...
 
 def rl_enable_color_blend() -> None:
@@ -202,6 +226,10 @@ def rl_disable_backface_culling() -> None:
 	"""Disable backface culling"""
 	...
 
+def rl_color_mask(r: ctypes.c_bool, g: ctypes.c_bool, b: ctypes.c_bool, a: ctypes.c_bool) -> None:
+	"""Color mask control"""
+	...
+
 def rl_set_cull_face(mode: ctypes.c_int) -> None:
 	"""Set face culling mode"""
 	...
@@ -216,6 +244,14 @@ def rl_disable_scissor_test() -> None:
 
 def rl_scissor(x: ctypes.c_int, y: ctypes.c_int, width: ctypes.c_int, height: ctypes.c_int) -> None:
 	"""Scissor test"""
+	...
+
+def rl_enable_point_mode() -> None:
+	"""Enable point mode"""
+	...
+
+def rl_disable_point_mode() -> None:
+	"""Disable point mode"""
 	...
 
 def rl_enable_wire_mode() -> None:
@@ -355,71 +391,71 @@ def rl_load_vertex_array() -> ctypes.c_uint:
 	...
 
 def rl_load_vertex_buffer(buffer: ctypes.c_void_p, size: ctypes.c_int, dynamic: ctypes.c_bool) -> ctypes.c_uint:
-	"""Load a vertex buffer attribute"""
+	"""Load a vertex buffer object"""
 	...
 
 def rl_load_vertex_buffer_element(buffer: ctypes.c_void_p, size: ctypes.c_int, dynamic: ctypes.c_bool) -> ctypes.c_uint:
-	"""Load a new attributes element buffer"""
+	"""Load vertex buffer elements object"""
 	...
 
 def rl_update_vertex_buffer(bufferId: ctypes.c_uint, data: ctypes.c_void_p, dataSize: ctypes.c_int, offset: ctypes.c_int) -> None:
-	"""Update GPU buffer with new data"""
+	"""Update vertex buffer object data on GPU buffer"""
 	...
 
 def rl_update_vertex_buffer_elements(id: ctypes.c_uint, data: ctypes.c_void_p, dataSize: ctypes.c_int, offset: ctypes.c_int) -> None:
-	"""Update vertex buffer elements with new data"""
+	"""Update vertex buffer elements data on GPU buffer"""
 	...
 
 def rl_unload_vertex_array(vaoId: ctypes.c_uint) -> None:
-	""""""
+	"""Unload vertex array (vao)"""
 	...
 
 def rl_unload_vertex_buffer(vboId: ctypes.c_uint) -> None:
-	""""""
+	"""Unload vertex buffer object"""
 	...
 
-def rl_set_vertex_attribute(index: ctypes.c_uint, compSize: ctypes.c_int, type: ctypes.c_int, normalized: ctypes.c_bool, stride: ctypes.c_int, pointer: ctypes.c_void_p) -> None:
-	""""""
+def rl_set_vertex_attribute(index: ctypes.c_uint, compSize: ctypes.c_int, type: ctypes.c_int, normalized: ctypes.c_bool, stride: ctypes.c_int, offset: ctypes.c_int) -> None:
+	"""Set vertex attribute data configuration"""
 	...
 
 def rl_set_vertex_attribute_divisor(index: ctypes.c_uint, divisor: ctypes.c_int) -> None:
-	""""""
+	"""Set vertex attribute data divisor"""
 	...
 
 def rl_set_vertex_attribute_default(locIndex: ctypes.c_int, value: ctypes.c_void_p, attribType: ctypes.c_int, count: ctypes.c_int) -> None:
-	"""Set vertex attribute default value"""
+	"""Set vertex attribute default value, when attribute to provided"""
 	...
 
 def rl_draw_vertex_array(offset: ctypes.c_int, count: ctypes.c_int) -> None:
-	""""""
+	"""Draw vertex array (currently active vao)"""
 	...
 
 def rl_draw_vertex_array_elements(offset: ctypes.c_int, count: ctypes.c_int, buffer: ctypes.c_void_p) -> None:
-	""""""
+	"""Draw vertex array elements"""
 	...
 
 def rl_draw_vertex_array_instanced(offset: ctypes.c_int, count: ctypes.c_int, instances: ctypes.c_int) -> None:
-	""""""
+	"""Draw vertex array (currently active vao) with instancing"""
 	...
 
 def rl_draw_vertex_array_elements_instanced(offset: ctypes.c_int, count: ctypes.c_int, buffer: ctypes.c_void_p, instances: ctypes.c_int) -> None:
-	""""""
+	"""Draw vertex array elements with instancing"""
 	...
 
 def rl_load_texture(data: ctypes.c_void_p, width: ctypes.c_int, height: ctypes.c_int, format: ctypes.c_int, mipmapCount: ctypes.c_int) -> ctypes.c_uint:
-	"""Load texture in GPU"""
+	"""Load texture data"""
 	...
 
 def rl_load_texture_depth(width: ctypes.c_int, height: ctypes.c_int, useRenderBuffer: ctypes.c_bool) -> ctypes.c_uint:
 	"""Load depth texture/renderbuffer (to be attached to fbo)"""
 	...
 
-def rl_load_texture_cubemap(data: ctypes.c_void_p, size: ctypes.c_int, format: ctypes.c_int) -> ctypes.c_uint:
-	"""Load texture cubemap"""
+def rl_load_texture_cubemap(data: ctypes.c_void_p, size: ctypes.c_int, format: ctypes.c_int, mipmapCount: ctypes.c_int) -> ctypes.c_uint:
+	"""Load texture cubemap data"""
 	...
 
 def rl_update_texture(id: ctypes.c_uint, offsetX: ctypes.c_int, offsetY: ctypes.c_int, width: ctypes.c_int, height: ctypes.c_int, format: ctypes.c_int, data: ctypes.c_void_p) -> None:
-	"""Update GPU texture with new data"""
+	"""Update texture with new data on GPU"""
 	...
 
 def rl_get_gl_texture_formats(format: ctypes.c_int, glInternalFormat: ctypes.POINTER(ctypes.c_uint), glFormat: ctypes.POINTER(ctypes.c_uint), glType: ctypes.POINTER(ctypes.c_uint)) -> None:
@@ -446,7 +482,7 @@ def rl_read_screen_pixels(width: ctypes.c_int, height: ctypes.c_int) -> ctypes.P
 	"""Read screen pixel data (color buffer)"""
 	...
 
-def rl_load_framebuffer(width: ctypes.c_int, height: ctypes.c_int) -> ctypes.c_uint:
+def rl_load_framebuffer() -> ctypes.c_uint:
 	"""Load an empty framebuffer"""
 	...
 
@@ -492,6 +528,10 @@ def rl_set_uniform(locIndex: ctypes.c_int, value: ctypes.c_void_p, uniformType: 
 
 def rl_set_uniform_matrix(locIndex: ctypes.c_int, mat: Matrix) -> None:
 	"""Set shader value matrix"""
+	...
+
+def rl_set_uniform_matrices(locIndex: ctypes.c_int, mat: ctypes.POINTER(Matrix), count: ctypes.c_int) -> None:
+	"""Set shader value matrices"""
 	...
 
 def rl_set_uniform_sampler(locIndex: ctypes.c_int, textureId: ctypes.c_uint) -> None:
@@ -590,12 +630,12 @@ def init_window(width: ctypes.c_int, height: ctypes.c_int, title: ctypes.c_char_
 	"""Initialize window and OpenGL context"""
 	...
 
-def window_should_close() -> ctypes.c_bool:
-	"""Check if KEY_ESCAPE pressed or Close icon pressed"""
-	...
-
 def close_window() -> None:
 	"""Close window and unload OpenGL context"""
+	...
+
+def window_should_close() -> ctypes.c_bool:
+	"""Check if application should close (KEY_ESCAPE pressed or windows close icon clicked)"""
 	...
 
 def is_window_ready() -> ctypes.c_bool:
@@ -607,19 +647,19 @@ def is_window_fullscreen() -> ctypes.c_bool:
 	...
 
 def is_window_hidden() -> ctypes.c_bool:
-	"""Check if window is currently hidden (only PLATFORM_DESKTOP)"""
+	"""Check if window is currently hidden"""
 	...
 
 def is_window_minimized() -> ctypes.c_bool:
-	"""Check if window is currently minimized (only PLATFORM_DESKTOP)"""
+	"""Check if window is currently minimized"""
 	...
 
 def is_window_maximized() -> ctypes.c_bool:
-	"""Check if window is currently maximized (only PLATFORM_DESKTOP)"""
+	"""Check if window is currently maximized"""
 	...
 
 def is_window_focused() -> ctypes.c_bool:
-	"""Check if window is currently focused (only PLATFORM_DESKTOP)"""
+	"""Check if window is currently focused"""
 	...
 
 def is_window_resized() -> ctypes.c_bool:
@@ -631,7 +671,7 @@ def is_window_state(flag: ctypes.c_uint) -> ctypes.c_bool:
 	...
 
 def set_window_state(flags: ctypes.c_uint) -> None:
-	"""Set window configuration state using flags (only PLATFORM_DESKTOP)"""
+	"""Set window configuration state using flags"""
 	...
 
 def clear_window_state(flags: ctypes.c_uint) -> None:
@@ -639,43 +679,51 @@ def clear_window_state(flags: ctypes.c_uint) -> None:
 	...
 
 def toggle_fullscreen() -> None:
-	"""Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)"""
+	"""Toggle window state: fullscreen/windowed, resizes monitor to match window resolution"""
+	...
+
+def toggle_borderless_windowed() -> None:
+	"""Toggle window state: borderless windowed, resizes window to match monitor resolution"""
 	...
 
 def maximize_window() -> None:
-	"""Set window state: maximized, if resizable (only PLATFORM_DESKTOP)"""
+	"""Set window state: maximized, if resizable"""
 	...
 
 def minimize_window() -> None:
-	"""Set window state: minimized, if resizable (only PLATFORM_DESKTOP)"""
+	"""Set window state: minimized, if resizable"""
 	...
 
 def restore_window() -> None:
-	"""Set window state: not minimized/maximized (only PLATFORM_DESKTOP)"""
+	"""Set window state: not minimized/maximized"""
 	...
 
 def set_window_icon(image: Image) -> None:
-	"""Set icon for window (single image, RGBA 32bit, only PLATFORM_DESKTOP)"""
+	"""Set icon for window (single image, RGBA 32bit)"""
 	...
 
 def set_window_icons(images: ctypes.POINTER(Image), count: ctypes.c_int) -> None:
-	"""Set icon for window (multiple images, RGBA 32bit, only PLATFORM_DESKTOP)"""
+	"""Set icon for window (multiple images, RGBA 32bit)"""
 	...
 
 def set_window_title(title: ctypes.c_char_p) -> None:
-	"""Set title for window (only PLATFORM_DESKTOP)"""
+	"""Set title for window"""
 	...
 
 def set_window_position(x: ctypes.c_int, y: ctypes.c_int) -> None:
-	"""Set window position on screen (only PLATFORM_DESKTOP)"""
+	"""Set window position on screen"""
 	...
 
 def set_window_monitor(monitor: ctypes.c_int) -> None:
-	"""Set monitor for the current window (fullscreen mode)"""
+	"""Set monitor for the current window"""
 	...
 
 def set_window_min_size(width: ctypes.c_int, height: ctypes.c_int) -> None:
 	"""Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)"""
+	...
+
+def set_window_max_size(width: ctypes.c_int, height: ctypes.c_int) -> None:
+	"""Set window maximum dimensions (for FLAG_WINDOW_RESIZABLE)"""
 	...
 
 def set_window_size(width: ctypes.c_int, height: ctypes.c_int) -> None:
@@ -683,7 +731,11 @@ def set_window_size(width: ctypes.c_int, height: ctypes.c_int) -> None:
 	...
 
 def set_window_opacity(opacity: ctypes.c_float) -> None:
-	"""Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP)"""
+	"""Set window opacity [0.0f..1.0f]"""
+	...
+
+def set_window_focused() -> None:
+	"""Set window focused"""
 	...
 
 def get_window_handle() -> ctypes.c_void_p:
@@ -711,7 +763,7 @@ def get_monitor_count() -> ctypes.c_int:
 	...
 
 def get_current_monitor() -> ctypes.c_int:
-	"""Get current connected monitor"""
+	"""Get current monitor where window is placed"""
 	...
 
 def get_monitor_position(monitor: ctypes.c_int) -> Vector2:
@@ -747,7 +799,7 @@ def get_window_scale_dpi() -> Vector2:
 	...
 
 def get_monitor_name(monitor: ctypes.c_int) -> ctypes.c_char_p:
-	"""Get the human-readable, UTF-8 encoded name of the primary monitor"""
+	"""Get the human-readable, UTF-8 encoded name of the specified monitor"""
 	...
 
 def set_clipboard_text(text: ctypes.c_char_p) -> None:
@@ -758,24 +810,16 @@ def get_clipboard_text() -> ctypes.c_char_p:
 	"""Get clipboard text content"""
 	...
 
+def get_clipboard_image() -> Image:
+	"""Get clipboard image content"""
+	...
+
 def enable_event_waiting() -> None:
 	"""Enable waiting for events on EndDrawing(), no automatic event polling"""
 	...
 
 def disable_event_waiting() -> None:
 	"""Disable waiting for events on EndDrawing(), automatic events polling"""
-	...
-
-def swap_screen_buffer() -> None:
-	"""Swap back buffer with front buffer (screen drawing)"""
-	...
-
-def poll_input_events() -> None:
-	"""Register all input events"""
-	...
-
-def wait_time(seconds: ctypes.c_double) -> None:
-	"""Wait for some time (halt program execution)"""
 	...
 
 def show_cursor() -> None:
@@ -886,8 +930,8 @@ def load_shader_from_memory(vsCode: ctypes.c_char_p, fsCode: ctypes.c_char_p) ->
 	"""Load shader from code strings and bind default locations"""
 	...
 
-def is_shader_ready(shader: Shader) -> ctypes.c_bool:
-	"""Check if a shader is ready"""
+def is_shader_valid(shader: Shader) -> ctypes.c_bool:
+	"""Check if a shader is valid (loaded on GPU)"""
 	...
 
 def get_shader_location(shader: Shader, uniformName: ctypes.c_char_p) -> ctypes.c_int:
@@ -911,31 +955,23 @@ def set_shader_value_matrix(shader: Shader, locIndex: ctypes.c_int, mat: Matrix)
 	...
 
 def set_shader_value_texture(shader: Shader, locIndex: ctypes.c_int, texture: Texture2D) -> None:
-	"""Set shader uniform value for texture (sampler2d)"""
+	"""Set shader uniform value and bind the texture (sampler2d)"""
 	...
 
 def unload_shader(shader: Shader) -> None:
 	"""Unload shader from GPU memory (VRAM)"""
 	...
 
-def get_mouse_ray(mousePosition: Vector2, camera: Camera) -> Ray:
-	"""Get a ray trace from mouse position"""
+def get_screen_to_world_ray(position: Vector2, camera: Camera) -> Ray:
+	"""Get a ray trace from screen position (i.e mouse)"""
 	...
 
-def get_camera_matrix(camera: Camera) -> Matrix:
-	"""Get camera transform matrix (view matrix)"""
-	...
-
-def get_camera_matrix_2d(camera: Camera2D) -> Matrix:
-	"""Get camera 2d transform matrix"""
+def get_screen_to_world_ray_ex(position: Vector2, camera: Camera, width: ctypes.c_int, height: ctypes.c_int) -> Ray:
+	"""Get a ray trace from screen position (i.e mouse) in a viewport"""
 	...
 
 def get_world_to_screen(position: Vector3, camera: Camera) -> Vector2:
 	"""Get the screen space position for a 3d world space position"""
-	...
-
-def get_screen_to_world_2d(position: Vector2, camera: Camera2D) -> Vector2:
-	"""Get the world space position for a 2d camera screen space position"""
 	...
 
 def get_world_to_screen_ex(position: Vector3, camera: Camera, width: ctypes.c_int, height: ctypes.c_int) -> Vector2:
@@ -946,12 +982,20 @@ def get_world_to_screen_2d(position: Vector2, camera: Camera2D) -> Vector2:
 	"""Get the screen space position for a 2d camera world space position"""
 	...
 
-def set_target_fps(fps: ctypes.c_int) -> None:
-	"""Set target FPS (maximum)"""
+def get_screen_to_world_2d(position: Vector2, camera: Camera2D) -> Vector2:
+	"""Get the world space position for a 2d camera screen space position"""
 	...
 
-def get_fps() -> ctypes.c_int:
-	"""Get current FPS"""
+def get_camera_matrix(camera: Camera) -> Matrix:
+	"""Get camera transform matrix (view matrix)"""
+	...
+
+def get_camera_matrix_2d(camera: Camera2D) -> Matrix:
+	"""Get camera 2d transform matrix"""
+	...
+
+def set_target_fps(fps: ctypes.c_int) -> None:
+	"""Set target FPS (maximum)"""
 	...
 
 def get_frame_time() -> ctypes.c_float:
@@ -962,12 +1006,36 @@ def get_time() -> ctypes.c_double:
 	"""Get elapsed time in seconds since InitWindow()"""
 	...
 
-def get_random_value(min: ctypes.c_int, max: ctypes.c_int) -> ctypes.c_int:
-	"""Get a random value between min and max (both included)"""
+def get_fps() -> ctypes.c_int:
+	"""Get current FPS"""
+	...
+
+def swap_screen_buffer() -> None:
+	"""Swap back buffer with front buffer (screen drawing)"""
+	...
+
+def poll_input_events() -> None:
+	"""Register all input events"""
+	...
+
+def wait_time(seconds: ctypes.c_double) -> None:
+	"""Wait for some time (halt program execution)"""
 	...
 
 def set_random_seed(seed: ctypes.c_uint) -> None:
 	"""Set the seed for the random number generator"""
+	...
+
+def get_random_value(min: ctypes.c_int, max: ctypes.c_int) -> ctypes.c_int:
+	"""Get a random value between min and max (both included)"""
+	...
+
+def load_random_sequence(count: ctypes.c_uint, min: ctypes.c_int, max: ctypes.c_int) -> ctypes.POINTER(ctypes.c_int):
+	"""Load random values sequence, no values repeated"""
+	...
+
+def unload_random_sequence(sequence: ctypes.POINTER(ctypes.c_int)) -> None:
+	"""Unload random values sequence"""
 	...
 
 def take_screenshot(fileName: ctypes.c_char_p) -> None:
@@ -976,6 +1044,10 @@ def take_screenshot(fileName: ctypes.c_char_p) -> None:
 
 def set_config_flags(flags: ctypes.c_uint) -> None:
 	"""Setup init configuration flags (view FLAGS)"""
+	...
+
+def open_url(url: ctypes.c_char_p) -> None:
+	"""Open URL with default system browser (if available)"""
 	...
 
 def trace_log(logLevel: ctypes.c_int, text: ctypes.c_char_p, args: ...) -> None:
@@ -998,11 +1070,7 @@ def mem_free(ptr: ctypes.c_void_p) -> None:
 	"""Internal memory free"""
 	...
 
-def open_url(url: ctypes.c_char_p) -> None:
-	"""Open URL with default system browser (if available)"""
-	...
-
-def load_file_data(fileName: ctypes.c_char_p, bytesRead: ctypes.POINTER(ctypes.c_uint)) -> ctypes.POINTER(ctypes.c_ubyte):
+def load_file_data(fileName: ctypes.c_char_p, dataSize: ctypes.POINTER(ctypes.c_int)) -> ctypes.POINTER(ctypes.c_ubyte):
 	"""Load file data as byte array (read)"""
 	...
 
@@ -1010,11 +1078,11 @@ def unload_file_data(data: ctypes.POINTER(ctypes.c_ubyte)) -> None:
 	"""Unload file data allocated by LoadFileData()"""
 	...
 
-def save_file_data(fileName: ctypes.c_char_p, data: ctypes.c_void_p, bytesToWrite: ctypes.c_uint) -> ctypes.c_bool:
+def save_file_data(fileName: ctypes.c_char_p, data: ctypes.c_void_p, dataSize: ctypes.c_int) -> ctypes.c_bool:
 	"""Save data to file from byte array (write), returns true on success"""
 	...
 
-def export_data_as_code(data: ctypes.POINTER(ctypes.c_ubyte), size: ctypes.c_uint, fileName: ctypes.c_char_p) -> ctypes.c_bool:
+def export_data_as_code(data: ctypes.POINTER(ctypes.c_ubyte), dataSize: ctypes.c_int, fileName: ctypes.c_char_p) -> ctypes.c_bool:
 	"""Export data to code (.h), returns true on success"""
 	...
 
@@ -1071,7 +1139,11 @@ def get_working_directory() -> ctypes.c_char_p:
 	...
 
 def get_application_directory() -> ctypes.c_char_p:
-	"""Get the directory if the running application (uses static string)"""
+	"""Get the directory of the running application (uses static string)"""
+	...
+
+def make_directory(dirPath: ctypes.c_char_p) -> ctypes.c_int:
+	"""Create directories (including full path requested), returns 0 on success"""
 	...
 
 def change_directory(dir: ctypes.c_char_p) -> ctypes.c_bool:
@@ -1082,12 +1154,16 @@ def is_path_file(path: ctypes.c_char_p) -> ctypes.c_bool:
 	"""Check if a given path is a file or a directory"""
 	...
 
+def is_file_name_valid(fileName: ctypes.c_char_p) -> ctypes.c_bool:
+	"""Check if fileName is valid for the platform/OS"""
+	...
+
 def load_directory_files(dirPath: ctypes.c_char_p) -> FilePathList:
 	"""Load directory filepaths"""
 	...
 
 def load_directory_files_ex(basePath: ctypes.c_char_p, filter: ctypes.c_char_p, scanSubdirs: ctypes.c_bool) -> FilePathList:
-	"""Load directory filepaths with extension filtering and recursive directory scan"""
+	"""Load directory filepaths with extension filtering and recursive directory scan. Use 'DIR' in the filter string to include directories in the result"""
 	...
 
 def unload_directory_files(files: FilePathList) -> None:
@@ -1126,8 +1202,56 @@ def decode_data_base64(data: ctypes.POINTER(ctypes.c_ubyte), outputSize: ctypes.
 	"""Decode Base64 string data, memory must be MemFree()"""
 	...
 
+def compute_crc32(data: ctypes.POINTER(ctypes.c_ubyte), dataSize: ctypes.c_int) -> ctypes.c_uint:
+	"""Compute CRC32 hash code"""
+	...
+
+def compute_md5(data: ctypes.POINTER(ctypes.c_ubyte), dataSize: ctypes.c_int) -> ctypes.POINTER(ctypes.c_uint):
+	"""Compute MD5 hash code, returns static int[4] (16 bytes)"""
+	...
+
+def compute_sha1(data: ctypes.POINTER(ctypes.c_ubyte), dataSize: ctypes.c_int) -> ctypes.POINTER(ctypes.c_uint):
+	"""Compute SHA1 hash code, returns static int[5] (20 bytes)"""
+	...
+
+def load_automation_event_list(fileName: ctypes.c_char_p) -> AutomationEventList:
+	"""Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS"""
+	...
+
+def unload_automation_event_list(list: AutomationEventList) -> None:
+	"""Unload automation events list from file"""
+	...
+
+def export_automation_event_list(list: AutomationEventList, fileName: ctypes.c_char_p) -> ctypes.c_bool:
+	"""Export automation events list as text file"""
+	...
+
+def set_automation_event_list(list: ctypes.POINTER(AutomationEventList)) -> None:
+	"""Set automation event list to record to"""
+	...
+
+def set_automation_event_base_frame(frame: ctypes.c_int) -> None:
+	"""Set automation event internal base frame to start recording"""
+	...
+
+def start_automation_event_recording() -> None:
+	"""Start recording automation events (AutomationEventList must be set)"""
+	...
+
+def stop_automation_event_recording() -> None:
+	"""Stop recording automation events"""
+	...
+
+def play_automation_event(event: AutomationEvent) -> None:
+	"""Play a recorded automation event"""
+	...
+
 def is_key_pressed(key: ctypes.c_int) -> ctypes.c_bool:
 	"""Check if a key has been pressed once"""
+	...
+
+def is_key_pressed_repeat(key: ctypes.c_int) -> ctypes.c_bool:
+	"""Check if a key has been pressed again"""
 	...
 
 def is_key_down(key: ctypes.c_int) -> ctypes.c_bool:
@@ -1142,16 +1266,20 @@ def is_key_up(key: ctypes.c_int) -> ctypes.c_bool:
 	"""Check if a key is NOT being pressed"""
 	...
 
-def set_exit_key(key: ctypes.c_int) -> None:
-	"""Set a custom key to exit program (default is ESC)"""
-	...
-
 def get_key_pressed() -> ctypes.c_int:
 	"""Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty"""
 	...
 
 def get_char_pressed() -> ctypes.c_int:
 	"""Get char pressed (unicode), call it multiple times for chars queued, returns 0 when the queue is empty"""
+	...
+
+def get_key_name(key: ctypes.c_int) -> ctypes.c_char_p:
+	"""Get name of a QWERTY key on the current keyboard layout (eg returns string 'q' for KEY_A on an AZERTY keyboard)"""
+	...
+
+def set_exit_key(key: ctypes.c_int) -> None:
+	"""Set a custom key to exit program (default is ESC)"""
 	...
 
 def is_gamepad_available(gamepad: ctypes.c_int) -> ctypes.c_bool:
@@ -1192,6 +1320,10 @@ def get_gamepad_axis_movement(gamepad: ctypes.c_int, axis: ctypes.c_int) -> ctyp
 
 def set_gamepad_mappings(mappings: ctypes.c_char_p) -> ctypes.c_int:
 	"""Set internal gamepad mappings (SDL_GameControllerDB)"""
+	...
+
+def set_gamepad_vibration(gamepad: ctypes.c_int, leftMotor: ctypes.c_float, rightMotor: ctypes.c_float, duration: ctypes.c_float) -> None:
+	"""Set gamepad vibration for both motors (duration in seconds)"""
 	...
 
 def is_mouse_button_pressed(button: ctypes.c_int) -> ctypes.c_bool:
@@ -1274,7 +1406,7 @@ def set_gestures_enabled(flags: ctypes.c_uint) -> None:
 	"""Enable a set of gestures using flags"""
 	...
 
-def is_gesture_detected(gesture: ctypes.c_int) -> ctypes.c_bool:
+def is_gesture_detected(gesture: ctypes.c_uint) -> ctypes.c_bool:
 	"""Check if a gesture have been detected"""
 	...
 
@@ -1283,7 +1415,7 @@ def get_gesture_detected() -> ctypes.c_int:
 	...
 
 def get_gesture_hold_duration() -> ctypes.c_float:
-	"""Get gesture hold time in milliseconds"""
+	"""Get gesture hold time in seconds"""
 	...
 
 def get_gesture_drag_vector() -> Vector2:
@@ -1314,12 +1446,20 @@ def set_shapes_texture(texture: Texture2D, source: Rectangle) -> None:
 	"""Set texture and rectangle to be used on shapes drawing"""
 	...
 
+def get_shapes_texture() -> Texture2D:
+	"""Get texture that is used for shapes drawing"""
+	...
+
+def get_shapes_texture_rectangle() -> Rectangle:
+	"""Get texture source rectangle that is used for shapes drawing"""
+	...
+
 def draw_pixel(posX: ctypes.c_int, posY: ctypes.c_int, color: Color) -> None:
-	"""Draw a pixel"""
+	"""Draw a pixel using geometry [Can be slow, use with care]"""
 	...
 
 def draw_pixel_v(position: Vector2, color: Color) -> None:
-	"""Draw a pixel (Vector version)"""
+	"""Draw a pixel using geometry (Vector version) [Can be slow, use with care]"""
 	...
 
 def draw_line(startPosX: ctypes.c_int, startPosY: ctypes.c_int, endPosX: ctypes.c_int, endPosY: ctypes.c_int, color: Color) -> None:
@@ -1327,27 +1467,19 @@ def draw_line(startPosX: ctypes.c_int, startPosY: ctypes.c_int, endPosX: ctypes.
 	...
 
 def draw_line_v(startPos: Vector2, endPos: Vector2, color: Color) -> None:
-	"""Draw a line (Vector version)"""
+	"""Draw a line (using gl lines)"""
 	...
 
 def draw_line_ex(startPos: Vector2, endPos: Vector2, thick: ctypes.c_float, color: Color) -> None:
-	"""Draw a line defining thickness"""
-	...
-
-def draw_line_bezier(startPos: Vector2, endPos: Vector2, thick: ctypes.c_float, color: Color) -> None:
-	"""Draw a line using cubic-bezier curves in-out"""
-	...
-
-def draw_line_bezier_quad(startPos: Vector2, endPos: Vector2, controlPos: Vector2, thick: ctypes.c_float, color: Color) -> None:
-	"""Draw line using quadratic bezier curves with a control point"""
-	...
-
-def draw_line_bezier_cubic(startPos: Vector2, endPos: Vector2, startControlPos: Vector2, endControlPos: Vector2, thick: ctypes.c_float, color: Color) -> None:
-	"""Draw line using cubic bezier curves with 2 control points"""
+	"""Draw a line (using triangles/quads)"""
 	...
 
 def draw_line_strip(points: ctypes.POINTER(Vector2), pointCount: ctypes.c_int, color: Color) -> None:
-	"""Draw lines sequence"""
+	"""Draw lines sequence (using gl lines)"""
+	...
+
+def draw_line_bezier(startPos: Vector2, endPos: Vector2, thick: ctypes.c_float, color: Color) -> None:
+	"""Draw line segment cubic-bezier in-out interpolation"""
 	...
 
 def draw_circle(centerX: ctypes.c_int, centerY: ctypes.c_int, radius: ctypes.c_float, color: Color) -> None:
@@ -1362,7 +1494,7 @@ def draw_circle_sector_lines(center: Vector2, radius: ctypes.c_float, startAngle
 	"""Draw circle sector outline"""
 	...
 
-def draw_circle_gradient(centerX: ctypes.c_int, centerY: ctypes.c_int, radius: ctypes.c_float, color1: Color, color2: Color) -> None:
+def draw_circle_gradient(centerX: ctypes.c_int, centerY: ctypes.c_int, radius: ctypes.c_float, inner: Color, outer: Color) -> None:
 	"""Draw a gradient-filled circle"""
 	...
 
@@ -1372,6 +1504,10 @@ def draw_circle_v(center: Vector2, radius: ctypes.c_float, color: Color) -> None
 
 def draw_circle_lines(centerX: ctypes.c_int, centerY: ctypes.c_int, radius: ctypes.c_float, color: Color) -> None:
 	"""Draw circle outline"""
+	...
+
+def draw_circle_lines_v(center: Vector2, radius: ctypes.c_float, color: Color) -> None:
+	"""Draw circle outline (Vector version)"""
 	...
 
 def draw_ellipse(centerX: ctypes.c_int, centerY: ctypes.c_int, radiusH: ctypes.c_float, radiusV: ctypes.c_float, color: Color) -> None:
@@ -1406,15 +1542,15 @@ def draw_rectangle_pro(rec: Rectangle, origin: Vector2, rotation: ctypes.c_float
 	"""Draw a color-filled rectangle with pro parameters"""
 	...
 
-def draw_rectangle_gradient_v(posX: ctypes.c_int, posY: ctypes.c_int, width: ctypes.c_int, height: ctypes.c_int, color1: Color, color2: Color) -> None:
+def draw_rectangle_gradient_v(posX: ctypes.c_int, posY: ctypes.c_int, width: ctypes.c_int, height: ctypes.c_int, top: Color, bottom: Color) -> None:
 	"""Draw a vertical-gradient-filled rectangle"""
 	...
 
-def draw_rectangle_gradient_h(posX: ctypes.c_int, posY: ctypes.c_int, width: ctypes.c_int, height: ctypes.c_int, color1: Color, color2: Color) -> None:
+def draw_rectangle_gradient_h(posX: ctypes.c_int, posY: ctypes.c_int, width: ctypes.c_int, height: ctypes.c_int, left: Color, right: Color) -> None:
 	"""Draw a horizontal-gradient-filled rectangle"""
 	...
 
-def draw_rectangle_gradient_ex(rec: Rectangle, col1: Color, col2: Color, col3: Color, col4: Color) -> None:
+def draw_rectangle_gradient_ex(rec: Rectangle, topLeft: Color, bottomLeft: Color, topRight: Color, bottomRight: Color) -> None:
 	"""Draw a gradient-filled rectangle with custom vertex colors"""
 	...
 
@@ -1430,7 +1566,11 @@ def draw_rectangle_rounded(rec: Rectangle, roundness: ctypes.c_float, segments: 
 	"""Draw rectangle with rounded edges"""
 	...
 
-def draw_rectangle_rounded_lines(rec: Rectangle, roundness: ctypes.c_float, segments: ctypes.c_int, lineThick: ctypes.c_float, color: Color) -> None:
+def draw_rectangle_rounded_lines(rec: Rectangle, roundness: ctypes.c_float, segments: ctypes.c_int, color: Color) -> None:
+	"""Draw rectangle lines with rounded edges"""
+	...
+
+def draw_rectangle_rounded_lines_ex(rec: Rectangle, roundness: ctypes.c_float, segments: ctypes.c_int, lineThick: ctypes.c_float, color: Color) -> None:
 	"""Draw rectangle with rounded edges outline"""
 	...
 
@@ -1462,6 +1602,66 @@ def draw_poly_lines_ex(center: Vector2, sides: ctypes.c_int, radius: ctypes.c_fl
 	"""Draw a polygon outline of n sides with extended parameters"""
 	...
 
+def draw_spline_linear(points: ctypes.POINTER(Vector2), pointCount: ctypes.c_int, thick: ctypes.c_float, color: Color) -> None:
+	"""Draw spline: Linear, minimum 2 points"""
+	...
+
+def draw_spline_basis(points: ctypes.POINTER(Vector2), pointCount: ctypes.c_int, thick: ctypes.c_float, color: Color) -> None:
+	"""Draw spline: B-Spline, minimum 4 points"""
+	...
+
+def draw_spline_catmull_rom(points: ctypes.POINTER(Vector2), pointCount: ctypes.c_int, thick: ctypes.c_float, color: Color) -> None:
+	"""Draw spline: Catmull-Rom, minimum 4 points"""
+	...
+
+def draw_spline_bezier_quadratic(points: ctypes.POINTER(Vector2), pointCount: ctypes.c_int, thick: ctypes.c_float, color: Color) -> None:
+	"""Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...]"""
+	...
+
+def draw_spline_bezier_cubic(points: ctypes.POINTER(Vector2), pointCount: ctypes.c_int, thick: ctypes.c_float, color: Color) -> None:
+	"""Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...]"""
+	...
+
+def draw_spline_segment_linear(p1: Vector2, p2: Vector2, thick: ctypes.c_float, color: Color) -> None:
+	"""Draw spline segment: Linear, 2 points"""
+	...
+
+def draw_spline_segment_basis(p1: Vector2, p2: Vector2, p3: Vector2, p4: Vector2, thick: ctypes.c_float, color: Color) -> None:
+	"""Draw spline segment: B-Spline, 4 points"""
+	...
+
+def draw_spline_segment_catmull_rom(p1: Vector2, p2: Vector2, p3: Vector2, p4: Vector2, thick: ctypes.c_float, color: Color) -> None:
+	"""Draw spline segment: Catmull-Rom, 4 points"""
+	...
+
+def draw_spline_segment_bezier_quadratic(p1: Vector2, c2: Vector2, p3: Vector2, thick: ctypes.c_float, color: Color) -> None:
+	"""Draw spline segment: Quadratic Bezier, 2 points, 1 control point"""
+	...
+
+def draw_spline_segment_bezier_cubic(p1: Vector2, c2: Vector2, c3: Vector2, p4: Vector2, thick: ctypes.c_float, color: Color) -> None:
+	"""Draw spline segment: Cubic Bezier, 2 points, 2 control points"""
+	...
+
+def get_spline_point_linear(startPos: Vector2, endPos: Vector2, t: ctypes.c_float) -> Vector2:
+	"""Get (evaluate) spline point: Linear"""
+	...
+
+def get_spline_point_basis(p1: Vector2, p2: Vector2, p3: Vector2, p4: Vector2, t: ctypes.c_float) -> Vector2:
+	"""Get (evaluate) spline point: B-Spline"""
+	...
+
+def get_spline_point_catmull_rom(p1: Vector2, p2: Vector2, p3: Vector2, p4: Vector2, t: ctypes.c_float) -> Vector2:
+	"""Get (evaluate) spline point: Catmull-Rom"""
+	...
+
+def get_spline_point_bezier_quad(p1: Vector2, c2: Vector2, p3: Vector2, t: ctypes.c_float) -> Vector2:
+	"""Get (evaluate) spline point: Quadratic Bezier"""
+	...
+
+def get_spline_point_bezier_cubic(p1: Vector2, c2: Vector2, c3: Vector2, p4: Vector2, t: ctypes.c_float) -> Vector2:
+	"""Get (evaluate) spline point: Cubic Bezier"""
+	...
+
 def check_collision_recs(rec1: Rectangle, rec2: Rectangle) -> ctypes.c_bool:
 	"""Check collision between two rectangles"""
 	...
@@ -1472,6 +1672,10 @@ def check_collision_circles(center1: Vector2, radius1: ctypes.c_float, center2: 
 
 def check_collision_circle_rec(center: Vector2, radius: ctypes.c_float, rec: Rectangle) -> ctypes.c_bool:
 	"""Check collision between circle and rectangle"""
+	...
+
+def check_collision_circle_line(center: Vector2, radius: ctypes.c_float, p1: Vector2, p2: Vector2) -> ctypes.c_bool:
+	"""Check if circle collides with a line created betweeen two points [p1] and [p2]"""
 	...
 
 def check_collision_point_rec(point: Vector2, rec: Rectangle) -> ctypes.c_bool:
@@ -1486,16 +1690,16 @@ def check_collision_point_triangle(point: Vector2, p1: Vector2, p2: Vector2, p3:
 	"""Check if point is inside a triangle"""
 	...
 
+def check_collision_point_line(point: Vector2, p1: Vector2, p2: Vector2, threshold: ctypes.c_int) -> ctypes.c_bool:
+	"""Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold]"""
+	...
+
 def check_collision_point_poly(point: Vector2, points: ctypes.POINTER(Vector2), pointCount: ctypes.c_int) -> ctypes.c_bool:
 	"""Check if point is within a polygon described by array of vertices"""
 	...
 
 def check_collision_lines(startPos1: Vector2, endPos1: Vector2, startPos2: Vector2, endPos2: Vector2, collisionPoint: ctypes.POINTER(Vector2)) -> ctypes.c_bool:
 	"""Check the collision between two lines defined by two points each, returns collision point by reference"""
-	...
-
-def check_collision_point_line(point: Vector2, p1: Vector2, p2: Vector2, threshold: ctypes.c_int) -> ctypes.c_bool:
-	"""Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold]"""
 	...
 
 def get_collision_rec(rec1: Rectangle, rec2: Rectangle) -> Rectangle:
@@ -1514,6 +1718,10 @@ def load_image_anim(fileName: ctypes.c_char_p, frames: ctypes.POINTER(ctypes.c_i
 	"""Load image sequence from file (frames appended to image.data)"""
 	...
 
+def load_image_anim_from_memory(fileType: ctypes.c_char_p, fileData: ctypes.POINTER(ctypes.c_ubyte), dataSize: ctypes.c_int, frames: ctypes.POINTER(ctypes.c_int)) -> Image:
+	"""Load image sequence from memory buffer"""
+	...
+
 def load_image_from_memory(fileType: ctypes.c_char_p, fileData: ctypes.POINTER(ctypes.c_ubyte), dataSize: ctypes.c_int) -> Image:
 	"""Load image from memory buffer, fileType refers to extension: i.e. '.png'"""
 	...
@@ -1526,8 +1734,8 @@ def load_image_from_screen() -> Image:
 	"""Load image from screen buffer and (screenshot)"""
 	...
 
-def is_image_ready(image: Image) -> ctypes.c_bool:
-	"""Check if an image is ready"""
+def is_image_valid(image: Image) -> ctypes.c_bool:
+	"""Check if an image is valid (data and parameters)"""
 	...
 
 def unload_image(image: Image) -> None:
@@ -1538,6 +1746,10 @@ def export_image(image: Image, fileName: ctypes.c_char_p) -> ctypes.c_bool:
 	"""Export image data to file, returns true on success"""
 	...
 
+def export_image_to_memory(image: Image, fileType: ctypes.c_char_p, fileSize: ctypes.POINTER(ctypes.c_int)) -> ctypes.POINTER(ctypes.c_ubyte):
+	"""Export image to memory buffer"""
+	...
+
 def export_image_as_code(image: Image, fileName: ctypes.c_char_p) -> ctypes.c_bool:
 	"""Export image as code file defining an array of bytes, returns true on success"""
 	...
@@ -1546,16 +1758,16 @@ def gen_image_color(width: ctypes.c_int, height: ctypes.c_int, color: Color) -> 
 	"""Generate image: plain color"""
 	...
 
-def gen_image_gradient_v(width: ctypes.c_int, height: ctypes.c_int, top: Color, bottom: Color) -> Image:
-	"""Generate image: vertical gradient"""
-	...
-
-def gen_image_gradient_h(width: ctypes.c_int, height: ctypes.c_int, left: Color, right: Color) -> Image:
-	"""Generate image: horizontal gradient"""
+def gen_image_gradient_linear(width: ctypes.c_int, height: ctypes.c_int, direction: ctypes.c_int, start: Color, end: Color) -> Image:
+	"""Generate image: linear gradient, direction in degrees [0..360], 0=Vertical gradient"""
 	...
 
 def gen_image_gradient_radial(width: ctypes.c_int, height: ctypes.c_int, density: ctypes.c_float, inner: Color, outer: Color) -> Image:
 	"""Generate image: radial gradient"""
+	...
+
+def gen_image_gradient_square(width: ctypes.c_int, height: ctypes.c_int, density: ctypes.c_float, inner: Color, outer: Color) -> Image:
+	"""Generate image: square gradient"""
 	...
 
 def gen_image_checked(width: ctypes.c_int, height: ctypes.c_int, checksX: ctypes.c_int, checksY: ctypes.c_int, col1: Color, col2: Color) -> Image:
@@ -1584,6 +1796,10 @@ def image_copy(image: Image) -> Image:
 
 def image_from_image(image: Image, rec: Rectangle) -> Image:
 	"""Create an image from another image piece"""
+	...
+
+def image_from_channel(image: Image, selectedChannel: ctypes.c_int) -> Image:
+	"""Create an image from a selected channel of another image (GRAYSCALE)"""
 	...
 
 def image_text(text: ctypes.c_char_p, fontSize: ctypes.c_int, color: Color) -> Image:
@@ -1626,6 +1842,10 @@ def image_blur_gaussian(image: ctypes.POINTER(Image), blurSize: ctypes.c_int) ->
 	"""Apply Gaussian blur using a box blur approximation"""
 	...
 
+def image_kernel_convolution(image: ctypes.POINTER(Image), kernel: ctypes.POINTER(ctypes.c_float), kernelSize: ctypes.c_int) -> None:
+	"""Apply custom square convolution kernel to image"""
+	...
+
 def image_resize(image: ctypes.POINTER(Image), newWidth: ctypes.c_int, newHeight: ctypes.c_int) -> None:
 	"""Resize image (Bicubic scaling algorithm)"""
 	...
@@ -1652,6 +1872,10 @@ def image_flip_vertical(image: ctypes.POINTER(Image)) -> None:
 
 def image_flip_horizontal(image: ctypes.POINTER(Image)) -> None:
 	"""Flip image horizontally"""
+	...
+
+def image_rotate(image: ctypes.POINTER(Image), degrees: ctypes.c_int) -> None:
+	"""Rotate image by input angle in degrees (-359 to 359)"""
 	...
 
 def image_rotate_cw(image: ctypes.POINTER(Image)) -> None:
@@ -1730,6 +1954,10 @@ def image_draw_line_v(dst: ctypes.POINTER(Image), start: Vector2, end: Vector2, 
 	"""Draw line within an image (Vector version)"""
 	...
 
+def image_draw_line_ex(dst: ctypes.POINTER(Image), start: Vector2, end: Vector2, thick: ctypes.c_int, color: Color) -> None:
+	"""Draw a line defining thickness within an image"""
+	...
+
 def image_draw_circle(dst: ctypes.POINTER(Image), centerX: ctypes.c_int, centerY: ctypes.c_int, radius: ctypes.c_int, color: Color) -> None:
 	"""Draw a filled circle within an image"""
 	...
@@ -1762,6 +1990,26 @@ def image_draw_rectangle_lines(dst: ctypes.POINTER(Image), rec: Rectangle, thick
 	"""Draw rectangle lines within an image"""
 	...
 
+def image_draw_triangle(dst: ctypes.POINTER(Image), v1: Vector2, v2: Vector2, v3: Vector2, color: Color) -> None:
+	"""Draw triangle within an image"""
+	...
+
+def image_draw_triangle_ex(dst: ctypes.POINTER(Image), v1: Vector2, v2: Vector2, v3: Vector2, c1: Color, c2: Color, c3: Color) -> None:
+	"""Draw triangle with interpolated colors within an image"""
+	...
+
+def image_draw_triangle_lines(dst: ctypes.POINTER(Image), v1: Vector2, v2: Vector2, v3: Vector2, color: Color) -> None:
+	"""Draw triangle outline within an image"""
+	...
+
+def image_draw_triangle_fan(dst: ctypes.POINTER(Image), points: ctypes.POINTER(Vector2), pointCount: ctypes.c_int, color: Color) -> None:
+	"""Draw a triangle fan defined by points within an image (first vertex is the center)"""
+	...
+
+def image_draw_triangle_strip(dst: ctypes.POINTER(Image), points: ctypes.POINTER(Vector2), pointCount: ctypes.c_int, color: Color) -> None:
+	"""Draw a triangle strip defined by points within an image"""
+	...
+
 def image_draw(dst: ctypes.POINTER(Image), src: Image, srcRec: Rectangle, dstRec: Rectangle, tint: Color) -> None:
 	"""Draw a source image within a destination image (tint applied to source)"""
 	...
@@ -1790,16 +2038,16 @@ def load_render_texture(width: ctypes.c_int, height: ctypes.c_int) -> RenderText
 	"""Load texture for rendering (framebuffer)"""
 	...
 
-def is_texture_ready(texture: Texture2D) -> ctypes.c_bool:
-	"""Check if a texture is ready"""
+def is_texture_valid(texture: Texture2D) -> ctypes.c_bool:
+	"""Check if a texture is valid (loaded in GPU)"""
 	...
 
 def unload_texture(texture: Texture2D) -> None:
 	"""Unload texture from GPU memory (VRAM)"""
 	...
 
-def is_render_texture_ready(target: RenderTexture2D) -> ctypes.c_bool:
-	"""Check if a render texture is ready"""
+def is_render_texture_valid(target: RenderTexture2D) -> ctypes.c_bool:
+	"""Check if a render texture is valid (loaded in GPU)"""
 	...
 
 def unload_render_texture(target: RenderTexture2D) -> None:
@@ -1850,12 +2098,16 @@ def draw_texture_n_patch(texture: Texture2D, nPatchInfo: NPatchInfo, dest: Recta
 	"""Draws a texture (or part of it) that stretches or shrinks nicely"""
 	...
 
+def color_is_equal(col1: Color, col2: Color) -> ctypes.c_bool:
+	"""Check if two colors are equal"""
+	...
+
 def fade(color: Color, alpha: ctypes.c_float) -> Color:
 	"""Get color with alpha applied, alpha goes from 0.0f to 1.0f"""
 	...
 
 def color_to_int(color: Color) -> ctypes.c_int:
-	"""Get hexadecimal value for a Color"""
+	"""Get hexadecimal value for a Color (0xRRGGBBAA)"""
 	...
 
 def color_normalize(color: Color) -> Vector4:
@@ -1894,6 +2146,10 @@ def color_alpha_blend(dst: Color, src: Color, tint: Color) -> Color:
 	"""Get src alpha-blended into dst color with tint"""
 	...
 
+def color_lerp(color1: Color, color2: Color, factor: ctypes.c_float) -> Color:
+	"""Get color lerp interpolation between two colors, factor [0.0f..1.0f]"""
+	...
+
 def get_color(hexValue: ctypes.c_uint) -> Color:
 	"""Get Color structure from hexadecimal value"""
 	...
@@ -1918,31 +2174,31 @@ def load_font(fileName: ctypes.c_char_p) -> Font:
 	"""Load font from file into GPU memory (VRAM)"""
 	...
 
-def load_font_ex(fileName: ctypes.c_char_p, fontSize: ctypes.c_int, fontChars: ctypes.POINTER(ctypes.c_int), glyphCount: ctypes.c_int) -> Font:
-	"""Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set"""
+def load_font_ex(fileName: ctypes.c_char_p, fontSize: ctypes.c_int, codepoints: ctypes.POINTER(ctypes.c_int), codepointCount: ctypes.c_int) -> Font:
+	"""Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character set, font size is provided in pixels height"""
 	...
 
 def load_font_from_image(image: Image, key: Color, firstChar: ctypes.c_int) -> Font:
 	"""Load font from Image (XNA style)"""
 	...
 
-def load_font_from_memory(fileType: ctypes.c_char_p, fileData: ctypes.POINTER(ctypes.c_ubyte), dataSize: ctypes.c_int, fontSize: ctypes.c_int, fontChars: ctypes.POINTER(ctypes.c_int), glyphCount: ctypes.c_int) -> Font:
+def load_font_from_memory(fileType: ctypes.c_char_p, fileData: ctypes.POINTER(ctypes.c_ubyte), dataSize: ctypes.c_int, fontSize: ctypes.c_int, codepoints: ctypes.POINTER(ctypes.c_int), codepointCount: ctypes.c_int) -> Font:
 	"""Load font from memory buffer, fileType refers to extension: i.e. '.ttf'"""
 	...
 
-def is_font_ready(font: Font) -> ctypes.c_bool:
-	"""Check if a font is ready"""
+def is_font_valid(font: Font) -> ctypes.c_bool:
+	"""Check if a font is valid (font data loaded, WARNING: GPU texture not checked)"""
 	...
 
-def load_font_data(fileData: ctypes.POINTER(ctypes.c_ubyte), dataSize: ctypes.c_int, fontSize: ctypes.c_int, fontChars: ctypes.POINTER(ctypes.c_int), glyphCount: ctypes.c_int, type: ctypes.c_int) -> ctypes.POINTER(GlyphInfo):
+def load_font_data(fileData: ctypes.POINTER(ctypes.c_ubyte), dataSize: ctypes.c_int, fontSize: ctypes.c_int, codepoints: ctypes.POINTER(ctypes.c_int), codepointCount: ctypes.c_int, type: ctypes.c_int) -> ctypes.POINTER(GlyphInfo):
 	"""Load font data for further use"""
 	...
 
-def gen_image_font_atlas(chars: ctypes.POINTER(GlyphInfo), recs: ctypes.POINTER(ctypes.POINTER(Rectangle)), glyphCount: ctypes.c_int, fontSize: ctypes.c_int, padding: ctypes.c_int, packMethod: ctypes.c_int) -> Image:
+def gen_image_font_atlas(glyphs: ctypes.POINTER(GlyphInfo), glyphRecs: ctypes.POINTER(ctypes.POINTER(Rectangle)), glyphCount: ctypes.c_int, fontSize: ctypes.c_int, padding: ctypes.c_int, packMethod: ctypes.c_int) -> Image:
 	"""Generate image font atlas using chars info"""
 	...
 
-def unload_font_data(chars: ctypes.POINTER(GlyphInfo), glyphCount: ctypes.c_int) -> None:
+def unload_font_data(glyphs: ctypes.POINTER(GlyphInfo), glyphCount: ctypes.c_int) -> None:
 	"""Unload font chars info data (RAM)"""
 	...
 
@@ -1974,8 +2230,12 @@ def draw_text_codepoint(font: Font, codepoint: ctypes.c_int, position: Vector2, 
 	"""Draw one character (codepoint)"""
 	...
 
-def draw_text_codepoints(font: Font, codepoints: ctypes.POINTER(ctypes.c_int), count: ctypes.c_int, position: Vector2, fontSize: ctypes.c_float, spacing: ctypes.c_float, tint: Color) -> None:
+def draw_text_codepoints(font: Font, codepoints: ctypes.POINTER(ctypes.c_int), codepointCount: ctypes.c_int, position: Vector2, fontSize: ctypes.c_float, spacing: ctypes.c_float, tint: Color) -> None:
 	"""Draw multiple character (codepoint)"""
+	...
+
+def set_text_line_spacing(spacing: ctypes.c_int) -> None:
+	"""Set vertical line spacing when drawing with line-breaks"""
 	...
 
 def measure_text(text: ctypes.c_char_p, fontSize: ctypes.c_int) -> ctypes.c_int:
@@ -2090,8 +2350,20 @@ def text_to_pascal(text: ctypes.c_char_p) -> ctypes.c_char_p:
 	"""Get Pascal case notation version of provided string"""
 	...
 
+def text_to_snake(text: ctypes.c_char_p) -> ctypes.c_char_p:
+	"""Get Snake case notation version of provided string"""
+	...
+
+def text_to_camel(text: ctypes.c_char_p) -> ctypes.c_char_p:
+	"""Get Camel case notation version of provided string"""
+	...
+
 def text_to_integer(text: ctypes.c_char_p) -> ctypes.c_int:
-	"""Get integer value from text (negative values not supported)"""
+	"""Get integer value from text"""
+	...
+
+def text_to_float(text: ctypes.c_char_p) -> ctypes.c_float:
+	"""Get float value from text"""
 	...
 
 def draw_line_3d(startPos: Vector3, endPos: Vector3, color: Color) -> None:
@@ -2186,8 +2458,8 @@ def load_model_from_mesh(mesh: Mesh) -> Model:
 	"""Load model from generated mesh (default material)"""
 	...
 
-def is_model_ready(model: Model) -> ctypes.c_bool:
-	"""Check if a model is ready"""
+def is_model_valid(model: Model) -> ctypes.c_bool:
+	"""Check if a model is valid (loaded in GPU, VAO/VBOs)"""
 	...
 
 def unload_model(model: Model) -> None:
@@ -2214,11 +2486,19 @@ def draw_model_wires_ex(model: Model, position: Vector3, rotationAxis: Vector3, 
 	"""Draw a model wires (with texture if set) with extended parameters"""
 	...
 
+def draw_model_points(model: Model, position: Vector3, scale: ctypes.c_float, tint: Color) -> None:
+	"""Draw a model as points"""
+	...
+
+def draw_model_points_ex(model: Model, position: Vector3, rotationAxis: Vector3, rotationAngle: ctypes.c_float, scale: Vector3, tint: Color) -> None:
+	"""Draw a model as points with extended parameters"""
+	...
+
 def draw_bounding_box(box: BoundingBox, color: Color) -> None:
 	"""Draw bounding box (wires)"""
 	...
 
-def draw_billboard(camera: Camera, texture: Texture2D, position: Vector3, size: ctypes.c_float, tint: Color) -> None:
+def draw_billboard(camera: Camera, texture: Texture2D, position: Vector3, scale: ctypes.c_float, tint: Color) -> None:
 	"""Draw a billboard texture"""
 	...
 
@@ -2250,16 +2530,20 @@ def draw_mesh_instanced(mesh: Mesh, material: Material, transforms: ctypes.POINT
 	"""Draw multiple mesh instances with material and different transforms"""
 	...
 
-def export_mesh(mesh: Mesh, fileName: ctypes.c_char_p) -> ctypes.c_bool:
-	"""Export mesh data to file, returns true on success"""
-	...
-
 def get_mesh_bounding_box(mesh: Mesh) -> BoundingBox:
 	"""Compute mesh bounding box limits"""
 	...
 
 def gen_mesh_tangents(mesh: ctypes.POINTER(Mesh)) -> None:
 	"""Compute mesh tangents"""
+	...
+
+def export_mesh(mesh: Mesh, fileName: ctypes.c_char_p) -> ctypes.c_bool:
+	"""Export mesh data to file, returns true on success"""
+	...
+
+def export_mesh_as_code(mesh: Mesh, fileName: ctypes.c_char_p) -> ctypes.c_bool:
+	"""Export mesh as code file (.h) defining multiple arrays of vertex attributes"""
 	...
 
 def gen_mesh_poly(sides: ctypes.c_int, radius: ctypes.c_float) -> Mesh:
@@ -2314,8 +2598,8 @@ def load_material_default() -> Material:
 	"""Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps)"""
 	...
 
-def is_material_ready(material: Material) -> ctypes.c_bool:
-	"""Check if a material is ready"""
+def is_material_valid(material: Material) -> ctypes.c_bool:
+	"""Check if a material is valid (shader assigned, map textures loaded in GPU)"""
 	...
 
 def unload_material(material: Material) -> None:
@@ -2330,19 +2614,23 @@ def set_model_mesh_material(model: ctypes.POINTER(Model), meshId: ctypes.c_int, 
 	"""Set material for a mesh"""
 	...
 
-def load_model_animations(fileName: ctypes.c_char_p, animCount: ctypes.POINTER(ctypes.c_uint)) -> ctypes.POINTER(ModelAnimation):
+def load_model_animations(fileName: ctypes.c_char_p, animCount: ctypes.POINTER(ctypes.c_int)) -> ctypes.POINTER(ModelAnimation):
 	"""Load model animations from file"""
 	...
 
 def update_model_animation(model: Model, anim: ModelAnimation, frame: ctypes.c_int) -> None:
-	"""Update model animation pose"""
+	"""Update model animation pose (CPU)"""
+	...
+
+def update_model_animation_bones(model: Model, anim: ModelAnimation, frame: ctypes.c_int) -> None:
+	"""Update model animation mesh bone matrices (GPU skinning)"""
 	...
 
 def unload_model_animation(anim: ModelAnimation) -> None:
 	"""Unload animation data"""
 	...
 
-def unload_model_animations(animations: ctypes.POINTER(ModelAnimation), count: ctypes.c_uint) -> None:
+def unload_model_animations(animations: ctypes.POINTER(ModelAnimation), animCount: ctypes.c_int) -> None:
 	"""Unload animation array data"""
 	...
 
@@ -2398,6 +2686,10 @@ def set_master_volume(volume: ctypes.c_float) -> None:
 	"""Set master volume (listener)"""
 	...
 
+def get_master_volume() -> ctypes.c_float:
+	"""Get master volume (listener)"""
+	...
+
 def load_wave(fileName: ctypes.c_char_p) -> Wave:
 	"""Load wave data from file"""
 	...
@@ -2406,8 +2698,8 @@ def load_wave_from_memory(fileType: ctypes.c_char_p, fileData: ctypes.POINTER(ct
 	"""Load wave from memory buffer, fileType refers to extension: i.e. '.wav'"""
 	...
 
-def is_wave_ready(wave: Wave) -> ctypes.c_bool:
-	"""Checks if wave data is ready"""
+def is_wave_valid(wave: Wave) -> ctypes.c_bool:
+	"""Checks if wave data is valid (data loaded and parameters)"""
 	...
 
 def unload_wave(wave: Wave) -> None:
@@ -2426,8 +2718,8 @@ def wave_copy(wave: Wave) -> Wave:
 	"""Copy a wave to a new wave"""
 	...
 
-def wave_crop(wave: ctypes.POINTER(Wave), initSample: ctypes.c_int, finalSample: ctypes.c_int) -> None:
-	"""Crop a wave to defined samples range"""
+def wave_crop(wave: ctypes.POINTER(Wave), initFrame: ctypes.c_int, finalFrame: ctypes.c_int) -> None:
+	"""Crop a wave to defined frames range"""
 	...
 
 def wave_format(wave: ctypes.POINTER(Wave), sampleRate: ctypes.c_int, sampleSize: ctypes.c_int, channels: ctypes.c_int) -> None:
@@ -2450,8 +2742,8 @@ def load_music_stream_from_memory(fileType: ctypes.c_char_p, data: ctypes.POINTE
 	"""Load music stream from data"""
 	...
 
-def is_music_ready(music: Music) -> ctypes.c_bool:
-	"""Checks if a music stream is ready"""
+def is_music_valid(music: Music) -> ctypes.c_bool:
+	"""Checks if a music stream is valid (context and buffers initialized)"""
 	...
 
 def unload_music_stream(music: Music) -> None:
@@ -2510,8 +2802,8 @@ def load_audio_stream(sampleRate: ctypes.c_uint, sampleSize: ctypes.c_uint, chan
 	"""Load audio stream (to stream raw audio pcm data)"""
 	...
 
-def is_audio_stream_ready(stream: AudioStream) -> ctypes.c_bool:
-	"""Checks if an audio stream is ready"""
+def is_audio_stream_valid(stream: AudioStream) -> ctypes.c_bool:
+	"""Checks if an audio stream is valid (buffers initialized)"""
 	...
 
 def unload_audio_stream(stream: AudioStream) -> None:
@@ -2618,15 +2910,19 @@ def vector2_length_sqr(v: Vector2) -> ctypes.c_float:
 	""""""
 	...
 
-def vector_2dot_product(v1: Vector2, v2: Vector2) -> ctypes.c_float:
+def vector2_dot_product(v1: Vector2, v2: Vector2) -> ctypes.c_float:
 	""""""
 	...
 
-def vector_2distance(v1: Vector2, v2: Vector2) -> ctypes.c_float:
+def vector2_cross_product(v1: Vector2, v2: Vector2) -> ctypes.c_float:
 	""""""
 	...
 
-def vector_2distance_sqr(v1: Vector2, v2: Vector2) -> ctypes.c_float:
+def vector2_distance(v1: Vector2, v2: Vector2) -> ctypes.c_float:
+	""""""
+	...
+
+def vector2_distance_sqr(v1: Vector2, v2: Vector2) -> ctypes.c_float:
 	""""""
 	...
 
@@ -2650,7 +2946,7 @@ def vector2_negate(v: Vector2) -> Vector2:
 	""""""
 	...
 
-def vector_2divide(v1: Vector2, v2: Vector2) -> Vector2:
+def vector2_divide(v1: Vector2, v2: Vector2) -> Vector2:
 	""""""
 	...
 
@@ -2667,6 +2963,14 @@ def vector2_lerp(v1: Vector2, v2: Vector2, amount: ctypes.c_float) -> Vector2:
 	...
 
 def vector2_reflect(v: Vector2, normal: Vector2) -> Vector2:
+	""""""
+	...
+
+def vector2_min(v1: Vector2, v2: Vector2) -> Vector2:
+	""""""
+	...
+
+def vector2_max(v1: Vector2, v2: Vector2) -> Vector2:
 	""""""
 	...
 
@@ -2691,6 +2995,10 @@ def vector2_clamp_value(v: Vector2, min: ctypes.c_float, max: ctypes.c_float) ->
 	...
 
 def vector2_equals(p: Vector2, q: Vector2) -> ctypes.c_int:
+	""""""
+	...
+
+def vector2_refract(v: Vector2, n: Vector2, r: ctypes.c_float) -> Vector2:
 	""""""
 	...
 
@@ -2770,6 +3078,14 @@ def vector3_normalize(v: Vector3) -> Vector3:
 	""""""
 	...
 
+def vector3_project(v1: Vector3, v2: Vector3) -> Vector3:
+	""""""
+	...
+
+def vector3_reject(v1: Vector3, v2: Vector3) -> Vector3:
+	""""""
+	...
+
 def vector3_ortho_normalize(v1: ctypes.POINTER(Vector3), v2: ctypes.POINTER(Vector3)) -> None:
 	""""""
 	...
@@ -2786,7 +3102,15 @@ def vector3_rotate_by_axis_angle(v: Vector3, axis: Vector3, angle: ctypes.c_floa
 	""""""
 	...
 
+def vector3_move_towards(v: Vector3, target: Vector3, maxDistance: ctypes.c_float) -> Vector3:
+	""""""
+	...
+
 def vector3_lerp(v1: Vector3, v2: Vector3, amount: ctypes.c_float) -> Vector3:
+	""""""
+	...
+
+def vector3_cubic_hermite(v1: Vector3, tangent1: Vector3, v2: Vector3, tangent2: Vector3, amount: ctypes.c_float) -> Vector3:
 	""""""
 	...
 
@@ -2831,6 +3155,94 @@ def vector3_equals(p: Vector3, q: Vector3) -> ctypes.c_int:
 	...
 
 def vector3_refract(v: Vector3, n: Vector3, r: ctypes.c_float) -> Vector3:
+	""""""
+	...
+
+def vector4_zero() -> Vector4:
+	""""""
+	...
+
+def vector4_one() -> Vector4:
+	""""""
+	...
+
+def vector4_add(v1: Vector4, v2: Vector4) -> Vector4:
+	""""""
+	...
+
+def vector4_add_value(v: Vector4, add: ctypes.c_float) -> Vector4:
+	""""""
+	...
+
+def vector4_subtract(v1: Vector4, v2: Vector4) -> Vector4:
+	""""""
+	...
+
+def vector4_subtract_value(v: Vector4, add: ctypes.c_float) -> Vector4:
+	""""""
+	...
+
+def vector4_length(v: Vector4) -> ctypes.c_float:
+	""""""
+	...
+
+def vector4_length_sqr(v: Vector4) -> ctypes.c_float:
+	""""""
+	...
+
+def vector4_dot_product(v1: Vector4, v2: Vector4) -> ctypes.c_float:
+	""""""
+	...
+
+def vector4_distance(v1: Vector4, v2: Vector4) -> ctypes.c_float:
+	""""""
+	...
+
+def vector4_distance_sqr(v1: Vector4, v2: Vector4) -> ctypes.c_float:
+	""""""
+	...
+
+def vector4_scale(v: Vector4, scale: ctypes.c_float) -> Vector4:
+	""""""
+	...
+
+def vector4_multiply(v1: Vector4, v2: Vector4) -> Vector4:
+	""""""
+	...
+
+def vector4_negate(v: Vector4) -> Vector4:
+	""""""
+	...
+
+def vector4_divide(v1: Vector4, v2: Vector4) -> Vector4:
+	""""""
+	...
+
+def vector4_normalize(v: Vector4) -> Vector4:
+	""""""
+	...
+
+def vector4_min(v1: Vector4, v2: Vector4) -> Vector4:
+	""""""
+	...
+
+def vector4_max(v1: Vector4, v2: Vector4) -> Vector4:
+	""""""
+	...
+
+def vector4_lerp(v1: Vector4, v2: Vector4, amount: ctypes.c_float) -> Vector4:
+	""""""
+	...
+
+def vector4_move_towards(v: Vector4, target: Vector4, maxDistance: ctypes.c_float) -> Vector4:
+	""""""
+	...
+
+def vector4_invert(v: Vector4) -> Vector4:
+	""""""
+	...
+
+def vector4_equals(p: Vector4, q: Vector4) -> ctypes.c_int:
 	""""""
 	...
 
@@ -2898,15 +3310,15 @@ def matrix_scale(x: ctypes.c_float, y: ctypes.c_float, z: ctypes.c_float) -> Mat
 	""""""
 	...
 
-def matrix_frustum(left: ctypes.c_double, right: ctypes.c_double, bottom: ctypes.c_double, top: ctypes.c_double, near: ctypes.c_double, far: ctypes.c_double) -> Matrix:
+def matrix_frustum(left: ctypes.c_double, right: ctypes.c_double, bottom: ctypes.c_double, top: ctypes.c_double, nearPlane: ctypes.c_double, farPlane: ctypes.c_double) -> Matrix:
 	""""""
 	...
 
-def matrix_perspective(fovy: ctypes.c_double, aspect: ctypes.c_double, near: ctypes.c_double, far: ctypes.c_double) -> Matrix:
+def matrix_perspective(fovY: ctypes.c_double, aspect: ctypes.c_double, nearPlane: ctypes.c_double, farPlane: ctypes.c_double) -> Matrix:
 	""""""
 	...
 
-def matrix_ortho(left: ctypes.c_double, right: ctypes.c_double, bottom: ctypes.c_double, top: ctypes.c_double, near: ctypes.c_double, far: ctypes.c_double) -> Matrix:
+def matrix_ortho(left: ctypes.c_double, right: ctypes.c_double, bottom: ctypes.c_double, top: ctypes.c_double, nearPlane: ctypes.c_double, farPlane: ctypes.c_double) -> Matrix:
 	""""""
 	...
 
@@ -2974,7 +3386,11 @@ def quaternion_slerp(q1: Quaternion, q2: Quaternion, amount: ctypes.c_float) -> 
 	""""""
 	...
 
-def quaternion_from_vector3_to_vector3(from: Vector3, to: Vector3) -> Quaternion:
+def quaternion_cubic_hermite_spline(q1: Quaternion, outTangent1: Quaternion, q2: Quaternion, inTangent2: Quaternion, t: ctypes.c_float) -> Quaternion:
+	""""""
+	...
+
+def quaternion_from_vector3_to_vector3(var_from: Vector3, to: Vector3) -> Quaternion:
 	""""""
 	...
 
@@ -3010,6 +3426,10 @@ def quaternion_equals(p: Quaternion, q: Quaternion) -> ctypes.c_int:
 	""""""
 	...
 
+def matrix_decompose(mat: Matrix, translation: ctypes.POINTER(Vector3), rotation: ctypes.POINTER(Quaternion), scale: ctypes.POINTER(Vector3)) -> None:
+	""""""
+	...
+
 def gui_enable() -> None:
 	"""Enable gui controls (global state)"""
 	...
@@ -3030,7 +3450,7 @@ def gui_is_locked() -> ctypes.c_bool:
 	"""Check if gui is locked (global state)"""
 	...
 
-def gui_fade(alpha: ctypes.c_float) -> None:
+def gui_set_alpha(alpha: ctypes.c_float) -> None:
 	"""Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f"""
 	...
 
@@ -3058,130 +3478,6 @@ def gui_get_style(control: ctypes.c_int, property: ctypes.c_int) -> ctypes.c_int
 	"""Get one style property"""
 	...
 
-def gui_window_box(bounds: Rectangle, title: ctypes.c_char_p) -> ctypes.c_bool:
-	"""Window Box control, shows a window that can be closed"""
-	...
-
-def gui_group_box(bounds: Rectangle, text: ctypes.c_char_p) -> None:
-	"""Group Box control with text name"""
-	...
-
-def gui_line(bounds: Rectangle, text: ctypes.c_char_p) -> None:
-	"""Line separator control, could contain text"""
-	...
-
-def gui_panel(bounds: Rectangle, text: ctypes.c_char_p) -> None:
-	"""Panel control, useful to group controls"""
-	...
-
-def gui_tab_bar(bounds: Rectangle, text: ctypes.POINTER(ctypes.POINTER(ctypes.c_char)), count: ctypes.c_int, active: ctypes.POINTER(ctypes.c_int)) -> ctypes.c_int:
-	"""Tab Bar control, returns TAB to be closed or -1"""
-	...
-
-def gui_scroll_panel(bounds: Rectangle, text: ctypes.c_char_p, content: Rectangle, scroll: ctypes.POINTER(Vector2)) -> Rectangle:
-	"""Scroll Panel control"""
-	...
-
-def gui_label(bounds: Rectangle, text: ctypes.c_char_p) -> None:
-	"""Label control, shows text"""
-	...
-
-def gui_button(bounds: Rectangle, text: ctypes.c_char_p) -> ctypes.c_bool:
-	"""Button control, returns true when clicked"""
-	...
-
-def gui_label_button(bounds: Rectangle, text: ctypes.c_char_p) -> ctypes.c_bool:
-	"""Label button control, show true when clicked"""
-	...
-
-def gui_toggle(bounds: Rectangle, text: ctypes.c_char_p, active: ctypes.c_bool) -> ctypes.c_bool:
-	"""Toggle Button control, returns true when active"""
-	...
-
-def gui_toggle_group(bounds: Rectangle, text: ctypes.c_char_p, active: ctypes.c_int) -> ctypes.c_int:
-	"""Toggle Group control, returns active toggle index"""
-	...
-
-def gui_check_box(bounds: Rectangle, text: ctypes.c_char_p, checked: ctypes.c_bool) -> ctypes.c_bool:
-	"""Check Box control, returns true when active"""
-	...
-
-def gui_combo_box(bounds: Rectangle, text: ctypes.c_char_p, active: ctypes.c_int) -> ctypes.c_int:
-	"""Combo Box control, returns selected item index"""
-	...
-
-def gui_dropdown_box(bounds: Rectangle, text: ctypes.c_char_p, active: ctypes.POINTER(ctypes.c_int), editMode: ctypes.c_bool) -> ctypes.c_bool:
-	"""Dropdown Box control, returns selected item"""
-	...
-
-def gui_spinner(bounds: Rectangle, text: ctypes.c_char_p, value: ctypes.POINTER(ctypes.c_int), minValue: ctypes.c_int, maxValue: ctypes.c_int, editMode: ctypes.c_bool) -> ctypes.c_bool:
-	"""Spinner control, returns selected value"""
-	...
-
-def gui_value_box(bounds: Rectangle, text: ctypes.c_char_p, value: ctypes.POINTER(ctypes.c_int), minValue: ctypes.c_int, maxValue: ctypes.c_int, editMode: ctypes.c_bool) -> ctypes.c_bool:
-	"""Value Box control, updates input text with numbers"""
-	...
-
-def gui_text_box(bounds: Rectangle, text: ctypes.c_char_p, textSize: ctypes.c_int, editMode: ctypes.c_bool) -> ctypes.c_bool:
-	"""Text Box control, updates input text"""
-	...
-
-def gui_slider(bounds: Rectangle, textLeft: ctypes.c_char_p, textRight: ctypes.c_char_p, value: ctypes.c_float, minValue: ctypes.c_float, maxValue: ctypes.c_float) -> ctypes.c_float:
-	"""Slider control, returns selected value"""
-	...
-
-def gui_slider_bar(bounds: Rectangle, textLeft: ctypes.c_char_p, textRight: ctypes.c_char_p, value: ctypes.c_float, minValue: ctypes.c_float, maxValue: ctypes.c_float) -> ctypes.c_float:
-	"""Slider Bar control, returns selected value"""
-	...
-
-def gui_progress_bar(bounds: Rectangle, textLeft: ctypes.c_char_p, textRight: ctypes.c_char_p, value: ctypes.c_float, minValue: ctypes.c_float, maxValue: ctypes.c_float) -> ctypes.c_float:
-	"""Progress Bar control, shows current progress value"""
-	...
-
-def gui_status_bar(bounds: Rectangle, text: ctypes.c_char_p) -> None:
-	"""Status Bar control, shows info text"""
-	...
-
-def gui_dummy_rec(bounds: Rectangle, text: ctypes.c_char_p) -> None:
-	"""Dummy control for placeholders"""
-	...
-
-def gui_grid(bounds: Rectangle, text: ctypes.c_char_p, spacing: ctypes.c_float, subdivs: ctypes.c_int) -> Vector2:
-	"""Grid control, returns mouse cell position"""
-	...
-
-def gui_list_view(bounds: Rectangle, text: ctypes.c_char_p, scrollIndex: ctypes.POINTER(ctypes.c_int), active: ctypes.c_int) -> ctypes.c_int:
-	"""List View control, returns selected list item index"""
-	...
-
-def gui_list_view_ex(bounds: Rectangle, text: ctypes.POINTER(ctypes.POINTER(ctypes.c_char)), count: ctypes.c_int, focus: ctypes.POINTER(ctypes.c_int), scrollIndex: ctypes.POINTER(ctypes.c_int), active: ctypes.c_int) -> ctypes.c_int:
-	"""List View with extended parameters"""
-	...
-
-def gui_message_box(bounds: Rectangle, title: ctypes.c_char_p, message: ctypes.c_char_p, buttons: ctypes.c_char_p) -> ctypes.c_int:
-	"""Message Box control, displays a message"""
-	...
-
-def gui_text_input_box(bounds: Rectangle, title: ctypes.c_char_p, message: ctypes.c_char_p, buttons: ctypes.c_char_p, text: ctypes.c_char_p, textMaxSize: ctypes.c_int, secretViewActive: ctypes.POINTER(ctypes.c_int)) -> ctypes.c_int:
-	"""Text Input Box control, ask for text, supports secret"""
-	...
-
-def gui_color_picker(bounds: Rectangle, text: ctypes.c_char_p, color: Color) -> Color:
-	"""Color Picker control (multiple color controls)"""
-	...
-
-def gui_color_panel(bounds: Rectangle, text: ctypes.c_char_p, color: Color) -> Color:
-	"""Color Panel control"""
-	...
-
-def gui_color_bar_alpha(bounds: Rectangle, text: ctypes.c_char_p, alpha: ctypes.c_float) -> ctypes.c_float:
-	"""Color Bar Alpha control"""
-	...
-
-def gui_color_bar_hue(bounds: Rectangle, text: ctypes.c_char_p, value: ctypes.c_float) -> ctypes.c_float:
-	"""Color Bar Hue control"""
-	...
-
 def gui_load_style(fileName: ctypes.c_char_p) -> None:
 	"""Load style file over global style variable (.rgs)"""
 	...
@@ -3204,5 +3500,145 @@ def gui_set_tooltip(tooltip: ctypes.c_char_p) -> None:
 
 def gui_icon_text(iconId: ctypes.c_int, text: ctypes.c_char_p) -> ctypes.c_char_p:
 	"""Get text with icon id prepended (if supported)"""
+	...
+
+def gui_window_box(bounds: Rectangle, title: ctypes.c_char_p) -> ctypes.c_int:
+	"""Window Box control, shows a window that can be closed"""
+	...
+
+def gui_group_box(bounds: Rectangle, text: ctypes.c_char_p) -> ctypes.c_int:
+	"""Group Box control with text name"""
+	...
+
+def gui_line(bounds: Rectangle, text: ctypes.c_char_p) -> ctypes.c_int:
+	"""Line separator control, could contain text"""
+	...
+
+def gui_panel(bounds: Rectangle, text: ctypes.c_char_p) -> ctypes.c_int:
+	"""Panel control, useful to group controls"""
+	...
+
+def gui_tab_bar(bounds: Rectangle, text: ctypes.POINTER(ctypes.POINTER(ctypes.c_char)), count: ctypes.c_int, active: ctypes.POINTER(ctypes.c_int)) -> ctypes.c_int:
+	"""Tab Bar control, returns TAB to be closed or -1"""
+	...
+
+def gui_scroll_panel(bounds: Rectangle, text: ctypes.c_char_p, content: Rectangle, scroll: ctypes.POINTER(Vector2), view: ctypes.POINTER(Rectangle)) -> ctypes.c_int:
+	"""Scroll Panel control"""
+	...
+
+def gui_label(bounds: Rectangle, text: ctypes.c_char_p) -> ctypes.c_int:
+	"""Label control"""
+	...
+
+def gui_button(bounds: Rectangle, text: ctypes.c_char_p) -> ctypes.c_int:
+	"""Button control, returns true when clicked"""
+	...
+
+def gui_label_button(bounds: Rectangle, text: ctypes.c_char_p) -> ctypes.c_int:
+	"""Label button control, returns true when clicked"""
+	...
+
+def gui_toggle(bounds: Rectangle, text: ctypes.c_char_p, active: ctypes.POINTER(ctypes.c_bool)) -> ctypes.c_int:
+	"""Toggle Button control"""
+	...
+
+def gui_toggle_group(bounds: Rectangle, text: ctypes.c_char_p, active: ctypes.POINTER(ctypes.c_int)) -> ctypes.c_int:
+	"""Toggle Group control"""
+	...
+
+def gui_toggle_slider(bounds: Rectangle, text: ctypes.c_char_p, active: ctypes.POINTER(ctypes.c_int)) -> ctypes.c_int:
+	"""Toggle Slider control"""
+	...
+
+def gui_check_box(bounds: Rectangle, text: ctypes.c_char_p, checked: ctypes.POINTER(ctypes.c_bool)) -> ctypes.c_int:
+	"""Check Box control, returns true when active"""
+	...
+
+def gui_combo_box(bounds: Rectangle, text: ctypes.c_char_p, active: ctypes.POINTER(ctypes.c_int)) -> ctypes.c_int:
+	"""Combo Box control"""
+	...
+
+def gui_dropdown_box(bounds: Rectangle, text: ctypes.c_char_p, active: ctypes.POINTER(ctypes.c_int), editMode: ctypes.c_bool) -> ctypes.c_int:
+	"""Dropdown Box control"""
+	...
+
+def gui_spinner(bounds: Rectangle, text: ctypes.c_char_p, value: ctypes.POINTER(ctypes.c_int), minValue: ctypes.c_int, maxValue: ctypes.c_int, editMode: ctypes.c_bool) -> ctypes.c_int:
+	"""Spinner control"""
+	...
+
+def gui_value_box(bounds: Rectangle, text: ctypes.c_char_p, value: ctypes.POINTER(ctypes.c_int), minValue: ctypes.c_int, maxValue: ctypes.c_int, editMode: ctypes.c_bool) -> ctypes.c_int:
+	"""Value Box control, updates input text with numbers"""
+	...
+
+def gui_value_box_float(bounds: Rectangle, text: ctypes.c_char_p, textValue: ctypes.c_char_p, value: ctypes.POINTER(ctypes.c_float), editMode: ctypes.c_bool) -> ctypes.c_int:
+	"""Value box control for float values"""
+	...
+
+def gui_text_box(bounds: Rectangle, text: ctypes.c_char_p, textSize: ctypes.c_int, editMode: ctypes.c_bool) -> ctypes.c_int:
+	"""Text Box control, updates input text"""
+	...
+
+def gui_slider(bounds: Rectangle, textLeft: ctypes.c_char_p, textRight: ctypes.c_char_p, value: ctypes.POINTER(ctypes.c_float), minValue: ctypes.c_float, maxValue: ctypes.c_float) -> ctypes.c_int:
+	"""Slider control"""
+	...
+
+def gui_slider_bar(bounds: Rectangle, textLeft: ctypes.c_char_p, textRight: ctypes.c_char_p, value: ctypes.POINTER(ctypes.c_float), minValue: ctypes.c_float, maxValue: ctypes.c_float) -> ctypes.c_int:
+	"""Slider Bar control"""
+	...
+
+def gui_progress_bar(bounds: Rectangle, textLeft: ctypes.c_char_p, textRight: ctypes.c_char_p, value: ctypes.POINTER(ctypes.c_float), minValue: ctypes.c_float, maxValue: ctypes.c_float) -> ctypes.c_int:
+	"""Progress Bar control"""
+	...
+
+def gui_status_bar(bounds: Rectangle, text: ctypes.c_char_p) -> ctypes.c_int:
+	"""Status Bar control, shows info text"""
+	...
+
+def gui_dummy_rec(bounds: Rectangle, text: ctypes.c_char_p) -> ctypes.c_int:
+	"""Dummy control for placeholders"""
+	...
+
+def gui_grid(bounds: Rectangle, text: ctypes.c_char_p, spacing: ctypes.c_float, subdivs: ctypes.c_int, mouseCell: ctypes.POINTER(Vector2)) -> ctypes.c_int:
+	"""Grid control"""
+	...
+
+def gui_list_view(bounds: Rectangle, text: ctypes.c_char_p, scrollIndex: ctypes.POINTER(ctypes.c_int), active: ctypes.POINTER(ctypes.c_int)) -> ctypes.c_int:
+	"""List View control"""
+	...
+
+def gui_list_view_ex(bounds: Rectangle, text: ctypes.POINTER(ctypes.POINTER(ctypes.c_char)), count: ctypes.c_int, scrollIndex: ctypes.POINTER(ctypes.c_int), active: ctypes.POINTER(ctypes.c_int), focus: ctypes.POINTER(ctypes.c_int)) -> ctypes.c_int:
+	"""List View with extended parameters"""
+	...
+
+def gui_message_box(bounds: Rectangle, title: ctypes.c_char_p, message: ctypes.c_char_p, buttons: ctypes.c_char_p) -> ctypes.c_int:
+	"""Message Box control, displays a message"""
+	...
+
+def gui_text_input_box(bounds: Rectangle, title: ctypes.c_char_p, message: ctypes.c_char_p, buttons: ctypes.c_char_p, text: ctypes.c_char_p, textMaxSize: ctypes.c_int, secretViewActive: ctypes.POINTER(ctypes.c_bool)) -> ctypes.c_int:
+	"""Text Input Box control, ask for text, supports secret"""
+	...
+
+def gui_color_picker(bounds: Rectangle, text: ctypes.c_char_p, color: ctypes.POINTER(Color)) -> ctypes.c_int:
+	"""Color Picker control (multiple color controls)"""
+	...
+
+def gui_color_panel(bounds: Rectangle, text: ctypes.c_char_p, color: ctypes.POINTER(Color)) -> ctypes.c_int:
+	"""Color Panel control"""
+	...
+
+def gui_color_bar_alpha(bounds: Rectangle, text: ctypes.c_char_p, alpha: ctypes.POINTER(ctypes.c_float)) -> ctypes.c_int:
+	"""Color Bar Alpha control"""
+	...
+
+def gui_color_bar_hue(bounds: Rectangle, text: ctypes.c_char_p, value: ctypes.POINTER(ctypes.c_float)) -> ctypes.c_int:
+	"""Color Bar Hue control"""
+	...
+
+def gui_color_picker_hsv(bounds: Rectangle, text: ctypes.c_char_p, colorHsv: ctypes.POINTER(Vector3)) -> ctypes.c_int:
+	"""Color Picker control that avoids conversion to RGB on each call (multiple color controls)"""
+	...
+
+def gui_color_panel_hsv(bounds: Rectangle, text: ctypes.c_char_p, colorHsv: ctypes.POINTER(Vector3)) -> ctypes.c_int:
+	"""Color Panel control that updates Hue-Saturation-Value color value, used by GuiColorPickerHSV()"""
 	...
 

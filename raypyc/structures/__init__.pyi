@@ -3,6 +3,7 @@ from raypyc.defines import *
 from typing import Type
 
 
+
 class rAudioBuffer(ctypes.Structure):
 	"""dummy structure"""
 	@property
@@ -52,6 +53,14 @@ class rlVertexBuffer(ctypes.Structure):
 		...
 
 	@property
+	def normals(self) -> ctypes.POINTER(ctypes.c_float):
+		...
+
+	@normals.setter
+	def normals(self, i: ctypes.POINTER(ctypes.c_float)) -> None:
+		...
+
+	@property
 	def colors(self) -> ctypes.POINTER(ctypes.c_ubyte):
 		...
 
@@ -68,11 +77,11 @@ class rlVertexBuffer(ctypes.Structure):
 		...
 
 	@property
-	def vboId(self) -> ctypes.c_uint * 4:
+	def vboId(self) -> ctypes.c_uint * 5:
 		...
 
 	@vboId.setter
-	def vboId(self, i: ctypes.c_uint * 4) -> None:
+	def vboId(self, i: ctypes.c_uint * 5) -> None:
 		...
 
 
@@ -902,6 +911,22 @@ class Mesh(ctypes.Structure):
 		...
 
 	@property
+	def boneMatrices(self) -> ctypes.POINTER(Matrix):
+		...
+
+	@boneMatrices.setter
+	def boneMatrices(self, i: ctypes.POINTER(Matrix)) -> None:
+		...
+
+	@property
+	def boneCount(self) -> ctypes.c_int:
+		...
+
+	@boneCount.setter
+	def boneCount(self, i: ctypes.c_int) -> None:
+		...
+
+	@property
 	def vaoId(self) -> ctypes.c_uint:
 		...
 
@@ -1144,6 +1169,14 @@ class ModelAnimation(ctypes.Structure):
 
 	@framePoses.setter
 	def framePoses(self, i: ctypes.POINTER(ctypes.POINTER(Transform))) -> None:
+		...
+
+	@property
+	def name(self) -> ctypes.c_char * 32:
+		...
+
+	@name.setter
+	def name(self, i: ctypes.c_char * 32) -> None:
 		...
 
 
@@ -1403,14 +1436,6 @@ class VrDeviceInfo(ctypes.Structure):
 		...
 
 	@property
-	def vScreenCenter(self) -> ctypes.c_float:
-		...
-
-	@vScreenCenter.setter
-	def vScreenCenter(self, i: ctypes.c_float) -> None:
-		...
-
-	@property
 	def eyeToScreenDistance(self) -> ctypes.c_float:
 		...
 
@@ -1545,6 +1570,60 @@ class FilePathList(ctypes.Structure):
 		...
 
 
+class AutomationEvent(ctypes.Structure):
+	"""Automation event"""
+	@property
+	def frame(self) -> ctypes.c_uint:
+		...
+
+	@frame.setter
+	def frame(self, i: ctypes.c_uint) -> None:
+		...
+
+	@property
+	def type(self) -> ctypes.c_uint:
+		...
+
+	@type.setter
+	def type(self, i: ctypes.c_uint) -> None:
+		...
+
+	@property
+	def params(self) -> ctypes.c_int * 4:
+		...
+
+	@params.setter
+	def params(self, i: ctypes.c_int * 4) -> None:
+		...
+
+
+class AutomationEventList(ctypes.Structure):
+	"""Automation event list"""
+	@property
+	def capacity(self) -> ctypes.c_uint:
+		...
+
+	@capacity.setter
+	def capacity(self, i: ctypes.c_uint) -> None:
+		...
+
+	@property
+	def count(self) -> ctypes.c_uint:
+		...
+
+	@count.setter
+	def count(self, i: ctypes.c_uint) -> None:
+		...
+
+	@property
+	def events(self) -> ctypes.POINTER(AutomationEvent):
+		...
+
+	@events.setter
+	def events(self, i: ctypes.POINTER(AutomationEvent)) -> None:
+		...
+
+
 class float3(ctypes.Structure):
 	"""NOTE: Helper types to be used instead of array return types for *ToFloat functions"""
 	@property
@@ -1568,7 +1647,7 @@ class float16(ctypes.Structure):
 
 
 class GuiStyleProp(ctypes.Structure):
-	"""Style property"""
+	"""NOTE: Used when exporting style as code for convenience"""
 	@property
 	def controlId(self) -> ctypes.c_ushort:
 		...
@@ -1586,14 +1665,65 @@ class GuiStyleProp(ctypes.Structure):
 		...
 
 	@property
-	def propertyValue(self) -> ctypes.c_uint:
+	def propertyValue(self) -> ctypes.c_int:
 		...
 
 	@propertyValue.setter
-	def propertyValue(self, i: ctypes.c_uint) -> None:
+	def propertyValue(self, i: ctypes.c_int) -> None:
 		...
 
 
-__structs: dict[str, Type[rlVertexBuffer | rlDrawCall | rlRenderBatch | Vector2 | Vector3 | Vector4 | Quaternion | Matrix | Color | Rectangle | Image | Texture | Texture2D | TextureCubemap | RenderTexture | RenderTexture2D | NPatchInfo | GlyphInfo | Font | Camera3D | Camera | Camera2D | Mesh | Shader | MaterialMap | Material | Transform | BoneInfo | Model | ModelAnimation | Ray | RayCollision | BoundingBox | Wave | AudioStream | Sound | Music | VrDeviceInfo | VrStereoConfig | FilePathList | float3 | float16 | GuiStyleProp]] = {
+class GuiTextStyle(ctypes.Structure):
+	"""NOTE: Text style is defined by control"""
+	@property
+	def size(self) -> ctypes.c_uint:
+		...
+
+	@size.setter
+	def size(self, i: ctypes.c_uint) -> None:
+		...
+
+	@property
+	def charSpacing(self) -> ctypes.c_int:
+		...
+
+	@charSpacing.setter
+	def charSpacing(self, i: ctypes.c_int) -> None:
+		...
+
+	@property
+	def lineSpacing(self) -> ctypes.c_int:
+		...
+
+	@lineSpacing.setter
+	def lineSpacing(self, i: ctypes.c_int) -> None:
+		...
+
+	@property
+	def alignmentH(self) -> ctypes.c_int:
+		...
+
+	@alignmentH.setter
+	def alignmentH(self, i: ctypes.c_int) -> None:
+		...
+
+	@property
+	def alignmentV(self) -> ctypes.c_int:
+		...
+
+	@alignmentV.setter
+	def alignmentV(self, i: ctypes.c_int) -> None:
+		...
+
+	@property
+	def padding(self) -> ctypes.c_int:
+		...
+
+	@padding.setter
+	def padding(self, i: ctypes.c_int) -> None:
+		...
+
+
+__structs: dict[str, Type[rlVertexBuffer | rlDrawCall | rlRenderBatch | Vector2 | Vector3 | Vector4 | Quaternion | Matrix | Color | Rectangle | Image | Texture | Texture2D | TextureCubemap | RenderTexture | RenderTexture2D | NPatchInfo | GlyphInfo | Font | Camera3D | Camera | Camera2D | Mesh | Shader | MaterialMap | Material | Transform | BoneInfo | Model | ModelAnimation | Ray | RayCollision | BoundingBox | Wave | AudioStream | Sound | Music | VrDeviceInfo | VrStereoConfig | FilePathList | AutomationEvent | AutomationEventList | float3 | float16 | GuiStyleProp | GuiTextStyle]] = {
 	...
 }

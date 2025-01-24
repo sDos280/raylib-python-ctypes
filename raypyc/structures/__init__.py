@@ -2,6 +2,7 @@ import ctypes
 from raypyc.defines import *
 
 
+
 class rAudioBuffer(ctypes.Structure):
 	"""dummy structure"""
 	_fields_ = [
@@ -22,9 +23,10 @@ class rlVertexBuffer(ctypes.Structure):
 		('elementCount', ctypes.c_int),  # Number of elements in the buffer (QUADS)
 		('vertices', ctypes.POINTER(ctypes.c_float)),  # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
 		('texcoords', ctypes.POINTER(ctypes.c_float)),  # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
+		('normals', ctypes.POINTER(ctypes.c_float)),  # Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)
 		('colors', ctypes.POINTER(ctypes.c_ubyte)),  # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
 		('vaoId', ctypes.c_uint),  # OpenGL Vertex Array Object id
-		('vboId', ctypes.c_uint * 4)  # OpenGL Vertex Buffer Objects id (4 types of vertex data)
+		('vboId', ctypes.c_uint * 5)  # OpenGL Vertex Buffer Objects id (5 types of vertex data)
 	]
 
 
@@ -235,8 +237,10 @@ class Mesh(ctypes.Structure):
 		('indices', ctypes.POINTER(ctypes.c_ushort)),  # Vertex indices (in case vertex data comes indexed)
 		('animVertices', ctypes.POINTER(ctypes.c_float)),  # Animated vertex positions (after bones transformations)
 		('animNormals', ctypes.POINTER(ctypes.c_float)),  # Animated normals (after bones transformations)
-		('boneIds', ctypes.POINTER(ctypes.c_ubyte)),  # Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning)
-		('boneWeights', ctypes.POINTER(ctypes.c_float)),  # Vertex bone weight, up to 4 bones influence by vertex (skinning)
+		('boneIds', ctypes.POINTER(ctypes.c_ubyte)),  # Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning) (shader-location = 6)
+		('boneWeights', ctypes.POINTER(ctypes.c_float)),  # Vertex bone weight, up to 4 bones influence by vertex (skinning) (shader-location = 7)
+		('boneMatrices', ctypes.POINTER(Matrix)),  # Bones animated transformation matrices
+		('boneCount', ctypes.c_int),  # Number of bones
 		('vaoId', ctypes.c_uint),  # OpenGL Vertex Array Object id
 		('vboId', ctypes.POINTER(ctypes.c_uint))  # OpenGL Vertex Buffer Objects id (default vertex data)
 	]
@@ -306,7 +310,8 @@ class ModelAnimation(ctypes.Structure):
 		('boneCount', ctypes.c_int),  # Number of bones
 		('frameCount', ctypes.c_int),  # Number of animation frames
 		('bones', ctypes.POINTER(BoneInfo)),  # Bones information (skeleton)
-		('framePoses', ctypes.POINTER(ctypes.POINTER(Transform)))  # Poses array by frame
+		('framePoses', ctypes.POINTER(ctypes.POINTER(Transform))),  # Poses array by frame
+		('name', ctypes.c_char * 32)  # Animation name
 	]
 
 
@@ -314,7 +319,7 @@ class Ray(ctypes.Structure):
 	"""Ray, ray for raycasting"""
 	_fields_ = [
 		('position', Vector3),  # Ray position (origin)
-		('direction', Vector3)  # Ray direction
+		('direction', Vector3)  # Ray direction (normalized)
 	]
 
 
@@ -384,7 +389,6 @@ class VrDeviceInfo(ctypes.Structure):
 		('vResolution', ctypes.c_int),  # Vertical resolution in pixels
 		('hScreenSize', ctypes.c_float),  # Horizontal size in meters
 		('vScreenSize', ctypes.c_float),  # Vertical size in meters
-		('vScreenCenter', ctypes.c_float),  # Screen center in meters
 		('eyeToScreenDistance', ctypes.c_float),  # Distance between eye and display in meters
 		('lensSeparationDistance', ctypes.c_float),  # Lens separation distance in meters
 		('interpupillaryDistance', ctypes.c_float),  # IPD (distance between pupils) in meters
@@ -416,6 +420,24 @@ class FilePathList(ctypes.Structure):
 	]
 
 
+class AutomationEvent(ctypes.Structure):
+	"""Automation event"""
+	_fields_ = [
+		('frame', ctypes.c_uint),  # Event frame
+		('type', ctypes.c_uint),  # Event type (AutomationEventType)
+		('params', ctypes.c_int * 4)  # Event parameters (if required)
+	]
+
+
+class AutomationEventList(ctypes.Structure):
+	"""Automation event list"""
+	_fields_ = [
+		('capacity', ctypes.c_uint),  # Events max entries (MAX_AUTOMATION_EVENTS)
+		('count', ctypes.c_uint),  # Events entries count
+		('events', ctypes.POINTER(AutomationEvent))  # Events entries
+	]
+
+
 class float3(ctypes.Structure):
 	"""NOTE: Helper types to be used instead of array return types for *ToFloat functions"""
 	_fields_ = [
@@ -431,11 +453,23 @@ class float16(ctypes.Structure):
 
 
 class GuiStyleProp(ctypes.Structure):
-	"""Style property"""
+	"""NOTE: Used when exporting style as code for convenience"""
 	_fields_ = [
-		('controlId', ctypes.c_ushort),
-		('propertyId', ctypes.c_ushort),
-		('propertyValue', ctypes.c_uint)
+		('controlId', ctypes.c_ushort),  # Control identifier
+		('propertyId', ctypes.c_ushort),  # Property identifier
+		('propertyValue', ctypes.c_int)  # Property value
+	]
+
+
+class GuiTextStyle(ctypes.Structure):
+	"""NOTE: Text style is defined by control"""
+	_fields_ = [
+		('size', ctypes.c_uint),
+		('charSpacing', ctypes.c_int),
+		('lineSpacing', ctypes.c_int),
+		('alignmentH', ctypes.c_int),
+		('alignmentV', ctypes.c_int),
+		('padding', ctypes.c_int)
 	]
 
 
@@ -480,7 +514,10 @@ __structs = {
 	"VrDeviceInfo": VrDeviceInfo,
 	"VrStereoConfig": VrStereoConfig,
 	"FilePathList": FilePathList,
+	"AutomationEvent": AutomationEvent,
+	"AutomationEventList": AutomationEventList,
 	"float3": float3,
 	"float16": float16,
-	"GuiStyleProp": GuiStyleProp
+	"GuiStyleProp": GuiStyleProp,
+	"GuiTextStyle": GuiTextStyle
 }
