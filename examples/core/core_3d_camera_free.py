@@ -28,14 +28,17 @@ def main():
 
     cubePosition = Vector3(0.0, 0.0, 0.0)
 
-    set_camera_mode(camera, CameraMode.CAMERA_FREE)  # Set a free camera mode
+    disable_cursor()  # Limit cursor to relative movement inside the window
+
+    set_target_fps(60)  # Set our game to run at 60 frames-per-second
     # ------------------------------------------------------------------------------------
 
     # Main game loop
     while not window_should_close():  # Detect window close button or ESC key
         # Update
         # ----------------------------------------------------------------------------------
-        update_camera(camera)
+        update_camera(camera, CameraMode.CAMERA_FREE)
+
         if is_key_down(ord('Z')): camera.target = Vector3(0.0, 0.0, 0.0)
         # ----------------------------------------------------------------------------------
 
