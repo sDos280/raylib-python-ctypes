@@ -105,7 +105,7 @@ header = [
 ]
 
 params = [
-    f"-d {sys.argv[2]}"
+    f"-d {sys.argv[2] if len(sys.argv) == 3 else ''}"
 ]
 
 
