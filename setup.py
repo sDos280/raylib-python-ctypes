@@ -9,7 +9,7 @@ with open("README.md", "r") as long_description_reader:
 
 setup(
     name='raypyc',
-    version='0.1.8',
+    version='0.1.8.1',
     description='A python wrapper for raylib using ctypes',
     long_description=_long_description,
     long_description_content_type='text/markdown',
