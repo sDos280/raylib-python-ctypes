@@ -1,3 +1,4 @@
+import ctypes
 import json
 import re
 import sys
@@ -104,7 +105,40 @@ def add_text_to_file(file_path: WindowsPath | Path, _string: str) -> None:
         file.write(_string)
 
 
-def convert_c_type_to_python_type(c_type_string: str) -> str:
+def convert_ctypes_type_to_python_type(ctypes_type_string: str) -> str:
+    """
+    Convert a ctypes type string to its corresponding Python type string.
+    """
+    ctypes_string_to_python_string = {
+        'ctypes.c_bool': 'bool',  # Maps to Python's bool type
+        # 'ctypes.c_char': 'char',  # Represents a single character (byte)
+        'ctypes.c_wchar': 'bytes',  # Represents a single wide character (Unicode)
+        'ctypes.c_ubyte': 'int',  # Unsigned 8-bit integer
+        'ctypes.c_short': 'int',  # Signed 16-bit integer
+        'ctypes.c_ushort': 'int',  # Unsigned 16-bit integer
+        'ctypes.c_int': 'int',  # Signed 32-bit integer
+        'ctypes.c_uint': 'int',  # Unsigned 32-bit integer
+        'ctypes.c_long': 'int',  # Typically a signed 32-bit or 64-bit integer (platform-dependent)
+        'ctypes.c_ulong': 'int',  # Typically an unsigned 32-bit or 64-bit integer (platform-dependent)
+        'ctypes.c_longlong': 'int',  # Signed 64-bit integer
+        'ctypes.c_ulonglong': 'int',  # Unsigned 64-bit integer
+        'ctypes.c_size_t': 'int',  # Unsigned integer type for representing sizes
+        'ctypes.c_ssize_t': 'int',  # Signed integer type for representing sizes
+        'ctypes.c_float': 'float',  # 32-bit floating point number
+        'ctypes.c_double': 'float',  # 64-bit floating point number
+        'ctypes.c_longdouble': 'float',  # Extended precision floating point number (platform-dependent)
+        'ctypes.c_char_p': 'bytes',  # Pointer to a null-terminated byte string (or None)
+        'ctypes.c_wchar_p': 'bytes',  # Pointer to a null-terminated wide character string (or None)
+        'ctypes.c_void_p': 'bytes',  # Generic pointer type (can be None)
+    }
+
+    """if ctypes_type_string.find("ctypes.POINTER(") == 0:  this wasn't added because i don't want people to thing that you can always enter null pointer
+        return "None"""
+
+    return ctypes_string_to_python_string.get(ctypes_type_string)
+
+
+def convert_c_type_to_python_ctypes_type(c_type_string: str) -> str:
     """convert c type string to ctype type sting"""
     c_string_to_ctypes_string = {
         'bool': 'c_bool',  # C type: _Bool  Python type: bool (1)
@@ -253,7 +287,7 @@ def generate_struct_code(struct_data: Dict[str, Union[str, List[Dict[str, str]]]
     if not for_stub:
         struct_fields = "\t_fields_ = [\n"
         for struct_data_field in struct_data['fields']:
-            struct_fields += f"\t\t('{struct_data_field['name']}', {convert_c_type_to_python_type(struct_data_field['type'])}),"
+            struct_fields += f"\t\t('{struct_data_field['name']}', {convert_c_type_to_python_ctypes_type(struct_data_field['type'])}),"
             if struct_data_field['description'] != "":
                 struct_fields += f"  # {struct_data_field['description']}"
             struct_fields += '\n'
@@ -265,7 +299,7 @@ def generate_struct_code(struct_data: Dict[str, Union[str, List[Dict[str, str]]]
 
     if for_stub:
         for struct_data_field in struct_data['fields']:
-            use_type = convert_c_type_to_python_type(struct_data_field['type'])
+            use_type = convert_c_type_to_python_ctypes_type(struct_data_field['type'])
             struct_setters_getters_string += f"\t@property\n\tdef {struct_data_field['name']}(self) -> {use_type}:\n"
             struct_setters_getters_string += f"\t\t...\n\n"
             struct_setters_getters_string += f"\t@{struct_data_field['name']}.setter\n\tdef {struct_data_field['name']}(self, i: {use_type}) -> None:\n"
@@ -302,12 +336,23 @@ def generate_function_signature_code(function_data: Dict[str, Union[str, List[Di
     function_string = f"def {function_data['name']}("
     if 'params' in function_data.keys():  # only return stuff
         for param in function_data['params']:
-            function_string += f"{param['name'] if param['name'] not in keyword.kwlist else 'var_' + param['name']}: {convert_c_type_to_python_type(param['type'])}, "
+            python_ctypes_type = convert_c_type_to_python_ctypes_type(param['type'])
+            alternative_types = convert_ctypes_type_to_python_type(python_ctypes_type)
+            type_hint = python_ctypes_type if alternative_types is None else python_ctypes_type + " | " + alternative_types
+
+            param_name = underscore(param['name']).replace('3_d', '_3d').replace('2_d', '_2d').replace('vector_2', 'vector2_').replace('vector_3', 'vector3_')
+
+            function_string += f"{param_name if param_name not in keyword.kwlist else 'var_' + param_name}: {type_hint}, "
 
         function_string = function_string[:-2]
 
     function_string += ") -> "
-    function_string += f"{convert_c_type_to_python_type(function_data['returnType'])}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
+
+    python_ctypes_type = convert_c_type_to_python_ctypes_type(function_data['returnType'])
+    alternative_types = convert_ctypes_type_to_python_type(python_ctypes_type)
+    type_hint = python_ctypes_type if alternative_types is None else python_ctypes_type + " | " + alternative_types
+
+    function_string += f"{type_hint}:\n\t\"\"\"{function_data['description']}\"\"\"\n\t...\n\n"
 
     return function_string
 
@@ -599,7 +644,7 @@ add_text_to_file(RAYPYC_FOLDER_PATH / 'enums/__init__.pyi', generate_enums_code(
 # -----------------------------------------
 
 generate_file(RAYPYC_FOLDER_PATH / '__init__.pyi')
-add_text_to_file(RAYPYC_FOLDER_PATH / '__init__.pyi', 'import ctypes\nfrom raypyc.defines import *\nfrom raypyc.defines import *\nfrom raypyc.colors import *\nfrom raypyc.enums import *\nfrom raypyc.structures import *\n\n\n')
+add_text_to_file(RAYPYC_FOLDER_PATH / '__init__.pyi', 'import ctypes\nfrom raypyc.defines import *\nfrom raypyc.colors import *\nfrom raypyc.enums import *\nfrom raypyc.structures import *\n\n\n')
 
 # check what function can be wrapped
 config_functions_to_wrapped = check_for_functions_that_can_wrap(config_api_functions)
